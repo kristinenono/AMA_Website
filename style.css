@@ -1,3 +1,12 @@
+/* STRUCTURAL ELEMENTS */
+/* 1. BODY */
+body {
+  margin: 0;
+}
+.wrapper {
+  display: flex;
+}
+
 /* testing */
 .margin-left {
   flex: 2;
