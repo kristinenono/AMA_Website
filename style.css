@@ -19,7 +19,9 @@ body {
 .button_style {
   font-family: Arial, Helvetica, sans-serif;
   background-color: #1f304f;
+  border: #1f304f solid;
   color: #f3f2ee;
+  text-align: center;
   text-decoration: none;
 }
 
