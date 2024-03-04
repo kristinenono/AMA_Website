@@ -17,11 +17,13 @@ body {
 
 /* Calendar Page */
 .margin-left {
-  flex: 2;
+  flex: 1.75;
+  border-right: #201c0f;
 }
 .page-content {
   flex: 7;
 }
 .margin-right {
   flex: 2;
+  border-left: #201c0f;
 }
