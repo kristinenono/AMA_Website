@@ -1,0 +1,10 @@
+/* testing */
+.margin-left {
+  flex: 2;
+}
+.page-content {
+  flex: 7;
+}
+.margin-right {
+  flex: 0.5;
+}
