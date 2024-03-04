@@ -23,6 +23,10 @@ body {
   text-decoration: none;
 }
 
+.button:hover {
+  color: #f3f2ee;
+}
+
 /* Calendar Page */
 .margin-left {
   flex: 2;
