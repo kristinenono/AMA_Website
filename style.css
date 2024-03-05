@@ -82,7 +82,7 @@ body {
 /* button */
 .add-btn {
   font-family: Arial, Helvetica, sans-serif;
-  background-color: #1f304f;
+  background-color: #1f3oi04f;
   color: #f3f2ee;
   padding: 20px 35px;
   border: none;
@@ -98,17 +98,17 @@ body {
   flex: 2;
   border-right: #201c0f;
   border-right-style: solid;
-  padding: 3rem;
+  padding: 1.5rem;
 }
 .page-content {
   flex: 7;
-  padding: 2rem;
+  padding: 7rem;
 }
 .margin-right {
   flex: 2;
   border-left: #201c0f;
   border-left-style: solid;
-  padding: 3rem;
+  padding: 1.5rem;
 }
 .flex-container {
   display: flex;
@@ -123,41 +123,51 @@ body {
   text-align: center;
   height: 200px;
   width: 500px;
-  padding-top: 2rem;
+  padding-top: 1rem;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
-  font-size: x-large;
+  /* padding-top: 1rem;
+  padding-left: 0.5rem; */
+  /* padding-right: 0.5rem; */
+  font-size: large;
 }
 
 .philanthropy-event {
   background-color: #e87531;
   color: #fafbfc;
+  font-family: var(--titleFontFamily);
+  /* padding: 1rem; */
 }
 
 .prof-dev-event {
   background-color: #e8a32a;
   color: #fafbfc;
+  font-family: var(--titleFontFamily);
 }
 
 .speaker-event {
   background-color: #476d3d;
   color: #fafbfc;
+  font-family: var(--titleFontFamily);
 }
 
 .social-event {
   background-color: #0071a5;
   color: #fafbfc;
+  font-family: var(--titleFontFamily);
 }
 
 .events-button {
   color: #fafbfc;
   text-decoration: none;
   border: 3px #fafbfc solid;
-  padding: 1rem 1rem;
+  padding: 1rem;
+  font-family: var(--titleFontFamily);
 }
 
 .heading-tag-upcoming-event {
   font-size: xx-large;
   text-align: center;
   color: #201c0f;
+  font-family: var(--titleFontFamily);
 }
