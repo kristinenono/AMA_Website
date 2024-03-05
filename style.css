@@ -121,6 +121,12 @@ body {
 .box {
   margin-bottom: 20px;
   text-align: center;
+  height: 200px;
+  width: 500px;
+  padding-top: 2rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  font-size: x-large;
 }
 
 .philanthropy-event {
@@ -141,4 +147,17 @@ body {
 .social-event {
   background-color: #0071a5;
   color: #fafbfc;
+}
+
+.events-button {
+  color: #fafbfc;
+  text-decoration: none;
+  border: 3px #fafbfc solid;
+  padding: 1rem 1rem;
+}
+
+.heading-tag-upcoming-event {
+  font-size: xx-large;
+  text-align: center;
+  color: #201c0f;
 }
