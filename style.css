@@ -160,6 +160,7 @@ body {
 }
 
 .events-button {
+  display: inline-block;
   color: #fafbfc;
   text-decoration: none;
   border: 0.2rem #fafbfc solid;
