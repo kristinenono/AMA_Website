@@ -72,6 +72,12 @@ body {
   font-size: var(--bodyFontSize);
   color: var(--bodyTextColor);
 }
+.btncolor {
+  background-color: var(--primarynavy);
+  font-family: var(--bodyFontFamily);
+  font-size: var(--bodyFontSize);
+  color: var(--bodyTextColor);
+}
 
 /* button */
 .add-btn {
