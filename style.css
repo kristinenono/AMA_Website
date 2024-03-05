@@ -20,6 +20,11 @@
   --tertiaryHeaderFontSize: 25px;
   --bodyFontSize: 25px;
 }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 /* STRUCTURAL ELEMENTS */
 /* 1. BODY */
@@ -41,8 +46,11 @@ body {
 .title {
   font-family: var(--titleFontFamily);
   font-size: var(--titleFontSize);
-  text-align: left;
   color: var(--primarywhite);
+  align-items: center;
+  justify-content: center;
+  padding-left: 8rem;
+  padding-top: 4rem;
 }
 
 .primaryheader {
@@ -71,6 +79,8 @@ body {
   font-family: var(--bodyFontFamily);
   font-size: var(--bodyFontSize);
   color: var(--bodyTextColor);
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 .btncolor {
   background-color: var(--primarynavy);
@@ -91,6 +101,86 @@ body {
 }
 .btn:hover {
   background-color: red;
+}
+
+.add-btn2 {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--primarynavy);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  display: inline-block; /* Change to inline-block to make it only as wide as its content */
+  margin-top: 10px; /* Adjust the margin as needed */
+}
+/*Home Page*/
+.container {
+  width: 98%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.titleContainers {
+  width: 100%; /* Adjust the width as needed */
+  margin: 0 auto;
+  overflow: hidden; /* Clear the float */
+  background-color: var(--primarynavy);
+}
+
+.column {
+  box-sizing: border-box;
+  float: left;
+  width: 50%;
+  background-color: var(--primarynavy);
+}
+#aboutSection {
+  width: 85%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 10px;
+  padding-top: 50px;
+}
+#involvementSection {
+  width: 85%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 10px;
+  padding-top: 50px;
+}
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.titleContainers {
+  width: 100%;
+  display: flex;
+}
+
+.column1 {
+  flex: 1;
+}
+
+.column2 {
+  flex: 1;
+}
+
+.involvementSection {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.involvementImage {
+  flex: 1;
+  max-width: 50%; /* Adjust the width of the image as needed */
+}
+
+.involvementText {
+  flex: 1;
+  max-width: 50%; /* Adjust the width of the text as needed */
 }
 
 /* Calendar Page */
