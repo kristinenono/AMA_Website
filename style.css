@@ -15,6 +15,24 @@ body {
   background-color: #f3f2ee;
 }
 
+.primaryheader {
+  margin: 0 auto;
+  font-family: Arial;
+  font-weight: bolder;
+  color: #f3f2ee solid;
+  text-align: center;
+  font-size: 55px;
+}
+
+.secondaryheader {
+  margin: 0 auto;
+  font-family: Arial;
+  font-weight: bold;
+  color: #201c0f solid;
+  text-align: center;
+  font-size: 45px;
+}
+
 /* button */
 .buttonstyle {
   color: #f3f2ee;
