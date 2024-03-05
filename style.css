@@ -38,6 +38,13 @@ body {
   background-color: #f3f2ee;
 }
 
+.title {
+  font-family: var(--titleFontFamily);
+  font-size: var(--titleFontSize);
+  text-align: left;
+  color: var(--primarywhite);
+}
+
 .primaryheader {
   margin: 0 auto;
   font-family: var(--bodyFontFamily);
@@ -45,7 +52,6 @@ body {
   color: var(--primaryblack);
   font-weight: bolder;
   text-align: center;
-  font-size: 55px;
 }
 
 .secondaryheader {
