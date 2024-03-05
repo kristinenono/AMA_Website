@@ -110,3 +110,31 @@ body {
   border-left-style: solid;
   padding: 3rem;
 }
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.box {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.philanthropy-event {
+  background-color: #e87531;
+}
+
+.prof-dev-event {
+  background-color: #e8a32a;
+}
+
+.speaker-event {
+  background-color: #476d3d;
+}
+
+.social-event {
+  background-color: #0071a5;
+}
