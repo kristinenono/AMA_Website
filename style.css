@@ -54,7 +54,6 @@ body {
   color: var(--primaryblack);
   margin: 0 auto;
   font-weight: bold;
-  text-align: center;
 }
 .tertiaryHeader {
   font-family: var(--bodyFontFamily);
