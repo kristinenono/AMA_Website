@@ -133,7 +133,11 @@ body {
   /* padding-right: 0.5rem; */
   font-size: large;
 }
-
+.margin-event {
+  background-color: #1f304f;
+  color: #fafbfc;
+  font-family: var(--titleFontFamily);
+}
 .philanthropy-event {
   background-color: #e87531;
   color: #fafbfc;
