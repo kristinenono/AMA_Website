@@ -1,9 +1,10 @@
 /* Primary Color Scheme and Typography*/
 :root {
-  /* Add these styles to your global stylesheet, which is used across all site pages. You only need to do this once. All elements in the library derive their variables and base styles from this central sheet, simplifying site-wide edits. For instance, if you want to modify how your h2's appear across the site, you just update it once in the global styles, and the changes apply everywhere. */
+  /*Fonts*/
   --titleFontFamily: "Arial Rounded MT Bold", "Helvetica Rounded", Arial,
     sans-serif;
   --bodyFontFamily: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  /*Colors*/
   --primarynavy: #1f304f;
   --primarywhite: #f3f2ee;
   --primaryblack: #201c0f;
@@ -12,9 +13,8 @@
   --bodyTextColor: #434343;
   --bodyTextColorWhite: #fafbfc;
   --linkColor: #0071a5;
-  /* 13px - 16px */
+  /*Font Sizes*/
   --titleFontSize: 65px;
-  /* 31px - 49px */
   --headerFontSize: 38px;
   --secondaryHeaderFontSize: 33px;
   --tertiaryHeaderFontSize: 25px;
@@ -38,6 +38,13 @@ body {
   background-color: #f3f2ee;
 }
 
+.title {
+  font-family: var(--titleFontFamily);
+  font-size: var(--titleFontSize);
+  text-align: left;
+  color: var(--primarywhite);
+}
+
 .primaryheader {
   margin: 0 auto;
   font-family: var(--bodyFontFamily);
@@ -45,7 +52,6 @@ body {
   color: var(--primaryblack);
   font-weight: bolder;
   text-align: center;
-  font-size: 55px;
 }
 
 .secondaryheader {
@@ -54,7 +60,6 @@ body {
   color: var(--primaryblack);
   margin: 0 auto;
   font-weight: bold;
-  text-align: center;
 }
 .tertiaryHeader {
   font-family: var(--bodyFontFamily);
