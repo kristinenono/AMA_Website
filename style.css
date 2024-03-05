@@ -119,13 +119,15 @@ body {
 }
 
 .box {
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   text-align: center;
-  height: 200px;
-  width: 500px;
+  /* height: 200px;
+  width: 500px; */
   padding-top: 1rem;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+  padding-bottom: 2rem;
+  margin-bottom: 20%;
   /* padding-top: 1rem;
   padding-left: 0.5rem; */
   /* padding-right: 0.5rem; */
@@ -160,7 +162,7 @@ body {
 .events-button {
   color: #fafbfc;
   text-decoration: none;
-  border: 3px #fafbfc solid;
+  border: 0.2rem #fafbfc solid;
   padding: 1rem;
   font-family: var(--titleFontFamily);
 }
