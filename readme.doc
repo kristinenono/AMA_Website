@@ -65,3 +65,58 @@ b. What are you planning to do today?
 I am planning on reviewing and testing the cards on the calendar page as well as test the prototype of the home page. 
 c. Any problems are you facing?
 no!
+
+3.5.24
+Carly
+a. What did you do yesterday?
+worked with the 3 column layout, styles, and the borders. I also worked on the Add event button and the calendar form. I also worked with the code for the calendar itself but then went and deleted it. 
+b. What are you planning to do today?
+I have been working to troubleshoot some of the margin issues and layouts on the trello, and adding in the new tasks into the trello. 
+c. Any problems are you facing?
+Some of the problems we are facing are bulma vs the color scheme
+- solution is to have both css and bulma, primarily use bulma for forms and cal page, could become a problem further down the line when converting to one page.
+
+Anvita
+a. What did you do yesterday?
+She helped with the 3 column layout, helped with the Add event button, and started to work with the cards for the upcoming events.
+b. What are you planning to do today?
+Also have been working with the cards for the upcoming events and created separate branches to look at
+c. Any problems are you facing?
+Finding that it will be difficult to have the different colors for the varying events, will want to stick to one color. Connecting the card to the form to the calendar will be difficult. 
+She is also having problems with the margins but will work to resolve that.
+
+Wyatt
+a. What did you do yesterday?
+nothing, was waiting on more of the prototype feedback.
+b. What are you planning to do today?
+Earlier started to work on the header for both of the pages, and will want to continue and hopefully finish the header. Hoping to maybe start the footer tonight
+c. Any problems are you facing?
+question - buttons--> do with css 
+- for the header - is members the only one with a dropdown --> answer = yes
+
+Grace
+a. What did you do yesterday?
+Finished the prototypes and started to build out the home page, originally did it separately
+b. What are you planning to do today?
+planning on resolving the issue that she has with her version and the group git version appearing differently 
+c. Any problems are you facing?
+formatting issues and maybe a conflict between the calendar and the index page
+
+Kristine
+a. What did you do yesterday?
+She only looked at other people's code
+b. What are you planning to do today?
+She will investigate the problem we are having with the colors and the bulma
+c. Any problems are you facing?
+no
+
+Kieren
+a. What did you do yesterday?
+She worked on the members dropdown on the prototype
+b. What are you planning to do today?
+She will work on the block out text boxes
+c. Any problems are you facing?
+with the prototype, there was an interference with the home page click (should not be much of a problem going forward)
+
+**After discussion, we will have to add tasks to involve establishing the firebase, sharing the firebase, deploy, and add in the javascript for the one drop down, for the new events form, and sign/sign out, email list, js for the calendar, new task for cards**
+-- grace will take establishing and sharing firebase, deploy firebase -- carly, Kristine will do sign in sign out js, kieren will do drop down on js, carly and anvita will take js for the calendar, wyatt will take js for email list, and then new events will be untagged**
