@@ -20,6 +20,11 @@
   --tertiaryHeaderFontSize: 25px;
   --bodyFontSize: 25px;
 }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 /* STRUCTURAL ELEMENTS */
 /* 1. BODY */
