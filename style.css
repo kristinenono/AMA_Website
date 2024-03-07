@@ -189,10 +189,14 @@ body {
 }
 
 .weekview {
-  /* width: 85%; */
+  width: auto;
+  height: auto;
   background-color: var(--primarywhite);
-  border: 0.5px var(--primaryblack) solid;
-  display: inline-block;
+  border-bottom: 2px var(--primaryblack) solid;
+  display: block;
   padding: auto;
   margin: auto;
+}
+.dayview {
+  display: inline-block;
 }
