@@ -188,6 +188,7 @@ body {
   height: 50%;
   /* width: 100%;
   height: 50%; */
+  margin-top: 5%;
   background-color: var(--primarywhite);
   border: 2px var(--primaryblack) solid;
   /* display: inline-block; */
@@ -205,6 +206,7 @@ body {
   display: inline-block;
   width: auto;
   text-align: center;
+  align-items: center;
   color: var(--headerColor);
   font: var(--bodyFontFamily);
   /* display: inline-block; */
