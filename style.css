@@ -97,17 +97,17 @@ body {
 
 /* Calendar Page */
 .margin-left {
-  flex: 2;
+  flex: 1;
   border-right: #201c0f;
   border-right-style: solid;
   padding: 1.5rem;
 }
 .page-content {
   flex: 7;
-  padding: 7rem;
+  padding: 1rem;
 }
 .margin-right {
-  flex: 2;
+  flex: 1;
   border-left: #201c0f;
   border-left-style: solid;
   padding: 1.5rem;
@@ -182,9 +182,17 @@ body {
 }
 
 .calview {
-  width: auto;
-  display: inline-block;
+  width: 100%;
+  height: 50%;
   background-color: var(--primarywhite);
-  border: 1rem var(--primaryblack) solid;
-  padding: 8%;
+  border: 2px var(--primaryblack) solid;
+}
+
+.weekview {
+  /* width: 85%; */
+  background-color: var(--primarywhite);
+  border: 0.5px var(--primaryblack) solid;
+  display: inline-block;
+  padding: auto;
+  margin: auto;
 }
