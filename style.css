@@ -180,3 +180,11 @@ body {
   color: #201c0f;
   font-family: var(--titleFontFamily);
 }
+
+.calview {
+  width: auto;
+  display: inline-block;
+  background-color: var(--primarywhite);
+  border: 1rem var(--primaryblack) solid;
+  padding: 8%;
+}
