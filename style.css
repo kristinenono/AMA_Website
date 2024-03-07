@@ -189,11 +189,11 @@ body {
 }
 
 .weekview {
-  width: auto;
-  height: auto;
+  width: 100%;
+  height: inherit;
   background-color: var(--primarywhite);
   border-bottom: 2px var(--primaryblack) solid;
-  display: block;
+  display: inline-block;
   /* padding-top: auto;
   padding-bottom: auto; */
   /* padding: auto; */
