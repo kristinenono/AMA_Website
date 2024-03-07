@@ -182,27 +182,38 @@ body {
 }
 
 .calview {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 50%;
+  /* width: 100%;
+  height: 50%; */
   background-color: var(--primarywhite);
   border: 2px var(--primaryblack) solid;
+  /* display: inline-block; */
 }
 
 .weekview {
+  flex: 1;
   width: 100%;
-  height: inherit;
+  /* width: 100%; */
+  /* width: inherit; */
+  /* height: inherit; */
   background-color: var(--primarywhite);
   border-bottom: 2px var(--primaryblack) solid;
-  display: inline-block;
+  /* display: inline-block; */
+  display: flex;
   /* padding-top: auto;
   padding-bottom: auto; */
   /* padding: auto; */
   margin: auto;
 }
 .dayview {
-  display: inline-block;
-  width: auto;
+  /* display: inline-block; */
+  /* width: auto;
+  height: inherit; */
   /* padding: 20%; */
   /* margin: 20%; */
   border-right: 2px var(--primaryblack) solid;
+  flex: 1;
 }
