@@ -194,9 +194,15 @@ body {
   background-color: var(--primarywhite);
   border-bottom: 2px var(--primaryblack) solid;
   display: block;
-  padding: auto;
+  /* padding-top: auto;
+  padding-bottom: auto; */
+  /* padding: auto; */
   margin: auto;
 }
 .dayview {
   display: inline-block;
+  width: auto;
+  /* padding: 20%; */
+  /* margin: 20%; */
+  border-right: 2px var(--primaryblack) solid;
 }
