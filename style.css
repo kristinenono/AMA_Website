@@ -195,18 +195,10 @@ body {
 .weekview {
   flex: 1;
   width: 100%;
-  height: inherit;
-  /* width: 100%; */
-  /* width: inherit; */
-  /* height: inherit; */
   background-color: var(--primarywhite);
   border-bottom: 2px var(--primaryblack) solid;
   display: inline-block;
-  /* display: inline-block; */
   display: flex;
-  /* padding-top: auto;
-  padding-bottom: auto; */
-  /* padding: auto; */
   margin: auto;
 }
 .weekdayview {
