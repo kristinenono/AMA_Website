@@ -229,14 +229,14 @@ body {
 }
 
 /* DROPDOWN */
-.center-dropdown {
+.center-dropdown-month {
   width: 100%; /* Ensures the dropdown spans the full width of its container */
   display: flex;
   justify-content: center; /* Centers the dropdown button */
   padding-bottom: 20px; /* Adjusts spacing below the dropdown button */
 }
 
-.dropdown-button {
+.dropdown-button-month {
   font: var(--titleFontFamily);
   background-color: #1f304f;
   color: #f3f2ee;
