@@ -255,3 +255,44 @@ body {
   margin: 50px auto;
   text-align: center;
 }
+
+#aboutSection {
+  width: 75%;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 50px auto;
+  text-align: center;
+}
+#involvementSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.involvementText {
+  flex: 1;
+  margin-left: 20%;
+}
+
+.involvementImage-flex {
+  flex: 1;
+}
+
+.involvementButton1 {
+  background-color: #1f304f;
+  border: none;
+  width: 10rem;
+  height: 3rem;
+  color: #fafbfc;
+  font-family: var(--bodyFontFamily);
+  font-size: 20px;
+}
+.involvementButton2 {
+  background-color: #b22b25;
+  border: none;
+  width: 10rem;
+  height: 3rem;
+  color: #fafbfc;
+  font-family: var(--bodyFontFamily);
+  font-size: 20px;
+}
