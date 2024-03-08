@@ -220,13 +220,8 @@ body {
   /* border-right: 2px var(--primaryblack) solid; */
 }
 .dayview {
-  display: inline-block;
-  width: auto;
-  /* display: inline-block; */
-  /* width: auto;
-  height: inherit; */
-  /* padding: 20%; */
-  /* margin: 20%; */
+  display: inline-block; /* This line is unnecessary */
+  width: auto; /* This line is unnecessary */
   border-right: 2px var(--primaryblack) solid;
   flex: 1;
 }
