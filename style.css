@@ -247,3 +247,11 @@ body {
   display: inline-block;
   text-decoration: none;
 }
+
+.aboutSection-box {
+  width: 75%;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 50px auto;
+  text-align: center;
+}
