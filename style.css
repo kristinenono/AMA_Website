@@ -44,6 +44,7 @@ body {
   font-size: var(--titleFontSize);
   text-align: left;
   color: var(--primarywhite);
+  font-size: 5vw;
 }
 
 .primaryheader {
