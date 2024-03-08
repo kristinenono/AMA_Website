@@ -39,28 +39,31 @@
         <!-- CENTER OF PAGE where calendar goes-->
 
         <div class="colormargins page-content">
-
-          <div class="field">
-            <label class="label">Month</label>
-            <div class="control">
-              <div class="select">
-                <select name="" id="">
-                  <option>--select--</option>
-                  <option value="">January</option>
-                  <option value="">Februrary</option>
-                  <option value="">March</option>
-                  <option value="">April</option>
-                  <option value="">May</option>
-                  <option value="">June</option>
-                  <option value="">July</option>
-                  <option value="">August</option>
-                  <option value="">September</option>
-                  <option value="">October</option>
-                  <option value="">November</option>
-                  <option value="">December</option>
-                </select>
-              </div>
+          <div class="center-dropdown">
+            <button id="dropdown-button" class="dropdown-button">
+              Select Month
+            </button>
+            <div
+              id="dropdown-content"
+              class="dropdown-content"
+            >
+              <select name="month" id="month-select">
+                <option value="January">January</option>
+                <option value="February">February</option>
+                <option value="March">March</option>
+                <option value="April">April</option>
+                <option value="May">May</option>
+                <option value="June">June</option>
+                <option value="July">July</option>
+                <option value="August">August</option>
+                <option value="September">September</option>
+                <option value="October">October</option>
+                <option value="November">November</option>
+                <option value="December">December</option>
+              </select>
             </div>
+          </div>
+
           <div class="calview">
             <div class="weekview">
               <div class="weekdayview">
@@ -174,5 +177,9 @@
       </div>
     </main>
     <footer></footer>
+    <script src="script.js"></script>
+      </body>
+      </html>
+      
   </body>
 </html>
