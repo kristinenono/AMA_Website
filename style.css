@@ -25,6 +25,7 @@
 /* 1. BODY */
 body {
   margin: 0;
+  background-color: #f3f2ee;
 }
 .wrapper {
   display: flex;
@@ -295,4 +296,24 @@ body {
   color: #fafbfc;
   font-family: var(--bodyFontFamily);
   font-size: 20px;
+}
+
+.titleContainers {
+  position: relative;
+}
+
+.column2 {
+  position: relative;
+}
+
+.background-image {
+  width: 100%;
+  height: auto;
+}
+
+.text-overlay {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: white;
 }
