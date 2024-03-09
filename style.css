@@ -110,7 +110,7 @@ body {
   display: flex;
   justify-content: flex-start; /* Ensures content starts from the top */
   align-items: center; /* Centers the child elements horizontally */
-  flex-direction: column; /* Stacks children vertically */
+  flex-direction: column;
 }
 .margin-right {
   flex: 1;
@@ -231,8 +231,13 @@ body {
 /* DROPDOWN */
 .actionbutton {
   justify-content: left;
+  align-items: flex-end;
+  display: flex;
 }
 
+.actionbutton select {
+  margin-left: 10px;
+}
 .selectdrop {
   margin-top: 10%;
   font-size: xx-large;
