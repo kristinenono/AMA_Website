@@ -298,11 +298,14 @@ body {
 
 .involvementText {
   flex: 1;
-  margin-left: 20%;
+  margin-left: 15%;
+  margin-bottom: 2rem;
 }
 
 .involvementImage-flex {
   flex: 1;
+  margin-right: 15%;
+  margin-bottom: 2rem;
 }
 
 .involvementButton1 {
