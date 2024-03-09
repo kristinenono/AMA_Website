@@ -120,3 +120,52 @@ with the prototype, there was an interference with the home page click (should n
 
 **After discussion, we will have to add tasks to involve establishing the firebase, sharing the firebase, deploy, and add in the javascript for the one drop down, for the new events form, and sign/sign out, email list, js for the calendar, new task for cards**
 -- grace will take establishing and sharing firebase, deploy firebase -- carly, Kristine will do sign in sign out js, kieren will do drop down on js, carly and anvita will take js for the calendar, wyatt will take js for email list, and then new events will be untagged**
+
+3.9.24
+Carly 
+a. What did you do yesterday?
+Worked on HTMl for calendar, JS for calendar, toggle buttons and dynamic functions.
+b. What are you planning to do today?
+Populating weekdays. 
+c. Any problems are you facing?
+Populating weekdays. 
+
+Anvita
+a. What did you do yesterday?
+worked on the html js and css to make the calendar dyanmically populate. She adjusted some of the styling for the today button and linked it for the current mth.
+b. What are you planning to do today?
+Working on the weekdays with Carly and making the current year show. 
+c. Any problems are you facing?
+weekdays and positioning of current year. 
+
+Grace
+a. What did you do yesterday?
+Nothing
+b. What are you planning to do today?
+Formatting with the home page and fixing that, adding in the hidden pop up for the event cards. Will continue to work on it so that the event will be dynamic. She will link the socials to the icons.
+She will also work on fixing the inline css to put it on the css style sheet.
+c. Any problems are you facing?
+No!
+
+Kristine 
+a. What did you do yesterday?
+She worked on the js for the modals.
+b. What are you planning to do today?
+She will continue to work with the modals, and work with bulma for the css.
+c. Any problems are you facing?
+There were problems with the bulma and making it customizable and make the sign in modal bulma.  
+
+Kieren
+a. What did you do yesterday?
+She worked on the text boxes and added the pictures.
+b. What are you planning to do today?
+Appending the home page content to the js sheet.
+c. Any problems are you facing?
+
+
+Wyatt
+a. What did you do yesterday?
+
+b. What are you planning to do today?
+
+c. Any problems are you facing?

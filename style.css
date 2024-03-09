@@ -228,6 +228,23 @@ body {
   border-right: 2px var(--primaryblack) solid;
   flex: 1;
 }
+/* Hidden class */
+.hidden {
+  display: none;
+}
+
+/* Styles for the event card popup */
+.event-card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--primarywhite);
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+}
 
 /* DROPDOWN */
 .navcal {
@@ -286,6 +303,8 @@ body {
 
 .involvementImage-flex {
   flex: 1;
+  margin-right: 5%;
+  margin-bottom: 3rem;
 }
 
 .involvementButton1 {
@@ -401,4 +420,14 @@ body {
 .button-container {
   display: flex;
   justify-content: center; /* Align items horizontally at the center */
+}
+
+.yearblock {
+  background-color: var(--primarynavy);
+  color: #f3f2ee;
+  font: var(--titleFontFamily);
+  padding: 1rem;
+  font-size: x-large;
+  display: inline-block;
+  margin-left: 26%;
 }

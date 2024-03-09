@@ -2,6 +2,7 @@ const calendarView = document.querySelector(".calview");
 const monthSelect = document.getElementById("month-select");
 const prevMonthBtn = document.querySelector(".action_left");
 const nextMonthBtn = document.querySelector(".action_right button");
+const yearblock = document.getElementById("yearblock");
 const monthNames = [
   "January",
   "February",
@@ -30,6 +31,8 @@ function generateCalendar(date) {
   let daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
 
   let dayCellsGenerated = 0;
+
+  yearblock.innerHTML = currentYear;
   let calendarHtml = "";
 
   calendarHtml += '<div class="weekdayview">';
@@ -139,5 +142,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Reset the form fields
     signupForm.reset();
+  });
+});
+document.addEventListener("DOMContentLoaded", function () {
+  const viewEventLinks = document.querySelectorAll(".events-button");
+  const eventCard = document.getElementById("eventCard");
+  const closeEventCardBtn = document.getElementById("closeEventCard");
+
+  // Show the event card when any "View Event Here" link is clicked
+  viewEventLinks.forEach(function (link) {
+    link.addEventListener("click", function () {
+      eventCard.classList.remove("hidden");
+    });
+  });
+
+  // Close the event card when the close button is clicked
+  closeEventCardBtn.addEventListener("click", function () {
+    eventCard.classList.add("hidden");
   });
 });
