@@ -77,9 +77,7 @@ function appendContent(html) {
 // </div>
 // </div>`;
 
-r_e("eventbtn").addEventListener("click", () => {
-  let html = "<h1> test test test </h1>";
-  html += "<h3> test test </h3>";
-  html += "<p> test test <p>";
-  r_e("sample").innerHTML = "<h1> About Link Clicked </h1>";
-});
+// r_e("eventbtn").addEventListener("click", () => {
+//   let html = "";
+//   r_e("cal_page").innerHTML = "<h1> About Link Clicked </h1>";
+// });
