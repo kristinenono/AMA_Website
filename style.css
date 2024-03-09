@@ -299,10 +299,13 @@ body {
 .involvementText {
   flex: 1;
   margin-left: 20%;
+  padding-bottom: 5rem;
 }
 
 .involvementImage-flex {
   flex: 1;
+  margin-right: 10%;
+  padding-bottom: 5rem;
 }
 
 .involvementButton1 {
