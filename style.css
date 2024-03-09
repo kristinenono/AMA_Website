@@ -371,3 +371,19 @@ body {
   clear: both; /* Ensures the separation between weeks */
   display: block; /* Change according to your design */
 }
+/* Add this class to your stylesheet */
+
+#today-btn {
+  background-color: var(--primarynavy);
+  color: #f3f2ee;
+  font: var(--titleFontFamily);
+  padding: 1rem;
+  /* font-weight: bold; */
+  font-size: 24px;
+}
+
+#month-select {
+  font-size: 30px;
+  color: var(--primaryblack);
+  background-color: #f3f2ee;
+}
