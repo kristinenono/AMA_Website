@@ -35,11 +35,14 @@ function generateCalendar(date) {
   yearblock.innerHTML = currentYear;
   let calendarHtml = "";
 
+  calendarHtml += `<div class="weekdayview">`;
   for (let i = 0; i < DayNames.length; i++) {
     calendarHtml += `<span>
     <br /><p class="dayofweek">${DayNames[i]}</p><br />
     </span>`;
   }
+  calendarHtml += "</div>";
+  calendarHtml += `<div class="weekview">`;
   for (let i = 0; i < firstDayOfMonth; i++) {
     calendarHtml += '<div class="dayview empty"></div>';
     dayCellsGenerated++;
