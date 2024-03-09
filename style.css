@@ -229,6 +229,9 @@ body {
 }
 
 /* DROPDOWN */
+.actionbutton {
+  justify-content: left;
+}
 
 .selectdrop {
   margin-top: 10%;
