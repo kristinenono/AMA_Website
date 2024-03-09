@@ -1,0 +1,481 @@
+/* Primary Color Scheme and Typography*/
+:root {
+  /*Fonts*/
+  --titleFontFamily: "Arial Rounded MT Bold", "Helvetica Rounded", Arial,
+    sans-serif;
+  --bodyFontFamily: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  /*Colors*/
+  --primarynavy: #1f304f;
+  --primarywhite: #f3f2ee;
+  --primaryblack: #201c0f;
+  --secondaryred: #b22b25;
+  --headerColor: #201c0f;
+  --bodyTextColor: #434343;
+  --bodyTextColorWhite: #fafbfc;
+  --linkColor: #0071a5;
+  /*Font Sizes*/
+  --titleFontSize: 65px;
+  --headerFontSize: 38px;
+  --secondaryHeaderFontSize: 33px;
+  --tertiaryHeaderFontSize: 25px;
+  --bodyFontSize: 25px;
+}
+
+/* STRUCTURAL ELEMENTS */
+/* nav style */
+#navStyle {
+  background-color: #f3f2ee;
+  margin-top: 0;
+}
+.navbarStyle2 {
+  color: #1f304f;
+  font-size: 25px;
+  padding-left: 20px;
+  margin: 0;
+  padding-top: 10px;
+  padding-bottom: 100px;
+}
+.navbar-item {
+  color: #1f304f;
+  font-size: 25px;
+  padding-left: 20px;
+  margin: 0;
+  padding-top: 10px;
+  padding-bottom: 100px;
+}
+.title is-child {
+  color: #1f304f;
+  font-size: 25px;
+  padding-left: 20px;
+  margin: 0;
+  padding-top: 10px;
+  padding-bottom: 100px;
+}
+/* 1. BODY */
+body {
+  margin: 0;
+  background-color: #f3f2ee;
+}
+.wrapper {
+  display: flex;
+}
+
+/* Styling for Margins */
+.colormargins {
+  background-color: #f3f2ee;
+}
+.mainbackground {
+  background-color: #f3f2ee;
+}
+
+.title {
+  font-family: var(--titleFontFamily);
+  font-size: var(--titleFontSize);
+  text-align: left;
+  vertical-align: middle;
+  color: var(--primarywhite);
+  font-size: 5vw;
+  margin-left: 5rem;
+}
+.logoStyle {
+  width: 300px;
+  float: left;
+  padding-left: 20px;
+  padding-top: 10px;
+  vertical-align: top;
+  font-family: Arial, Helvetica, sans-serif;
+  word-wrap: break-word;
+}
+.buttonStyle {
+  position: absolute;
+  top: 2.25%;
+  right: 30px;
+  height: auto;
+}
+
+.bt .imageLogoStyle {
+  float: left;
+}
+.primaryheader {
+  margin: 0 auto;
+  font-family: var(--bodyFontFamily);
+  font-size: var(--headerFontSize);
+  color: var(--primaryblack);
+  font-weight: bolder;
+  text-align: center;
+}
+
+.secondaryheader {
+  font-family: var(--bodyFontFamily);
+  font-size: var(--secondaryHeaderFontSize);
+  color: var(--primaryblack);
+  margin: 0 auto;
+  font-weight: bold;
+}
+.tertiaryHeader {
+  font-family: var(--bodyFontFamily);
+  font-size: var(--tertiaryHeaderFontSize);
+  text-align: left;
+  color: var(--headerColor);
+}
+.primaryBody {
+  font-family: var(--bodyFontFamily);
+  font-size: var(--bodyFontSize);
+  color: var(--bodyTextColor);
+}
+.btncolor {
+  background-color: var(--primarynavy);
+  font-family: var(--bodyFontFamily);
+  font-size: var(--bodyFontSize);
+  color: var(--bodyTextColor);
+}
+
+/* button */
+.add-btn {
+  font: var(--titleFontFamily);
+  background-color: #1f304f;
+  color: #f3f2ee;
+  padding: 1rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 24px;
+  display: inline-block;
+  text-decoration: none;
+}
+.btn:hover {
+  background-color: red;
+}
+
+/* Calendar Page */
+.margin-left {
+  flex: 1;
+  border-right: #201c0f;
+  border-right-style: solid;
+  padding: 1.5rem;
+}
+.page-content {
+  flex: 7;
+  padding: 1rem;
+  display: flex;
+  justify-content: flex-start; /* Ensures content starts from the top */
+  align-items: center; /* Centers the child elements horizontally */
+  flex-direction: column;
+}
+.margin-right {
+  flex: 1;
+  border-left: #201c0f;
+  border-left-style: solid;
+  padding: 1.5rem;
+}
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.box {
+  /* margin-bottom: 20px; */
+  text-align: center;
+  /* height: 200px;
+    width: 500px; */
+  padding-top: 1rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-bottom: 2rem;
+  margin-bottom: 20%;
+  /* padding-top: 1rem;
+    padding-left: 0.5rem; */
+  /* padding-right: 0.5rem; */
+  font-size: large;
+}
+.margin-event {
+  background-color: #1f304f;
+  color: #fafbfc;
+  font-family: var(--titleFontFamily);
+}
+.philanthropy-event {
+  background-color: #e87531;
+  color: #fafbfc;
+  font-family: var(--titleFontFamily);
+  /* padding: 1rem; */
+}
+
+.prof-dev-event {
+  background-color: #e8a32a;
+  color: #fafbfc;
+  font-family: var(--titleFontFamily);
+}
+
+.speaker-event {
+  background-color: #476d3d;
+  color: #fafbfc;
+  font-family: var(--titleFontFamily);
+}
+
+.social-event {
+  background-color: #0071a5;
+  color: #fafbfc;
+  font-family: var(--titleFontFamily);
+}
+
+.events-button {
+  display: inline-block;
+  color: #fafbfc;
+  text-decoration: none;
+  border: 0.2rem #fafbfc solid;
+  padding: 1rem;
+  font-family: var(--titleFontFamily);
+}
+
+.heading-tag-upcoming-event {
+  font-size: xx-large;
+  text-align: center;
+  color: #201c0f;
+  font-family: var(--titleFontFamily);
+}
+
+.calview {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 50%;
+  /* width: 100%;
+    height: 50%; */
+  margin-top: 5%;
+  background-color: var(--primarywhite);
+  border: 2px var(--primaryblack) solid;
+  /* display: inline-block; */
+}
+.weekview {
+  flex: 1;
+  width: 100%;
+  background-color: var(--primarywhite);
+  border-bottom: 2px var(--primaryblack) solid;
+  display: inline-block;
+  display: flex;
+  margin: auto;
+}
+.weekdayview {
+  display: inline-block;
+  width: auto;
+  text-align: center;
+  align-items: center;
+  color: var(--headerColor);
+  font: var(--bodyFontFamily);
+  flex: 1;
+}
+.dayofweek {
+  font-weight: bolder;
+  font-size: larger;
+}
+.dayview {
+  display: inline-block; /* This line is unnecessary */
+  width: auto; /* This line is unnecessary */
+  border-right: 2px var(--primaryblack) solid;
+  flex: 1;
+}
+/* Hidden class */
+.hidden {
+  display: none;
+}
+
+/* Styles for the event card popup */
+.event-card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--primarywhite);
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+}
+
+/* DROPDOWN */
+.navcal {
+  display: inline-block;
+  flex-direction: row;
+  margin-top: 2%;
+  width: 100%;
+  justify-content: center;
+}
+.today {
+  justify-content: left;
+  margin-right: 30%;
+}
+.action_left {
+  justify-content: left;
+  margin-right: 1%;
+}
+.action_right {
+  justify-content: right;
+  margin-left: 1%;
+}
+/* .actionbuttonselect {
+    margin-left: 10px;
+  } */
+.selectdrop {
+  font-size: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.aboutSection-box {
+  width: 75%;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+#aboutSection {
+  width: 75%;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 50px auto;
+  text-align: center;
+}
+#involvementSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.involvementText {
+  flex: 1;
+  margin-left: 20%;
+}
+
+.involvementImage-flex {
+  flex: 1;
+  margin-right: 5%;
+  margin-bottom: 3rem;
+}
+
+.involvementButton1 {
+  background-color: #1f304f;
+  border: none;
+  width: 10rem;
+  height: 3rem;
+  color: #fafbfc;
+  font-family: var(--bodyFontFamily);
+  font-size: 20px;
+}
+.involvementButton2 {
+  background-color: #b22b25;
+  border: none;
+  width: 10rem;
+  height: 3rem;
+  color: #fafbfc;
+  font-family: var(--bodyFontFamily);
+  font-size: 20px;
+}
+
+.titleContainers {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1f304f;
+}
+.column {
+  display: flex;
+  align-items: center;
+}
+.column .text-overlay {
+  margin-left: 20px; /* Adjust as needed */
+}
+.column2 {
+  position: flex;
+  width: 45%;
+  height: 45%;
+}
+
+.background-image {
+  width: 100%;
+  height: auto;
+}
+
+.text-overlay {
+  margin-left: 20px;
+  color: white;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  padding-right: 100px;
+}
+.dropdown .bttn1 {
+  border: none;
+  cursor: pointer;
+  outline: none;
+  background-color: #1f304f;
+  height: 50px;
+}
+.bttn1:hover {
+  background-color: #b22b25;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #1f304f;
+  min-width: 160px;
+  z-index: 1;
+}
+.dropdown-content a {
+  float: none;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  height: 60px;
+  width: 100%;
+}
+.dropdown-content a:hover {
+  background-color: #b22b25;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dayview.empty {
+  background-color: #f3f2ee; /* or any color that blends with the calendar's background */
+}
+
+.week-separator {
+  clear: both; /* Ensures the separation between weeks */
+  display: block; /* Change according to your design */
+}
+/* Add this class to your stylesheet */
+
+#today-btn {
+  background-color: var(--primarynavy);
+  color: #f3f2ee;
+  font: var(--titleFontFamily);
+  padding: 1rem;
+  /* font-weight: bold; */
+  font-size: 24px;
+}
+
+#month-select {
+  font-size: 30px;
+  color: var(--primaryblack);
+  background-color: #f3f2ee;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center; /* Align items horizontally at the center */
+}
+
+.yearblock {
+  background-color: var(--primarynavy);
+  color: #f3f2ee;
+  font: var(--titleFontFamily);
+  padding: 1rem;
+  font-size: x-large;
+  display: inline-block;
+  margin-left: 26%;
+}
