@@ -403,6 +403,13 @@ body {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
+  text-align: center;
+  margin: auto;
+}
+/* Center the submit button */
+input[type="submit"] {
+  display: block;
+  margin: auto;
 }
 
 .popup-content {
@@ -490,4 +497,31 @@ body {
 
 .dropdown-content.show {
   display: block;
+}
+
+.addEventContent {
+  font-family: var(--bodyFontFamily);
+  font-size: 20px;
+  text-align: center;
+}
+.secondaryheader2 {
+  font-family: var(--bodyFontFamily);
+  font-size: 30px;
+  color: var(--primarynavy);
+  margin: 0 auto;
+  font-weight: bold;
+  text-align: center;
+}
+.add-btn2 {
+  font: var(--titleFontFamily);
+  background-color: #1f304f;
+  color: #f3f2ee;
+  padding: 1rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 24px;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  align-items: center;
 }
