@@ -16,7 +16,7 @@ const monthNames = [
   "November",
   "December",
 ];
-const DayNames = ["Mon", "Tues", "Wed", "Thu", "Fri", "Sat", "Sun"];
+const DayNames = ["Sun", "Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];
 
 let currentDate = new Date();
 
@@ -30,17 +30,22 @@ function generateCalendar(date) {
   let daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
 
   let dayCellsGenerated = 0;
+  let calendarHtml = "";
 
-  let calendarHtml =
-    '<div class="weekdayview"></div>' + '<div class="weekview">';
-
+  calendarHtml += '<div class="weekdayview">';
+  for (let i = 0; i < DayNames.length; i++) {
+    calendarHtml += `<span>
+    <br /><p class="dayofweek">${DayNames[i]}</p><br />
+    </span>`;
+  }
+  calendarHtml += `</div>`;
+  calendarHtml += '<div class="weekview">';
   for (let i = 0; i < firstDayOfMonth; i++) {
     calendarHtml += '<div class="dayview empty"></div>';
     dayCellsGenerated++;
   }
 
   for (let day = 1; day <= daysInMonth; day++) {
-    // calendarHtml += `<p class="dayofweek">${day}</p>`;
     calendarHtml += `<div class="dayview">${day}</div>`;
     dayCellsGenerated++;
     if (dayCellsGenerated % 7 === 0 && dayCellsGenerated !== totalDays) {
@@ -59,7 +64,7 @@ function generateCalendar(date) {
   if (dayCellsGenerated % 7 !== 1) {
     calendarHtml += "</div>";
   }
-
+  calendarHtml += `</div>`;
   calendarView.innerHTML = calendarHtml;
   monthSelect.value = monthNames[currentMonth];
 }
