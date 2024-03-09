@@ -229,19 +229,33 @@ body {
 }
 
 /* DROPDOWN */
-.actionbutton {
+.navcal {
+  display: inline-block;
+  flex-direction: row;
+  margin-top: 2%;
+  width: 100%;
+  justify-content: center;
+}
+.today {
   justify-content: left;
-  align-items: flex-end;
-  display: flex;
+  margin-right: 30%;
 }
-
-.actionbutton select {
+.action_left {
+  justify-content: left;
+  margin-right: 1%;
+}
+.action_right {
+  justify-content: right;
+  margin-left: 1%;
+}
+/* .actionbuttonselect {
   margin-left: 10px;
-}
+} */
 .selectdrop {
-  margin-top: 10%;
+  /* margin-top: 10%; */
   font-size: xx-large;
   align-items: center;
+  justify-content: center;
 }
 
 .aboutSection-box {
