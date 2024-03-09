@@ -1,7 +1,7 @@
 const calendarView = document.querySelector(".calview");
 const monthSelect = document.getElementById("month-select");
 const prevMonthBtn = document.querySelector(".action_left");
-const nextMonthBtn = document.querySelector(".action_right button");
+const nextMonthBtn = document.querySelector(".action_right");
 const yearblock = document.getElementById("yearblock");
 const monthNames = [
   "January",
@@ -35,19 +35,15 @@ function generateCalendar(date) {
   yearblock.innerHTML = currentYear;
   let calendarHtml = "";
 
-  calendarHtml += '<div class="weekdayview">';
   for (let i = 0; i < DayNames.length; i++) {
     calendarHtml += `<span>
     <br /><p class="dayofweek">${DayNames[i]}</p><br />
     </span>`;
   }
-  calendarHtml += `</div>`;
-  calendarHtml += '<div class="weekview">';
   for (let i = 0; i < firstDayOfMonth; i++) {
     calendarHtml += '<div class="dayview empty"></div>';
     dayCellsGenerated++;
   }
-
   for (let day = 1; day <= daysInMonth; day++) {
     calendarHtml += `<div class="dayview">${day}</div>`;
     dayCellsGenerated++;

@@ -248,29 +248,30 @@ body {
 
 /* DROPDOWN */
 .navcal {
-  display: inline-block;
+  display: flex;
   flex-direction: row;
-  margin-top: 2%;
-  width: 100%;
-  justify-content: center;
+  /* margin-top: 2%; */
+  /* justify-content: center; */
 }
 .today {
-  justify-content: left;
-  margin-right: 30%;
+  flex: 3;
+  margin-right: 2%;
+}
+.navcalcenter {
+  flex: 5;
 }
 .action_left {
-  justify-content: left;
   margin-right: 1%;
 }
 .action_right {
-  justify-content: right;
   margin-left: 1%;
 }
-/* .actionbuttonselect {
-    margin-left: 10px;
-  } */
+.yearblock {
+  flex: 3;
+  margin-left: 2%;
+}
 .selectdrop {
-  font-size: 100%;
+  font-size: 80%;
   align-items: center;
   justify-content: center;
 }
@@ -404,7 +405,7 @@ body {
 
 #today-btn {
   background-color: var(--primarynavy);
-  color: #f3f2ee;
+  color: var(--primarywhite);
   font: var(--titleFontFamily);
   padding: 1rem;
   /* font-weight: bold; */
@@ -422,12 +423,10 @@ body {
   justify-content: center; /* Align items horizontally at the center */
 }
 
-.yearblock {
+#yearblock {
   background-color: var(--primarynavy);
-  color: #f3f2ee;
+  color: var(--primarywhite);
   font: var(--titleFontFamily);
   padding: 1rem;
-  font-size: x-large;
-  display: inline-block;
-  margin-left: 26%;
+  font-size: 24px;
 }
