@@ -190,6 +190,8 @@
                 <p class="primaryBody">Date: [Event Date]</p>
                 <p class="primaryBody">Location: [Event Location]</p>
                 <!-- Add more details as needed -->
+                <button id="editEventCard">Edit</button>
+                <button id="deleteEventCard">Delete</button>
                 <button id="closeEventCard">Close</button>
               </div>
             </div>
@@ -213,12 +215,12 @@
         <!-- CENTER OF PAGE where calendar goes-->
         <div id="sample" class="colormargins page-content">
           <div class="navcal">
-            <span>
-              <button class="today" id="today-btn">Today</button>
-              <button class="action_left">
-                <i class="fa-solid fa-chevron-left"></i>
-              </button>
+            <span class="today">
+              <button id="today-btn">Today</button>
             </span>
+            <button class="action_left">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
             <select class="selectdrop" id="month-select">
               <option value="January">January</option>
               <option value="February">February</option>
@@ -233,69 +235,69 @@
               <option value="November">November</option>
               <option value="December">December</option>
             </select>
-            <span class="action_right">
-              <button><i class="fa-solid fa-chevron-right"></i></button>
+            <button class="action_right">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+            <span class="yearblock">
+              <button id="yearblock"></button>
             </span>
           </div>
-
           <div class="calview">
-            <div class="weekview">
-              <div class="weekdayview">
-                <span>
-                  <br />
-                  <p class="dayofweek">Sun</p>
-                  <br />
-                </span>
-              </div>
-              <div class="weekdayview">
-                <span>
-                  <br />
-                  <p class="dayofweek">Mon</p>
-                  <br />
-                </span>
-              </div>
-              <div class="weekdayview">
-                <span>
-                  <br />
-                  <p class="dayofweek">Tue</p>
-                  <br />
-                </span>
-              </div>
-              <div class="weekdayview">
-                <span>
-                  <br />
-                  <p class="dayofweek">Wed</p>
-                  <br />
-                </span>
-              </div>
-              <div class="weekdayview">
-                <div class="weekdayview">
-                  <span>
-                    <br />
-                    <p class="dayofweek">Thu</p>
-                    <br />
-                  </span>
-                </div>
-              </div>
-              <div class="weekdayview">
-                <div class="weekdayview">
-                  <span>
-                    <br />
-                    <p class="dayofweek">Fri</p>
-                    <br />
-                  </span>
-                </div>
-              </div>
-              <div class="weekdayview">
-                <span>
-                  <br />
-                  <p class="dayofweek">Sat</p>
-                  <br />
-                </span>
-              </div>
-              <!-- Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab,
-              recusandae. -->
+            <div class="weekdayview">
+              <span>
+                <br />
+                <p class="dayofweek">Sun</p>
+                <br />
+              </span>
             </div>
+            <div class="weekdayview">
+              <span>
+                <br />
+                <p class="dayofweek">Mon</p>
+                <br />
+              </span>
+            </div>
+            <div class="weekdayview">
+              <span>
+                <br />
+                <p class="dayofweek">Tue</p>
+                <br />
+              </span>
+            </div>
+            <div class="weekdayview">
+              <span>
+                <br />
+                <p class="dayofweek">Wed</p>
+                <br />
+              </span>
+            </div>
+            <div class="weekdayview">
+              <div class="weekdayview">
+                <span>
+                  <br />
+                  <p class="dayofweek">Thu</p>
+                  <br />
+                </span>
+              </div>
+            </div>
+            <div class="weekdayview">
+              <div class="weekdayview">
+                <span>
+                  <br />
+                  <p class="dayofweek">Fri</p>
+                  <br />
+                </span>
+              </div>
+            </div>
+            <div class="weekdayview">
+              <span>
+                <br />
+                <p class="dayofweek">Sat</p>
+                <br />
+              </span>
+            </div>
+            <!-- Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab,
+              recusandae. -->
             <div class="weekview">
               <div class="dayview">Lorem, ipsum.</div>
               <div class="dayview">Lorem, ipsum.</div>
@@ -372,11 +374,12 @@
               padding-right: 50px;
             "
           >
-            <img
-              src="images/AMA Logo Footer.png"
-              alt=""
-              style="height: 50px; float: left"
-            />
+            <a href="index.html">
+              <img
+                src="images/AMA Logo Footer.png"
+                alt=""
+                style="height: 50px; float: left"
+            /></a>
             <div
               style="padding-top: 5px; padding-left: 150px; text-align: left"
             >
@@ -400,16 +403,30 @@
             "
           >
             <div style="width: 12%; margin-left: 26%">
-              <i class="fa-brands fa-linkedin fa-2xl" style="color: gray"></i>
+              <a href="https://www.linkedin.com/in/ama-badgers-5247a9252/">
+                <i class="fa-brands fa-linkedin fa-2xl" style="color: gray"></i
+              ></a>
             </div>
             <div style="width: 12%">
-              <i class="fa-brands fa-instagram fa-2xl" style="color: gray"></i>
+              <a href="https://www.instagram.com/amabadgers/"
+                ><i
+                  class="fa-brands fa-instagram fa-2xl"
+                  style="color: gray"
+                ></i>
+              </a>
             </div>
             <div style="width: 12%">
-              <i class="fa-brands fa-facebook fa-2xl" style="color: gray"></i>
+              <a href="https://www.facebook.com/AMAUWMadison/"
+                ><i class="fa-brands fa-facebook fa-2xl" style="color: gray"></i
+              ></a>
             </div>
             <div style="width: 12%">
-              <i class="fa-brands fa-x-twitter fa-2xl" style="color: gray"></i>
+              <a href="https://twitter.com/amauwmadison?lang=en"
+                ><i
+                  class="fa-brands fa-x-twitter fa-2xl"
+                  style="color: gray"
+                ></i>
+              </a>
             </div>
           </div>
           <div style="text-align: center">
@@ -477,7 +494,7 @@
             </div>
             <div style="padding: 8px">
               <a
-                href="#"
+                href="calendar.html"
                 style="
                   color: #f3f2ee;
                   font-family: Arial, Helvetica, sans-serif;

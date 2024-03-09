@@ -12,166 +12,156 @@
     <title>Document</title>
   </head>
   <body>
-    <nav style="background-color: #f3f2ee; margin-top: 0">
-      <!-- website logo -->
-      <div class="tile is-child">
-        <h1
-          class="navbar-item"
-          style="
-            color: #1f304f;
-            font-size: 25px;
-            padding-left: 20px;
-            margin: 0;
-            padding-top: 10px;
-            padding-bottom: 100px;
-          "
-        >
-          <img src="images/AMA Logo.png" alt="" style="float: left" />
-          <div
+    <div class="navStyle">
+      <nav id="navStyle">
+        <!-- website logo -->
+        <!-- strugling to convert below to seperate stylesheet -->
+        <div class="tile is-child">
+          <h1
+            class="navbar-item title"
             style="
-              width: 300px;
-              float: left;
+              color: #1f304f;
+              font-size: 25px;
               padding-left: 20px;
+              margin: 0;
               padding-top: 10px;
+              padding-bottom: 100px;
             "
           >
+            <img src="images/AMA Logo.png" alt="" style="float: left" />
+            <div class="logoStyle">
+              <strong>University of Wisconsin <br />Madison</strong>
+            </div>
+          </h1>
+        </div>
+        <div style="position: absolute; top: 2.25%; right: 30px; height: auto">
+          <!-- the login button for users -->
+          <a href="login_modal.html" class="add-btn">
             <strong
               style="
-                vertical-align: top;
+                color: #f3f2ee;
                 font-family: Arial, Helvetica, sans-serif;
-                word-wrap: break-word;
+                font-size: 20px;
+                vertical-align: bottom;
               "
-              >University of Wisconsin Madison</strong
+              >LOGIN</strong
             >
-          </div>
-        </h1>
-      </div>
-      <div style="position: absolute; top: 2.25%; right: 30px; height: auto">
-        <!-- the login button for users -->
-        <a href="login_modal.html" class="add-btn">
-          <strong
-            style="
-              color: #f3f2ee;
-              font-family: Arial, Helvetica, sans-serif;
-              font-size: 20px;
-              vertical-align: bottom;
-            "
-            >LOGIN</strong
-          >
-        </a>
-        &nbsp; &nbsp;
-        <!-- the signup button for users -->
-        <a href="sign_up_modal.html" class="add-btn" id="sign_up_btn">
-          <strong
-            style="
-              color: #f3f2ee;
-              font-family: Arial, Helvetica, sans-serif;
-              font-size: 20px;
-              vertical-align: bottom;
-            "
-            >SIGN UP</strong
-          >
-        </a>
-      </div>
-      <!-- the navigation bar -->
-      <div
-        style="
-          background-color: #1f304f;
-          height: 50px;
-          width: 100%;
-          text-align: center;
-        "
-      >
-        <a
-          href="index.html"
+          </a>
+          &nbsp; &nbsp;
+          <!-- the signup button for users -->
+          <a href="sign_up_modal.html" class="add-btn" id="sign_up_btn">
+            <strong
+              style="
+                color: #f3f2ee;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 20px;
+                vertical-align: bottom;
+              "
+              >SIGN UP</strong
+            >
+          </a>
+        </div>
+        <!-- the navigation bar -->
+        <div
           style="
-            display: inline-block;
-            padding-right: 100px;
-            padding-left: 50px;
+            background-color: #1f304f;
+            height: 50px;
+            width: 100%;
+            text-align: center;
           "
         >
-          <strong
+          <a
+            href="index.html"
             style="
-              color: #f3f2ee;
-              font-family: Arial, Helvetica, sans-serif;
-              font-size: 20px;
+              display: inline-block;
+              padding-right: 100px;
+              padding-left: 50px;
             "
-            >HOME</strong
           >
-        </a>
-        <a style="display: inline-block; padding-right: 100px">
-          <strong
-            style="
-              color: #f3f2ee;
-              font-family: Arial, Helvetica, sans-serif;
-              font-size: 20px;
-              vertical-align: bottom;
-            "
-            >ABOUT</strong
-          >
-        </a>
-        <!-- the members dropdown menu -->
-        <div class="dropdown">
-          <button class="bttn1">
             <strong
               style="
                 color: #f3f2ee;
                 font-family: Arial, Helvetica, sans-serif;
                 font-size: 20px;
               "
-              >MEMBERS</strong
+              >HOME</strong
             >
-          </button>
-          <div class="dropdown-content">
-            <div>
-              <a
-                href="calendar.html"
+          </a>
+          <a style="display: inline-block; padding-right: 100px">
+            <strong
+              style="
+                color: #f3f2ee;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 20px;
+                vertical-align: bottom;
+              "
+              >ABOUT</strong
+            >
+          </a>
+          <!-- the members dropdown menu -->
+          <div class="dropdown">
+            <button class="bttn1">
+              <strong
                 style="
                   color: #f3f2ee;
                   font-family: Arial, Helvetica, sans-serif;
                   font-size: 20px;
-                  padding-top: 20px;
                 "
-                >CALENDER</a
+                >MEMBERS</strong
               >
-            </div>
-            <div>
-              <a
-                href="#"
-                style="
-                  color: #f3f2ee;
-                  font-family: Arial, Helvetica, sans-serif;
-                  font-size: 20px;
-                  word-wrap: break-word;
-                  padding-top: 20px;
-                "
-                >POINT SYSTEM</a
-              >
+            </button>
+            <div class="dropdown-content">
+              <div>
+                <a
+                  href="calendar.html"
+                  style="
+                    color: #f3f2ee;
+                    font-family: Arial, Helvetica, sans-serif;
+                    font-size: 20px;
+                    padding-top: 20px;
+                  "
+                  >CALENDER</a
+                >
+              </div>
+              <div>
+                <a
+                  href="#"
+                  style="
+                    color: #f3f2ee;
+                    font-family: Arial, Helvetica, sans-serif;
+                    font-size: 20px;
+                    word-wrap: break-word;
+                    padding-top: 20px;
+                  "
+                  >POINT SYSTEM</a
+                >
+              </div>
             </div>
           </div>
+          <a style="display: inline-block; padding-right: 100px">
+            <strong
+              style="
+                color: #f3f2ee;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 20px;
+              "
+              >BLOG</strong
+            >
+          </a>
+          <a style="display: inline-block; padding-right: 100px">
+            <strong
+              style="
+                color: #f3f2ee;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 20px;
+              "
+              >CONTACT</strong
+            >
+          </a>
         </div>
-        <a style="display: inline-block; padding-right: 100px">
-          <strong
-            style="
-              color: #f3f2ee;
-              font-family: Arial, Helvetica, sans-serif;
-              font-size: 20px;
-            "
-            >BLOG</strong
-          >
-        </a>
-        <a style="display: inline-block; padding-right: 100px">
-          <strong
-            style="
-              color: #f3f2ee;
-              font-family: Arial, Helvetica, sans-serif;
-              font-size: 20px;
-            "
-            >CONTACT</strong
-          >
-        </a>
-      </div>
-    </nav>
+      </nav>
+    </div>
+
     <div class="titleContainers">
       <div class="column column1">
         <h1 class="title">Welcome to <br />AMA UW-Madison</h1>
@@ -244,12 +234,11 @@
               padding-right: 50px;
             "
           >
-            <a href="index.html">
-              <img
-                src="images/AMA Logo Footer.png"
-                alt=""
-                style="height: 50px; float: left"
-            /></a>
+            <img
+              src="images/AMA Logo Footer.png"
+              alt=""
+              style="height: 50px; float: left"
+            />
             <div
               style="padding-top: 5px; padding-left: 150px; text-align: left"
             >
@@ -273,30 +262,16 @@
             "
           >
             <div style="width: 12%; margin-left: 26%">
-              <a href="https://www.linkedin.com/in/ama-badgers-5247a9252/">
-                <i class="fa-brands fa-linkedin fa-2xl" style="color: gray"></i
-              ></a>
+              <i class="fa-brands fa-linkedin fa-2xl" style="color: gray"></i>
             </div>
             <div style="width: 12%">
-              <a href="https://www.instagram.com/amabadgers/"
-                ><i
-                  class="fa-brands fa-instagram fa-2xl"
-                  style="color: gray"
-                ></i>
-              </a>
+              <i class="fa-brands fa-instagram fa-2xl" style="color: gray"></i>
             </div>
             <div style="width: 12%">
-              <a href="https://www.facebook.com/AMAUWMadison/"
-                ><i class="fa-brands fa-facebook fa-2xl" style="color: gray"></i
-              ></a>
+              <i class="fa-brands fa-facebook fa-2xl" style="color: gray"></i>
             </div>
             <div style="width: 12%">
-              <a href="https://twitter.com/amauwmadison?lang=en"
-                ><i
-                  class="fa-brands fa-x-twitter fa-2xl"
-                  style="color: gray"
-                ></i>
-              </a>
+              <i class="fa-brands fa-x-twitter fa-2xl" style="color: gray"></i>
             </div>
           </div>
           <div style="text-align: center">
@@ -364,7 +339,7 @@
             </div>
             <div style="padding: 8px">
               <a
-                href="calendar.html"
+                href="#"
                 style="
                   color: #f3f2ee;
                   font-family: Arial, Helvetica, sans-serif;
@@ -417,7 +392,7 @@
               style="
                 margin-top: 4%;
                 height: 35px;
-                width: 400px;
+                width: 350px;
                 border: 1px solid black;
               "
             />

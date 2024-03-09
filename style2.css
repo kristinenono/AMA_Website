@@ -22,6 +22,35 @@
 }
 
 /* STRUCTURAL ELEMENTS */
+/* nav style */
+#navStyle {
+  background-color: #f3f2ee;
+  margin-top: 0;
+}
+.navbarStyle2 {
+  color: #1f304f;
+  font-size: 25px;
+  padding-left: 20px;
+  margin: 0;
+  padding-top: 10px;
+  padding-bottom: 100px;
+}
+.navbar-item {
+  color: #1f304f;
+  font-size: 25px;
+  padding-left: 20px;
+  margin: 0;
+  padding-top: 10px;
+  padding-bottom: 100px;
+}
+.title is-child {
+  color: #1f304f;
+  font-size: 25px;
+  padding-left: 20px;
+  margin: 0;
+  padding-top: 10px;
+  padding-bottom: 100px;
+}
 /* 1. BODY */
 body {
   margin: 0;
@@ -43,11 +72,30 @@ body {
   font-family: var(--titleFontFamily);
   font-size: var(--titleFontSize);
   text-align: left;
+  vertical-align: middle;
   color: var(--primarywhite);
   font-size: 5vw;
   margin-left: 5rem;
 }
+.logoStyle {
+  width: 300px;
+  float: left;
+  padding-left: 20px;
+  padding-top: 10px;
+  vertical-align: top;
+  font-family: Arial, Helvetica, sans-serif;
+  word-wrap: break-word;
+}
+.buttonStyle {
+  position: absolute;
+  top: 2.25%;
+  right: 30px;
+  height: auto;
+}
 
+.bt .imageLogoStyle {
+  float: left;
+}
 .primaryheader {
   margin: 0 auto;
   font-family: var(--bodyFontFamily);
@@ -210,13 +258,13 @@ body {
   margin: auto;
 }
 .weekdayview {
-  flex: 1;
-  width: 100%;
-  background-color: var(--primarywhite);
-  border-bottom: 2px var(--primaryblack) solid;
   display: inline-block;
-  display: flex;
-  margin: auto;
+  width: auto;
+  text-align: center;
+  align-items: center;
+  color: var(--headerColor);
+  font: var(--bodyFontFamily);
+  flex: 1;
 }
 .dayofweek {
   font-weight: bolder;
@@ -248,30 +296,29 @@ body {
 
 /* DROPDOWN */
 .navcal {
-  display: flex;
+  display: inline-block;
   flex-direction: row;
-  /* margin-top: 2%; */
-  /* justify-content: center; */
+  margin-top: 2%;
+  width: 100%;
+  justify-content: center;
 }
 .today {
-  flex: 3;
-  margin-right: 2%;
-}
-.navcalcenter {
-  flex: 5;
+  justify-content: left;
+  margin-right: 30%;
 }
 .action_left {
+  justify-content: left;
   margin-right: 1%;
 }
 .action_right {
+  justify-content: right;
   margin-left: 1%;
 }
-.yearblock {
-  flex: 3;
-  margin-left: 2%;
-}
+/* .actionbuttonselect {
+    margin-left: 10px;
+  } */
 .selectdrop {
-  font-size: 80%;
+  font-size: 100%;
   align-items: center;
   justify-content: center;
 }
@@ -405,7 +452,7 @@ body {
 
 #today-btn {
   background-color: var(--primarynavy);
-  color: var(--primarywhite);
+  color: #f3f2ee;
   font: var(--titleFontFamily);
   padding: 1rem;
   /* font-weight: bold; */
@@ -423,10 +470,12 @@ body {
   justify-content: center; /* Align items horizontally at the center */
 }
 
-#yearblock {
+.yearblock {
   background-color: var(--primarynavy);
-  color: var(--primarywhite);
+  color: #f3f2ee;
   font: var(--titleFontFamily);
   padding: 1rem;
-  font-size: 24px;
+  font-size: x-large;
+  display: inline-block;
+  margin-left: 26%;
 }
