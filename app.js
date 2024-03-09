@@ -80,3 +80,10 @@ nextMonthBtn.addEventListener("click", function () {
 });
 
 generateCalendar(currentDate);
+
+const todayBtn = document.querySelector("#today-btn"); // Get the Today button
+
+todayBtn.addEventListener("click", function () {
+  currentDate = new Date(); // Reset currentDate to today's date
+  generateCalendar(currentDate); // Regenerate the calendar for the current month
+});
