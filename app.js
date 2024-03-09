@@ -105,43 +105,43 @@ document.addEventListener("DOMContentLoaded", function () {
   var cancelButton = document.getElementById("cancel_btn");
 
   // Add a click event listener to the cancel button
-  cancelButton.addEventListener("click", function(event) {
-      // Prevent the default action of the button (submitting the form)
-      event.preventDefault();
+  cancelButton.addEventListener("click", function (event) {
+    // Prevent the default action of the button (submitting the form)
+    event.preventDefault();
 
-      // Redirect the user to the index.html page
-      window.location.href = "index.html";
+    // Redirect the user to the index.html page
+    window.location.href = "index.html";
   });
 });
 
 // Wait for the DOM content to be fully loaded
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   // Get the form and password input element
   var signupForm = document.getElementById("signup_form");
   var passwordInput = document.getElementById("password");
 
   // Add a submit event listener to the form
-  signupForm.addEventListener("submit", function(event) {
-      // Prevent the default form submission
-      event.preventDefault();
+  signupForm.addEventListener("submit", function (event) {
+    // Prevent the default form submission
+    event.preventDefault();
 
-      // Get the value of the password input
-      var password = passwordInput.value;
+    // Get the value of the password input
+    var password = passwordInput.value;
 
-      // Check if the password meets the required criteria (e.g., minimum length)
-      if (password.length < 8) {
-          // Display an error message if the password is too short
-          alert("Password must be at least 8 characters long.");
-          return; // Stop further execution of the function
-      }
+    // Check if the password meets the required criteria (e.g., minimum length)
+    if (password.length < 8) {
+      // Display an error message if the password is too short
+      alert("Password must be at least 8 characters long.");
+      return; // Stop further execution of the function
+    }
 
-      // If the password is valid, you can proceed with form submission
-      // Here, you can add code to submit the form data to the server
-      // For demonstration purposes, let's just log the password to the console
-      console.log("Password:", password);
-      
-      // Reset the form fields
-      signupForm.reset();
+    // If the password is valid, you can proceed with form submission
+    // Here, you can add code to submit the form data to the server
+    // For demonstration purposes, let's just log the password to the console
+    console.log("Password:", password);
+
+    // Reset the form fields
+    signupForm.reset();
   });
 });
 document.addEventListener("DOMContentLoaded", function () {
@@ -178,3 +178,20 @@ function closeAddEventsPopup() {
 document.getElementById("eventbtn").onclick = function () {
   openAddEventsPopup();
 };
+
+document.addEventListener("DOMContentLoaded", function () {
+  var dropdownButton = document.querySelector(".bttn1");
+  var dropdownContent = document.querySelector(".dropdown-content");
+
+  function toggleDropdown() {
+    dropdownContent.classList.toggle("show");
+  }
+
+  dropdownButton.addEventListener("click", toggleDropdown);
+
+  document.addEventListener("click", function (event) {
+    if (!event.target.closest(".dropdown")) {
+      dropdownContent.classList.remove("show");
+    }
+  });
+});
