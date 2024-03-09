@@ -161,3 +161,20 @@ document.addEventListener("DOMContentLoaded", function () {
     eventCard.classList.add("hidden");
   });
 });
+// Add Events Popup
+var addEventsPopup = document.getElementById("addEventsPopup");
+
+// Function to open the popup
+function openAddEventsPopup() {
+  addEventsPopup.style.display = "block";
+}
+
+// Function to close the popup
+function closeAddEventsPopup() {
+  addEventsPopup.style.display = "none";
+}
+
+// Attach the open function to your "Add Event" button
+document.getElementById("eventbtn").onclick = function () {
+  openAddEventsPopup();
+};
