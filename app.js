@@ -18,8 +18,20 @@ function appendContent(html) {
 // const previousmn = document.querySelector("action_left");
 // const nextmn = document.querySelector("action_right");
 
-let currentYear = Date.getFullYear();
-console.log(currentYear);
+const currentDate = new Date();
+const currentMonth = currentDate.getMonth() + 1;
+const currentDay = currentDate.getDate();
+const currentYear = currentDate.getFullYear();
+
+let firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
+
+console.log(firstDayOfMonth);
+console.log(
+  `Today's date (m/dd/yyyy): ${currentMonth}/${currentDay}/${currentYear}`
+);
+
+// let currentYear = Date.getFullYear();
+// console.log(currentYear);
 
 // let eventbtn = ` <div class="form-content">
 // <div class="modal is-active mainbackground">
