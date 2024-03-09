@@ -7,7 +7,7 @@ function r_e(classname) {
 function appendContent(html) {
   r_e("main").innerHTML = html;
 }
-
+const cal_page_content = r_e();
 const today_btn = r_e(today);
 
 let cal_page = `<main>
@@ -179,3 +179,7 @@ let cal_page = `<main>
   </div>
 </div>
 </main>`;
+
+today_btn.addEventListener("click", () => {
+  page - content.classList.add("is-hidden");
+});
