@@ -185,5 +185,3 @@ let cal_page = `<main>
   </div>
 </div>
 </main>`;
-
-console.log(appendContent(cal_page));
