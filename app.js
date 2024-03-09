@@ -1,108 +1,82 @@
-//Class selector function//
+const calendarView = document.querySelector(".calview");
+const monthSelect = document.getElementById("month-select");
+const prevMonthBtn = document.querySelector(".action_left");
+const nextMonthBtn = document.querySelector(".action_right button");
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
-function r_e(id) {
-  return document.querySelector(`#${id}`);
+let currentDate = new Date();
+
+function generateCalendar(date) {
+  // this is where we set the cal grid
+  const totalDays = 42;
+  calendarView.innerHTML = "";
+  let currentYear = date.getFullYear();
+  let currentMonth = date.getMonth();
+  let firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
+  let daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+  let dayCellsGenerated = 0;
+
+  let calendarHtml = '<div class="weekview">';
+
+  for (let i = 0; i < firstDayOfMonth; i++) {
+    calendarHtml += '<div class="dayview empty"></div>';
+    dayCellsGenerated++;
+  }
+
+  for (let day = 1; day <= daysInMonth; day++) {
+    calendarHtml += `<div class="dayview">${day}</div>`;
+    dayCellsGenerated++;
+    if (dayCellsGenerated % 7 === 0 && dayCellsGenerated !== totalDays) {
+      calendarHtml += '</div><div class="weekview">'; // Start a new row every 7 days unless it's the last cell
+    }
+  }
+
+  while (dayCellsGenerated < totalDays) {
+    calendarHtml += '<div class="dayview empty"></div>';
+    dayCellsGenerated++;
+    if (dayCellsGenerated % 7 === 0 && dayCellsGenerated !== totalDays) {
+      calendarHtml += '</div><div class="weekview">';
+    }
+  }
+
+  if (dayCellsGenerated % 7 !== 1) {
+    calendarHtml += "</div>";
+  }
+
+  calendarView.innerHTML = calendarHtml;
+  monthSelect.value = monthNames[currentMonth];
 }
 
-function appendContent(html) {
-  r_e("sample").innerHTML += html;
+function changeMonth(step) {
+  currentDate.setMonth(currentDate.getMonth() + step);
+  generateCalendar(currentDate);
 }
 
-// function getDate{
+monthSelect.addEventListener("change", function () {
+  currentDate.setMonth(monthNames.indexOf(this.value));
+  generateCalendar(currentDate);
+});
 
-// }
+prevMonthBtn.addEventListener("click", function () {
+  changeMonth(-1);
+});
 
-// document.addEventListener
-// const CalendarView = document.querySelector("calview");
-// const monthSelect = document.getElementById("month-select");
-// const previousmn = document.querySelector("action_left");
-// const nextmn = document.querySelector("action_right");
+nextMonthBtn.addEventListener("click", function () {
+  changeMonth(1);
+});
 
-const currentDate = new Date();
-const currentMonth = currentDate.getMonth() + 1;
-const currentDay = currentDate.getDate();
-const currentYear = currentDate.getFullYear();
-
-let firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
-
-console.log(firstDayOfMonth);
-console.log(
-  `Today's date (m/dd/yyyy): ${currentMonth}/${currentDay}/${currentYear}`
-);
-
-// let currentYear = Date.getFullYear();
-// console.log(currentYear);
-
-// let eventbtn = ` <div class="form-content">
-// <div class="modal is-active mainbackground">
-//   <h2 class="title">New Event</h2>
-//   <div class="field">
-//     <label class="label">Name of Event</label>
-//     <div class="control">
-//       <input class="input" type="text" placeholder="LinkedIn Workshop" />
-//     </div>
-//   </div>
-//   <div class="field">
-//     <label class="label">Date and Time of Event</label>
-//     <div class="control">
-//       <input
-//         class="input"
-//         type="datetime-local"
-//         placeholder="12-01-22 01:22"
-//       />
-//     </div>
-//   </div>
-//   <div class="field">
-//     <label class="label">Choose Event Category</label>
-//     <div class="control">
-//       <div class="select">
-//         <select name="" id="">
-//           <option>--select--</option>
-//           <option value="">Philanthropy</option>
-//           <option value="">Professional Development</option>
-//           <option value="">Speaker Event</option>
-//           <option value="">Social Event</option>
-//         </select>
-//       </div>
-//     </div>
-//   </div>
-//   <div class="field">
-//     <label class="label">Points Assigned</label>
-//     <div class="control">
-//       <input class="input" type="number" placeholder="5" />
-//     </div>
-//   </div>
-//   <div class="field">
-//     <label class="label">Description of Event</label>
-//     <div class="control">
-//       <textarea
-//         cols="20"
-//         rows="12"
-//         placeholder="Dress Code: Business Casual
-// Location: Grainger"
-//       ></textarea>
-//     </div>
-//   </div>
-//   <div class="field has-addons">
-//     <div class="control">
-//       <input class="input" type="text" placeholder="Generate Code" />
-//     </div>
-//     <div class="control">
-//       <a class="button btncolor">Go</a>
-//     </div>
-//   </div>
-//   <div class="field is-grouped">
-//     <div class="control">
-//       <button class="button">Submit</button>
-//     </div>
-//     <div class="control">
-//       <button class="button">Cancel</button>
-//     </div>
-//   </div>
-// </div>
-// </div>`;
-
-// r_e("eventbtn").addEventListener("click", () => {
-//   let html = "";
-//   r_e("cal_page").innerHTML = "<h1> About Link Clicked </h1>";
-// });
+generateCalendar(currentDate);
