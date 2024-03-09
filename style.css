@@ -387,3 +387,8 @@ body {
   color: var(--primaryblack);
   background-color: #f3f2ee;
 }
+
+.button-container {
+  display: flex;
+  justify-content: center; /* Align items horizontally at the center */
+}

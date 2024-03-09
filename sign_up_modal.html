@@ -1,17 +1,18 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
 </head>
 <body>
-    <!-- creation of a modal that appears for users to sign up -->
-    <div>
+    <!-- creation of a modal that appears for users to login -->
         <!-- contains all of the content code within the modal -->
         <div>
             <div style="background-color: #1F304F; width: 30%; height: 30%; margin: auto;">
                 <!-- the sign in form for users -->
-                <form>
+                <form id="signup_form">
                     <div style="color:F3F2EE; text-align: center; padding-top: 5px; font-family: Arial, Helvetica, sans-serif;">
                         <p><b>TEMP SIGN UP MODAL</b></p>
                     </div>
@@ -22,24 +23,20 @@
                     <br>
                     <!-- the password field -->
                     <p style="color:F3F2EE; font-family: Arial, Helvetica, sans-serif; text-align: center; padding-top: 5px;">Password:</p>
-                    <input type="password" placeholder="password"
+                    <input type="password" id="password" placeholder="password"
                         style="background-color:F3F2EE; margin: auto; display: block; text-align: center;">
                     <br>
-                    <!-- the login button -->
-                    <a>
-                        <button style="margin: auto; display: block;">
-                            <strong>Sign up</strong></button>
-                    </a>
-                    <!-- Cancel Button -->
-                    <a>
-                        <button style="margin: auto; display: block;">
-                            <strong>Cancel</strong></button>
-                    </a>
+                    <div class="button-container">
+                            <button id="signup_btn" style="margin: auto; display: block;">
+                                <strong>Sign Up</strong></button>
+                            <button id="cancel_btn" style="margin: auto; display: block;">
+                                <strong>Cancel</strong></button>
+                    </div>
                     <!-- location where error is displayed if one occurs -->
                     <div class="error has-text-warning"></div>
                 </form>
             </div>
         </div>
-    </div>
 </body>
+<script src="app.js"></script>
 </html>
