@@ -252,8 +252,7 @@ body {
   margin-left: 10px;
 } */
 .selectdrop {
-  /* margin-top: 10%; */
-  font-size: xx-large;
+  font-size: 100%;
   align-items: center;
   justify-content: center;
 }
