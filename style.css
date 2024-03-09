@@ -45,6 +45,7 @@ body {
   text-align: left;
   color: var(--primarywhite);
   font-size: 5vw;
+  margin-left: 5rem;
 }
 
 .primaryheader {
@@ -227,6 +228,23 @@ body {
   border-right: 2px var(--primaryblack) solid;
   flex: 1;
 }
+/* Hidden class */
+.hidden {
+  display: none;
+}
+
+/* Styles for the event card popup */
+.event-card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--primarywhite);
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+}
 
 /* DROPDOWN */
 .navcal {
@@ -307,11 +325,22 @@ body {
 }
 
 .titleContainers {
-  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1f304f;
 }
-
+.column {
+  display: flex;
+  align-items: center;
+}
+.column .text-overlay {
+  margin-left: 20px; /* Adjust as needed */
+}
 .column2 {
-  position: relative;
+  position: flex;
+  width: 45%;
+  height: 45%;
 }
 
 .background-image {
@@ -320,9 +349,7 @@ body {
 }
 
 .text-overlay {
-  position: absolute;
-  top: 20px;
-  left: 20px;
+  margin-left: 20px;
   color: white;
 }
 
