@@ -2,6 +2,7 @@ const calendarView = document.querySelector(".calview");
 const monthSelect = document.getElementById("month-select");
 const prevMonthBtn = document.querySelector(".action_left");
 const nextMonthBtn = document.querySelector(".action_right button");
+const yearblock = document.getElementById("yearblock");
 const monthNames = [
   "January",
   "February",
@@ -29,6 +30,8 @@ function generateCalendar(date) {
   let daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
 
   let dayCellsGenerated = 0;
+
+  yearblock.innerHTML = currentYear;
 
   let calendarHtml = '<div class="weekview">';
 
