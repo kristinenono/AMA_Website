@@ -1,14 +1,20 @@
 //Class selector function//
 
 function r_e(classname) {
-  return document.querySelector(`.${classname}`);
+  return document.querySelector(`#${id}`);
 }
 
 function appendContent(html) {
   r_e("main").innerHTML = html;
 }
 
-const today_btn = r_e(today);
+r_e("").addEventListener("click", () => {
+  // override existing content
+  let html = "<h1> test test test </h1>";
+  html += "<h3> test test </h3>";
+  html += "<p> test test <p>";
+  r_e("main").innerHTML = "<h1> About Link Clicked </h1>";
+});
 
 let cal_page = `<main>
 <div class="wrapper">
@@ -179,3 +185,5 @@ let cal_page = `<main>
   </div>
 </div>
 </main>`;
+
+console.log(appendContent(cal_page));
