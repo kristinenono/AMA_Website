@@ -8,6 +8,19 @@ function appendContent(html) {
   r_e("sample").innerHTML += html;
 }
 
+// function getDate{
+
+// }
+
+// document.addEventListener
+// const CalendarView = document.querySelector("calview");
+// const monthSelect = document.getElementById("month-select");
+// const previousmn = document.querySelector("action_left");
+// const nextmn = document.querySelector("action_right");
+
+let currentYear = Date.getFullYear();
+console.log(currentYear);
+
 // let eventbtn = ` <div class="form-content">
 // <div class="modal is-active mainbackground">
 //   <h2 class="title">New Event</h2>
