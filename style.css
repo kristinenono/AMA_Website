@@ -303,6 +303,8 @@ body {
 
 .involvementImage-flex {
   flex: 1;
+  margin-right: 5%;
+  margin-bottom: 3rem;
 }
 
 .involvementButton1 {
