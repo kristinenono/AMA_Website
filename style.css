@@ -215,13 +215,11 @@ body {
   align-items: center;
   color: var(--headerColor);
   font: var(--bodyFontFamily);
-  /* display: inline-block; */
-  /* width: auto;
-  height: inherit; */
-  /* padding: 20%; */
-  /* margin: 20%; */
   flex: 1;
-  /* border-right: 2px var(--primaryblack) solid; */
+}
+.dayofweek {
+  font-weight: bolder;
+  font-size: larger;
 }
 .dayview {
   display: inline-block; /* This line is unnecessary */
@@ -231,23 +229,11 @@ body {
 }
 
 /* DROPDOWN */
-.center-dropdown-month {
-  width: 100%; /* Ensures the dropdown spans the full width of its container */
-  display: flex;
-  justify-content: center; /* Centers the dropdown button */
-  padding-bottom: 20px; /* Adjusts spacing below the dropdown button */
-}
 
-.dropdown-button-month {
-  font: var(--titleFontFamily);
-  background-color: #1f304f;
-  color: #f3f2ee;
-  padding: 1rem;
-  border: none;
-  border-radius: 5px;
-  font-size: 24px;
-  display: inline-block;
-  text-decoration: none;
+.selectdrop {
+  margin-top: 10%;
+  font-size: xx-large;
+  align-items: center;
 }
 
 .aboutSection-box {
@@ -325,10 +311,10 @@ body {
   padding-right: 100px;
 }
 .dropdown .bttn1 {
-  border: none; 
-  cursor: pointer; 
+  border: none;
+  cursor: pointer;
   outline: none;
-  background-color:#1F304F;
+  background-color: #1f304f;
   height: 50px;
 }
 .bttn1:hover {
@@ -337,7 +323,7 @@ body {
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #1F304F;
+  background-color: #1f304f;
   min-width: 160px;
   z-index: 1;
 }
@@ -345,12 +331,12 @@ body {
   float: none;
   display: inline-block;
   text-decoration: none;
-  text-align:center;
+  text-align: center;
   height: 60px;
   width: 100%;
 }
 .dropdown-content a:hover {
-  background-color:#b22b25;
+  background-color: #b22b25;
 }
 .dropdown:hover .dropdown-content {
   display: block;
