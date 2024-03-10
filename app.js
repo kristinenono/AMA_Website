@@ -299,7 +299,7 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
   const viewEventLinks = document.querySelectorAll(".events-button");
   const eventCard = document.getElementById("eventCard");
-  const closeEventCardBtn = document.getElementById("closeEventCard");
+  const closeEventCardBtn = document.getElementById("eventCard");
 
   // Show the event card when any "View Event Here" link is clicked
   viewEventLinks.forEach(function (link) {
