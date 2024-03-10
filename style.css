@@ -551,11 +551,13 @@ input[type="submit"] {
 .dropdown-content a:hover {
   background-color: #b22b25;
 }
-
+/* Display the dropdown content when hovering over the button */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
 .show {
   display: block;
 }
-
 
 .addEventContent {
   font-family: var(--bodyFontFamily);
@@ -780,7 +782,7 @@ nav {
     margin-top: 0;
   }
   .navbar-menu.active > div > div > button:hover {
-   width: 110%;
+    width: 110%;
   }
   .navbar-menu.active #login {
     margin-top: 0;
@@ -926,14 +928,14 @@ button {
 }
 
 #submit_btn {
-    margin-top: 10px;
-    border: none;
-    cursor: pointer;
-    outline: none;
-    height: 35px;
-    width: calc(100% - 20px);
-    background-color: #b22b25;
-    width: 50%;
+  margin-top: 10px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  height: 35px;
+  width: calc(100% - 20px);
+  background-color: #b22b25;
+  width: 50%;
 }
 
 button p {
@@ -978,7 +980,6 @@ button p {
   }
 }
 
-
 @media only screen and (max-width: 1000px) {
   .navbar-items {
     font-size: calc(
@@ -995,41 +996,43 @@ button p {
     padding-left: 10px;
   }
 }
-  #img_logo {
-    height: 50px; 
-    float: left; 
-    margin-right: 3%;
-    margin-left: 6%;
-  }
-  #icons {
-    width: 100%; 
-    display: flex; 
-    text-align: center; 
-    margin-bottom: 5%; 
-    padding-top: 10%;
-  }
-  #line {
-    border-left: 3px solid darkgray;
-    height: 160px;
-    left: 66%;
-    margin-top: 3%;
-    margin-right: 2%;
-  }
-  #logbtn {
-    height: 100%;
-    width: 100%;
-  }
-  #signbtn {
-    height: 100%;
-    width: 100%;
-  }
-  #login {
-    display: inline-block;
-    margin-top: 6%;
-  }
-  #signin {
-    display: inline-block;
-    margin-top: 6%;
-  }
+#img_logo {
+  height: 50px;
+  float: left;
+  margin-right: 3%;
+  margin-left: 6%;
+}
+#icons {
+  width: 100%;
+  display: flex;
+  text-align: center;
+  margin-bottom: 5%;
+  padding-top: 10%;
+}
+#line {
+  border-left: 3px solid darkgray;
+  height: 160px;
+  left: 66%;
+  margin-top: 3%;
+  margin-right: 2%;
+}
+#logbtn {
+  height: 100%;
+  width: 100%;
+}
+#signbtn {
+  height: 100%;
+  width: 100%;
+}
+#login {
+  display: inline-block;
+  margin-top: 6%;
+}
+#signin {
+  display: inline-block;
+  margin-top: 6%;
+}
 
-.show {display:block;}
+.show {
+  display: block;
+}
