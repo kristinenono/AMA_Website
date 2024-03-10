@@ -510,7 +510,6 @@ input[type="submit"] {
 #calendarbtn:hover,
 #pointbtn:hover {
   background-color: #b22b25;
-  width: 76%;
 }
 
 .dropdown {
@@ -584,6 +583,9 @@ input[type="submit"] {
   text-decoration: none;
   text-align: center;
   align-items: center;
+}
+#eventbtn {
+  font-family: var(--titleFontFamily);
 }
 
 /* change style to css file */
@@ -665,7 +667,7 @@ nav {
 #blog-link {
   display: inline-block;
   padding-right: 100px;
-  padding-left: 90px;
+  padding-left: 100px;
 }
 #contact-link {
   display: inline-block;
