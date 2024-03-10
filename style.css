@@ -517,16 +517,21 @@ input[type="submit"] {
   display: inline-block;
 }
 
-.dropdown .bttn1 {
+.bttn1 {
   border: none;
   cursor: pointer;
   outline: none;
   background-color: #1f304f;
-  height: 50px;
+  color: #f3f2ee;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  padding: 10px 20px;
 }
+
 .bttn1:hover {
   background-color: #b22b25;
 }
+
 .dropdown-content {
   display: none;
   position: absolute;
@@ -536,15 +541,20 @@ input[type="submit"] {
 }
 
 .dropdown-content a {
-  float: none;
-  display: inline-block;
+  color: #f3f2ee;
+  padding: 12px 16px;
+  display: block;
   text-decoration: none;
-  text-align: center;
-  height: 60px;
-  width: 100%;
 }
 
-.dropdown-content.show {
+.dropdown-content a:hover {
+  background-color: #b22b25;
+}
+/* Display the dropdown content when hovering over the button */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.show {
   display: block;
 }
 
@@ -630,7 +640,15 @@ nav {
 }
 #format-link {
   display: inline-block;
-  padding-right: 100px;
+  text-align: center;
+  padding-right: 90px;
+  padding-bottom: 25px;
+}
+#format-link1 {
+  display: inline-block;
+  text-align: center;
+  padding-right: 90px;
+  padding-bottom: 25px;
 }
 #format-nav {
   color: #f3f2ee;
@@ -711,8 +729,9 @@ nav {
 .navbar-menu a {
   color: #f3f2ee;
   font-size: 20px;
-  padding: 0 20px;
+  padding: 20px;
   text-decoration: none;
+  text-align: center;
 }
 .login-signup {
   display: block; /* Initially show login and signup */
@@ -724,7 +743,7 @@ nav {
   display: none; /* Initially hide login and signup in burger menu */
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 1100px) {
   .navbar-menu {
     display: none;
     flex-direction: column;
@@ -737,29 +756,58 @@ nav {
   .navbar-menu.active {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
     margin-top: 50px;
     width: 250px;
     margin-right: 5%;
   }
-  .navbar-menu.active > div > a {
+  .navbar-menu.active > div {
     text-align: center;
-    align-items: center;
-    padding-top: 5%;
-    padding-bottom: 5%;
   }
-  .navbar-menu.active > div > div > a {
+  .navbar-menu.active > div {
     text-align: center;
-    padding-top: 5%;
-    padding-bottom: 5%;
-    background-color: none;
+  }
+  .navbar-menu.active > div > #format-link {
+    padding-left: 30%;
+  }
+  .navbar-menu.active > div > #format-link1 {
+    padding-left: 34%;
+  }
+  .navbar-menu.active > div > #home-link {
+    padding-left: 37%;
   }
   .navbar-menu.active > div > div > button {
-    text-align: center;
-    margin-left: 10%;
+    padding-right: 25px;
     background-color: none;
-    padding-right: 0px;
+    margin-top: 0;
+  }
+  .navbar-menu.active > div > div > button:hover {
+    width: 110%;
+  }
+  .navbar-menu.active #login {
+    margin-top: 0;
+    padding-top: 0;
+  }
+  .navbar-menu.active #logbtn {
+    margin-top: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 15%;
+  }
+  .navbar-menu.active #signin {
+    margin-top: 0;
+    padding-top: 0;
+  }
+  .navbar-menu.active #signbtn {
+    margin-top: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 6%;
+  }
+  .navbar-menu.active #logbtn:hover {
+    width: 110%;
+  }
+  .navbar-menu.active #signbtn:hover {
+    width: 60%;
   }
   .navbar-burger {
     display: block;
@@ -818,12 +866,30 @@ footer {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 20px;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 5px;
+  align-items: flex-start;
+}
+
+@media only screen and (max-width: 750px) {
+  .footer-section {
+    width: calc(50% - 20px); /* Adjust width for smaller screens */
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .footer-section {
+    width: calc(100% - 20px); /* Adjust width for even smaller screens */
+    margin-bottom: 20px;
+  }
 }
 
 .footer-section {
   width: calc(33.33% - 20px);
-  margin-bottom: 15px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
 }
 
 .footer-section h2,
@@ -836,7 +902,8 @@ footer {
 
 .social-icons {
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: center; /* Distribute items evenly */
   margin-top: 10px;
 }
 
@@ -857,8 +924,17 @@ button {
   border: none;
   cursor: pointer;
   outline: none;
-  /* height: 35px; */
-  /* width: calc(100% - 20px); */
+}
+
+#submit_btn {
+  margin-top: 10px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  height: 35px;
+  width: calc(100% - 20px);
+  background-color: #b22b25;
+  width: 50%;
 }
 
 button p {
@@ -892,8 +968,14 @@ button p {
 }
 
 @media only screen and (max-width: 750px) {
-  .footer-section:nth-child(1) .social-icons {
-    flex-direction: column;
+  .social-icons {
+    flex-wrap: nowrap;
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .footer-section:nth-child(1) div {
+    margin-right: 3%;
   }
 }
 
@@ -930,14 +1012,26 @@ button p {
   border-left: 3px solid darkgray;
   height: 160px;
   left: 66%;
-  margin-top: 2%;
+  margin-top: 3%;
   margin-right: 2%;
 }
-
-.dayview:last-child {
-  border-right: none;
+#logbtn {
+  height: 100%;
+  width: 100%;
+}
+#signbtn {
+  height: 100%;
+  width: 100%;
+}
+#login {
+  display: inline-block;
+  margin-top: 6%;
+}
+#signin {
+  display: inline-block;
+  margin-top: 6%;
 }
 
-.weekview:last-child .dayview {
-  border-bottom: none;
+.show {
+  display: block;
 }

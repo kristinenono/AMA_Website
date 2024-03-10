@@ -19,7 +19,13 @@
           <strong id="logo-text">University of Wisconsin Madison</strong>
         </div>
       </h1>
-      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar">
+      <a
+        role="button"
+        class="navbar-burger"
+        aria-label="menu"
+        aria-expanded="false"
+        data-target="navbar"
+      >
         <span></span>
         <span></span>
         <span></span>
@@ -39,10 +45,14 @@
       </div>
       <div class="navbar-menu">
         <div>
-          <a href="index.html" id="home-link"><strong id="home-nav">HOME</strong></a>
+          <a href="index.html" id="home-link"
+            ><strong id="home-nav">HOME</strong></a
+          >
           <a id="format-link"><strong id="format-nav">ABOUT</strong></a>
           <div class="dropdown">
-            <button class="bttn1"><strong id="format-nav">MEMBERS</strong></button>
+            <button class="bttn1">
+              <strong id="format-nav">MEMBERS</strong>
+            </button>
             <div class="dropdown-content">
               <div><a href="calendar.html" id="calendarbtn">CALENDAR</a></div>
               <div><a href="#" id="pointbtn">POINT SYSTEM</a></div>
@@ -50,20 +60,24 @@
           </div>
           <a id="blog-link"><strong id="format-nav">BLOG</strong></a>
           <a id="format-link"><strong id="format-nav">CONTACT</strong></a>
-        <div class="login-signup-burger">
-          <a id="login">
-            <button id="logbtn" class="add-btn button" onclick="loginclick()">
-              <strong id="bttn-font">LOGIN</strong>
-            </button>
-          </a>
-          &nbsp; &nbsp;
-          <a id="signin">
-            <button id="signbtn" class="add-btn button" onclick="signupclick()">
-              <strong id="bttn-font">SIGN UP</strong>
-            </button>
-          </a>
+          <div class="login-signup-burger">
+            <a id="login">
+              <button id="logbtn" class="add-btn button" onclick="loginclick()">
+                <strong id="bttn-font">LOGIN</strong>
+              </button>
+            </a>
+            &nbsp; &nbsp;
+            <a id="signin">
+              <button
+                id="signbtn"
+                class="add-btn button"
+                onclick="signupclick()"
+              >
+                <strong id="bttn-font">SIGN UP</strong>
+              </button>
+            </a>
+          </div>
         </div>
-      </div>
       </div>
     </nav>
     <header></header>
@@ -79,8 +93,12 @@
               <a href="#" class="events-button">View Event Here! </a>
 
               <div id="eventCard" class="event-card hidden">
+                <span class="close" onclick="closeAddEventsPopup()"
+                  >&times;</span
+                >
+
                 <!-- Content of the event card goes here -->
-                <h2 class="secondaryheader">Event Title</h2>
+                <h2 class="secondaryheader2">Event Title</h2>
                 <p class="primaryBody">Date: [Event Date]</p>
                 <p class="primaryBody">Location: [Event Location]</p>
                 <!-- Add more details as needed -->
@@ -205,12 +223,12 @@
           <span class="close" onclick="closeAddEventsPopup()">&times;</span>
           <h2 class="secondaryheader2">Add Event</h2>
           <form>
-            <p class="addEventContent">
+            <p class="primaryBody">
               <label for="eventTitle">Event Title:</label>
               <input type="text" id="eventTitle" required />
             </p>
 
-            <p class="addEventContent">
+            <p class="primaryBody">
               <label for="eventType">Event Type:</label>
               <select id="eventType" required>
                 <option value="memberMeeting">Member Meeting</option>
@@ -223,14 +241,14 @@
               </select>
             </p>
 
-            <p class="addEventContent">
+            <p class="primaryBody">
               <label for="eventDescription">Event Description:</label>
             </p>
-            <p class="addEventContent">
+            <p class="primaryBody">
               <textarea id="eventDescription" rows="4" required></textarea>
             </p>
 
-            <p class="addEventContent">
+            <p class="primaryBody">
               <label for="eventDate">Event Date:</label>
               <input type="date" id="eventDate" required />
             </p>
@@ -244,34 +262,45 @@
       <div class="footer-box">
         <div class="footer-section">
           <div class="navbar-items">
-            <img src="images/AMA Logo Footer.png" alt="" id="img_logo">
-          <div style="margin-top: 4%; padding-top: 5px;">
-            <strong id="footer-uw-logo" class="text-logo">University of Wisconsin </br> Madison</strong>
+            <img src="images/AMA Logo Footer.png" alt="" id="img_logo" />
+            <div style="margin-top: 4%; padding-top: 5px">
+              <strong id="footer-uw-logo" class="text-logo"
+                >University of Wisconsin Madison</strong
+              >
+            </div>
           </div>
-      </div>
           <div class="social-icons" id="icons">
-            <a href="https://www.linkedin.com/in/ama-badgers-5247a9252/" style="margin-right: 3%;">
+            <a
+              href="https://www.linkedin.com/in/ama-badgers-5247a9252/"
+              style="margin-right: 3%"
+            >
               <i class="fab fa-linkedin fa-2x"></i>
             </a>
-            <a href="https://www.instagram.com/amabadgers/" style="margin-right: 3%;">
+            <a
+              href="https://www.instagram.com/amabadgers/"
+              style="margin-right: 3%"
+            >
               <i class="fab fa-instagram fa-2x"></i>
             </a>
-            <a href="https://www.facebook.com/AMAUWMadison/" style="margin-right: 3%;">
+            <a
+              href="https://www.facebook.com/AMAUWMadison/"
+              style="margin-right: 3%"
+            >
               <i class="fab fa-facebook fa-2x"></i>
             </a>
             <a href="https://twitter.com/amauwmadison?lang=en">
               <i class="fab fa-twitter fa-2x"></i>
             </a>
           </div>
-          <div style="text-align: center;">
-          <p>975 University Ave, Madison, WI 53706</p>
-          <p style="color: gray;">+00 000 000 000</p>
-      </div>
+          <div style="text-align: center">
+            <p>975 University Ave, Madison, WI 53706</p>
+            <p style="color: gray">+00 000 000 000</p>
+          </div>
         </div>
-        <div class="footer-section" style="padding-top: 5%;">
+        <div class="footer-section" style="padding-top: 5%">
           <div>
             <div style="padding: 8px">
-              <a href="#" ><b>About Us</b></a>
+              <a href="#"><b>About Us</b></a>
             </div>
             <div style="padding: 8px">
               <a href="#"><b>Blog</b></a>
@@ -293,9 +322,13 @@
         <div id="line"></div>
         <div class="footer-section">
           <h2>JOIN OUR EMAIL LIST</h2>
-          <p>Want to become an official member of the Badger American Marketing Association or just be added to the email list? Fill out our member form to stay up to date on upcoming events!</p>
-          <input type="text" placeholder="Enter your email here">
-          <button style="width: 50%;">
+          <p>
+            Want to become an official member of the Badger American Marketing
+            Association or just be added to the email list? Fill out our member
+            form to stay up to date on upcoming events!
+          </p>
+          <input type="text" placeholder="Enter your email here" />
+          <button id="submit_btn">
             <p>SUBMIT</p>
           </button>
         </div>
