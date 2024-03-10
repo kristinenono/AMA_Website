@@ -29,7 +29,6 @@ function generateCalendar(date) {
   let currentMonth = date.getMonth();
   let firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
   // this is the first day of the week
-  let daysInFirstWeek = 7 - firstDayOfMonth;
   let daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
   let dayCellsGenerated = 0;
 
