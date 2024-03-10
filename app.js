@@ -19,6 +19,21 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+  var dropdownButton = document.querySelector(".bttn1");
+  var dropdownContent = document.querySelector(".dropdown-content");
+
+  dropdownButton.addEventListener("click", function() {
+    dropdownContent.classList.toggle("show");
+  });
+
+  document.addEventListener("click", function(event) {
+    if (!event.target.closest(".dropdown")) {
+      dropdownContent.classList.remove("show");
+    }
+  });
+});
+
 
 
 const calendarView = document.querySelector(".calview");
@@ -160,21 +175,6 @@ function closeAddEventsPopup() {
 document.getElementById("eventbtn").onclick = function () {
   openAddEventsPopup();
 };
-
-var dropdownButton = document.querySelector(".bttn1");
-var dropdownContent = document.querySelector(".dropdown-content");
-
-function toggleDropdown() {
-  dropdownContent.classList.toggle("show");
-}
-
-dropdownButton.addEventListener("click", toggleDropdown);
-
-document.addEventListener("click", function (event) {
-  if (!event.target.closest(".dropdown")) {
-    dropdownContent.classList.remove("show");
-  }
-});
 
 // MODAL POP UP IN HTML
 function openModal() {
