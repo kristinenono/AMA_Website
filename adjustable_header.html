@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css" />
+<script src="app.js"></script>
+<title>Responsive Burger Menu</title>
+<style>
+  /* Styles for burger menu */
+.navbar-burger {
+  display: none;
+}
+.navbar-menu {
+  background-color: #1f304f;
+  text-align: center;
+}
+.navbar-menu a {
+  color: #f3f2ee;
+  font-size: 20px;
+  padding: 0 20px;
+  text-decoration: none;
+}
+.login-signup {
+  display: block; /* Initially show login and signup */
+}
+.login-signup-burger {
+  display: none; /* Initially hide login and signup in burger menu */
+}
+
+@media screen and (max-width: 850px) {
+  .navbar-menu {
+    display: none;
+    flex-direction: column;
+    background-color: #1f304f;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+  }
+  .navbar-menu.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    margin-top: 50px;
+    margin-right: 20px;
+    width: 150px;
+  }
+  .navbar-menu.active > div > a {
+    float: left;
+    padding-top: 5%;
+    padding-bottom: 5%;
+  }
+  .navbar-menu.active > div > div > a{
+    float: left;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    background-color: none;
+  }
+  .navbar-menu.active > div > div > button{
+    float: left;
+    margin-left: 10%;
+    background-color: none;
+    padding-right: 0px;
+  }
+  .navbar-burger {
+    display: block;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+  }
+  .navbar-burger span {
+    background-color:#1f304f;
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px;
+    transition: all 0.3s ease;
+  }
+  .navbar-burger.active span:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+  }
+  .navbar-burger.active span:nth-child(2) {
+      opacity: 0;
+  }
+  .navbar-burger.active span:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+  }
+  .login-signup {
+    display: none; /* Hide login and signup when burger menu is active */
+  }
+  .login-signup-burger {
+    display: block; /* Show login and signup in burger menu */
+  }
+  .navbar-item {
+    font-size: calc(20px + 0.5vw); /* Adjust font size relative to viewport width */
+    display: flex;
+    align-items: center;
+  }
+  .navbar-item img {
+    width: calc(20% + 2vw); /* Adjust image width relative to viewport width */
+  }
+  .navbar-item div {
+    flex: 1;
+    padding-left: 20px;
+  }
+ }
+</style>
+</head>
+<body>
+  <nav style="background-color: #f3f2ee; margin-top: 0">
+      <h1 class="navbar-item" style="color: #1f304f; font-size: 25px; padding-left: 20px; margin: 0; padding-top: 10px; padding-bottom: 100px;">
+        <img src="images/AMA Logo.png" alt="" style="float: left" />
+        <div style="width: 300px; float: left; padding-left: 20px; padding-top: 10px;">
+          <strong style="vertical-align: top; font-family: Arial, Helvetica, sans-serif; word-wrap: break-word;">University of Wisconsin Madison</strong>
+        </div>
+      </h1>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar">
+      <span></span>
+      <span></span>
+      <span></span>
+    </a>
+    <div style="position: absolute; top: 2.25%; right: 30px; height: auto" class="login-signup">
+      <a href="login_modal.html" class="add-btn" id="login_btn"><strong style="color: #f3f2ee; font-family: Arial, Helvetica, sans-serif; font-size: 20px; vertical-align: bottom;">LOGIN</strong></a>
+      &nbsp; &nbsp;
+      <a href="sign_up_modal.html" class="add-btn" id="sign_up_btn"><strong style="color: #f3f2ee; font-family: Arial, Helvetica, sans-serif; font-size: 20px; vertical-align: bottom;">SIGN UP</strong></a>
+    </div>
+    <div class="navbar-menu">
+      <div>
+        <a href="index.html"><strong style="font-family: Arial, Helvetica, sans-serif; padding-right: 25px;">HOME</strong></a>
+        <a><strong style="font-family: Arial, Helvetica, sans-serif; padding-right: 25px;">ABOUT</strong></a>
+        <div class="dropdown">
+          <button class="bttn1"><strong style="color: #f3f2ee; font-family: Arial, Helvetica, sans-serif; font-size: 20px; padding-right: 25px;">MEMBERS</strong></button>
+          <div class="dropdown-content">
+            <div><a href="calendar.html" style="color: #f3f2ee;font-family: Arial, Helvetica, sans-serif;font-size: 20px;padding-top: 20px;">CALENDAR</a></div>
+            <div><a href="#" style="color: #f3f2ee;font-family: Arial, Helvetica, sans-serif;font-size: 20px;padding-top: 20px;">POINT SYSTEM</a></div>
+          </div>
+        </div>
+        <a><strong style="font-family: Arial, Helvetica, sans-serif; padding-right: 25px;">BLOG</strong></a>
+        <a><strong style="font-family: Arial, Helvetica, sans-serif;">CONTACT</strong></a>
+      <div class="login-signup-burger">
+        <a href="login_modal.html" class="add-btn" id="login_btn_burger"><strong style="color: #f3f2ee; font-family: Arial, Helvetica, sans-serif; font-size: 20px; vertical-align: bottom;">LOGIN</strong></a>
+        &nbsp; &nbsp;
+        <a href="sign_up_modal.html" class="add-btn" id="sign_up_btn_burger"><strong style="color: #f3f2ee; font-family: Arial, Helvetica, sans-serif; font-size: 20px; vertical-align: bottom;">SIGN UP</strong></a>
+      </div>
+    </div>
+    </div>
+  </nav>
+  <script>
+    // JavaScript to handle the burger menu toggle
+document.addEventListener('DOMContentLoaded', function () {
+  const burger = document.querySelector('.navbar-burger');
+  const menu = document.querySelector('.navbar-menu');
+  const loginSignupBurger = document.querySelector('.login-signup-burger');
+
+  burger.addEventListener('click', function () {
+    burger.classList.toggle('active');
+    menu.classList.toggle('active');
+    loginSignupBurger.classList.toggle('active'); // Toggle login and signup in burger menu
+  });
+  
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 768) {
+      burger.classList.remove('active');
+      menu.classList.remove('active');
+      loginSignupBurger.classList.remove('active'); // Remove active class on resize
+    }
+  });
+});
+  </script>
+</body>
+</html>
+
+

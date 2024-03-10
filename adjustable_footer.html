@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css" />
+<script src="https://kit.fontawesome.com/bcae03608a.js" crossorigin="anonymous"></script>
+<title>Responsive Burger Menu</title>
+
+<style>
+  footer {
+    height: auto;
+    background-color: #1f304f;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+  }
+
+  .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+  }
+
+  .footer-section {
+    width: calc(33.33% - 90px);
+    margin-bottom: 15px;
+  }
+
+  .footer-section h2, .footer-section p, .footer-section a {
+    color: #f3f2ee;
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: none;
+  }
+
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .social-icons a {
+    margin: 0 5px;
+    color: gray;
+  }
+
+  input[type="text"] {
+    margin-top: 10px;
+    height: 35px;
+    width: calc(100% - 20px);
+    border: 1px solid black;
+  }
+
+  button {
+    margin-top: 10px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    background-color: #b22b25;
+    height: 35px;
+    width: calc(100% - 20px);
+  }
+
+  button p {
+    color: #f3f2ee;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: auto;
+  }
+
+  .footer-section:nth-child(2) div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  @media only screen and (max-width: 750px) {
+    .footer-section:nth-child(2) div {
+      flex-direction: column;
+    }
+  }
+
+  @media only screen and (max-width: 1400px) {
+    .navbar-item {
+    font-size: calc(20px + 0.5vw); /* Adjust font size relative to viewport width */
+    display: flex;
+    align-items: center;
+  }
+  .navbar-item img {
+    width: calc(50% + 2vw); /* Adjust image width relative to viewport width */
+  }
+  .navbar-item div {
+    flex: 1;
+    padding-left: 20px;
+  }
+  }
+</style>
+
+</head>
+<body>
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <div class="navbar-item">
+          <img src="images/AMA Logo Footer.png" alt="" style="height: 50px; float: left; margin-right: 3%;">
+        <div style="margin-top: 1%;">
+          <strong id="footer-uw-logo" style="margin-right: 50%;">University of Wisconsin Madison</strong>
+        </div>
+    </div>
+        <div class="social-icons" style="  width: 100%; display: flex; text-align: center; margin-bottom: 5%; padding-top: 10%;">
+          <a href="https://www.linkedin.com/in/ama-badgers-5247a9252/" style="margin-right: 3%;">
+            <i class="fab fa-linkedin fa-2x"></i>
+          </a>
+          <a href="https://www.instagram.com/amabadgers/" style="margin-right: 3%;">
+            <i class="fab fa-instagram fa-2x"></i>
+          </a>
+          <a href="https://www.facebook.com/AMAUWMadison/" style="margin-right: 3%;">
+            <i class="fab fa-facebook fa-2x"></i>
+          </a>
+          <a href="https://twitter.com/amauwmadison?lang=en">
+            <i class="fab fa-twitter fa-2x"></i>
+          </a>
+        </div>
+        <div style="text-align: center;">
+        <p>975 University Ave, Madison, WI 53706</p>
+        <p style="color: gray;">+00 000 000 000 address@gmail.com</p>
+    </div>
+      </div>
+      <div class="footer-section" style="padding-top: 5%;">
+        <div>
+          <div style="padding: 8px">
+            <a href="#" ><b>About Us</b></a>
+          </div>
+          <div style="padding: 8px">
+            <a href="#"><b>Blog</b></a>
+          </div>
+          <div style="padding: 8px">
+            <a href="#"><b>Point System</b></a>
+          </div>
+          <div style="padding: 8px">
+            <a href="#"><b>Contact Us</b></a>
+          </div>
+          <div style="padding: 8px">
+            <a href="calendar.html"><b>Events</b></a>
+          </div>
+          <div style="padding: 8px">
+            <a href="#"><b>Become a Sponsor</b></a>
+          </div>
+        </div>
+      </div>
+      <div
+      style="
+        border-left: 3px solid darkgray;
+        height: 160px;
+        left: 66%;
+        margin-top: 2%;
+        margin-right: 2%;
+      "
+    ></div>
+      <div class="footer-section">
+        <h2>JOIN OUR EMAIL LIST</h2>
+        <p>Want to become an official member of the Badger American Marketing Association or just be added to the email list? Fill out our member form to stay up to date on upcoming events!</p>
+        <input type="text" placeholder="Enter your email here">
+        <button>
+          <p>SUBMIT</p>
+        </button>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
+
+
+
