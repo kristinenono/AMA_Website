@@ -228,6 +228,9 @@ body {
   padding: 1rem;
   font-family: var(--titleFontFamily);
 }
+#eventbtn {
+  font-family: var(--titleFontFamily);
+}
 
 .heading-tag-upcoming-event {
   font-size: xx-large;

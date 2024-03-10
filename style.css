@@ -584,6 +584,9 @@ input[type="submit"] {
   text-align: center;
   align-items: center;
 }
+#eventbtn {
+  font-family: var(--titleFontFamily);
+}
 
 /* change style to css file */
 
