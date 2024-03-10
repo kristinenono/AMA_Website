@@ -32,6 +32,7 @@ function generateCalendar(date) {
   let emptyCellsCount = 0;
 
   yearblock.innerHTML = currentYear;
+  // adding in a comment to restore the js
   let calendarHtml = "<div class='weekdayview'>";
   for (let title = 0; title <= 6; title++) {
     calendarHtml += `<div class='dayofweek'>${dayNames[title]}</div>`;
