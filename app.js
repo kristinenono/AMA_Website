@@ -300,6 +300,16 @@ document.addEventListener("DOMContentLoaded", function () {
   const viewEventLinks = document.querySelectorAll(".events-button");
   const eventCard = document.getElementById("eventCard");
   const closeEventCardBtn = document.getElementById("eventCard");
+  // Add an event listener to the close button
+  document
+    .getElementById("closeAddEventsPopup")
+    .addEventListener("click", closeAddEventsPopup);
+
+  // Function to close the add events popup
+  function closeAddEventsPopup() {
+    var addEventsPopup = document.getElementById("addEventsPopup");
+    addEventsPopup.style.display = "none";
+  }
 
   // Show the event card when any "View Event Here" link is clicked
   viewEventLinks.forEach(function (link) {
@@ -333,11 +343,11 @@ document.getElementById("eventbtn").onclick = function () {
 
 // MODAL POP UP IN HTML
 function openLoginModal() {
-  var loginModal = document.getElementById('logmodal');
-  console.log("button clicked")
+  var loginModal = document.getElementById("logmodal");
+  console.log("button clicked");
   // loginModal.style.display = 'block';
 }
-document.getElementById('logbtn').addEventListener('click', openLoginModal);
+document.getElementById("logbtn").addEventListener("click", openLoginModal);
 
 // function closeModal() {
 //   var modal = document.getElementById("logmodal");
