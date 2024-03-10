@@ -1,9 +1,9 @@
+// main functions to use
+
 const mainContent = document.getElementById("main-content");
 const homeLink = document.getElementById("home-link");
-const calendarLink = document.getElementById("calendarbtn");
 
 homeLink.addEventListener("click", loadHomePage);
-calendarLink.addEventListener("click", loadCalendarPage);
 
 function loadHomePage(event) {
   event.preventDefault();
@@ -47,9 +47,14 @@ function loadHomePage(event) {
 </div>`;
 }
 
-function loadCalendarPage(event) {
-  event.preventDefault();
-  document.getElementById("main-content").innerHTML = `<main>
+function r_e(id) {
+  return document.querySelector(`#${id}`);
+}
+function appendContent(html) {
+  r_e("main").innerHTML = html;
+}
+
+let cal_page_content = `<main>
   <div id="cal_page" class="wrapper">
     <!-- LEFT MARGIN -->
     <div class="colormargins margin-left">
@@ -88,93 +93,63 @@ function loadCalendarPage(event) {
         </div>
       </div>
     </div>
-    <!-- CENTER OF PAGE where calendar goes-->
-    <div id="sample" class="colormargins page-content">
-      <div class="navcal">
-        <span class="today">
-          <button id="today-btn">Today</button>
-        </span>
-        <button class="action_left">
-          <i class="fa-solid fa-chevron-left"></i>
-        </button>
-        <select class="selectdrop" id="month-select">
-          <option value="January">January</option>
-          <option value="February">February</option>
-          <option value="March">March</option>
-          <option value="April">April</option>
-          <option value="May">May</option>
-          <option value="June">June</option>
-          <option value="July">July</option>
-          <option value="August">August</option>
-          <option value="September">September</option>
-          <option value="October">October</option>
-          <option value="November">November</option>
-          <option value="December">December</option>
-        </select>
-        <button class="action_right">
-          <i class="fa-solid fa-chevron-right"></i>
-        </button>
-        <span class="yearblock">
-          <button id="yearblock"></button>
-        </span>
-      </div>
-      <div class="calview">
-        <div class="weekdayview">
-          <div class="dayofweek">Lorem, ipsum.</div>
-          <div class="dayofweek">Lorem, ipsum.</div>
-          <div class="dayofweek">Lorem, ipsum.</div>
-          <div class="dayofweek">Lorem, ipsum.</div>
-          <div class="dayofweek">Lorem, ipsum.</div>
-          <div class="dayofweek">Lorem, ipsum.</div>
-          <div class="dayofweek">Lorem, ipsum.</div>
-        </div>
-        <div class="weekview">
-          <div class="dayview">Lorem, ipsum.</div>
-          <div class="dayview">Lorem, ipsum.</div>
-          <div class="dayview">Lorem, ipsum.</div>
-          <div class="dayview">Lorem, ipsum.</div>
-          <div class="dayview">Lorem, ipsum.</div>
-          <div class="dayview">Lorem, ipsum.</div>
-          <div class="dayview">Lorem, ipsum.</div>
-        </div>
-        <div class="weekview">
-          <div class="dayview">Lorem, ipsum.</div>
-          <div class="dayview">Lorem, ipsum.</div>
-          <div class="dayview">Lorem, ipsum.</div>
-          <div class="dayview">Lorem, ipsum.</div>
-          <div class="dayview">Lorem, ipsum.</div>
-          <div class="dayview">Lorem, ipsum.</div>
-          <div class="dayview">Lorem, ipsum.</div>
-        </div>
-        <div class="weekview">
-          <div class="dayview">Lorem, ipsum.</div>
-          <div class="dayview">Lorem, ipsum.</div>
-          <div class="dayview">Lorem, ipsum.</div>
-          <div class="dayview">Lorem, ipsum.</div>
-          <div class="dayview">Lorem, ipsum.</div>
-          <div class="dayview">Lorem, ipsum.</div>
-          <div class="dayview">Lorem, ipsum.</div>
-        </div>
-        <div class="weekview">
-          <div class="dayview">Lorem, ipsum.</div>
-          <div class="dayview">Lorem, ipsum.</div>
-          <div class="dayview">Lorem, ipsum.</div>
-          <div class="dayview">Lorem, ipsum.</div>
-          <div class="dayview">Lorem, ipsum.</div>
-          <div class="dayview">Lorem, ipsum.</div>
-          <div class="dayview">Lorem, ipsum.</div>
-        </div>
-        <div class="weekview">
-          <div class="dayview">Lorem, ipsum.</div>
-          <div class="dayview">Lorem, ipsum.</div>
-          <div class="dayview">Lorem, ipsum.</div>
-          <div class="dayview">Lorem, ipsum.</div>
-          <div class="dayview">Lorem, ipsum.</div>
-          <div class="dayview">Lorem, ipsum.</div>
-          <div class="dayview">Lorem, ipsum.</div>
-        </div>
-      </div>
+    <div class="calview">
+    <div class="weekdayview">
+      <div class="dayofweek">Lorem, ipsum.</div>
+      <div class="dayofweek">Lorem, ipsum.</div>
+      <div class="dayofweek">Lorem, ipsum.</div>
+      <div class="dayofweek">Lorem, ipsum.</div>
+      <div class="dayofweek">Lorem, ipsum.</div>
+      <div class="dayofweek">Lorem, ipsum.</div>
+      <div class="dayofweek">Lorem, ipsum.</div>
     </div>
+    <div class="weekview">
+      <div class="dayview">Lorem, ipsum.</div>
+      <div class="dayview">Lorem, ipsum.</div>
+      <div class="dayview">Lorem, ipsum.</div>
+      <div class="dayview">Lorem, ipsum.</div>
+      <div class="dayview">Lorem, ipsum.</div>
+      <div class="dayview">Lorem, ipsum.</div>
+      <div class="dayview">Lorem, ipsum.</div>
+    </div>
+    <div class="weekview">
+      <div class="dayview">Lorem, ipsum.</div>
+      <div class="dayview">Lorem, ipsum.</div>
+      <div class="dayview">Lorem, ipsum.</div>
+      <div class="dayview">Lorem, ipsum.</div>
+      <div class="dayview">Lorem, ipsum.</div>
+      <div class="dayview">Lorem, ipsum.</div>
+      <div class="dayview">Lorem, ipsum.</div>
+    </div>
+    <div class="weekview">
+      <div class="dayview">Lorem, ipsum.</div>
+      <div class="dayview">Lorem, ipsum.</div>
+      <div class="dayview">Lorem, ipsum.</div>
+      <div class="dayview">Lorem, ipsum.</div>
+      <div class="dayview">Lorem, ipsum.</div>
+      <div class="dayview">Lorem, ipsum.</div>
+      <div class="dayview">Lorem, ipsum.</div>
+    </div>
+    <div class="weekview">
+      <div class="dayview">Lorem, ipsum.</div>
+      <div class="dayview">Lorem, ipsum.</div>
+      <div class="dayview">Lorem, ipsum.</div>
+      <div class="dayview">Lorem, ipsum.</div>
+      <div class="dayview">Lorem, ipsum.</div>
+      <div class="dayview">Lorem, ipsum.</div>
+      <div class="dayview">Lorem, ipsum.</div>
+    </div>
+    <div class="weekview">
+      <div class="dayview">Lorem, ipsum.</div>
+      <div class="dayview">Lorem, ipsum.</div>
+      <div class="dayview">Lorem, ipsum.</div>
+      <div class="dayview">Lorem, ipsum.</div>
+      <div class="dayview">Lorem, ipsum.</div>
+      <div class="dayview">Lorem, ipsum.</div>
+      <div class="dayview">Lorem, ipsum.</div>
+    </div>
+  </div>
+</div>
     <!-- RIGHT MARGIN -->
     <div class="colormargins margin-right">
       <a href="#" class="add-btn" id="eventbtn">Add Event</a>
@@ -222,49 +197,12 @@ function loadCalendarPage(event) {
     </div>
   </div>
 </main>`;
-}
-
-// JavaScript to handle the burger menu toggle
-document.addEventListener("DOMContentLoaded", function () {
-  const burger = document.querySelector(".navbar-burger");
-  const menu = document.querySelector(".navbar-menu");
-  const loginSignupBurger = document.querySelector(".login-signup-burger");
-
-  burger.addEventListener("click", function () {
-    burger.classList.toggle("active");
-    menu.classList.toggle("active");
-    loginSignupBurger.classList.toggle("active"); // Toggle login and signup in burger menu
-  });
-
-  window.addEventListener("resize", function () {
-    if (window.innerWidth > 768) {
-      burger.classList.remove("active");
-      menu.classList.remove("active");
-      loginSignupBurger.classList.remove("active"); // Remove active class on resize
-    }
-  });
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-  var dropdownButton = document.querySelector(".bttn1");
-  var dropdownContent = document.querySelector(".dropdown-content");
-
-  dropdownButton.addEventListener("click", function () {
-    dropdownContent.classList.toggle("show");
-  });
-
-  document.addEventListener("click", function (event) {
-    if (!event.target.closest(".dropdown")) {
-      dropdownContent.classList.remove("show");
-    }
-  });
-});
 
 const calendarView = document.querySelector(".calview");
-const monthSelect = document.getElementById("month-select");
+const monthSelect = r_e("month-select");
 const prevMonthBtn = document.querySelector(".action_left");
 const nextMonthBtn = document.querySelector(".action_right");
-const yearblock = document.getElementById("yearblock");
+const yearblock = r_e("yearblock");
 const monthNames = [
   "January",
   "February",
@@ -356,13 +294,52 @@ nextMonthBtn.addEventListener("click", function () {
   changeMonth(1);
 });
 
-generateCalendar(currentDate);
+r_e("calendarbtn").addEventListener("click", () => {
+  generateCalendar(currentDate);
+  appendContent(cal_page_content);
+  const todayBtn = document.querySelector("#today-btn"); // Get the Today button
 
-const todayBtn = document.querySelector("#today-btn"); // Get the Today button
+  todayBtn.addEventListener("click", function () {
+    currentDate = new Date(); // Reset currentDate to today's date
+    generateCalendar(currentDate); // Regenerate the calendar for the current month
+  });
+});
 
-todayBtn.addEventListener("click", function () {
-  currentDate = new Date(); // Reset currentDate to today's date
-  generateCalendar(currentDate); // Regenerate the calendar for the current month
+// JavaScript to handle the burger menu toggle
+document.addEventListener("DOMContentLoaded", function () {
+  const burger = document.querySelector(".navbar-burger");
+  const menu = document.querySelector(".navbar-menu");
+  const loginSignupBurger = document.querySelector(".login-signup-burger");
+
+  burger.addEventListener("click", function () {
+    burger.classList.toggle("active");
+    menu.classList.toggle("active");
+    loginSignupBurger.classList.toggle("active"); // Toggle login and signup in burger menu
+  });
+
+  window.addEventListener("resize", function () {
+    if (window.innerWidth > 768) {
+      burger.classList.remove("active");
+      menu.classList.remove("active");
+      loginSignupBurger.classList.remove("active"); // Remove active class on resize
+    }
+  });
+});
+
+// still some dom content loaded
+document.addEventListener("DOMContentLoaded", function () {
+  var dropdownButton = document.querySelector(".bttn1");
+  var dropdownContent = document.querySelector(".dropdown-content");
+
+  dropdownButton.addEventListener("click", function () {
+    dropdownContent.classList.toggle("show");
+  });
+
+  document.addEventListener("click", function (event) {
+    if (!event.target.closest(".dropdown")) {
+      dropdownContent.classList.remove("show");
+    }
+  });
 });
 
 document.addEventListener("DOMContentLoaded", function () {
