@@ -94,8 +94,12 @@
               <a href="#" class="events-button">View Event Here! </a>
 
               <div id="eventCard" class="event-card hidden">
+                <span class="close" onclick="closeAddEventsPopup()"
+                  >&times;</span
+                >
+
                 <!-- Content of the event card goes here -->
-                <h2 class="secondaryheader">Event Title</h2>
+                <h2 class="secondaryheader2">Event Title</h2>
                 <p class="primaryBody">Date: [Event Date]</p>
                 <p class="primaryBody">Location: [Event Location]</p>
                 <!-- Add more details as needed -->
@@ -220,12 +224,12 @@
           <span class="close" onclick="closeAddEventsPopup()">&times;</span>
           <h2 class="secondaryheader2">Add Event</h2>
           <form>
-            <p class="addEventContent">
+            <p class="primaryBody">
               <label for="eventTitle">Event Title:</label>
               <input type="text" id="eventTitle" required />
             </p>
 
-            <p class="addEventContent">
+            <p class="primaryBody">
               <label for="eventType">Event Type:</label>
               <select id="eventType" required>
                 <option value="memberMeeting">Member Meeting</option>
@@ -238,14 +242,14 @@
               </select>
             </p>
 
-            <p class="addEventContent">
+            <p class="primaryBody">
               <label for="eventDescription">Event Description:</label>
             </p>
-            <p class="addEventContent">
+            <p class="primaryBody">
               <textarea id="eventDescription" rows="4" required></textarea>
             </p>
 
-            <p class="addEventContent">
+            <p class="primaryBody">
               <label for="eventDate">Event Date:</label>
               <input type="date" id="eventDate" required />
             </p>
