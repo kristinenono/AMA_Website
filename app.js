@@ -214,17 +214,6 @@ window.onclick = function (event) {
 };
 
 // JavaScript to handle the burger menu toggle
-<<<<<<< HEAD
-document.addEventListener('DOMContentLoaded', function () {
-  const burger = document.querySelector('.navbar-burger');
-  const menu = document.querySelector('.navbar-menu');
-  const loginSignupBurger = document.querySelector('.login-signup-burger');
-   
-  burger.addEventListener('click', function () {
-    burger.classList.toggle('active');
-    menu.classList.toggle('active');
-    loginSignupBurger.classList.toggle('active'); // Toggle login and signup in burger menu
-=======
 document.addEventListener("DOMContentLoaded", function () {
   const burger = document.querySelector(".navbar-burger");
   const menu = document.querySelector(".navbar-menu");
@@ -235,7 +224,6 @@ document.addEventListener("DOMContentLoaded", function () {
     burger.classList.toggle("active");
     menu.classList.toggle("active");
     loginSignupBurger.classList.toggle("active"); // Toggle login and signup in burger menu
->>>>>>> b363b916329600802203f18452b45062d71f31fd
   });
 
   window.addEventListener("resize", function () {
