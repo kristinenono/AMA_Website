@@ -515,6 +515,7 @@ input[type="submit"] {
   position: relative;
   display: inline-block;
 }
+
 .dropdown .bttn1 {
   border: none;
   cursor: pointer;
@@ -648,7 +649,8 @@ nav {
 }
 #blog-link {
   display: inline-block;
-  padding-right: 100px"
+  padding-right: 100px;
+  padding-left: 100px;
 }
 #contact-link {
   display: inline-block; padding-right: 100px
@@ -691,3 +693,120 @@ nav {
   margin-bottom: 10%;
   
 }
+
+#logo-text {
+  vertical-align: top;
+  font-family: Arial, Helvetica, sans-serif; 
+  word-wrap: break-word;
+}
+#bttn-font {
+  color: #f3f2ee; 
+  font-family: Arial, Helvetica, sans-serif; 
+  font-size: 20px;
+  vertical-align: bottom;
+}
+  /* Styles for burger menu */
+  .navbar-burger {
+    display: none;
+  }
+  .navbar-menu {
+    background-color: #1f304f;
+    text-align: center;
+  }
+  .navbar-menu a {
+    color: #f3f2ee;
+    font-size: 20px;
+    padding: 0 20px;
+    text-decoration: none;
+  }
+  .login-signup {
+    display: block; /* Initially show login and signup */
+    position: absolute; 
+    top: 2.25%; 
+    right: 30px; 
+    height: auto"
+  }
+  .login-signup-burger {
+    display: none; /* Initially hide login and signup in burger menu */
+  }
+  
+  @media screen and (max-width: 850px) {
+    .navbar-menu {
+      display: none;
+      flex-direction: column;
+      background-color: #1f304f;
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+    }
+    .navbar-menu.active {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: left;
+      margin-top: 50px;
+      margin-right: 20px;
+      width: 150px;
+    }
+    .navbar-menu.active > div > a {
+      float: left;
+      padding-top: 5%;
+      padding-bottom: 5%;
+    }
+    .navbar-menu.active > div > div > a{
+      float: left;
+      padding-top: 5%;
+      padding-bottom: 5%;
+      background-color: none;
+    }
+    .navbar-menu.active > div > div > button{
+      float: left;
+      margin-left: 10%;
+      background-color: none;
+      padding-right: 0px;
+    }
+    .navbar-burger {
+      display: block;
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      cursor: pointer;
+    }
+    .navbar-burger span {
+      background-color:#1f304f;
+      display: block;
+      width: 25px;
+      height: 3px;
+      margin: 5px;
+      transition: all 0.3s ease;
+    }
+    .navbar-burger.active span:nth-child(1) {
+      transform: rotate(-45deg) translate(-5px, 6px);
+    }
+    .navbar-burger.active span:nth-child(2) {
+        opacity: 0;
+    }
+    .navbar-burger.active span:nth-child(3) {
+      transform: rotate(45deg) translate(-5px, -6px);
+    }
+    .login-signup {
+      display: none; /* Hide login and signup when burger menu is active */
+    }
+    .login-signup-burger {
+      display: block; /* Show login and signup in burger menu */
+    }
+    .navbar-item {
+      font-size: calc(20px + 0.5vw); /* Adjust font size relative to viewport width */
+      display: flex;
+      align-items: center;
+    }
+    .navbar-item img {
+      width: calc(20% + 2vw); /* Adjust image width relative to viewport width */
+    }
+    .navbar-item div {
+      flex: 1;
+      padding-left: 20px;
+    }
+   }
+  
