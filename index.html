@@ -12,6 +12,72 @@
     <title>Document</title>
   </head>
   <body>
+    <!-- modal for login -->
+    <div id="logmodal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+          <span class="modal-close" onclick="modalclose()">&times;</span>
+          <div class="modal-margin">
+                <!-- the sign in form for users -->
+                <form id="login_form">
+                    <div style="color:white; text-align: center; padding-top: 5px; font-family: Arial, Helvetica, sans-serif;">
+                        <p><b>TEMP LOG IN MODAL</b></p>
+                    </div>
+                    <!-- the email field -->
+                    <p style="color:white; font-family: Arial, Helvetica, sans-serif; text-align: center; padding-top: 5px;">Email:</p>
+                    <input type="email" placeholder="sampleemail@wisc.edu"
+                        style="background-color:F3F2EE; text-align: center; margin: auto; display: block;">
+                    <br>
+                    <!-- the password field -->
+                    <p style="color:white; font-family: Arial, Helvetica, sans-serif; text-align: center; padding-top: 5px;">Password:</p>
+                    <input type="password" id="password" placeholder="password"
+                        style="background-color:F3F2EE; margin: auto; display: block; text-align: center;">
+                    <br>
+                    <div class="button-container">
+                            <button id="login_btn" style="margin: auto; display: block;">
+                                <strong>Log In</strong></button>
+                            <button id="logcancel_btn" style="margin: auto; display: block;">
+                                <strong>Cancel</strong></button>
+                    </div>
+                    <!-- location where error is displayed if one occurs -->
+                    <div class="error has-text-warning"></div>
+                </form>
+            </div>
+      </div>
+    </div>
+    <!-- sign up modal -->
+    <div id="signmodal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+          <span class="modal-close" onclick="signmodalclose()">&times;</span>
+          <div class="modal-margin">
+                <!-- the sign in form for users -->
+                <form id="signup_form">
+                    <div style="color:white; text-align: center; padding-top: 5px; font-family: Arial, Helvetica, sans-serif;">
+                        <p><b>TEMP SIGN UP MODAL</b></p>
+                    </div>
+                    <!-- the email field -->
+                    <p style="color:white; font-family: Arial, Helvetica, sans-serif; text-align: center; padding-top: 5px;">Email:</p>
+                    <input type="email" placeholder="sampleemail@wisc.edu"
+                        style="background-color:F3F2EE; text-align: center; margin: auto; display: block;">
+                    <br>
+                    <!-- the password field -->
+                    <p style="color:white; font-family: Arial, Helvetica, sans-serif; text-align: center; padding-top: 5px;">Password:</p>
+                    <input type="password" id="password" placeholder="password"
+                        style="background-color:F3F2EE; margin: auto; display: block; text-align: center;">
+                    <br>
+                    <div class="button-container">
+                            <button id="signup_btn" style="margin: auto; display: block;">
+                                <strong>Sign Up</strong></button>
+                            <button id="logcancel_btn" style="margin: auto; display: block;">
+                                <strong>Cancel</strong></button>
+                    </div>
+                    <!-- location where error is displayed if one occurs -->
+                    <div class="error has-text-warning"></div>
+                </form>
+            </div>
+      </div>
+    </div>
     <nav style="background-color: #f3f2ee; margin-top: 0">
       <!-- website logo -->
       <div class="tile is-child">
@@ -31,13 +97,33 @@
       </div>
       <div style="position: absolute; top: 2.25%; right: 30px; height: auto">
         <!-- the login button for users -->
-        <a href="login_modal.html" class="add-btn">
-          <strong id="loginbtn">LOGIN</strong>
+        <a id="login">
+          <button id="logbtn" class="add-btn button" onclick="loginclick()">
+            <strong
+            style="
+              color: #f3f2ee;
+              font-family: Arial, Helvetica, sans-serif;
+              font-size: 20px;
+              vertical-align: bottom;
+            "
+            >LOGIN</strong
+          >
+          </button>
         </a>
         &nbsp; &nbsp;
         <!-- the signup button for users -->
-        <a href="sign_up_modal.html" class="add-btn" id="sign_up_btn">
-          <strong id="signupbtn">SIGN UP</strong>
+        <a id="signin">
+          <button id="signbtn" class="add-btn button" onclick="signupclick()">
+            <strong
+            style="
+              color: #f3f2ee;
+              font-family: Arial, Helvetica, sans-serif;
+              font-size: 20px;
+              vertical-align: bottom;
+            "
+            >SIGN UP</strong
+          >
+          </button>
         </a>
       </div>
       <!-- the navigation bar -->
