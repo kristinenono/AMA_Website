@@ -1,3 +1,26 @@
+// JavaScript to handle the burger menu toggle
+document.addEventListener('DOMContentLoaded', function () {
+  const burger = document.querySelector('.navbar-burger');
+  const menu = document.querySelector('.navbar-menu');
+  const loginSignupBurger = document.querySelector('.login-signup-burger');
+   
+  burger.addEventListener('click', function () {
+    burger.classList.toggle('active');
+    menu.classList.toggle('active');
+    loginSignupBurger.classList.toggle('active'); // Toggle login and signup in burger menu
+  });
+      
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 768) {
+      burger.classList.remove('active');
+      menu.classList.remove('active');
+      loginSignupBurger.classList.remove('active'); // Remove active class on resize
+    }
+  });
+});
+
+
+
 const calendarView = document.querySelector(".calview");
 const monthSelect = document.getElementById("month-select");
 const prevMonthBtn = document.querySelector(".action_left");
@@ -211,7 +234,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const burger = document.querySelector('.navbar-burger');
   const menu = document.querySelector('.navbar-menu');
   const loginSignupBurger = document.querySelector('.login-signup-burger');
-  const backgroundDiv = document.querySelector('.background-div');
    
   burger.addEventListener('click', function () {
     burger.classList.toggle('active');

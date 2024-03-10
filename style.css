@@ -508,11 +508,13 @@ input[type="submit"] {
 #calendarbtn:hover,
 #pointbtn:hover {
   background-color: #b22b25;
+  width: 76%;
 }
 
 .dropdown {
   position: relative;
   display: inline-block;
+  margin-right: 2.5%;
 }
 
 .dropdown .bttn1 {
@@ -521,6 +523,7 @@ input[type="submit"] {
   outline: none;
   background-color: #1f304f;
   height: 50px;
+  width: 150%;
 }
 .bttn1:hover {
   background-color: #b22b25;
@@ -529,7 +532,7 @@ input[type="submit"] {
   display: none;
   position: absolute;
   background-color: #1f304f;
-  min-width: 160px;
+  width: 150%;
   z-index: 1;
 }
 
@@ -539,7 +542,6 @@ input[type="submit"] {
   text-decoration: none;
   text-align: center;
   height: 60px;
-  width: 100%;
 }
 
 .dropdown-content.show {
@@ -629,7 +631,7 @@ nav {
 #format-link {
   display: inline-block;
   text-align: center;
-  padding-right: 100px;
+  padding-right: 90px;
   padding-bottom: 25px;
   
 }
@@ -646,7 +648,7 @@ nav {
 #blog-link {
   display: inline-block;
   padding-right: 100px;
-  padding-left: 100px;
+  padding-left: 90px;
 }
 #contact-link {
   display: inline-block; padding-right: 100px
@@ -948,3 +950,4 @@ nav {
     margin-top: 6%;
   }
 
+.show {display:block;}
