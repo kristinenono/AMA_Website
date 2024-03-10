@@ -45,52 +45,57 @@ const dayNames = ["Sun", "Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];
 let currentDate = new Date();
 
 function generateCalendar(date) {
-  // this is where we set the cal grid
   const totalDays = 42;
   calendarView.innerHTML = "";
   let currentYear = date.getFullYear();
   let currentMonth = date.getMonth();
   let firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
-  // this is the first day of the week
   let daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
   let dayCellsGenerated = 0;
+  let emptyCellsCount = 0;
 
   yearblock.innerHTML = currentYear;
-  let calendarHtml = "";
-
-  calendarHtml += `<div class="weekdayview">`;
+  // adding in a comment to restore the js
+  let calendarHtml = "<div class='weekdayview'>";
   for (let title = 0; title <= 6; title++) {
-    calendarHtml += `<div class="dayofweek">${dayNames[title]}
-  </div>`;
+    calendarHtml += `<div class='dayofweek'>${dayNames[title]}</div>`;
   }
+  calendarHtml += "</div><div class='monthview'><div class='weekview'>";
 
-  calendarHtml += `</div>`;
-  calendarHtml += `<div class="weekview">`;
   for (let i = 0; i < firstDayOfMonth; i++) {
     calendarHtml += '<div class="dayview empty"></div>';
     dayCellsGenerated++;
+    emptyCellsCount++;
   }
   for (let day = 1; day <= daysInMonth; day++) {
     calendarHtml += `<div class="dayview">${day}</div>`;
     dayCellsGenerated++;
     if (dayCellsGenerated % 7 === 0 && dayCellsGenerated !== totalDays) {
-      calendarHtml += '</div><div class="weekview">'; // Start a new row every 7 days unless it's the last cell
+      calendarHtml += '</div><div class="weekview">';
+      emptyCellsCount = 0; // Reset empty cells count at the start of a new week
     }
   }
 
   while (dayCellsGenerated < totalDays) {
     calendarHtml += '<div class="dayview empty"></div>';
     dayCellsGenerated++;
+    emptyCellsCount++;
     if (dayCellsGenerated % 7 === 0 && dayCellsGenerated !== totalDays) {
       calendarHtml += '</div><div class="weekview">';
+      emptyCellsCount = 0; // Reset empty cells count at the start of a new week
     }
   }
 
-  if (dayCellsGenerated % 7 !== 1) {
-    calendarHtml += "</div>";
+  if (emptyCellsCount === 7) {
+    // Remove the last weekview div if all its cells are empty
+    calendarHtml = calendarHtml.substring(
+      0,
+      calendarHtml.lastIndexOf('<div class="weekview">')
+    );
   }
-  calendarHtml += `</div>`;
-  calendarView.innerHTML = calendarHtml;
+
+  calendarHtml += "</div>"; // Close the last weekview or monthview div properly
+  calendarView.innerHTML = calendarHtml; // Set the calendar HTML to the innerHTML of the calendarView
   monthSelect.value = monthNames[currentMonth];
 }
 
@@ -173,13 +178,13 @@ document.addEventListener("click", function (event) {
 
 // MODAL POP UP IN HTML
 function openModal() {
-  var modal = document.getElementById('logmodal');
-  modal.style.display = 'block';
+  var modal = document.getElementById("logmodal");
+  modal.style.display = "block";
 }
 
 function closeModal() {
-  var modal = document.getElementById('logmodal');
-  modal.style.display = 'none';
+  var modal = document.getElementById("logmodal");
+  modal.style.display = "none";
 }
 
 // Function to handle login button click event
@@ -195,18 +200,21 @@ function modalclose() {
 // when cancel is clicked the fields empty
 function clearFields() {
   var emailField = document.querySelector('#logmodal input[type="email"]');
-  var passwordField = document.querySelector('#logmodal input[type="password"]');
+  var passwordField = document.querySelector(
+    '#logmodal input[type="password"]'
+  );
 
-  emailField.value = ''; // Clearing the email input field
-  passwordField.value = ''; // Clearing the password input field
+  emailField.value = ""; // Clearing the email input field
+  passwordField.value = ""; // Clearing the password input field
 }
 
 // Function to handle cancel button click event
-document.getElementById('logcancel_btn').addEventListener('click', function(event) {
-  event.preventDefault(); // Prevent the default form submission behavior
-  clearFields(); // Clear the input fields
-});
-
+document
+  .getElementById("logcancel_btn")
+  .addEventListener("click", function (event) {
+    event.preventDefault(); // Prevent the default form submission behavior
+    clearFields(); // Clear the input fields
+  });
 
 // SIGN UP MODAL
 function signupclick() {
@@ -226,26 +234,26 @@ window.onclick = function (event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
-}
-
+};
 
 // JavaScript to handle the burger menu toggle
 document.addEventListener('DOMContentLoaded', function () {
   const burger = document.querySelector('.navbar-burger');
   const menu = document.querySelector('.navbar-menu');
   const loginSignupBurger = document.querySelector('.login-signup-burger');
+  const backgroundDiv = document.querySelector('.background-div');
    
   burger.addEventListener('click', function () {
     burger.classList.toggle('active');
     menu.classList.toggle('active');
     loginSignupBurger.classList.toggle('active'); // Toggle login and signup in burger menu
   });
-      
-  window.addEventListener('resize', function () {
+
+  window.addEventListener("resize", function () {
     if (window.innerWidth > 768) {
-      burger.classList.remove('active');
-      menu.classList.remove('active');
-      loginSignupBurger.classList.remove('active'); // Remove active class on resize
+      burger.classList.remove("active");
+      menu.classList.remove("active");
+      loginSignupBurger.classList.remove("active"); // Remove active class on resize
     }
   });
 });
