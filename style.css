@@ -559,10 +559,10 @@ input[type="submit"] {
 .dropdown-content a:hover {
   background-color: #b22b25;
 }
-/* Display the dropdown content when hovering over the button */
+/* Display the dropdown content when hovering over the button 
 .dropdown:hover .dropdown-content {
   display: block;
-}
+}*/
 .show {
   display: block;
 }
