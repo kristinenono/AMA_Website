@@ -9,6 +9,10 @@
       crossorigin="anonymous"
     ></script>
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
   </head>
   <body>
     <nav style="background-color: #f3f2ee; margin-top: 0">
@@ -32,19 +36,19 @@
       </a>
       <div class="login-signup">
         <a id="login">
-          <button class="add-btn button" onclick="loginclick()">
+          <button class="add-btn button is-link" onclick="loginclick()">
             <strong id="bttn-font">LOGIN</strong>
           </button>
         </a>
         &nbsp; &nbsp;
         <a id="signin">
-          <button class="add-btn button" onclick="signupclick()">
+          <button class="add-btn button is-link" onclick="signupclick()">
             <strong id="bttn-font">SIGN UP</strong>
           </button>
         </a>
       </div>
       <div class="navbar-menu">
-        <div>
+        <div class="navbar-item">
           <a href="index.html" id="home-link"
             ><strong id="home-nav">HOME</strong></a
           >
@@ -87,43 +91,77 @@
         <div class="colormargins margin-left">
           <h2 class="heading-tag-upcoming-event">Upcoming Events</h2>
           <div class="flex-container">
-            <div class="box margin-event">
+            <div class="box margin-event ">
               <h2>Philathropy event</h2>
-
-              <a href="#" class="events-button">View Event Here! </a>
-
-              <div id="eventCard" class="event-card hidden">
-                <span class="close" onclick="closeAddEventsPopup()"
-                  >&times;</span
-                >
-
-                <!-- Content of the event card goes here -->
+              <a href="#" class="events-button" id="eventbtn1">View Event Here! </a>
+              <div class="modal is-hidden" id="card_modal_1">
+                <div class = "modal-background" id= "cardbg_1"></div>
+                <div class="modal-content section has-background-white">
                 <h2 class="secondaryheader2">Event Title</h2>
+                <form>
                 <p class="primaryBody">Date: [Event Date]</p>
                 <p class="primaryBody">Location: [Event Location]</p>
-                <!-- Add more details as needed -->
                 <button id="editEventCard">Edit</button>
                 <button id="deleteEventCard">Delete</button>
                 <button id="closeEventCard">Close</button>
+              </form>
               </div>
-            </div>
-            <div class="box margin-event">
-              <h2>Professional Development Event</h2>
-
-              <a href="#" class="events-button">View Event Here! </a>
-            </div>
-            <div class="box margin-event">
-              <h2>Speaker Event</h2>
-
-              <a href="#" class="events-button">View Event Here! </a>
-            </div>
-            <div class="box margin-event">
-              <h2>Social Event</h2>
-
-              <a href="#" class="events-button">View Event Here! </a>
-            </div>
-          </div>
+              </div>
+              </div>
+              <div class="box margin-event">
+                <h2>Professional Development event</h2>
+                <a href="#" class="events-button" id="eventbtn2">View Event Here! </a>
+                <div class="modal is-hidden" id="card_modal_2">
+                  <div class = "modal-background" id= "cardbg_2"></div>
+                  <div class="modal-content section has-background-white">
+                  <h2 class="secondaryheader2">Event Title</h2>
+                  <form>
+                  <p class="primaryBody">Date: [Event Date]</p>
+                  <p class="primaryBody">Location: [Event Location]</p>
+                  <button id="editEventCard">Edit</button>
+                  <button id="deleteEventCard">Delete</button>
+                  <button id="closeEventCard2">Close</button>
+                </form>
+                </div>
+                </div>
+                </div>
+                <div class="box margin-event">
+                  <h2>Social event</h2>
+                  <a href="#" class="events-button" id="eventbtn3">View Event Here! </a>
+                  <div class="modal is-hidden" id="card_modal_3">
+                    <div class = "modal-background" id= "cardbg_3"></div>
+                    <div class="modal-content section has-background-white">
+                    <h2 class="secondaryheader2">Event Title</h2>
+                    <form>
+                    <p class="primaryBody">Date: [Event Date]</p>
+                    <p class="primaryBody">Location: [Event Location]</p>
+                    <button id="editEventCard">Edit</button>
+                    <button id="deleteEventCard">Delete</button>
+                    <button id="closeEventCard3">Close</button>
+                  </form>
+                  </div>
+                  </div>
+                  </div>
+                  <div class="box margin-event">
+                    <h2>Speaker event</h2>
+                    <a href="#" class="events-button" id="eventbtn4">View Event Here! </a>
+                    <div class="modal is-hidden" id="card_modal_4">
+                      <div class = "modal-background" id= "cardbg_4"></div>
+                      <div class="modal-content section has-background-white">
+                      <h2 class="secondaryheader2">Event Title</h2>
+                      <form>
+                      <p class="primaryBody">Date: [Event Date]</p>
+                      <p class="primaryBody">Location: [Event Location]</p>
+                      <button id="editEventCard">Edit</button>
+                      <button id="deleteEventCard">Delete</button>
+                      <button id="closeEventCard4">Close</button>
+                    </form>
+                    </div>
+                    </div>
+                    </div>
         </div>
+        </div>
+
         <!-- CENTER OF PAGE where calendar goes-->
         <div id="sample" class="colormargins page-content">
           <div class="navcal">
@@ -214,123 +252,80 @@
         <!-- RIGHT MARGIN -->
         <div class="colormargins margin-right">
           <a href="#" class="add-btn2" id="eventbtn">Add Event</a>
-        </div>
-      </div>
-      <div id="addEventsPopup" class="popup">
-        <div class="popup-content">
-          <span class="close" onclick="closeAddEventsPopup()">&times;</span>
-          <h2 class="secondaryheader2">Add Event</h2>
-          <form>
-            <p class="primaryBody">
-              <label for="eventTitle">Event Title:</label>
-              <input type="text" id="eventTitle" required />
-            </p>
-
-            <p class="primaryBody">
-              <label for="eventType">Event Type:</label>
-              <select id="eventType" required>
-                <option value="memberMeeting">Member Meeting</option>
-                <option value="professionalDevelopment">
-                  Professional Development
-                </option>
-                <option value="social">Social</option>
-                <option value="philanthropic">Philanthropic</option>
-                <option value="dei">DEI</option>
-              </select>
-            </p>
-
-            <p class="primaryBody">
-              <label for="eventDescription">Event Description:</label>
-            </p>
-            <p class="primaryBody">
-              <textarea id="eventDescription" rows="4" required></textarea>
-            </p>
-
-            <p class="primaryBody">
-              <label for="eventDate">Event Date:</label>
-              <input type="date" id="eventDate" required />
-            </p>
-
-            <input type="submit" value="Add Event" />
+          <div class="modal is-hidden" id="popupmodal">
+            <div class = "modal-background" id= "popupbg"></div>
+            <div class="modal-content section has-background-white">
+            <h2 class="title">New Event</h2>
+            <form>
+            <div class="field">
+            <label class="label">Name of Event</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="LinkedIn Workshop" />
+            </div>
+            </div>
+            <div class="field">
+            <label class="label">Date and Time of Event</label>
+            <div class="control">
+              <input
+                class="input"
+                type="datetime-local"
+                placeholder="12-01-22 01:22"
+              />
+            </div>
+            </div>
+            <div class="field">
+            <label class="label">Choose Event Category</label>
+            <div class="control">
+              <div class="select">
+                <select name="" id="">
+                  <option>--select--</option>
+                  <option value="">Philanthropy</option>
+                  <option value="">Professional Development</option>
+                  <option value="">Speaker Event</option>
+                  <option value="">Social Event</option>
+                </select>
+              </div>
+            </div>
+            </div>
+            <div class="field">
+            <label class="label">Points Assigned</label>
+            <div class="control">
+              <input class="input" type="number" placeholder="5" />
+            </div>
+            </div>
+            <div class="field">
+            <label class="label">Description of Event</label>
+            <div class="control">
+              <textarea
+                cols="20"
+                rows="12"
+                placeholder="Dress Code: Business Casual 
+            Location: Grainger"
+              ></textarea>
+            </div>
+            </div>
+            <div class="field has-addons">
+            <div class="control">
+              <input class="input" type="text" placeholder="Generate Code" />
+            </div>
+            <div class="control">
+              <a class="button btncolor">Go</a>
+            </div>
+            </div>
+            <div class="field is-grouped">
+            <div class="control">
+              <button class="button">Submit</button>
+            </div>
+            <div class="control">
+              <button class="button" id="addEventcncl">Cancel</button>
+            </div>
+            </div>
+            </div>
           </form>
-        </div>
-      </div>
+            </div></div>
+    </div>
+  </div>
     </main>
-    <footer>
-      <div class="footer-box">
-        <div class="footer-section">
-          <div class="navbar-items">
-            <img src="images/AMA Logo Footer.png" alt="" id="img_logo" />
-            <div style="margin-top: 4%; padding-top: 5px">
-              <strong id="footer-uw-logo" class="text-logo"
-                >University of Wisconsin Madison</strong
-              >
-            </div>
-          </div>
-          <div class="social-icons" id="icons">
-            <a
-              href="https://www.linkedin.com/in/ama-badgers-5247a9252/"
-              style="margin-right: 3%"
-            >
-              <i class="fab fa-linkedin fa-2x"></i>
-            </a>
-            <a
-              href="https://www.instagram.com/amabadgers/"
-              style="margin-right: 3%"
-            >
-              <i class="fab fa-instagram fa-2x"></i>
-            </a>
-            <a
-              href="https://www.facebook.com/AMAUWMadison/"
-              style="margin-right: 3%"
-            >
-              <i class="fab fa-facebook fa-2x"></i>
-            </a>
-            <a href="https://twitter.com/amauwmadison?lang=en">
-              <i class="fab fa-twitter fa-2x"></i>
-            </a>
-          </div>
-          <div style="text-align: center">
-            <p>975 University Ave, Madison, WI 53706</p>
-            <p style="color: gray">+00 000 000 000</p>
-          </div>
-        </div>
-        <div class="footer-section" style="padding-top: 5%">
-          <div>
-            <div style="padding: 8px">
-              <a href="#"><b>About Us</b></a>
-            </div>
-            <div style="padding: 8px">
-              <a href="#"><b>Blog</b></a>
-            </div>
-            <div style="padding: 8px">
-              <a href="#"><b>Point System</b></a>
-            </div>
-            <div style="padding: 8px">
-              <a href="#"><b>Contact Us</b></a>
-            </div>
-            <div style="padding: 8px">
-              <a href="calendar.html"><b>Events</b></a>
-            </div>
-            <div style="padding: 8px">
-              <a href="#"><b>Become a Sponsor</b></a>
-            </div>
-          </div>
-        </div>
-        <div id="line"></div>
-        <div class="footer-section">
-          <h2>JOIN OUR EMAIL LIST</h2>
-          <p>
-            Want to become an official member of the Badger American Marketing
-            Association or just be added to the email list? Fill out our member
-            form to stay up to date on upcoming events!
-          </p>
-          <input type="text" placeholder="Enter your email here" />
-          <button id="submit_btn">
-            <p>SUBMIT</p>
-          </button>
-        </div>
-      </div>
     </footer>
     <script src="app.js"></script>
   </body>

@@ -96,6 +96,47 @@ body {
 .add-btn:hover {
   background-color: #b22b25;
 }
+/* home page modal styling */
+.modal-h {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+.modal-content-h {
+  background-color: #1f304f;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.modal-close-h {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  align-content: center;
+}
+
+.modal-close-h:hover,
+.modal-close-h:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.modal-margin-h {
+  width: 20%;
+  height: 20%;
+  margin: auto;
+}
 
 /* Calendar Page */
 .margin-left {
@@ -173,9 +214,9 @@ body {
 
 .events-button {
   display: inline-block;
-  color: #fafbfc;
-  text-decoration: none;
-  border: 0.2rem #fafbfc solid;
+  color: var(--primarynavy);
+  text-decoration: underline;
+  border: 0.2rem var(--primaryblack);
   padding: 1rem;
   font-family: var(--titleFontFamily);
 }
@@ -444,48 +485,6 @@ input[type="submit"] {
   color: black;
   text-decoration: none;
   cursor: pointer;
-}
-
-/* login modal style */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-}
-.modal-content {
-  background-color: #1f304f;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-}
-
-.modal-close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  align-content: center;
-}
-
-.modal-close:hover,
-.modal-close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
-.modal-margin {
-  width: 20%;
-  height: 20%;
-  margin: auto;
 }
 
 #memberbtn {

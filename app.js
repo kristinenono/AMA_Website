@@ -207,57 +207,87 @@ nextMonthBtn.addEventListener("click", function () {
 }); // Get the Today button
 cal_page_content += calendarView;
 
-cal_page_content += `<!-- RIGHT MARGIN -->
-    <div class="colormargins margin-right">
-      <a href="#" class="add-btn" id="eventbtn">Add Event</a>
-      <!-- <button class="add-btn">Add Event</button> -->
-      <!-- href="cal_form.html" -->
-    </div>
-  </div>
-  <div id="addEventsPopup" class="popup">
-    <div class="popup-content">
-      <span class="close" onclick="closeAddEventsPopup()">&times;</span>
-      <h2 class="secondaryheader2">Add Event</h2>
-      <form>
-        <p class="addEventContent">
-          <label for="eventTitle">Event Title:</label>
-          <input type="text" id="eventTitle" required />
-        </p>
-
-        <p class="addEventContent">
-          <label for="eventType">Event Type:</label>
-          <select id="eventType" required>
-            <option value="memberMeeting">Member Meeting</option>
-            <option value="professionalDevelopment">
-              Professional Development
-            </option>
-            <option value="social">Social</option>
-            <option value="philanthropic">Philanthropic</option>
-            <option value="dei">DEI</option>
-          </select>
-        </p>
-
-        <p class="addEventContent">
-          <label for="eventDescription">Event Description:</label>
-        </p>
-        <p class="addEventContent">
-          <textarea id="eventDescription" rows="4" required></textarea>
-        </p>
-
-        <p class="addEventContent">
-          <label for="eventDate">Event Date:</label>
-          <input type="date" id="eventDate" required />
-        </p>
-
-        <input type="submit" value="Add Event" />
-      </form>
-    </div>
-  </div>
+cal_page_content += `<div class="colormargins margin-right">
+<a href="#" class="add-btn2" id="eventbtn">Add Event</a>
 </main>`;
 
 // click event for cal
 r_e("calendarbtn").addEventListener("click", () => {
   appendContent(cal_page_content);
+});
+// addEventModal
+let addEventForm = r_e("popupmodal");
+
+function show_addEvent_form() {
+  addEventForm.classList.remove("is-hidden");
+  addEventForm.classList.add("is-active");
+}
+
+let addEventbtn = r_e("eventbtn");
+addEventbtn.addEventListener("click", show_addEvent_form);
+
+let addEventcancel = r_e("addEventcncl");
+addEventcancel.addEventListener("click", () => {
+  addEventForm.classList.remove("is-active");
+});
+
+// eventcardModal
+let eventCard1 = r_e("card_modal_1");
+let eventbtn1 = r_e("eventbtn1");
+let eventclose1 = r_e("closeEventCard");
+
+function showEventCard1() {
+  eventCard1.classList.remove("is-hidden");
+  eventCard1.classList.add("is-active");
+}
+eventbtn1.addEventListener("click", showEventCard1);
+
+eventclose1.addEventListener("click", () => {
+  eventCard1.classList.remove("is-active");
+});
+// eventcardModal2
+let eventCard2 = r_e("card_modal_2");
+let eventbtn2 = r_e("eventbtn2");
+let eventclose2 = r_e("closeEventCard2");
+
+function showEventCard2() {
+  eventCard2.classList.remove("is-hidden");
+  eventCard2.classList.add("is-active");
+}
+eventbtn2.addEventListener("click", showEventCard2);
+
+eventclose2.addEventListener("click", () => {
+  eventCard2.classList.remove("is-active");
+});
+
+// / eventcardModal3
+let eventCard3 = r_e("card_modal_3");
+let eventbtn3 = r_e("eventbtn3");
+let eventclose3 = r_e("closeEventCard3");
+
+function showEventCard3() {
+  eventCard3.classList.remove("is-hidden");
+  eventCard3.classList.add("is-active");
+}
+eventbtn3.addEventListener("click", showEventCard3);
+
+eventclose3.addEventListener("click", () => {
+  eventCard3.classList.remove("is-active");
+});
+
+// / eventcardModal4
+let eventCard4 = r_e("card_modal_4");
+let eventbtn4 = r_e("eventbtn4");
+let eventclose4 = r_e("closeEventCard4");
+
+function showEventCard4() {
+  eventCard4.classList.remove("is-hidden");
+  eventCard4.classList.add("is-active");
+}
+eventbtn4.addEventListener("click", showEventCard4);
+
+eventclose4.addEventListener("click", () => {
+  eventCard4.classList.remove("is-active");
 });
 
 // JavaScript to handle the burger menu toggle
@@ -314,23 +344,24 @@ document.addEventListener("DOMContentLoaded", function () {
     eventCard.classList.add("hidden");
   });
 });
-// Add Events Popup
-var addEventsPopup = document.getElementById("addEventsPopup");
 
-// Function to open the popup
-function openAddEventsPopup() {
-  addEventsPopup.style.display = "block";
-}
+// // Add Events Popup
+// var addEventsPopup = document.getElementById("addEventsPopup");
 
-// Function to close the popup
-function closeAddEventsPopup() {
-  addEventsPopup.style.display = "none";
-}
+// // Function to open the popup
+// function openAddEventsPopup() {
+//   addEventsPopup.style.display = "block";
+// }
 
-// Attach the open function to your "Add Event" button
-document.getElementById("eventbtn").onclick = function () {
-  openAddEventsPopup();
-};
+// // Function to close the popup
+// function closeAddEventsPopup() {
+//   addEventsPopup.style.display = "none";
+// }
+
+// // Attach the open function to your "Add Event" button
+// document.getElementById("eventbtn").onclick = function () {
+//   openAddEventsPopup();
+// };
 
 // MODAL POP UP IN HTML
 function openModal() {
