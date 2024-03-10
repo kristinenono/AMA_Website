@@ -150,13 +150,13 @@ document.addEventListener("click", function (event) {
 
 // MODAL POP UP IN HTML
 function openModal() {
-  var modal = document.getElementById('logmodal');
-  modal.style.display = 'block';
+  var modal = document.getElementById("logmodal");
+  modal.style.display = "block";
 }
 
 function closeModal() {
-  var modal = document.getElementById('logmodal');
-  modal.style.display = 'none';
+  var modal = document.getElementById("logmodal");
+  modal.style.display = "none";
 }
 
 // Function to handle login button click event
@@ -172,18 +172,21 @@ function modalclose() {
 // when cancel is clicked the fields empty
 function clearFields() {
   var emailField = document.querySelector('#logmodal input[type="email"]');
-  var passwordField = document.querySelector('#logmodal input[type="password"]');
+  var passwordField = document.querySelector(
+    '#logmodal input[type="password"]'
+  );
 
-  emailField.value = ''; // Clearing the email input field
-  passwordField.value = ''; // Clearing the password input field
+  emailField.value = ""; // Clearing the email input field
+  passwordField.value = ""; // Clearing the password input field
 }
 
 // Function to handle cancel button click event
-document.getElementById('logcancel_btn').addEventListener('click', function(event) {
-  event.preventDefault(); // Prevent the default form submission behavior
-  clearFields(); // Clear the input fields
-});
-
+document
+  .getElementById("logcancel_btn")
+  .addEventListener("click", function (event) {
+    event.preventDefault(); // Prevent the default form submission behavior
+    clearFields(); // Clear the input fields
+  });
 
 // SIGN UP MODAL
 function signupclick() {
@@ -203,26 +206,25 @@ window.onclick = function (event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
-}
-
+};
 
 // JavaScript to handle the burger menu toggle
-document.addEventListener('DOMContentLoaded', function () {
-  const burger = document.querySelector('.navbar-burger');
-  const menu = document.querySelector('.navbar-menu');
-  const loginSignupBurger = document.querySelector('.login-signup-burger');
-   
-  burger.addEventListener('click', function () {
-    burger.classList.toggle('active');
-    menu.classList.toggle('active');
-    loginSignupBurger.classList.toggle('active'); // Toggle login and signup in burger menu
+document.addEventListener("DOMContentLoaded", function () {
+  const burger = document.querySelector(".navbar-burger");
+  const menu = document.querySelector(".navbar-menu");
+  const loginSignupBurger = document.querySelector(".login-signup-burger");
+
+  burger.addEventListener("click", function () {
+    burger.classList.toggle("active");
+    menu.classList.toggle("active");
+    loginSignupBurger.classList.toggle("active"); // Toggle login and signup in burger menu
   });
-      
-  window.addEventListener('resize', function () {
+
+  window.addEventListener("resize", function () {
     if (window.innerWidth > 768) {
-      burger.classList.remove('active');
-      menu.classList.remove('active');
-      loginSignupBurger.classList.remove('active'); // Remove active class on resize
+      burger.classList.remove("active");
+      menu.classList.remove("active");
+      loginSignupBurger.classList.remove("active"); // Remove active class on resize
     }
   });
 });
