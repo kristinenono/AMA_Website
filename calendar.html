@@ -8,142 +8,62 @@
       src="https://kit.fontawesome.com/bcae03608a.js"
       crossorigin="anonymous"
     ></script>
-
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <nav style="background-color: #f3f2ee; margin-top: 0">
       <!-- website logo -->
-      <div class="tile is-child">
-        <h1
-          class="navbar-item"
-          style="
-            color: #1f304f;
-            font-size: 25px;
-            padding-left: 20px;
-            margin: 0;
-            padding-top: 10px;
-            padding-bottom: 100px;
-          "
-        >
-          <img src="images/AMA Logo.png" alt="" style="float: left" />
-          <div
-            style="
-              width: 300px;
-              float: left;
-              padding-left: 20px;
-              padding-top: 10px;
-            "
-          >
-            <strong
-              style="
-                vertical-align: top;
-                font-family: Arial, Helvetica, sans-serif;
-                word-wrap: break-word;
-              "
-              >University of Wisconsin Madison</strong
-            >
-          </div>
-        </h1>
-      </div>
-      <div style="position: absolute; top: 2.25%; right: 30px; height: auto">
-        <!-- the login button for users -->
-        <a href="login_modal.html" class="add-btn">
-          <strong
-            style="
-              color: #f3f2ee;
-              font-family: Arial, Helvetica, sans-serif;
-              font-size: 20px;
-              vertical-align: bottom;
-            "
-            >LOGIN</strong
-          >
+      <h1 class="navbar-item" id="navbar-item">
+        <img src="images/AMA Logo.png" alt="" style="float: left" />
+        <div id="uw-madison">
+          <strong id="logo-text">University of Wisconsin Madison</strong>
+        </div>
+      </h1>
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar">
+        <span></span>
+        <span></span>
+        <span></span>
+      </a>
+      <div class="login-signup">
+        <a id="login">
+          <button id="logbtn" class="add-btn button" onclick="loginclick()">
+            <strong id="bttn-font">LOGIN</strong>
+          </button>
         </a>
         &nbsp; &nbsp;
-        <!-- the signup button for users -->
-        <a href="sign_up_modal.html" class="add-btn">
-          <strong
-            style="
-              color: #f3f2ee;
-              font-family: Arial, Helvetica, sans-serif;
-              font-size: 20px;
-              vertical-align: bottom;
-            "
-            >SIGN UP</strong
-          >
+        <a id="signin">
+          <button id="signbtn" class="add-btn button" onclick="signupclick()">
+            <strong id="bttn-font">SIGN UP</strong>
+          </button>
         </a>
       </div>
-      <!-- the navigation bar -->
-      <div
-        style="
-          background-color: #1f304f;
-          height: 50px;
-          width: 100%;
-          text-align: center;
-        "
-      >
-        <a
-          href="index.html"
-          style="
-            display: inline-block;
-            padding-right: 100px;
-            padding-left: 50px;
-          "
-        >
-          <strong
-            style="
-              color: #f3f2ee;
-              font-family: Arial, Helvetica, sans-serif;
-              font-size: 20px;
-            "
-            >HOME</strong
-          >
-        </a>
-        <a style="display: inline-block; padding-right: 100px">
-          <strong
-            style="
-              color: #f3f2ee;
-              font-family: Arial, Helvetica, sans-serif;
-              font-size: 20px;
-              vertical-align: bottom;
-            "
-            >ABOUT</strong
-          >
-        </a>
-        <!-- the members dropdown menu -->
-        <div class="dropdown">
-          <button class="bttn1">
-            <strong id="memberbtn">MEMBERS</strong>
-          </button>
-          <div class="dropdown-content">
-            <div>
-              <a id="calendarbtn" href="calendar.html">CALENDER</a>
-            </div>
-            <div>
-              <a href="#" id="pointbtn">POINT SYSTEM</a>
+      <div class="navbar-menu">
+        <div>
+          <a href="index.html" id="home-link"><strong id="home-nav">HOME</strong></a>
+          <a id="format-link"><strong id="format-nav">ABOUT</strong></a>
+          <div class="dropdown">
+            <button class="bttn1"><strong id="format-nav">MEMBERS</strong></button>
+            <div class="dropdown-content">
+              <div><a href="calendar.html" id="calendarbtn">CALENDAR</a></div>
+              <div><a href="#" id="pointbtn">POINT SYSTEM</a></div>
             </div>
           </div>
+          <a id="blog-link"><strong id="format-nav">BLOG</strong></a>
+          <a id="format-link"><strong id="format-nav">CONTACT</strong></a>
+        <div class="login-signup-burger">
+          <a id="login">
+            <button id="logbtn" class="add-btn button" onclick="loginclick()">
+              <strong id="bttn-font">LOGIN</strong>
+            </button>
+          </a>
+          &nbsp; &nbsp;
+          <a id="signin">
+            <button id="signbtn" class="add-btn button" onclick="signupclick()">
+              <strong id="bttn-font">SIGN UP</strong>
+            </button>
+          </a>
         </div>
-        <a style="display: inline-block; padding-right: 100px">
-          <strong
-            style="
-              color: #f3f2ee;
-              font-family: Arial, Helvetica, sans-serif;
-              font-size: 20px;
-            "
-            >BLOG</strong
-          >
-        </a>
-        <a style="display: inline-block; padding-right: 100px">
-          <strong
-            style="
-              color: #f3f2ee;
-              font-family: Arial, Helvetica, sans-serif;
-              font-size: 20px;
-            "
-            >CONTACT</strong
-          >
-        </a>
+      </div>
       </div>
     </nav>
     <header></header>

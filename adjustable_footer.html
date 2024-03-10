@@ -16,7 +16,7 @@
     width: 100%;
   }
 
-  .footer-content {
+  .footer-box {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -94,21 +94,43 @@
     flex: 1;
     padding-left: 20px;
   }
+}
+  #img_logo {
+    height: 50px; 
+    float: left; 
+    margin-right: 3%;
+  }
+  #icons {
+    width: 100%; 
+    display: flex; 
+    text-align: center; 
+    margin-bottom: 5%; 
+    padding-top: 10%;
+  }
+  #line {
+    border-left: 3px solid darkgray;
+    height: 160px;
+    left: 66%;
+    margin-top: 2%;
+    margin-right: 2%;
+  }
+  .text-logo {
+    margin-right: 50%;
   }
 </style>
 
 </head>
 <body>
   <footer>
-    <div class="footer-content">
+    <div class="footer-box">
       <div class="footer-section">
         <div class="navbar-item">
-          <img src="images/AMA Logo Footer.png" alt="" style="height: 50px; float: left; margin-right: 3%;">
+          <img src="images/AMA Logo Footer.png" alt="" id="img_logo">
         <div style="margin-top: 1%;">
-          <strong id="footer-uw-logo" style="margin-right: 50%;">University of Wisconsin Madison</strong>
+          <strong id="footer-uw-logo" class="text-logo">University of Wisconsin Madison</strong>
         </div>
     </div>
-        <div class="social-icons" style="  width: 100%; display: flex; text-align: center; margin-bottom: 5%; padding-top: 10%;">
+        <div class="social-icons" id="icons">
           <a href="https://www.linkedin.com/in/ama-badgers-5247a9252/" style="margin-right: 3%;">
             <i class="fab fa-linkedin fa-2x"></i>
           </a>
@@ -149,15 +171,7 @@
           </div>
         </div>
       </div>
-      <div
-      style="
-        border-left: 3px solid darkgray;
-        height: 160px;
-        left: 66%;
-        margin-top: 2%;
-        margin-right: 2%;
-      "
-    ></div>
+      <div id="line"></div>
       <div class="footer-section">
         <h2>JOIN OUR EMAIL LIST</h2>
         <p>Want to become an official member of the Badger American Marketing Association or just be added to the email list? Fill out our member form to stay up to date on upcoming events!</p>
