@@ -1,93 +1,40 @@
-const homeContent = `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="style.css" />
-        <title>Document</title>
-        <script src="https://kit.fontawesome.com/bcae03608a.js" crossorigin="anonymous"></script>
-    </head>
-    <body>
-        <div class="titleContainers">
-            <div class="column column1">
-                <h1 class="title">Welcome to <br />AMA UW-Madison</h1>
-            </div>
-            <div class="column column2">
-                <img src="images/capitalPlaceholder.png" alt="Madison Capital" width="100%" height="100%" />
-            </div>
-        </div>
-        <div id="aboutSection" class="aboutSection-box">
-            <h2 class="primaryheader">About us</h2>
-            <p class="primaryBody">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum at magni
-                porro voluptatibus, quasi doloribus provident officiis, illo hic laborum
-                distinctio mollitia quis minima ducimus.
-            </p>
-        </div>
-        <div id="involvementSection" class="involvementSection">
-            <div class="involvementText">
-                <h3 class="secondaryheader">Get involved</h3>
-                <h4 class="tertiaryHeader">Our primary events include:</h4>
-                <ul class="primaryBody">
-                    <li>Member meetings</li>
-                    <li>Professional developments</li>
-                    <li>Social events</li>
-                    <li>Community outreach</li>
-                    <li>And more!</li>
-                </ul>
-                <div>
-                    <p>
-                        <button class="involvementButton1"><b>LEARN MORE</b></button>&nbsp;&nbsp;
-                        <button class="involvementButton2"><b>JOIN</b></button>
-                    </p>
-                </div>
-            </div>
-            <div class="involvementImage-flex">
-                <img src="images/Bucks_event.png" alt="AMA Event" width="100%" height="Auto" />
-            </div>
-        </div>
-    </body>
-    </html>
-`;
-
-document.body.innerHTML = homeContent;
 // JavaScript to handle the burger menu toggle
-document.addEventListener("DOMContentLoaded", function () {
-  const burger = document.querySelector(".navbar-burger");
-  const menu = document.querySelector(".navbar-menu");
-  const loginSignupBurger = document.querySelector(".login-signup-burger");
-
-  burger.addEventListener("click", function () {
-    burger.classList.toggle("active");
-    menu.classList.toggle("active");
-    loginSignupBurger.classList.toggle("active"); // Toggle login and signup in burger menu
+document.addEventListener('DOMContentLoaded', function () {
+  const burger = document.querySelector('.navbar-burger');
+  const menu = document.querySelector('.navbar-menu');
+  const loginSignupBurger = document.querySelector('.login-signup-burger');
+   
+  burger.addEventListener('click', function () {
+    burger.classList.toggle('active');
+    menu.classList.toggle('active');
+    loginSignupBurger.classList.toggle('active'); // Toggle login and signup in burger menu
   });
-
-  window.addEventListener("resize", function () {
+      
+  window.addEventListener('resize', function () {
     if (window.innerWidth > 768) {
-      burger.classList.remove("active");
-      menu.classList.remove("active");
-      loginSignupBurger.classList.remove("active"); // Remove active class on resize
+      burger.classList.remove('active');
+      menu.classList.remove('active');
+      loginSignupBurger.classList.remove('active'); // Remove active class on resize
     }
   });
 });
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function() {
   var dropdownButton = document.querySelector(".bttn1");
   var dropdownContent = document.querySelector(".dropdown-content");
 
-  dropdownButton.addEventListener("click", function () {
+  dropdownButton.addEventListener("click", function() {
     dropdownContent.classList.toggle("show");
   });
 
-  document.addEventListener("click", function (event) {
+  document.addEventListener("click", function(event) {
     if (!event.target.closest(".dropdown")) {
       dropdownContent.classList.remove("show");
     }
   });
 });
+
+
 
 const calendarView = document.querySelector(".calview");
 const monthSelect = document.getElementById("month-select");
@@ -290,16 +237,16 @@ window.onclick = function (event) {
 };
 
 // JavaScript to handle the burger menu toggle
-document.addEventListener("DOMContentLoaded", function () {
-  const burger = document.querySelector(".navbar-burger");
-  const menu = document.querySelector(".navbar-menu");
-  const loginSignupBurger = document.querySelector(".login-signup-burger");
-  const backgroundDiv = document.querySelector(".background-div");
-
-  burger.addEventListener("click", function () {
-    burger.classList.toggle("active");
-    menu.classList.toggle("active");
-    loginSignupBurger.classList.toggle("active"); // Toggle login and signup in burger menu
+document.addEventListener('DOMContentLoaded', function () {
+  const burger = document.querySelector('.navbar-burger');
+  const menu = document.querySelector('.navbar-menu');
+  const loginSignupBurger = document.querySelector('.login-signup-burger');
+  const backgroundDiv = document.querySelector('.background-div');
+   
+  burger.addEventListener('click', function () {
+    burger.classList.toggle('active');
+    menu.classList.toggle('active');
+    loginSignupBurger.classList.toggle('active'); // Toggle login and signup in burger menu
   });
 
   window.addEventListener("resize", function () {
