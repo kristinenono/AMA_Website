@@ -1,51 +1,60 @@
 // main functions to use
-
 const mainContent = document.getElementById("main-content");
 const homeLink = document.getElementById("home-link");
 
-homeLink.addEventListener("click", loadHomePage);
-
-function loadHomePage(event) {
-  event.preventDefault();
-  mainContent.innerHTML = `<div class="titleContainers">
-  <div class="column column1">
-      <h1 class="title">Welcome to <br />AMA UW-Madison</h1>
-  </div>
-  <div class="column column2">
-      <img src="images/capitalPlaceholder.png" alt="Madison Capital" width="100%" height="100%" />
-  </div>
-</div>
-<div id="aboutSection" class="aboutSection-box">
-  <h2 class="primaryheader">About us</h2>
-  <p class="primaryBody">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum at magni
-      porro voluptatibus, quasi doloribus provident officiis, illo hic laborum
-      distinctio mollitia quis minima ducimus.
-  </p>
-</div>
-<div id="involvementSection" class="involvementSection">
-  <div class="involvementText">
-      <h3 class="secondaryheader">Get involved</h3>
-      <h4 class="tertiaryHeader">Our primary events include:</h4>
-      <ul class="primaryBody">
-          <li>Member meetings</li>
-          <li>Professional developments</li>
-          <li>Social events</li>
-          <li>Community outreach</li>
-          <li>And more!</li>
-      </ul>
-      <div>
-          <p>
-              <button class="involvementButton1"><b>LEARN MORE</b></button>&nbsp;&nbsp;
-              <button class="involvementButton2"><b>JOIN</b></button>
-          </p>
+document.addEventListener("DOMContentLoaded", function () {
+  // Function to load the home page content
+  function loadHomePage(event) {
+    event.preventDefault();
+    mainContent.innerHTML = `<div class="titleContainers">
+      <div class="column column1">
+          <h1 class="title">Welcome to <br />AMA UW-Madison</h1>
       </div>
-  </div>
-  <div class="involvementImage-flex">
-      <img src="images/Bucks_event.png" alt="AMA Event" width="100%" height="Auto" />
-  </div>
-</div>`;
-}
+      <div class="column column2">
+          <img src="images/capitalPlaceholder.png" alt="Madison Capital" width="100%" height="100%" />
+      </div>
+    </div>
+    <div id="aboutSection" class="aboutSection-box">
+      <h2 class="primaryheader">About us</h2>
+      <p class="primaryBody">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum at magni
+          porro voluptatibus, quasi doloribus provident officiis, illo hic laborum
+          distinctio mollitia quis minima ducimus.
+      </p>
+    </div>
+    <div id="involvementSection" class="involvementSection">
+      <div class="involvementText">
+          <h3 class="secondaryheader">Get involved</h3>
+          <h4 class="tertiaryHeader">Our primary events include:</h4>
+          <ul class="primaryBody">
+              <li>Member meetings</li>
+              <li>Professional developments</li>
+              <li>Social events</li>
+              <li>Community outreach</li>
+              <li>And more!</li>
+          </ul>
+          <div>
+              <p>
+                  <button class="involvementButton1"><b>LEARN MORE</b></button>&nbsp;&nbsp;
+                  <button class="involvementButton2"><b>JOIN</b></button>
+              </p>
+          </div>
+      </div>
+      <div class="involvementImage-flex">
+          <img src="images/Bucks_event.png" alt="AMA Event" width="100%" height="Auto" />
+      </div>
+    </div>`;
+  }
+
+  // Call the loadHomePage function
+  loadHomePage(new Event("click"));
+
+  // Get the home link element
+  const homeLink = document.getElementById("home-link");
+
+  // Add an event listener to load the home page when the home link is clicked
+  homeLink.addEventListener("click", loadHomePage);
+});
 
 function r_e(id) {
   return document.querySelector(`#${id}`);
