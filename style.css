@@ -196,7 +196,7 @@ body {
     height: 50%; */
   margin-top: 5%;
   background-color: var(--primarywhite);
-  border: 2px var(--primaryblack) solid;
+  /* border: 2px var(--primaryblack) solid; */
   /* display: inline-block; */
 }
 .weekview {
@@ -204,7 +204,7 @@ body {
   width: 100%;
   height: 120px;
   background-color: var(--primarywhite);
-  border-bottom: 2px var(--primaryblack) solid;
+  /* border-bottom: 2px var(--primaryblack) solid; */
   display: inline-block;
   display: flex;
   margin: auto;
@@ -213,7 +213,7 @@ body {
   flex: 1;
   width: 100%;
   background-color: var(--primarywhite);
-  border-bottom: 2px var(--primaryblack) solid;
+  /* border-bottom: 2px var(--primaryblack) solid; */
   display: inline-block;
   display: flex;
   align-items: center;
@@ -230,10 +230,19 @@ body {
   display: inline-block; /* This line is unnecessary */
   width: auto; /* This line is unnecessary */
   border-right: 2px var(--primaryblack) solid;
+  border-bottom: 2px var(--primaryblack) solid;
   flex: 1;
   font-family: var(--bodyFontFamily);
   padding-top: 1%;
   padding-left: 1%;
+}
+
+.weekview:first-child {
+  border-top: 2px solid var(--primaryblack);
+}
+
+.dayview:first-child {
+  border-left: 2px solid var(--primaryblack);
 }
 /* Hidden class */
 .hidden {
