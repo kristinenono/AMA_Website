@@ -104,6 +104,21 @@ let cal_page_content = `<main>
     </div>
     <div class="calview">
 </div>`;
+
+// Member drop down button
+var dropdownButton = document.querySelector(".bttn1");
+var dropdownContent = document.querySelector(".dropdown-content");
+
+dropdownButton.addEventListener("click", function () {
+  dropdownContent.classList.toggle("show");
+});
+
+document.addEventListener("click", function (event) {
+  if (!event.target.closest(".dropdown")) {
+    dropdownContent.classList.remove("show");
+  }
+});
+
 const calendarView = document.querySelector(".calview");
 const monthSelect = r_e("month-select");
 const prevMonthBtn = document.querySelector(".action_left");
@@ -277,22 +292,6 @@ document.addEventListener("DOMContentLoaded", function () {
       burger.classList.remove("active");
       menu.classList.remove("active");
       loginSignupBurger.classList.remove("active"); // Remove active class on resize
-    }
-  });
-});
-
-// still some dom content loaded
-document.addEventListener("DOMContentLoaded", function () {
-  var dropdownButton = document.querySelector(".bttn1");
-  var dropdownContent = document.querySelector(".dropdown-content");
-
-  dropdownButton.addEventListener("click", function () {
-    dropdownContent.classList.toggle("show");
-  });
-
-  document.addEventListener("click", function (event) {
-    if (!event.target.closest(".dropdown")) {
-      dropdownContent.classList.remove("show");
     }
   });
 });
