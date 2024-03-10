@@ -1,40 +1,264 @@
+const mainContent = document.getElementById("main-content");
+const homeLink = document.getElementById("home-link");
+const calendarLink = document.getElementById("calendarbtn");
+
+homeLink.addEventListener("click", loadHomePage);
+calendarLink.addEventListener("click", loadCalendarPage);
+
+function loadHomePage(event) {
+  event.preventDefault();
+  mainContent.innerHTML = `<div class="titleContainers">
+  <div class="column column1">
+      <h1 class="title">Welcome to <br />AMA UW-Madison</h1>
+  </div>
+  <div class="column column2">
+      <img src="images/capitalPlaceholder.png" alt="Madison Capital" width="100%" height="100%" />
+  </div>
+</div>
+<div id="aboutSection" class="aboutSection-box">
+  <h2 class="primaryheader">About us</h2>
+  <p class="primaryBody">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum at magni
+      porro voluptatibus, quasi doloribus provident officiis, illo hic laborum
+      distinctio mollitia quis minima ducimus.
+  </p>
+</div>
+<div id="involvementSection" class="involvementSection">
+  <div class="involvementText">
+      <h3 class="secondaryheader">Get involved</h3>
+      <h4 class="tertiaryHeader">Our primary events include:</h4>
+      <ul class="primaryBody">
+          <li>Member meetings</li>
+          <li>Professional developments</li>
+          <li>Social events</li>
+          <li>Community outreach</li>
+          <li>And more!</li>
+      </ul>
+      <div>
+          <p>
+              <button class="involvementButton1"><b>LEARN MORE</b></button>&nbsp;&nbsp;
+              <button class="involvementButton2"><b>JOIN</b></button>
+          </p>
+      </div>
+  </div>
+  <div class="involvementImage-flex">
+      <img src="images/Bucks_event.png" alt="AMA Event" width="100%" height="Auto" />
+  </div>
+</div>`;
+}
+
+function loadCalendarPage(event) {
+  event.preventDefault();
+  document.getElementById("main-content").innerHTML = `<main>
+  <div id="cal_page" class="wrapper">
+    <!-- LEFT MARGIN -->
+    <div class="colormargins margin-left">
+      <h2 class="heading-tag-upcoming-event">Upcoming Events</h2>
+      <div class="flex-container">
+        <div class="box margin-event">
+          <h2>Philathropy event</h2>
+
+          <a href="#" class="events-button">View Event Here! </a>
+
+          <div id="eventCard" class="event-card hidden">
+            <!-- Content of the event card goes here -->
+            <h2 class="secondaryheader">Event Title</h2>
+            <p class="primaryBody">Date: [Event Date]</p>
+            <p class="primaryBody">Location: [Event Location]</p>
+            <!-- Add more details as needed -->
+            <button id="editEventCard">Edit</button>
+            <button id="deleteEventCard">Delete</button>
+            <button id="closeEventCard">Close</button>
+          </div>
+        </div>
+        <div class="box margin-event">
+          <h2>Professional Development Event</h2>
+
+          <a href="#" class="events-button">View Event Here! </a>
+        </div>
+        <div class="box margin-event">
+          <h2>Speaker Event</h2>
+
+          <a href="#" class="events-button">View Event Here! </a>
+        </div>
+        <div class="box margin-event">
+          <h2>Social Event</h2>
+
+          <a href="#" class="events-button">View Event Here! </a>
+        </div>
+      </div>
+    </div>
+    <!-- CENTER OF PAGE where calendar goes-->
+    <div id="sample" class="colormargins page-content">
+      <div class="navcal">
+        <span class="today">
+          <button id="today-btn">Today</button>
+        </span>
+        <button class="action_left">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <select class="selectdrop" id="month-select">
+          <option value="January">January</option>
+          <option value="February">February</option>
+          <option value="March">March</option>
+          <option value="April">April</option>
+          <option value="May">May</option>
+          <option value="June">June</option>
+          <option value="July">July</option>
+          <option value="August">August</option>
+          <option value="September">September</option>
+          <option value="October">October</option>
+          <option value="November">November</option>
+          <option value="December">December</option>
+        </select>
+        <button class="action_right">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+        <span class="yearblock">
+          <button id="yearblock"></button>
+        </span>
+      </div>
+      <div class="calview">
+        <div class="weekdayview">
+          <div class="dayofweek">Lorem, ipsum.</div>
+          <div class="dayofweek">Lorem, ipsum.</div>
+          <div class="dayofweek">Lorem, ipsum.</div>
+          <div class="dayofweek">Lorem, ipsum.</div>
+          <div class="dayofweek">Lorem, ipsum.</div>
+          <div class="dayofweek">Lorem, ipsum.</div>
+          <div class="dayofweek">Lorem, ipsum.</div>
+        </div>
+        <div class="weekview">
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+        </div>
+        <div class="weekview">
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+        </div>
+        <div class="weekview">
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+        </div>
+        <div class="weekview">
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+        </div>
+        <div class="weekview">
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+        </div>
+      </div>
+    </div>
+    <!-- RIGHT MARGIN -->
+    <div class="colormargins margin-right">
+      <a href="#" class="add-btn" id="eventbtn">Add Event</a>
+      <!-- <button class="add-btn">Add Event</button> -->
+      <!-- href="cal_form.html" -->
+    </div>
+  </div>
+  <div id="addEventsPopup" class="popup">
+    <div class="popup-content">
+      <span class="close" onclick="closeAddEventsPopup()">&times;</span>
+      <h2 class="secondaryheader2">Add Event</h2>
+      <form>
+        <p class="addEventContent">
+          <label for="eventTitle">Event Title:</label>
+          <input type="text" id="eventTitle" required />
+        </p>
+
+        <p class="addEventContent">
+          <label for="eventType">Event Type:</label>
+          <select id="eventType" required>
+            <option value="memberMeeting">Member Meeting</option>
+            <option value="professionalDevelopment">
+              Professional Development
+            </option>
+            <option value="social">Social</option>
+            <option value="philanthropic">Philanthropic</option>
+            <option value="dei">DEI</option>
+          </select>
+        </p>
+
+        <p class="addEventContent">
+          <label for="eventDescription">Event Description:</label>
+        </p>
+        <p class="addEventContent">
+          <textarea id="eventDescription" rows="4" required></textarea>
+        </p>
+
+        <p class="addEventContent">
+          <label for="eventDate">Event Date:</label>
+          <input type="date" id="eventDate" required />
+        </p>
+
+        <input type="submit" value="Add Event" />
+      </form>
+    </div>
+  </div>
+</main>`;
+}
+
 // JavaScript to handle the burger menu toggle
-document.addEventListener('DOMContentLoaded', function () {
-  const burger = document.querySelector('.navbar-burger');
-  const menu = document.querySelector('.navbar-menu');
-  const loginSignupBurger = document.querySelector('.login-signup-burger');
-   
-  burger.addEventListener('click', function () {
-    burger.classList.toggle('active');
-    menu.classList.toggle('active');
-    loginSignupBurger.classList.toggle('active'); // Toggle login and signup in burger menu
+document.addEventListener("DOMContentLoaded", function () {
+  const burger = document.querySelector(".navbar-burger");
+  const menu = document.querySelector(".navbar-menu");
+  const loginSignupBurger = document.querySelector(".login-signup-burger");
+
+  burger.addEventListener("click", function () {
+    burger.classList.toggle("active");
+    menu.classList.toggle("active");
+    loginSignupBurger.classList.toggle("active"); // Toggle login and signup in burger menu
   });
-      
-  window.addEventListener('resize', function () {
+
+  window.addEventListener("resize", function () {
     if (window.innerWidth > 768) {
-      burger.classList.remove('active');
-      menu.classList.remove('active');
-      loginSignupBurger.classList.remove('active'); // Remove active class on resize
+      burger.classList.remove("active");
+      menu.classList.remove("active");
+      loginSignupBurger.classList.remove("active"); // Remove active class on resize
     }
   });
 });
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   var dropdownButton = document.querySelector(".bttn1");
   var dropdownContent = document.querySelector(".dropdown-content");
 
-  dropdownButton.addEventListener("click", function() {
+  dropdownButton.addEventListener("click", function () {
     dropdownContent.classList.toggle("show");
   });
 
-  document.addEventListener("click", function(event) {
+  document.addEventListener("click", function (event) {
     if (!event.target.closest(".dropdown")) {
       dropdownContent.classList.remove("show");
     }
   });
 });
-
-
 
 const calendarView = document.querySelector(".calview");
 const monthSelect = document.getElementById("month-select");
@@ -237,16 +461,16 @@ window.onclick = function (event) {
 };
 
 // JavaScript to handle the burger menu toggle
-document.addEventListener('DOMContentLoaded', function () {
-  const burger = document.querySelector('.navbar-burger');
-  const menu = document.querySelector('.navbar-menu');
-  const loginSignupBurger = document.querySelector('.login-signup-burger');
-  const backgroundDiv = document.querySelector('.background-div');
-   
-  burger.addEventListener('click', function () {
-    burger.classList.toggle('active');
-    menu.classList.toggle('active');
-    loginSignupBurger.classList.toggle('active'); // Toggle login and signup in burger menu
+document.addEventListener("DOMContentLoaded", function () {
+  const burger = document.querySelector(".navbar-burger");
+  const menu = document.querySelector(".navbar-menu");
+  const loginSignupBurger = document.querySelector(".login-signup-burger");
+  const backgroundDiv = document.querySelector(".background-div");
+
+  burger.addEventListener("click", function () {
+    burger.classList.toggle("active");
+    menu.classList.toggle("active");
+    loginSignupBurger.classList.toggle("active"); // Toggle login and signup in burger menu
   });
 
   window.addEventListener("resize", function () {
