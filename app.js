@@ -99,52 +99,6 @@ todayBtn.addEventListener("click", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Get the form and password input element
-  var signupForm = document.getElementById("signup_form");
-  var passwordInput = document.getElementById("password");
-  var cancelButton = document.getElementById("cancel_btn");
-
-  // Add a click event listener to the cancel button
-  cancelButton.addEventListener("click", function(event) {
-      // Prevent the default action of the button (submitting the form)
-      event.preventDefault();
-
-      // Redirect the user to the index.html page
-      window.location.href = "index.html";
-  });
-});
-
-// Wait for the DOM content to be fully loaded
-document.addEventListener("DOMContentLoaded", function() {
-  // Get the form and password input element
-  var signupForm = document.getElementById("signup_form");
-  var passwordInput = document.getElementById("password");
-
-  // Add a submit event listener to the form
-  signupForm.addEventListener("submit", function(event) {
-      // Prevent the default form submission
-      event.preventDefault();
-
-      // Get the value of the password input
-      var password = passwordInput.value;
-
-      // Check if the password meets the required criteria (e.g., minimum length)
-      if (password.length < 8) {
-          // Display an error message if the password is too short
-          alert("Password must be at least 8 characters long.");
-          return; // Stop further execution of the function
-      }
-
-      // If the password is valid, you can proceed with form submission
-      // Here, you can add code to submit the form data to the server
-      // For demonstration purposes, let's just log the password to the console
-      console.log("Password:", password);
-      
-      // Reset the form fields
-      signupForm.reset();
-  });
-});
-document.addEventListener("DOMContentLoaded", function () {
   const viewEventLinks = document.querySelectorAll(".events-button");
   const eventCard = document.getElementById("eventCard");
   const closeEventCardBtn = document.getElementById("closeEventCard");
@@ -177,4 +131,66 @@ function closeAddEventsPopup() {
 // Attach the open function to your "Add Event" button
 document.getElementById("eventbtn").onclick = function () {
   openAddEventsPopup();
+};
+
+
+
+
+
+// MODAL POP UP IN HTML
+function openModal() {
+  var modal = document.getElementById('logmodal');
+  modal.style.display = 'block';
+}
+
+// Function to close the modal
+function closeModal() {
+  var modal = document.getElementById('logmodal');
+  modal.style.display = 'none';
+}
+
+// Function to handle login button click event
+function loginclick() {
+  openModal();
+}
+
+// Function to handle span (close) click event
+function modalclose() {
+  closeModal();
+}
+
+// when cancel is clicked the fields empty
+function clearFields() {
+  var emailField = document.querySelector('#logmodal input[type="email"]');
+  var passwordField = document.querySelector('#logmodal input[type="password"]');
+  
+  emailField.value = ''; // Clearing the email input field
+  passwordField.value = ''; // Clearing the password input field
+}
+
+// Function to handle cancel button click event
+document.getElementById('logcancel_btn').addEventListener('click', function(event) {
+  event.preventDefault(); // Prevent the default form submission behavior
+  clearFields(); // Clear the input fields
+});
+
+
+// SIGN UP MODAL
+function signupclick() {
+  var modal = document.getElementById("signmodal");
+  modal.style.display = "block";
+}
+
+// Function to close the signup modal
+function signmodalclose() {
+  var modal = document.getElementById("signmodal");
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the signup modal, close it
+window.onclick = function (event) {
+  var modal = document.getElementById("signmodal");
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
 };
