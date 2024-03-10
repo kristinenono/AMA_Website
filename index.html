@@ -17,7 +17,7 @@
     <div id="logmodal" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
-            <span class="modal-close">&times;</span>
+            <span class="modal-close" onclick="logmodalclose()">&times;</span>
             <div class="modal-margin">
                   <!-- the sign in form for users -->
                   <form id="login_form">
@@ -36,7 +36,7 @@
                       <div class="button-container">
                               <button id="login_btn" class="loginbtn-style">
                                   <strong>Log In</strong></button>
-                              <button id="logcancel_btn" class="loginbtn-style">
+                              <button id="logcancel_btn" class="loginbtn-style" onclick="closeModal()">
                                   <strong>Cancel</strong></button>
                       </div>
                       <!-- location where error is displayed if one occurs -->
@@ -49,7 +49,7 @@
       <div id="signmodal" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
-            <span class="modal-close">&times;</span>
+            <span class="modal-close" onclick="signmodalclose()">&times;</span>
             <div class="modal-margin">
                   <!-- the sign in form for users -->
                   <form id="signup_form">
@@ -93,13 +93,13 @@
         </a>
         <div class="login-signup">
           <a id="login">
-            <button id="logbtn" class="add-btn button">
+            <button id="logbutton" class="add-btn button" onclick="logclick()">
               <strong id="bttn-font">LOGIN</strong>
             </button>
           </a>
           &nbsp; &nbsp;
           <a id="signin">
-            <button id="signbtn" class="add-btn button">
+            <button id="signbutton" class="add-btn button" onclick="signupclick()">
               <strong id="bttn-font">SIGN UP</strong>
             </button>
           </a>
