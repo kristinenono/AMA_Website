@@ -632,14 +632,15 @@ nav {
 }
 #format-link {
   display: inline-block;
-<<<<<<< HEAD
   text-align: center;
   padding-right: 90px;
   padding-bottom: 25px;
-  
-=======
-  padding-right: 100px;
->>>>>>> 86750a9cae92d603207f2a555ce0bf2cdaeeddbf
+}
+#format-link1 {
+  display: inline-block;
+  text-align: center;
+  padding-right: 90px;
+  padding-bottom: 25px;
 }
 #format-nav {
   color: #f3f2ee;
@@ -720,8 +721,9 @@ nav {
 .navbar-menu a {
   color: #f3f2ee;
   font-size: 20px;
-  padding: 0 20px;
+  padding: 20px;
   text-decoration: none;
+  text-align: center;
 }
 .login-signup {
   display: block; /* Initially show login and signup */
@@ -746,30 +748,33 @@ nav {
   .navbar-menu.active {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
     margin-top: 50px;
     width: 250px;
     margin-right: 5%;
   }
-  .navbar-menu.active > div > a {
+  .navbar-menu.active > div {
     text-align: center;
-    align-items: center;
-    padding-top: 5%;
-    padding-bottom: 5%;
   }
-  .navbar-menu.active > div > div > a {
+  .navbar-menu.active > div {
     text-align: center;
-    padding-top: 5%;
-    padding-bottom: 5%;
-    background-color: none;
+  }
+  .navbar-menu.active > div > #format-link {
+    padding-left: 30%;
+  }
+  .navbar-menu.active > div > #format-link1 {
+    padding-left: 35%;
+  }
+  .navbar-menu.active > div > #home-link {
+    padding-left: 37%;
   }
   .navbar-menu.active > div > div > button {
-    text-align: center;
-    margin-left: 10%;
-    background-color: none;
-    padding-right: 0px;
+    padding-right: 50%;
+    margin-top: 0;
   }
+  .navbar-menu.active > div > div > button:hover {
+   width: 110%;
+  }
+
   .navbar-burger {
     display: block;
     position: absolute;
@@ -866,8 +871,17 @@ button {
   border: none;
   cursor: pointer;
   outline: none;
-  /* height: 35px; */
-  /* width: calc(100% - 20px); */
+}
+
+#submit_btn {
+    margin-top: 10px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    height: 35px;
+    width: calc(100% - 20px);
+    background-color: #b22b25;
+    width: 50%;
 }
 
 button p {
@@ -922,7 +936,6 @@ button p {
     padding-left: 10px;
   }
 }
-<<<<<<< HEAD
   #img_logo {
     height: 50px; 
     float: left; 
@@ -961,25 +974,3 @@ button p {
   }
 
 .show {display:block;}
-=======
-#img_logo {
-  height: 50px;
-  float: left;
-  margin-right: 3%;
-  margin-left: 6%;
-}
-#icons {
-  width: 100%;
-  display: flex;
-  text-align: center;
-  margin-bottom: 5%;
-  padding-top: 10%;
-}
-#line {
-  border-left: 3px solid darkgray;
-  height: 160px;
-  left: 66%;
-  margin-top: 2%;
-  margin-right: 2%;
-}
->>>>>>> 86750a9cae92d603207f2a555ce0bf2cdaeeddbf
