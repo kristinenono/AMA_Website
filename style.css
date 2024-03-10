@@ -933,3 +933,11 @@ button p {
   margin-top: 2%;
   margin-right: 2%;
 }
+
+.dayview:last-child {
+  border-right: none;
+}
+
+.weekview:last-child .dayview {
+  border-bottom: none;
+}
