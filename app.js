@@ -378,17 +378,11 @@ function logclick() {
   var modal = document.getElementById("logmodal");
   modal.style.display = "block";
 }
-document.getElementById('logbtn').addEventListener('click', openLoginModal);
 
-// function closeModal() {
-//   var modal = document.getElementById("logmodal");
-//   modal.style.display = "none";
-// }
-
-// Function to handle span (close) click event
-// function modalclose() {
-//   closeModal();
-// }
+function logmodalclose() {
+  var modal = document.getElementById("logmodal");
+  modal.style.display = "none";
+}
 
 // when cancel is clicked the fields empty
 function clearFields() {
