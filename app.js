@@ -94,110 +94,7 @@ let cal_page_content = `<main>
       </div>
     </div>
     <div class="calview">
-    <div class="weekdayview">
-      <div class="dayofweek">Lorem, ipsum.</div>
-      <div class="dayofweek">Lorem, ipsum.</div>
-      <div class="dayofweek">Lorem, ipsum.</div>
-      <div class="dayofweek">Lorem, ipsum.</div>
-      <div class="dayofweek">Lorem, ipsum.</div>
-      <div class="dayofweek">Lorem, ipsum.</div>
-      <div class="dayofweek">Lorem, ipsum.</div>
-    </div>
-    <div class="weekview">
-      <div class="dayview">Lorem, ipsum.</div>
-      <div class="dayview">Lorem, ipsum.</div>
-      <div class="dayview">Lorem, ipsum.</div>
-      <div class="dayview">Lorem, ipsum.</div>
-      <div class="dayview">Lorem, ipsum.</div>
-      <div class="dayview">Lorem, ipsum.</div>
-      <div class="dayview">Lorem, ipsum.</div>
-    </div>
-    <div class="weekview">
-      <div class="dayview">Lorem, ipsum.</div>
-      <div class="dayview">Lorem, ipsum.</div>
-      <div class="dayview">Lorem, ipsum.</div>
-      <div class="dayview">Lorem, ipsum.</div>
-      <div class="dayview">Lorem, ipsum.</div>
-      <div class="dayview">Lorem, ipsum.</div>
-      <div class="dayview">Lorem, ipsum.</div>
-    </div>
-    <div class="weekview">
-      <div class="dayview">Lorem, ipsum.</div>
-      <div class="dayview">Lorem, ipsum.</div>
-      <div class="dayview">Lorem, ipsum.</div>
-      <div class="dayview">Lorem, ipsum.</div>
-      <div class="dayview">Lorem, ipsum.</div>
-      <div class="dayview">Lorem, ipsum.</div>
-      <div class="dayview">Lorem, ipsum.</div>
-    </div>
-    <div class="weekview">
-      <div class="dayview">Lorem, ipsum.</div>
-      <div class="dayview">Lorem, ipsum.</div>
-      <div class="dayview">Lorem, ipsum.</div>
-      <div class="dayview">Lorem, ipsum.</div>
-      <div class="dayview">Lorem, ipsum.</div>
-      <div class="dayview">Lorem, ipsum.</div>
-      <div class="dayview">Lorem, ipsum.</div>
-    </div>
-    <div class="weekview">
-      <div class="dayview">Lorem, ipsum.</div>
-      <div class="dayview">Lorem, ipsum.</div>
-      <div class="dayview">Lorem, ipsum.</div>
-      <div class="dayview">Lorem, ipsum.</div>
-      <div class="dayview">Lorem, ipsum.</div>
-      <div class="dayview">Lorem, ipsum.</div>
-      <div class="dayview">Lorem, ipsum.</div>
-    </div>
-  </div>
-</div>
-    <!-- RIGHT MARGIN -->
-    <div class="colormargins margin-right">
-      <a href="#" class="add-btn" id="eventbtn">Add Event</a>
-      <!-- <button class="add-btn">Add Event</button> -->
-      <!-- href="cal_form.html" -->
-    </div>
-  </div>
-  <div id="addEventsPopup" class="popup">
-    <div class="popup-content">
-      <span class="close" onclick="closeAddEventsPopup()">&times;</span>
-      <h2 class="secondaryheader2">Add Event</h2>
-      <form>
-        <p class="addEventContent">
-          <label for="eventTitle">Event Title:</label>
-          <input type="text" id="eventTitle" required />
-        </p>
-
-        <p class="addEventContent">
-          <label for="eventType">Event Type:</label>
-          <select id="eventType" required>
-            <option value="memberMeeting">Member Meeting</option>
-            <option value="professionalDevelopment">
-              Professional Development
-            </option>
-            <option value="social">Social</option>
-            <option value="philanthropic">Philanthropic</option>
-            <option value="dei">DEI</option>
-          </select>
-        </p>
-
-        <p class="addEventContent">
-          <label for="eventDescription">Event Description:</label>
-        </p>
-        <p class="addEventContent">
-          <textarea id="eventDescription" rows="4" required></textarea>
-        </p>
-
-        <p class="addEventContent">
-          <label for="eventDate">Event Date:</label>
-          <input type="date" id="eventDate" required />
-        </p>
-
-        <input type="submit" value="Add Event" />
-      </form>
-    </div>
-  </div>
-</main>`;
-
+</div>`;
 const calendarView = document.querySelector(".calview");
 const monthSelect = r_e("month-select");
 const prevMonthBtn = document.querySelector(".action_left");
@@ -275,6 +172,12 @@ function generateCalendar(date) {
   calendarView.innerHTML = calendarHtml; // Set the calendar HTML to the innerHTML of the calendarView
   monthSelect.value = monthNames[currentMonth];
 }
+generateCalendar(currentDate);
+const todayBtn = document.querySelector("#today-btn");
+todayBtn.addEventListener("click", function () {
+  currentDate = new Date(); // Reset currentDate to today's date
+  generateCalendar(currentDate); // Regenerate the calendar for the current month
+});
 
 function changeMonth(step) {
   currentDate.setMonth(currentDate.getMonth() + step);
@@ -292,17 +195,60 @@ prevMonthBtn.addEventListener("click", function () {
 
 nextMonthBtn.addEventListener("click", function () {
   changeMonth(1);
-});
+}); // Get the Today button
+cal_page_content += calendarView;
 
+cal_page_content += `<!-- RIGHT MARGIN -->
+    <div class="colormargins margin-right">
+      <a href="#" class="add-btn" id="eventbtn">Add Event</a>
+      <!-- <button class="add-btn">Add Event</button> -->
+      <!-- href="cal_form.html" -->
+    </div>
+  </div>
+  <div id="addEventsPopup" class="popup">
+    <div class="popup-content">
+      <span class="close" onclick="closeAddEventsPopup()">&times;</span>
+      <h2 class="secondaryheader2">Add Event</h2>
+      <form>
+        <p class="addEventContent">
+          <label for="eventTitle">Event Title:</label>
+          <input type="text" id="eventTitle" required />
+        </p>
+
+        <p class="addEventContent">
+          <label for="eventType">Event Type:</label>
+          <select id="eventType" required>
+            <option value="memberMeeting">Member Meeting</option>
+            <option value="professionalDevelopment">
+              Professional Development
+            </option>
+            <option value="social">Social</option>
+            <option value="philanthropic">Philanthropic</option>
+            <option value="dei">DEI</option>
+          </select>
+        </p>
+
+        <p class="addEventContent">
+          <label for="eventDescription">Event Description:</label>
+        </p>
+        <p class="addEventContent">
+          <textarea id="eventDescription" rows="4" required></textarea>
+        </p>
+
+        <p class="addEventContent">
+          <label for="eventDate">Event Date:</label>
+          <input type="date" id="eventDate" required />
+        </p>
+
+        <input type="submit" value="Add Event" />
+      </form>
+    </div>
+  </div>
+</main>`;
+
+// click event for cal
 r_e("calendarbtn").addEventListener("click", () => {
-  generateCalendar(currentDate);
   appendContent(cal_page_content);
-  const todayBtn = document.querySelector("#today-btn"); // Get the Today button
-
-  todayBtn.addEventListener("click", function () {
-    currentDate = new Date(); // Reset currentDate to today's date
-    generateCalendar(currentDate); // Regenerate the calendar for the current month
-  });
 });
 
 // JavaScript to handle the burger menu toggle
