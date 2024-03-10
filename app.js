@@ -17,7 +17,7 @@ const monthNames = [
   "November",
   "December",
 ];
-const DayNames = ["Sun", "Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];
+const dayNames = ["Sun", "Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];
 
 let currentDate = new Date();
 
@@ -28,20 +28,21 @@ function generateCalendar(date) {
   let currentYear = date.getFullYear();
   let currentMonth = date.getMonth();
   let firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
+  // this is the first day of the week
+  let daysInFirstWeek = 7 - firstDayOfMonth;
   let daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-
   let dayCellsGenerated = 0;
 
   yearblock.innerHTML = currentYear;
   let calendarHtml = "";
 
   calendarHtml += `<div class="weekdayview">`;
-  for (let i = 0; i < DayNames.length; i++) {
-    calendarHtml += `<span>
-    <br /><p class="dayofweek">${DayNames[i]}</p><br />
-    </span>`;
+  for (let title = 0; title <= 6; title++) {
+    calendarHtml += `<div class="dayofweek">${dayNames[title]}
+  </div>`;
   }
-  calendarHtml += "</div>";
+
+  calendarHtml += `</div>`;
   calendarHtml += `<div class="weekview">`;
   for (let i = 0; i < firstDayOfMonth; i++) {
     calendarHtml += '<div class="dayview empty"></div>';
@@ -105,43 +106,43 @@ document.addEventListener("DOMContentLoaded", function () {
   var cancelButton = document.getElementById("cancel_btn");
 
   // Add a click event listener to the cancel button
-  cancelButton.addEventListener("click", function(event) {
-      // Prevent the default action of the button (submitting the form)
-      event.preventDefault();
+  cancelButton.addEventListener("click", function (event) {
+    // Prevent the default action of the button (submitting the form)
+    event.preventDefault();
 
-      // Redirect the user to the index.html page
-      window.location.href = "index.html";
+    // Redirect the user to the index.html page
+    window.location.href = "index.html";
   });
 });
 
 // Wait for the DOM content to be fully loaded
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   // Get the form and password input element
   var signupForm = document.getElementById("signup_form");
   var passwordInput = document.getElementById("password");
 
   // Add a submit event listener to the form
-  signupForm.addEventListener("submit", function(event) {
-      // Prevent the default form submission
-      event.preventDefault();
+  signupForm.addEventListener("submit", function (event) {
+    // Prevent the default form submission
+    event.preventDefault();
 
-      // Get the value of the password input
-      var password = passwordInput.value;
+    // Get the value of the password input
+    var password = passwordInput.value;
 
-      // Check if the password meets the required criteria (e.g., minimum length)
-      if (password.length < 8) {
-          // Display an error message if the password is too short
-          alert("Password must be at least 8 characters long.");
-          return; // Stop further execution of the function
-      }
+    // Check if the password meets the required criteria (e.g., minimum length)
+    if (password.length < 8) {
+      // Display an error message if the password is too short
+      alert("Password must be at least 8 characters long.");
+      return; // Stop further execution of the function
+    }
 
-      // If the password is valid, you can proceed with form submission
-      // Here, you can add code to submit the form data to the server
-      // For demonstration purposes, let's just log the password to the console
-      console.log("Password:", password);
-      
-      // Reset the form fields
-      signupForm.reset();
+    // If the password is valid, you can proceed with form submission
+    // Here, you can add code to submit the form data to the server
+    // For demonstration purposes, let's just log the password to the console
+    console.log("Password:", password);
+
+    // Reset the form fields
+    signupForm.reset();
   });
 });
 document.addEventListener("DOMContentLoaded", function () {

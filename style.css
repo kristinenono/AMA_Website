@@ -143,8 +143,8 @@ body {
   font-size: large;
 }
 .margin-event {
-  background-color: #1f304f;
-  color: #fafbfc;
+  background-color: var(--primarynavy);
+  color: var(--primarywhite);
   font-family: var(--titleFontFamily);
 }
 .philanthropy-event {
@@ -216,17 +216,24 @@ body {
   border-bottom: 2px var(--primaryblack) solid;
   display: inline-block;
   display: flex;
-  margin: auto;
+  align-items: center;
 }
 .dayofweek {
-  font-weight: bolder;
-  font-size: larger;
+  flex: 1;
+  text-align: center;
+  font-family: var(--bodyFontFamily);
+  font-size: x-large;
+  font-weight: bold;
+  width: auto; /* This line is unnecessary */
 }
 .dayview {
   display: inline-block; /* This line is unnecessary */
   width: auto; /* This line is unnecessary */
   border-right: 2px var(--primaryblack) solid;
   flex: 1;
+  font-family: var(--bodyFontFamily);
+  padding-top: 1%;
+  padding-left: 1%;
 }
 /* Hidden class */
 .hidden {
@@ -250,8 +257,6 @@ body {
 .navcal {
   display: flex;
   flex-direction: row;
-  /* margin-top: 2%; */
-  /* justify-content: center; */
 }
 .today {
   flex: 3;
@@ -274,6 +279,8 @@ body {
   font-size: 80%;
   align-items: center;
   justify-content: center;
+  text-align: center;
+  font-weight: bolder;
 }
 
 .aboutSection-box {
@@ -406,7 +413,7 @@ body {
 #today-btn {
   background-color: var(--primarynavy);
   color: var(--primarywhite);
-  font: var(--titleFontFamily);
+  font-family: var(--titleFontFamily);
   padding: 1rem;
   /* font-weight: bold; */
   font-size: 24px;
@@ -426,7 +433,7 @@ body {
 #yearblock {
   background-color: var(--primarynavy);
   color: var(--primarywhite);
-  font: var(--titleFontFamily);
+  font-family: var(--titleFontFamily);
   padding: 1rem;
   font-size: 24px;
 }
