@@ -91,20 +91,19 @@
               <h2>Philathropy event</h2>
 
               <a href="#" class="events-button">View Event Here! </a>
-
+              <!-- creating event card pop up -->
               <div id="eventCard" class="event-card hidden">
-                <span class="close" onclick="closeEventCardBtn()">&times;</span>
-
-                <!-- Content of the event card goes here -->
+                <!-- Content of the event card here -->
                 <h2 class="secondaryheader2">Event Title</h2>
                 <p class="primaryBody">Date: [Event Date]</p>
                 <p class="primaryBody">Location: [Event Location]</p>
-                <!-- Add more details as needed -->
+                <!-- Event card buttons -->
                 <button id="editEventCard">Edit</button>
                 <button id="deleteEventCard">Delete</button>
                 <button id="closeEventCard">Close</button>
               </div>
             </div>
+            <!-- additional events listed on left pane -->
             <div class="box margin-event">
               <h2>Professional Development Event</h2>
 
@@ -214,9 +213,11 @@
           <a href="#" class="add-btn2" id="eventbtn">Add Event</a>
         </div>
       </div>
+      <!-- creating the add events popup -->
       <div id="addEventsPopup" class="popup">
         <div class="popup-content">
-          <span class="close" onclick="closeAddEventsPopup()">&times;</span>
+          <span id="closeAddEventsPopup" class="close">&times;</span>
+          <!-- body of popup -->
           <h2 class="secondaryheader2">Add Event</h2>
           <form>
             <p class="primaryBody">
@@ -248,11 +249,13 @@
               <label for="eventDate">Event Date:</label>
               <input type="date" id="eventDate" required />
             </p>
-
+            <!-- submit button of popup -->
             <input type="submit" value="Add Event" />
           </form>
         </div>
       </div>
+
+      <!-- end of popup -->
     </main>
     <footer>
       <div class="footer-box">

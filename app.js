@@ -300,6 +300,16 @@ document.addEventListener("DOMContentLoaded", function () {
   const viewEventLinks = document.querySelectorAll(".events-button");
   const eventCard = document.getElementById("eventCard");
   const closeEventCardBtn = document.getElementById("eventCard");
+  // Add an event listener to the close button
+  document
+    .getElementById("closeAddEventsPopup")
+    .addEventListener("click", closeAddEventsPopup);
+
+  // Function to close the add events popup
+  function closeAddEventsPopup() {
+    var addEventsPopup = document.getElementById("addEventsPopup");
+    addEventsPopup.style.display = "none";
+  }
 
   // Show the event card when any "View Event Here" link is clicked
   viewEventLinks.forEach(function (link) {
@@ -337,11 +347,12 @@ function logclick() {
   var modal = document.getElementById("logmodal");
   modal.style.display = "block";
 }
+document.getElementById('logbtn').addEventListener('click', openLoginModal);
 
-function logmodalclose() {
-  var modal = document.getElementById("logmodal");
-  modal.style.display = "none";
-}
+// function closeModal() {
+//   var modal = document.getElementById("logmodal");
+//   modal.style.display = "none";
+// }
 
 // Function to handle span (close) click event
 // function modalclose() {
