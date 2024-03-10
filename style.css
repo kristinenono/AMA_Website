@@ -91,11 +91,10 @@ body {
   border: none;
   border-radius: 5px;
   font-size: 24px;
-  display: inline-block;
   text-decoration: none;
 }
-.btn:hover {
-  background-color: red;
+.add-btn:hover {
+  background-color:#b22b25;
 }
 
 /* Calendar Page */
@@ -679,7 +678,7 @@ nav {
   font-family: Arial, Helvetica, sans-serif;
   word-wrap: break-word;
   color: #f3f2ee;
-  font-size: medium;
+  font-size: calc(10px + 0.5vw); 
 }
 #footer-align {
   width: 100%;
@@ -698,7 +697,6 @@ nav {
   color: #f3f2ee; 
   font-family: Arial, Helvetica, sans-serif; 
   font-size: 20px;
-  vertical-align: bottom;
 }
   /* Styles for burger menu */
   .navbar-burger {
@@ -717,9 +715,8 @@ nav {
   .login-signup {
     display: block; /* Initially show login and signup */
     position: absolute; 
-    top: 2.25%; 
     right: 30px; 
-    height: auto"
+    top: 0;
   }
   .login-signup-burger {
     display: none; /* Initially hide login and signup in burger menu */
@@ -821,7 +818,7 @@ nav {
   }
 
   .footer-section {
-    width: calc(33.33% - 90px);
+    width: calc(33.33% - 20px);
     margin-bottom: 15px;
   }
 
@@ -863,6 +860,7 @@ nav {
     color: #f3f2ee;
     font-family: Arial, Helvetica, sans-serif;
     margin: auto;
+    font-size: 1vw;
   }
 
   .footer-section:nth-child(2) div {
@@ -870,32 +868,50 @@ nav {
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
+    padding-right: 15%;
   }
 
   @media only screen and (max-width: 750px) {
     .footer-section:nth-child(2) div {
       flex-direction: column;
+      text-align: right;
     }
   }
 
-  @media only screen and (max-width: 1400px) {
+  @media only screen and (max-width: 750px) {
+    .footer-section:nth-child(2) div {
+      flex-direction: column;
+      text-align: center;
+      padding-right: 0;
+    }
+  }
+
+  @media only screen and (max-width: 750px) {
+    .footer-section:nth-child(1) .social-icons {
+      flex-direction: column;
+    }
+  }
+
+  @media only screen and (max-width: 1000px) {
     .navbar-items {
     font-size: calc(20px + 0.5vw); /* Adjust font size relative to viewport width */
     display: flex;
     align-items: center;
   }
   .navbar-items img {
-    width: calc(50% + 2vw); /* Adjust image width relative to viewport width */
+    width: calc(40% + 1vw); /* Adjust image width relative to viewport width */
+
   }
   .navbar-items div {
     flex: 1;
-    padding-left: 20px;
+    padding-left: 10px;
   }
 }
   #img_logo {
     height: 50px; 
     float: left; 
     margin-right: 3%;
+    margin-left: 6%;
   }
   #icons {
     width: 100%; 
@@ -910,7 +926,4 @@ nav {
     left: 66%;
     margin-top: 2%;
     margin-right: 2%;
-  }
-  .text-logo {
-    margin-right: 50%;
   }
