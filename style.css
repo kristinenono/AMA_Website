@@ -473,7 +473,6 @@ input[type="submit"] {
 .dropdown {
   position: relative;
   display: inline-block;
-  padding-right: 100px;
 }
 .dropdown .bttn1 {
   border: none;
@@ -649,4 +648,5 @@ nav {
   display: flex;
   text-align: center;
   margin-bottom: 10%;
+  
 }
