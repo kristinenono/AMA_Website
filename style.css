@@ -237,7 +237,7 @@ body {
     height: 50%; */
   margin-top: 5%;
   background-color: var(--primarywhite);
-  border: 2px var(--primaryblack) solid;
+  /* border: 2px var(--primaryblack) solid; */
   /* display: inline-block; */
 }
 .weekview {
@@ -245,7 +245,7 @@ body {
   width: 100%;
   height: 120px;
   background-color: var(--primarywhite);
-  border-bottom: 2px var(--primaryblack) solid;
+  /* border-bottom: 2px var(--primaryblack) solid; */
   display: inline-block;
   display: flex;
   margin: auto;
@@ -254,7 +254,7 @@ body {
   flex: 1;
   width: 100%;
   background-color: var(--primarywhite);
-  border-bottom: 2px var(--primaryblack) solid;
+  /* border-bottom: 2px var(--primaryblack) solid; */
   display: inline-block;
   display: flex;
   align-items: center;
@@ -271,10 +271,19 @@ body {
   display: inline-block; /* This line is unnecessary */
   width: auto; /* This line is unnecessary */
   border-right: 2px var(--primaryblack) solid;
+  border-bottom: 2px var(--primaryblack) solid;
   flex: 1;
   font-family: var(--bodyFontFamily);
   padding-top: 1%;
   padding-left: 1%;
+}
+
+.weekview:first-child {
+  border-top: 2px solid var(--primaryblack);
+}
+
+.dayview:first-child {
+  border-left: 2px solid var(--primaryblack);
 }
 /* Hidden class */
 .hidden {
@@ -549,10 +558,10 @@ input[type="submit"] {
 .dropdown-content a:hover {
   background-color: #b22b25;
 }
-/* Display the dropdown content when hovering over the button */
+/* Display the dropdown content when hovering over the button 
 .dropdown:hover .dropdown-content {
   display: block;
-}
+}*/
 .show {
   display: block;
 }
@@ -789,7 +798,7 @@ nav {
     margin-top: 0;
     padding-top: 0;
   }
-  .navbar-menu.active #logbtn {
+  .navbar-menu.active .logbtn {
     margin-top: 0;
     padding-top: 0;
     padding-bottom: 0;
@@ -805,7 +814,7 @@ nav {
     padding-bottom: 0;
     padding-left: 6%;
   }
-  .navbar-menu.active #logbtn:hover {
+  .navbar-menu.active .add-btn:hover {
     width: 110%;
   }
   .navbar-menu.active #signbtn:hover {
@@ -1017,7 +1026,7 @@ button p {
   margin-top: 3%;
   margin-right: 2%;
 }
-#logbtn {
+.logbtn {
   height: 100%;
   width: 100%;
 }
@@ -1036,4 +1045,79 @@ button p {
 
 .show {
   display: block;
+}
+
+#login-form {
+  color: white;
+  text-align: center;
+  padding-top: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+#e-form {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  padding-top: 5px;
+}
+#email-background {
+  background-color: F3F2EE;
+  text-align: center;
+  margin: auto;
+  display: block;
+}
+#password-form {
+  background-color: F3F2EE;
+  margin: auto;
+  display: block;
+  text-align: center;
+}
+#loginbtn-style {
+  margin: auto;
+  display: block;
+}
+#signup-forms {
+  color: white;
+  text-align: center;
+  padding-top: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+#modal-format {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  padding-top: 5px;
+}
+#email-input {
+  background-color: F3F2EE;
+  text-align: center;
+  margin: auto;
+  display: block;
+}
+#modal-password {
+  background-color: F3F2EE;
+  margin: auto;
+  display: block;
+  text-align: center;
+}
+#uw-wisc {
+  margin-top: 4%;
+  padding-top: 5px;
+}
+#social-icon {
+  margin-right: 3%;
+}
+#adress {
+  text-align: center;
+}
+#phone {
+  color: gray;
+}
+#footer-padding {
+  padding: 8px;
+}
+#float-img {
+  float: left;
+}
+#footer-link-padding {
+  padding-top: 5%;
 }

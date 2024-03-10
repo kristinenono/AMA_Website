@@ -17,27 +17,26 @@
     <div id="logmodal" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
-            <span class="modal-close" onclick="modalclose()">&times;</span>
+            <span class="modal-close" onclick="logmodalclose()">&times;</span>
             <div class="modal-margin">
                   <!-- the sign in form for users -->
                   <form id="login_form">
-                      <div style="color:white; text-align: center; padding-top: 5px; font-family: Arial, Helvetica, sans-serif;">
+                      <div id="login-form">
                           <p><b>TEMP LOG IN MODAL</b></p>
                       </div>
                       <!-- the email field -->
-                      <p style="color:white; font-family: Arial, Helvetica, sans-serif; text-align: center; padding-top: 5px;">Email:</p>
-                      <input type="email" placeholder="sampleemail@wisc.edu"
-                          style="background-color:F3F2EE; text-align: center; margin: auto; display: block;">
+                      <p id="e-form">Email:</p>
+                      <input type="email" placeholder="sampleemail@wisc.edu" id="email-background">
                       <br>
                       <!-- the password field -->
-                      <p style="color:white; font-family: Arial, Helvetica, sans-serif; text-align: center; padding-top: 5px;">Password:</p>
-                      <input type="password" id="password" placeholder="password"
-                          style="background-color:F3F2EE; margin: auto; display: block; text-align: center;">
+                      <p id="e-form">Password:</p>
+                      <input type="password" id="logpassword" placeholder="password"
+                          id="password-form">
                       <br>
                       <div class="button-container">
-                              <button id="login_btn" style="margin: auto; display: block;">
+                              <button id="login_btn" class="loginbtn-style">
                                   <strong>Log In</strong></button>
-                              <button id="logcancel_btn" style="margin: auto; display: block;">
+                              <button id="logcancel_btn" class="loginbtn-style" onclick="closeModal()">
                                   <strong>Cancel</strong></button>
                       </div>
                       <!-- location where error is displayed if one occurs -->
@@ -54,23 +53,23 @@
             <div class="modal-margin">
                   <!-- the sign in form for users -->
                   <form id="signup_form">
-                      <div style="color:white; text-align: center; padding-top: 5px; font-family: Arial, Helvetica, sans-serif;">
+                      <div id="signup-forms">
                           <p><b>TEMP SIGN UP MODAL</b></p>
                       </div>
                       <!-- the email field -->
-                      <p style="color:white; font-family: Arial, Helvetica, sans-serif; text-align: center; padding-top: 5px;">Email:</p>
+                      <p id="modal-format ">Email:</p>
                       <input type="email" placeholder="sampleemail@wisc.edu"
-                          style="background-color:F3F2EE; text-align: center; margin: auto; display: block;">
+                          id="email-input">
                       <br>
                       <!-- the password field -->
-                      <p style="color:white; font-family: Arial, Helvetica, sans-serif; text-align: center; padding-top: 5px;">Password:</p>
-                      <input type="password" id="password" placeholder="password"
-                          style="background-color:F3F2EE; margin: auto; display: block; text-align: center;">
+                      <p id="modal-format ">Password:</p>
+                      <input type="password" id="signpassword" placeholder="password"
+                          id="modal-password">
                       <br>
                       <div class="button-container">
-                              <button id="signup_btn" style="margin: auto; display: block;">
+                              <button id="signup_btn" class="loginbtn-style">
                                   <strong>Sign Up</strong></button>
-                              <button id="logcancel_btn" style="margin: auto; display: block;">
+                              <button id="signcancel_btn" class="loginbtn-style">
                                   <strong>Cancel</strong></button>
                       </div>
                       <!-- location where error is displayed if one occurs -->
@@ -79,10 +78,10 @@
               </div>
         </div>
       </div>
-      <nav style="background-color: #f3f2ee; margin-top: 0">
+      <nav>
         <!-- website logo -->
         <h1 class="navbar-item" id="navbar-item">
-          <img src="images/AMA Logo.png" alt="" style="float: left" />
+          <img src="images/AMA Logo.png" alt="" id="float-img"/>
           <div id="uw-madison">
             <strong id="logo-text">University of Wisconsin </br> Madison</strong>
           </div>
@@ -94,13 +93,13 @@
         </a>
         <div class="login-signup">
           <a id="login">
-            <button id="logbtn" class="add-btn button" onclick="loginclick()">
+            <button id="logbutton" class="add-btn button" onclick="logclick()">
               <strong id="bttn-font">LOGIN</strong>
             </button>
           </a>
           &nbsp; &nbsp;
           <a id="signin">
-            <button id="signbtn" class="add-btn button" onclick="signupclick()">
+            <button id="signbutton" class="add-btn button" onclick="signupclick()">
               <strong id="bttn-font">SIGN UP</strong>
             </button>
           </a>
@@ -120,13 +119,13 @@
             <a id="format-link"><strong id="format-nav">CONTACT</strong></a>
           <div class="login-signup-burger">
             <a id="login">
-              <button id="logbtn" class="add-btn button" onclick="loginclick()">
+              <button id="logbtn" class="add-btn button">
                 <strong id="bttn-font">LOGIN</strong>
               </button>
             </a>
             &nbsp; &nbsp;
             <a id="signin">
-              <button id="signbtn" class="add-btn button" onclick="signupclick()">
+              <button id="signbtn" class="add-btn button">
                 <strong id="bttn-font">SIGN UP</strong>
               </button>
             </a>
@@ -145,47 +144,47 @@
           <div class="footer-section">
             <div class="navbar-items">
               <img src="images/AMA Logo Footer.png" alt="" id="img_logo">
-              <div style="margin-top: 4%; padding-top: 5px;">
+              <div id="uw-wisc">
                 <strong id="footer-uw-logo" class="text-logo">University of Wisconsin </br> Madison</strong>
               </div>
             </div>
             <div class="social-icons" id="icons">
-                <a href="https://www.linkedin.com/in/ama-badgers-5247a9252/" style="margin-right: 3%;">
+                <a href="https://www.linkedin.com/in/ama-badgers-5247a9252/" id="social-icon">
                   <i class="fab fa-linkedin fa-2x"></i>
                 </a>
-                <a href="https://www.instagram.com/amabadgers/" style="margin-right: 3%;">
+                <a href="https://www.instagram.com/amabadgers/" id="social-icon">
                   <i class="fab fa-instagram fa-2x"></i>
                 </a>
-                <a href="https://www.facebook.com/AMAUWMadison/" style="margin-right: 3%;">
+                <a href="https://www.facebook.com/AMAUWMadison/" id="social-icon">
                   <i class="fab fa-facebook fa-2x"></i>
                 </a>
                 <a href="https://twitter.com/amauwmadison?lang=en">
                   <i class="fab fa-twitter fa-2x"></i>
                 </a>
             </div>
-            <div style="text-align: center;">
+            <div id="adress">
               <p>975 University Ave, Madison, WI 53706</p>
-              <p style="color: gray;">+00 000 000 000</p>
+              <p id="phone">+00 000 000 000</p>
             </div>
           </div>
-          <div class="footer-section" style="padding-top: 5%;">
+          <div class="footer-section" id="footer-link-padding">
             <div>
-              <div style="padding: 8px">
+              <div id="footer-padding">
                 <a href="#" ><b>About Us</b></a>
               </div>
-              <div style="padding: 8px">
+              <div id="footer-padding">
                 <a href="#"><b>Blog</b></a>
               </div>
-              <div style="padding: 8px">
+              <div id="footer-padding">
                 <a href="#"><b>Point System</b></a>
               </div>
-              <div style="padding: 8px">
+              <div id="footer-padding">
                 <a href="#"><b>Contact Us</b></a>
               </div>
-              <div style="padding: 8px">
+              <div id="footer-padding">
                 <a href="calendar.html"><b>Events</b></a>
               </div>
-              <div style="padding: 8px">
+              <div id="footer-padding">
                 <a href="#"><b>Become a Sponsor</b></a>
               </div>
             </div>
@@ -201,7 +200,6 @@
           </div>
         </div>
       </footer>
-
     <script src="app.js"></script>
   </body>
 </html>

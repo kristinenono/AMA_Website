@@ -104,6 +104,21 @@ let cal_page_content = `<main>
     </div>
     <div class="calview">
 </div>`;
+
+// Member drop down button
+var dropdownButton = document.querySelector(".bttn1");
+var dropdownContent = document.querySelector(".dropdown-content");
+
+dropdownButton.addEventListener("click", function () {
+  dropdownContent.classList.toggle("show");
+});
+
+document.addEventListener("click", function (event) {
+  if (!event.target.closest(".dropdown")) {
+    dropdownContent.classList.remove("show");
+  }
+});
+
 const calendarView = document.querySelector(".calview");
 const monthSelect = r_e("month-select");
 const prevMonthBtn = document.querySelector(".action_left");
@@ -311,26 +326,20 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// still some dom content loaded
-document.addEventListener("DOMContentLoaded", function () {
-  var dropdownButton = document.querySelector(".bttn1");
-  var dropdownContent = document.querySelector(".dropdown-content");
-
-  dropdownButton.addEventListener("click", function () {
-    dropdownContent.classList.toggle("show");
-  });
-
-  document.addEventListener("click", function (event) {
-    if (!event.target.closest(".dropdown")) {
-      dropdownContent.classList.remove("show");
-    }
-  });
-});
-
 document.addEventListener("DOMContentLoaded", function () {
   const viewEventLinks = document.querySelectorAll(".events-button");
   const eventCard = document.getElementById("eventCard");
-  const closeEventCardBtn = document.getElementById("closeEventCard");
+  const closeEventCardBtn = document.getElementById("eventCard");
+  // Add an event listener to the close button
+  document
+    .getElementById("closeAddEventsPopup")
+    .addEventListener("click", closeAddEventsPopup);
+
+  // Function to close the add events popup
+  function closeAddEventsPopup() {
+    var addEventsPopup = document.getElementById("addEventsPopup");
+    addEventsPopup.style.display = "none";
+  }
 
   // Show the event card when any "View Event Here" link is clicked
   viewEventLinks.forEach(function (link) {
@@ -364,25 +373,22 @@ document.addEventListener("DOMContentLoaded", function () {
 // };
 
 // MODAL POP UP IN HTML
-function openModal() {
+// Login Modal
+function logclick() {
   var modal = document.getElementById("logmodal");
   modal.style.display = "block";
 }
+document.getElementById('logbtn').addEventListener('click', openLoginModal);
 
-function closeModal() {
-  var modal = document.getElementById("logmodal");
-  modal.style.display = "none";
-}
-
-// Function to handle login button click event
-function loginclick() {
-  openModal();
-}
+// function closeModal() {
+//   var modal = document.getElementById("logmodal");
+//   modal.style.display = "none";
+// }
 
 // Function to handle span (close) click event
-function modalclose() {
-  closeModal();
-}
+// function modalclose() {
+//   closeModal();
+// }
 
 // when cancel is clicked the fields empty
 function clearFields() {
