@@ -799,7 +799,7 @@ nav {
     margin-top: 0;
     padding-top: 0;
   }
-  .navbar-menu.active #logbtn {
+  .navbar-menu.active .logbtn {
     margin-top: 0;
     padding-top: 0;
     padding-bottom: 0;
@@ -815,7 +815,7 @@ nav {
     padding-bottom: 0;
     padding-left: 6%;
   }
-  .navbar-menu.active #logbtn:hover {
+  .navbar-menu.active .add-btn:hover {
     width: 110%;
   }
   .navbar-menu.active #signbtn:hover {
@@ -1027,7 +1027,7 @@ button p {
   margin-top: 3%;
   margin-right: 2%;
 }
-#logbtn {
+.logbtn {
   height: 100%;
   width: 100%;
 }

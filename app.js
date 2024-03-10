@@ -333,64 +333,61 @@ document.getElementById("eventbtn").onclick = function () {
 };
 
 // MODAL POP UP IN HTML
-function openModal() {
-  var modal = document.getElementById("logmodal");
-  modal.style.display = "block";
+function openLoginModal() {
+  var loginModal = document.getElementById('logmodal');
+  console.log("button clicked")
+  // loginModal.style.display = 'block';
 }
+document.getElementById('logbtn').addEventListener('click', openLoginModal);
 
-function closeModal() {
-  var modal = document.getElementById("logmodal");
-  modal.style.display = "none";
-}
-
-// Function to handle login button click event
-function loginclick() {
-  openModal();
-}
+// function closeModal() {
+//   var modal = document.getElementById("logmodal");
+//   modal.style.display = "none";
+// }
 
 // Function to handle span (close) click event
-function modalclose() {
-  closeModal();
-}
+// function modalclose() {
+//   closeModal();
+// }
 
 // when cancel is clicked the fields empty
-function clearFields() {
-  var emailField = document.querySelector('#logmodal input[type="email"]');
-  var passwordField = document.querySelector(
-    '#logmodal input[type="password"]'
-  );
+// function clearFields() {
+//   var emailField = document.querySelector('#logmodal input[type="email"]');
+//   var passwordField = document.querySelector(
+//     '#logmodal input[type="password"]'
+//   );
 
-  emailField.value = ""; // Clearing the email input field
-  passwordField.value = ""; // Clearing the password input field
-}
+//   emailField.value = ""; // Clearing the email input field
+//   passwordField.value = ""; // Clearing the password input field
+// }
 
 // Function to handle cancel button click event
-document
-  .getElementById("logcancel_btn")
-  .addEventListener("click", function (event) {
-    event.preventDefault(); // Prevent the default form submission behavior
-    clearFields(); // Clear the input fields
-  });
+// document
+//   .getElementById("logcancel_btn")
+//   .addEventListener("click", function (event) {
+//     event.preventDefault(); // Prevent the default form submission behavior
+//     clearFields(); // Clear the input fields
+//   });
 
 // SIGN UP MODAL
-function signupclick() {
-  var modal = document.getElementById("signmodal");
-  modal.style.display = "block";
-}
+// function signupclick() {
+//   var modal = document.getElementById("signmodal");
+//   modal.style.display = "block";
+// }
 
 // Function to close the signup modal
-function signmodalclose() {
-  var modal = document.getElementById("signmodal");
-  modal.style.display = "none";
-}
+// function signmodalclose() {
+//   var modal = document.getElementById("signmodal");
+//   modal.style.display = "none";
+// }
 
 // When the user clicks anywhere outside of the signup modal, close it
-window.onclick = function (event) {
-  var modal = document.getElementById("signmodal");
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-};
+// window.onclick = function (event) {
+//   var modal = document.getElementById("signmodal");
+//   if (event.target == modal) {
+//     modal.style.display = "none";
+//   }
+// };
 
 // JavaScript to handle the burger menu toggle
 document.addEventListener("DOMContentLoaded", function () {
