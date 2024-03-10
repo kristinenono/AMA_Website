@@ -15,26 +15,9 @@
     <nav style="background-color: #f3f2ee; margin-top: 0">
       <!-- website logo -->
       <div class="tile is-child">
-        <h1
-          class="navbar-item"
-          style="
-            color: #1f304f;
-            font-size: 25px;
-            padding-left: 20px;
-            margin: 0;
-            padding-top: 10px;
-            padding-bottom: 100px;
-          "
-        >
+        <h1 class="navbar-item" id="navbar-item">
           <img src="images/AMA Logo.png" alt="" style="float: left" />
-          <div
-            style="
-              width: 300px;
-              float: left;
-              padding-left: 20px;
-              padding-top: 10px;
-            "
-          >
+          <div id="uw-madison">
             <strong
               style="
                 vertical-align: top;
@@ -49,126 +32,41 @@
       <div style="position: absolute; top: 2.25%; right: 30px; height: auto">
         <!-- the login button for users -->
         <a href="login_modal.html" class="add-btn">
-          <strong
-            style="
-              color: #f3f2ee;
-              font-family: Arial, Helvetica, sans-serif;
-              font-size: 20px;
-              vertical-align: bottom;
-            "
-            >LOGIN</strong
-          >
+          <strong id="loginbtn">LOGIN</strong>
         </a>
         &nbsp; &nbsp;
         <!-- the signup button for users -->
         <a href="sign_up_modal.html" class="add-btn" id="sign_up_btn">
-          <strong
-            style="
-              color: #f3f2ee;
-              font-family: Arial, Helvetica, sans-serif;
-              font-size: 20px;
-              vertical-align: bottom;
-            "
-            >SIGN UP</strong
-          >
+          <strong id="signupbtn">SIGN UP</strong>
         </a>
       </div>
       <!-- the navigation bar -->
-      <div
-        style="
-          background-color: #1f304f;
-          height: 50px;
-          width: 100%;
-          text-align: center;
-        "
-      >
-        <a
-          href="index.html"
-          style="
-            display: inline-block;
-            padding-right: 100px;
-            padding-left: 50px;
-          "
-        >
-          <strong
-            style="
-              color: #f3f2ee;
-              font-family: Arial, Helvetica, sans-serif;
-              font-size: 20px;
-            "
-            >HOME</strong
-          >
+      <div id="navbar-div">
+        <a href="index.html" id="home-link">
+          <strong id="home-nav">HOME</strong>
         </a>
-        <a style="display: inline-block; padding-right: 100px">
-          <strong
-            style="
-              color: #f3f2ee;
-              font-family: Arial, Helvetica, sans-serif;
-              font-size: 20px;
-              vertical-align: bottom;
-            "
-            >ABOUT</strong
-          >
+        <a id="format-link">
+          <strong id="format-nav">ABOUT</strong>
         </a>
         <!-- the members dropdown menu -->
         <div class="dropdown">
           <button class="bttn1">
-            <strong
-              style="
-                color: #f3f2ee;
-                font-family: Arial, Helvetica, sans-serif;
-                font-size: 20px;
-              "
-              >MEMBERS</strong
-            >
+            <strong id="format-nav">MEMBERS</strong>
           </button>
           <div class="dropdown-content">
             <div>
-              <a
-                href="calendar.html"
-                style="
-                  color: #f3f2ee;
-                  font-family: Arial, Helvetica, sans-serif;
-                  font-size: 20px;
-                  padding-top: 20px;
-                "
-                >CALENDER</a
-              >
+              <a href="calendar.html" id="calendarbtn">CALENDER</a>
             </div>
             <div>
-              <a
-                href="#"
-                style="
-                  color: #f3f2ee;
-                  font-family: Arial, Helvetica, sans-serif;
-                  font-size: 20px;
-                  word-wrap: break-word;
-                  padding-top: 20px;
-                "
-                >POINT SYSTEM</a
-              >
+              <a href="#" id="pointbtn">POINT SYSTEM</a>
             </div>
           </div>
         </div>
-        <a style="display: inline-block; padding-right: 100px">
-          <strong
-            style="
-              color: #f3f2ee;
-              font-family: Arial, Helvetica, sans-serif;
-              font-size: 20px;
-            "
-            >BLOG</strong
-          >
+        <a id="format-link">
+          <strong id="format-nav">BLOG</strong>
         </a>
-        <a style="display: inline-block; padding-right: 100px">
-          <strong
-            style="
-              color: #f3f2ee;
-              font-family: Arial, Helvetica, sans-serif;
-              font-size: 20px;
-            "
-            >CONTACT</strong
-          >
+        <a id="format-link">
+          <strong id="format-nav">CONTACT</strong>
         </a>
       </div>
     </nav>
@@ -223,55 +121,20 @@
         />
       </div>
     </div>
-    <footer
-      style="
-        height: auto;
-        background-color: #1f304f;
-        left: 0;
-        bottom: 0;
-        height: 275px;
-        width: 100%;
-      "
-    >
-      <div style="width: 100%; height: 100%; display: flex">
-        <div style="width: 25%; background-color: #1f304f">
-          <div
-            style="
-              padding-left: 20px;
-              padding-top: 25px;
-              padding-bottom: 70px;
-              text-align: right;
-              padding-right: 50px;
-            "
-          >
+    <footer>
+      <div id="footer-box">
+        <div id="footer-back">
+          <div id="footer-padding">
             <a href="index.html">
-              <img
-                src="images/AMA Logo Footer.png"
-                alt=""
-                style="height: 50px; float: left"
+              <img src="images/AMA Logo Footer.png" alt="" id="footer-logo"
             /></a>
-            <div
-              style="padding-top: 5px; padding-left: 150px; text-align: left"
-            >
-              <strong
-                style="
-                  font-family: Arial, Helvetica, sans-serif;
-                  word-wrap: break-word;
-                  color: #f3f2ee;
-                  font-size: medium;
-                "
+            <div id="footer-uw">
+              <strong id="footer-uw-logo"
                 >University of Wisconsin Madison</strong
               >
             </div>
           </div>
-          <div
-            style="
-              width: 100%;
-              display: flex;
-              text-align: center;
-              margin-bottom: 10%;
-            "
-          >
+          <div id="footer-align">
             <div style="width: 12%; margin-left: 26%">
               <a href="https://www.linkedin.com/in/ama-badgers-5247a9252/">
                 <i class="fa-brands fa-linkedin fa-2xl" style="color: gray"></i

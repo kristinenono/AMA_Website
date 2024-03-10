@@ -179,3 +179,18 @@ function closeAddEventsPopup() {
 document.getElementById("eventbtn").onclick = function () {
   openAddEventsPopup();
 };
+
+var dropdownButton = document.querySelector(".bttn1");
+var dropdownContent = document.querySelector(".dropdown-content");
+
+function toggleDropdown() {
+  dropdownContent.classList.toggle("show");
+}
+
+dropdownButton.addEventListener("click", toggleDropdown);
+
+document.addEventListener("click", function (event) {
+  if (!event.target.closest(".dropdown")) {
+    dropdownContent.classList.remove("show");
+  }
+});

@@ -362,44 +362,6 @@ body {
   margin-left: 20px;
   color: white;
 }
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-  padding-right: 100px;
-}
-.dropdown .bttn1 {
-  border: none;
-  cursor: pointer;
-  outline: none;
-  background-color: #1f304f;
-  height: 50px;
-}
-.bttn1:hover {
-  background-color: #b22b25;
-}
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #1f304f;
-  min-width: 160px;
-  z-index: 1;
-}
-.dropdown-content a {
-  float: none;
-  display: inline-block;
-  text-decoration: none;
-  text-align: center;
-  height: 60px;
-  width: 100%;
-}
-.dropdown-content a:hover {
-  background-color: #b22b25;
-}
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
 .dayview.empty {
   background-color: #f3f2ee; /* or any color that blends with the calendar's background */
 }
@@ -448,6 +410,13 @@ body {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
+  text-align: center;
+  margin: auto;
+}
+/* Center the submit button */
+input[type="submit"] {
+  display: block;
+  margin: auto;
 }
 
 .popup-content {
@@ -475,4 +444,209 @@ body {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+#memberbtn {
+  color: #f3f2ee;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+}
+
+#calendarbtn {
+  color: #f3f2ee;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  padding-top: 20px;
+}
+#pointbtn {
+  color: #f3f2ee;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  word-wrap: break-word;
+  padding-top: 20px;
+}
+#calendarbtn:hover,
+#pointbtn:hover {
+  background-color: #b22b25;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  padding-right: 100px;
+}
+.dropdown .bttn1 {
+  border: none;
+  cursor: pointer;
+  outline: none;
+  background-color: #1f304f;
+  height: 50px;
+}
+.bttn1:hover {
+  background-color: #b22b25;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #1f304f;
+  min-width: 160px;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  height: 60px;
+  width: 100%;
+}
+
+.dropdown-content.show {
+  display: block;
+}
+
+.addEventContent {
+  font-family: var(--bodyFontFamily);
+  font-size: 20px;
+  text-align: center;
+}
+.secondaryheader2 {
+  font-family: var(--bodyFontFamily);
+  font-size: 30px;
+  color: var(--primarynavy);
+  margin: 0 auto;
+  font-weight: bold;
+  text-align: center;
+}
+.add-btn2 {
+  font: var(--titleFontFamily);
+  background-color: #1f304f;
+  color: #f3f2ee;
+  padding: 1rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 24px;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  align-items: center;
+}
+
+/* change style to css file */
+
+#navbar-item {
+  color: #1f304f;
+  font-size: 25px;
+  padding-left: 20px;
+  margin: 0;
+  padding-top: 10px;
+  padding-bottom: 100px;
+}
+
+footer {
+  height: auto;
+  background-color: #1f304f;
+  left: 0;
+  bottom: 0;
+  height: 275px;
+  width: 100%;
+}
+
+nav {
+  background-color: #f3f2ee;
+  margin-top: 0;
+}
+#uw-madison {
+  width: 300px;
+  float: left;
+  padding-left: 20px;
+  padding-top: 10px;
+}
+#loginbtn {
+  color: #f3f2ee;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  vertical-align: bottom;
+}
+#signupbtn {
+  color: #f3f2ee;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  vertical-align: bottom;
+}
+#navbar-div {
+  background-color: #1f304f;
+  height: 50px;
+  width: 100%;
+  text-align: center;
+}
+#home-link {
+  display: inline-block;
+  padding-right: 100px;
+  padding-left: 50px;
+}
+#home-nav {
+  color: #f3f2ee;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+}
+#format-link {
+  display: inline-block;
+  padding-right: 100px;
+}
+#format-nav {
+  color: #f3f2ee;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  vertical-align: bottom;
+}
+#blog-nav {
+  color: #f3f2ee;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+}
+#blog-link {
+  display: inline-block;
+  padding-right: 100px"
+}
+#contact-link {
+  display: inline-block; padding-right: 100px
+}
+#footer-box {
+  width: 100%;
+  height: 100%;
+  display: flex
+}
+#footer-back {
+  width: 25%;
+  background-color: #1f304f
+}
+#footer-padding {
+  padding-left: 20px;
+  padding-top: 25px;
+  padding-bottom: 70px;
+  text-align: right;
+  padding-right: 50px;
+}
+#footer-logo {
+  height: 50px;
+  float: left
+}
+#footer-uw {
+  padding-top: 5px;
+  padding-left: 150px;
+  text-align: left
+}
+#footer-uw-logo {
+  font-family: Arial, Helvetica, sans-serif;
+  word-wrap: break-word;
+  color: #f3f2ee;
+  font-size: medium;
+}
+#footer-align {
+  width: 100%;
+  display: flex;
+  text-align: center;
+  margin-bottom: 10%;
 }

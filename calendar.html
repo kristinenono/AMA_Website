@@ -113,40 +113,14 @@
         <!-- the members dropdown menu -->
         <div class="dropdown">
           <button class="bttn1">
-            <strong
-              style="
-                color: #f3f2ee;
-                font-family: Arial, Helvetica, sans-serif;
-                font-size: 20px;
-              "
-              >MEMBERS</strong
-            >
+            <strong id="memberbtn">MEMBERS</strong>
           </button>
           <div class="dropdown-content">
             <div>
-              <a
-                href="calendar.html"
-                style="
-                  color: #f3f2ee;
-                  font-family: Arial, Helvetica, sans-serif;
-                  font-size: 20px;
-                  padding-top: 20px;
-                "
-                >CALENDER</a
-              >
+              <a id="calendarbtn" href="calendar.html">CALENDER</a>
             </div>
             <div>
-              <a
-                href="#"
-                style="
-                  color: #f3f2ee;
-                  font-family: Arial, Helvetica, sans-serif;
-                  font-size: 20px;
-                  word-wrap: break-word;
-                  padding-top: 20px;
-                "
-                >POINT SYSTEM</a
-              >
+              <a href="#" id="pointbtn">POINT SYSTEM</a>
             </div>
           </div>
         </div>
@@ -309,27 +283,37 @@
       <div id="addEventsPopup" class="popup">
         <div class="popup-content">
           <span class="close" onclick="closeAddEventsPopup()">&times;</span>
-          <h2>Add Event</h2>
+          <h2 class="secondaryheader2">Add Event</h2>
           <form>
-            <label for="eventTitle">Event Title:</label>
-            <input type="text" id="eventTitle" required />
+            <p class="addEventContent">
+              <label for="eventTitle">Event Title:</label>
+              <input type="text" id="eventTitle" required />
+            </p>
 
-            <label for="eventType">Event Type:</label>
-            <select id="eventType" required>
-              <option value="memberMeeting">Member Meeting</option>
-              <option value="professionalDevelopment">
-                Professional Development
-              </option>
-              <option value="social">Social</option>
-              <option value="philanthropic">Philanthropic</option>
-              <option value="dei">DEI</option>
-            </select>
+            <p class="addEventContent">
+              <label for="eventType">Event Type:</label>
+              <select id="eventType" required>
+                <option value="memberMeeting">Member Meeting</option>
+                <option value="professionalDevelopment">
+                  Professional Development
+                </option>
+                <option value="social">Social</option>
+                <option value="philanthropic">Philanthropic</option>
+                <option value="dei">DEI</option>
+              </select>
+            </p>
 
-            <label for="eventDescription">Event Description:</label>
-            <textarea id="eventDescription" rows="4" required></textarea>
+            <p class="addEventContent">
+              <label for="eventDescription">Event Description:</label>
+            </p>
+            <p class="addEventContent">
+              <textarea id="eventDescription" rows="4" required></textarea>
+            </p>
 
-            <label for="eventDate">Event Date:</label>
-            <input type="date" id="eventDate" required />
+            <p class="addEventContent">
+              <label for="eventDate">Event Date:</label>
+              <input type="date" id="eventDate" required />
+            </p>
 
             <input type="submit" value="Add Event" />
           </form>
