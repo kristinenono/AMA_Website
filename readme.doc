@@ -16,6 +16,7 @@ Burndown Charts:
 https://docs.google.com/document/d/1KKJ5IcZBKBVSd2nlgsM9ysChk1Oz2ZVP2NKr0PfUyFk/edit?usp=sharing
 
 
+
 Scrum Meetings:
 3.1.24
 
@@ -26,7 +27,6 @@ b. What are you planning to do today?
 Nothing, waiting on the rest of the prototype and then conversation with the client
 c. Any problems are you facing?
 no
-
 
 Kieren
 a. What did you do yesterday?
@@ -67,6 +67,7 @@ b. What are you planning to do today?
 I am planning on reviewing and testing the cards on the calendar page as well as test the prototype of the home page. 
 c. Any problems are you facing?
 no!
+
 
 3.5.24
 Carly
@@ -123,6 +124,7 @@ with the prototype, there was an interference with the home page click (should n
 **After discussion, we will have to add tasks to involve establishing the firebase, sharing the firebase, deploy, and add in the javascript for the one drop down, for the new events form, and sign/sign out, email list, js for the calendar, new task for cards**
 -- grace will take establishing and sharing firebase, deploy firebase -- carly, Kristine will do sign in sign out js, kieren will do drop down on js, carly and anvita will take js for the calendar, wyatt will take js for email list, and then new events will be untagged**
 
+
 3.9.24
 Carly 
 a. What did you do yesterday?
@@ -172,6 +174,7 @@ b. What are you planning to do today?
 He is planning on adding the burger menu to the header when it is resized, and fix both the header and footer so that when they are re-sized the formatting stays correct. He will then add the code into the html files
 c. Any problems are you facing?
 He ran into a couple issues with the formatting of the burger because not all fields going in the menu are in one area. 
+
 
 **Sprint Review - 3.10.24**
 a. What did you learn from doing our first sprint?
