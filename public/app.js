@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <h1 class="title">Welcome to <br />AMA UW-Madison</h1>
       </div>
       <div class="column column2">
-          <img src="images/capitalPlaceholder.png" alt="Madison Capital" width="100%" height="100%" />
+          <img src="images/capitalPlaceholder.png" alt="MadisonCapital" width="100%" height="100%" />
       </div>
     </div>
     <div id="aboutSection" class="aboutSection-box">
