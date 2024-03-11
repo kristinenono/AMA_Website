@@ -1,89 +1,205 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
-
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/10.8.1/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/10.8.1/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/10.8.1/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/10.8.1/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/10.8.1/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/10.8.1/firebase-messaging-compat.js"></script>
-    <script defer src="/__/firebase/10.8.1/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/10.8.1/firebase-analytics-compat.js"></script>
-    <script defer src="/__/firebase/10.8.1/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/10.8.1/firebase-performance-compat.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
-
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-    </style>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Single Page Layout</title>
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/bcae03608a.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
-    </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
+    <header>
+          <!-- modal for login -->
+    <div id="logmodal" class="modal-h">
+        <!-- Modal content -->
+        <div class="modal-content-h">
+            <span class="modal-close-h" onclick="logmodalclose()">&times;</span>
+            <div class="modal-margin-h">
+                  <!-- the sign in form for users -->
+                  <form id="login_form">
+                      <div id="login-form">
+                          <p><b>TEMP LOG IN MODAL</b></p>
+                      </div>
+                      <!-- the email field -->
+                      <p id="e-form">Email:</p>
+                      <input type="email" placeholder="sampleemail@wisc.edu" id="email-background">
+                      <br>
+                      <!-- the password field -->
+                      <p id="e-form">Password:</p>
+                      <input type="password" id="logpassword" placeholder="password"
+                          id="password-form">
+                      <br>
+                      <div class="button-container">
+                              <button id="login_btn" class="loginbtn-style">
+                                  <strong>Log In</strong></button>
+                              <button id="logcancel_btn" class="loginbtn-style" onclick="closeModal()">
+                                  <strong>Cancel</strong></button>
+                      </div>
+                      <!-- location where error is displayed if one occurs -->
+                      <div class="error has-text-warning"></div>
+                  </form>
+              </div>
+        </div>
+      </div>
+      <!-- sign up modal -->
+      <div id="signmodal" class="modal-h">
+        <!-- Modal content -->
+        <div class="modal-content-h">
+            <span class="modal-close-h" onclick="signmodalclose()">&times;</span>
+            <div class="modal-margin-h">
+                  <!-- the sign in form for users -->
+                  <form id="signup_form">
+                      <div id="signup-forms">
+                          <p><b>TEMP SIGN UP MODAL</b></p>
+                      </div>
+                      <!-- the email field -->
+                      <p id="modal-format ">Email:</p>
+                      <input type="email" placeholder="sampleemail@wisc.edu"
+                          id="email-input">
+                      <br>
+                      <!-- the password field -->
+                      <p id="modal-format ">Password:</p>
+                      <input type="password" id="signpassword" placeholder="password"
+                          id="modal-password">
+                      <br>
+                      <div class="button-container">
+                              <button id="signup_btn" class="loginbtn-style">
+                                  <strong>Sign Up</strong></button>
+                              <button id="signcancel_btn" class="loginbtn-style">
+                                  <strong>Cancel</strong></button>
+                      </div>
+                      <!-- location where error is displayed if one occurs -->
+                      <div class="error has-text-warning"></div>
+                  </form>
+              </div>
+        </div>
+      </div>
+      <nav>
+        <!-- website logo -->
+        <h1 class="navbar-item" id="navbar-item">
+          <img src="images/AMA_Logo.png" alt="" id="float-img"/>
+          <div id="uw-madison">
+            <strong id="logo-text">University of Wisconsin </br> Madison</strong>
+          </div>
+        </h1>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar">
+          <span></span>
+          <span></span>
+          <span></span>
+        </a>
+        <div class="login-signup">
+          <a id="login">
+            <button id="logbutton" class="add-btn button" onclick="logclick()">
+              <strong id="bttn-font">LOGIN</strong>
+            </button>
+          </a>
+          &nbsp; &nbsp;
+          <a id="signin">
+            <button id="signbutton" class="add-btn button" onclick="signupclick()">
+              <strong id="bttn-font">SIGN UP</strong>
+            </button>
+          </a>
+        </div>
+        <div class="navbar-menu">
+          <div>
+            <a href="index.html" id="home-link"><strong id="home-nav">HOME</strong></a>
+            <a id="format-link1"><strong id="format-nav">ABOUT</strong></a>
+            <div class="dropdown">
+              <button class="bttn1"><strong id="format-nav">MEMBERS</strong></button>
+              <div class="dropdown-content">
+                <a href="calendar.html" id="calendarbtn">CALENDAR</a>
+                <a href="#" id="pointbtn">POINT SYSTEM</a>
+              </div>
+            </div>          
+            <a id="blog-link"><strong id="format-nav">BLOG</strong></a>
+            <a id="format-link"><strong id="format-nav">CONTACT</strong></a>
+          <div class="login-signup-burger">
+            <a id="login">
+              <button id="logbtn" class="add-btn button">
+                <strong id="bttn-font">LOGIN</strong>
+              </button>
+            </a>
+            &nbsp; &nbsp;
+            <a id="signin">
+              <button id="signbtn" class="add-btn button">
+                <strong id="bttn-font">SIGN UP</strong>
+              </button>
+            </a>
+          </div>
+        </div>
+        </div>
+      </nav>
+    </header>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const loadEl = document.querySelector('#load');
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+    <main id="main-content">
+      <!-- Content will be dynamically loaded here -->
+    </main>
 
-        try {
-          let app = firebase.app();
-          let features = [
-            'auth', 
-            'database', 
-            'firestore',
-            'functions',
-            'messaging', 
-            'storage', 
-            'analytics', 
-            'remoteConfig',
-            'performance',
-          ].filter(feature => typeof app[feature] === 'function');
-          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
-        }
-      });
-    </script>
+    <footer>
+        <div class="footer-box">
+          <div class="footer-section">
+            <div class="navbar-items">
+              <img src="images/AMA_Logo_Footer.png" alt="" id="img_logo">
+              <div id="uw-wisc">
+                <strong id="footer-uw-logo" class="text-logo">University of Wisconsin </br> Madison</strong>
+              </div>
+            </div>
+            <div class="social-icons" id="icons">
+                <a href="https://www.linkedin.com/in/ama-badgers-5247a9252/" id="social-icon">
+                  <i class="fab fa-linkedin fa-2x"></i>
+                </a>
+                <a href="https://www.instagram.com/amabadgers/" id="social-icon">
+                  <i class="fab fa-instagram fa-2x"></i>
+                </a>
+                <a href="https://www.facebook.com/AMAUWMadison/" id="social-icon">
+                  <i class="fab fa-facebook fa-2x"></i>
+                </a>
+                <a href="https://twitter.com/amauwmadison?lang=en">
+                  <i class="fab fa-twitter fa-2x"></i>
+                </a>
+            </div>
+            <div id="adress">
+              <p>975 University Ave, Madison, WI 53706</p>
+              <p id="phone">+00 000 000 000</p>
+            </div>
+          </div>
+          <div class="footer-section" id="footer-link-padding">
+            <div>
+              <div id="footer-padding">
+                <a href="#" ><b>About Us</b></a>
+              </div>
+              <div id="footer-padding">
+                <a href="#"><b>Blog</b></a>
+              </div>
+              <div id="footer-padding">
+                <a href="#"><b>Point System</b></a>
+              </div>
+              <div id="footer-padding">
+                <a href="#"><b>Contact Us</b></a>
+              </div>
+              <div id="footer-padding">
+                <a href="calendar.html"><b>Events</b></a>
+              </div>
+              <div id="footer-padding">
+                <a href="#"><b>Become a Sponsor</b></a>
+              </div>
+            </div>
+          </div>
+          <div id="line"></div>
+          <div class="footer-section">
+            <h2>JOIN OUR EMAIL LIST</h2>
+            <p>Want to become an official member of the Badger American Marketing Association or just be added to the email list? Fill out our member form to stay up to date on upcoming events!</p>
+            <input type="text" placeholder="Enter your email here">
+            <button id="submit_btn">
+              <p>SUBMIT</p>
+            </button>
+          </div>
+        </div>
+      </footer>
+    <script src="app.js"></script>
   </body>
 </html>
