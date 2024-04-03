@@ -18,68 +18,82 @@
   <body>
     <header>
           <!-- modal for login -->
-    <div id="logmodal" class="modal-h">
-        <!-- Modal content -->
-        <div class="modal-content-h">
-            <span class="modal-close-h" onclick="logmodalclose()">&times;</span>
-            <div class="modal-margin-h">
-                  <!-- the sign in form for users -->
-                  <form id="login_form">
-                      <div id="login-form">
-                          <p><b>TEMP LOG IN MODAL</b></p>
-                      </div>
-                      <!-- the email field -->
-                      <p id="e-form">Email:</p>
-                      <input type="email" placeholder="sampleemail@wisc.edu" id="email-background">
-                      <br>
-                      <!-- the password field -->
-                      <p id="e-form">Password:</p>
-                      <input type="password" id="logpassword" placeholder="password"
-                          id="password-form">
-                      <br>
-                      <div class="button-container">
-                              <button id="login_btn" class="loginbtn-style">
-                                  <strong>Log In</strong></button>
-                              <button id="logcancel_btn" class="loginbtn-style" onclick="closeModal()">
-                                  <strong>Cancel</strong></button>
-                      </div>
-                      <!-- location where error is displayed if one occurs -->
-                      <div class="error has-text-warning"></div>
-                  </form>
+          <div class="modal" id="logmodal">
+            <div class="modal-background" id="signup_modalbg"></div>
+            <div class="modal-content">
+              <div class="box">
+                <label class="label title is-4">Sign Up</label>
+                <form id="signup_form">
+                  <!-- email -->
+                  <div class="field">
+                    <label class="label">Email</label>
+                    <div class="control">
+                      <input
+                        class="input"
+                        type="email"
+                        id="email"
+                        placeholder="knono@gmail.com"
+                      />
+                    </div>
+                  </div>
+                  <!-- password -->
+                  <div class="field">
+                    <label class="label">Password</label>
+                    <div class="control">
+                      <input class="input" type="password" id="password" />
+                    </div>
+                  </div>
+      
+                  <div class="field is-grouped">
+                    <div class="control">
+                      <button class="button is-success">Submit</button>
+                    </div>
+                    <!-- <div class="control">
+                      <button class="button is-success is-light">Cancel</button>
+                    </div> -->
+                  </div>
+      
+                  <div class="error has-text-danger"></div>
+                </form>
               </div>
-        </div>
-      </div>
-      <!-- sign up modal -->
-      <div id="signmodal" class="modal-h">
-        <!-- Modal content -->
-        <div class="modal-content-h">
-            <span class="modal-close-h" onclick="signmodalclose()">&times;</span>
-            <div class="modal-margin-h">
-                  <!-- the sign in form for users -->
-                  <form id="signup_form">
-                      <div id="signup-forms">
-                          <p><b>TEMP SIGN UP MODAL</b></p>
-                      </div>
-                      <!-- the email field -->
-                      <p id="modal-format ">Email:</p>
-                      <input type="email" placeholder="sampleemail@wisc.edu"
-                          id="email-input">
-                      <br>
-                      <!-- the password field -->
-                      <p id="modal-format ">Password:</p>
-                      <input type="password" id="signpassword" placeholder="password"
-                          id="modal-password">
-                      <br>
-                      <div class="button-container">
-                              <button id="signup_btn" class="loginbtn-style">
-                                  <strong>Sign Up</strong></button>
-                              <button id="signcancel_btn" class="loginbtn-style">
-                                  <strong>Cancel</strong></button>
-                      </div>
-                      <!-- location where error is displayed if one occurs -->
-                      <div class="error has-text-warning"></div>
-                  </form>
+            </div>
+          </div>
+      <div class="modal" id="signmodal">
+        <div class="modal-background" id="signin_modalbg"></div>
+        <div class="modal-content">
+          <div class="box">
+            <label class="label title is-4">Log In</label>
+            <form id="signin_form">
+              <!-- email -->
+              <div class="field">
+                <label class="label">Email</label>
+                <div class="control">
+                  <input
+                    class="input"
+                    type="email"
+                    id="email_"
+                    placeholder="knono@gmail.com"
+                  />
+                </div>
               </div>
+              <!-- password -->
+              <div class="field">
+                <label class="label">Password</label>
+                <div class="control">
+                  <input class="input" type="password" id="password_" />
+                </div>
+              </div>
+  
+              <div class="field is-grouped">
+                <div class="control">
+                  <button class="button is-success">Submit</button>
+                </div>
+                <!-- <div class="control">
+                  <button class="button is-success is-light">Cancel</button>
+                </div> -->
+              </div>
+            </form>
+          </div>
         </div>
       </div>
       <nav>
@@ -105,7 +119,7 @@
           </a>
           <div class="login-signup">
             <a id="login">
-              <button class="add-btn button is-link" onclick="loginclick()">
+              <button class="add-btn button is-link" onclick="logclick()">
                 <strong id="bttn-font">LOGIN</strong>
               </button>
             </a>
