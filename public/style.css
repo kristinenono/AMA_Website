@@ -1115,7 +1115,7 @@ button p {
 #footer-padding {
   padding: 8px;
 }
-#float-img {
+.float-img {
   float: left;
 }
 #footer-link-padding {
