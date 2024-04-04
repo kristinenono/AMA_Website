@@ -1,4 +1,5 @@
 // main functions to use
+console.log(firebase);
 const mainContent = document.getElementById("main-content");
 const homeLink = document.getElementById("home-link");
 
@@ -467,3 +468,5 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+// console.log(firebase);
