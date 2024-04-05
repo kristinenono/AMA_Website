@@ -256,11 +256,11 @@
             <div class = "modal-background" id= "popupbg"></div>
             <div class="modal-content section has-background-white">
             <h2 class="title">New Event</h2>
-            <form>
+            <form id="cal_form_modal">
             <div class="field">
-            <label class="label">Name of Event</label>
+            <label class="label" >Name of Event</label>
             <div class="control">
-              <input class="input" type="text" placeholder="LinkedIn Workshop" />
+              <input class="input" id = "evtname" type="text" placeholder="LinkedIn Workshop" />
             </div>
             </div>
             <div class="field">
@@ -268,6 +268,7 @@
             <div class="control">
               <input
                 class="input"
+                id = "datetime"
                 type="datetime-local"
                 placeholder="12-01-22 01:22"
               />
@@ -277,7 +278,7 @@
             <label class="label">Choose Event Category</label>
             <div class="control">
               <div class="select">
-                <select name="" id="">
+                <select name="" id="evttype">
                   <option>--select--</option>
                   <option value="">Philanthropy</option>
                   <option value="">Professional Development</option>
@@ -290,7 +291,7 @@
             <div class="field">
             <label class="label">Points Assigned</label>
             <div class="control">
-              <input class="input" type="number" placeholder="5" />
+              <input class="input" id = "ptsassigned" type="number" placeholder="5" />
             </div>
             </div>
             <div class="field">
@@ -299,6 +300,7 @@
               <textarea
                 cols="20"
                 rows="12"
+                id = "descriptionevt"
                 placeholder="Dress Code: Business Casual 
             Location: Grainger"
               ></textarea>
@@ -314,7 +316,7 @@
             </div>
             <div class="field is-grouped">
             <div class="control">
-              <button class="button">Submit</button>
+              <button class="button" id = "addevtsbt">Submit</button>
             </div>
             <div class="control">
               <button class="button" id="addEventcncl">Cancel</button>
@@ -387,6 +389,35 @@
         </div>
       </div>
     </footer>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-storage.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+
+    <script>
+      // TODO
+      // Copy **only** your firebaseConfig from Google Firebae and add it below
+      const firebaseConfig = {
+        apiKey: "AIzaSyBEZAtfgyF88HPoBR94OxTJe0Io7lyKbjA",
+        authDomain: "amabadgers.firebaseapp.com",
+        projectId: "amabadgers",
+        storageBucket: "amabadgers.appspot.com",
+        messagingSenderId: "131147849099",
+        appId: "1:131147849099:web:a969b845dd736bbc2de38e",
+      
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      // define authentication variable
+      let auth = firebase.auth();
+      let db = firebase.firestore();
+    </script>
     <script src="app.js"></script>
   </body>
 </html>
