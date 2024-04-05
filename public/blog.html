@@ -16,6 +16,42 @@
   />
   </head>
   <body>
+    <div class="navbar-menu is-justify-content-center">
+      <div class="navbar-item just">
+        <a href="index.html" id="home-link"
+          ><strong id="home-nav">HOME</strong></a
+        >
+        <a id="format-link"><strong id="format-nav">ABOUT</strong></a>
+        <div class="navbar-item dropdown">
+          <button class="bttn1">
+            <strong id="format-nav">MEMBERS</strong>
+          </button>
+          <div class="dropdown-content">
+            <div><a href="calendar.html" id="calendarbtn">CALENDAR</a></div>
+            <div><a href="points.html" id="pointbtn">POINT SYSTEM</a></div>
+          </div>
+        </div>
+        <a href="blog.html" id="blog-link"><strong id="format-nav">BLOG</strong></a>
+        <a id="format-link"><strong id="format-nav">CONTACT</strong></a>
+        <div class="login-signup-burger">
+          <a id="login">
+            <button id="logbtn" class="add-btn button" onclick="loginclick()">
+              <strong id="bttn-font">LOGIN</strong>
+            </button>
+          </a>
+          &nbsp; &nbsp;
+          <a id="signin">
+            <button
+              id="signbtn"
+              class="add-btn button"
+              onclick="signupclick()"
+            >
+              <strong id="bttn-font">SIGN UP</strong>
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
     <main>
       <div class="container my-4">
         <div class="card">
