@@ -19,11 +19,11 @@
     <header>
       <!-- modal for login -->
       <div class="modal" id="logmodal">
-        <div class="modal-background" id="signup_modalbg"></div>
+        <div class="modal-background" id="log_modalbg"></div>
         <div class="modal-content">
           <div class="box">
-            <label class="label title is-4">Sign Up</label>
-            <form id="signup_form">
+            <label class="label title is-4">Log In</label>
+            <form id="log_form">
               <!-- email -->
               <div class="field">
                 <label class="label">Email</label>
@@ -59,11 +59,11 @@
         </div>
       </div>
       <div class="modal" id="signmodal">
-        <div class="modal-background" id="signin_modalbg"></div>
+        <div class="modal-background" id="sign_modalbg"></div>
         <div class="modal-content">
           <div class="box">
-            <label class="label title is-4">Log In</label>
-            <form id="signin_form">
+            <label class="label title is-4">Sign Up</label>
+            <form id="sign_form">
               <!-- email -->
               <div class="field">
                 <label class="label">Email</label>
@@ -117,14 +117,14 @@
         </a>
         <div class="login-signup">
           <a id="login">
-            <button class="add-btn button is-link" onclick="loginclick()">
-              <strong id="bttn-font">LOGIN</strong>
+            <button id="loginbtn" class="add-btn button is-link">
+              <strong class="bttn-font">LOGIN</strong>
             </button>
           </a>
           &nbsp; &nbsp;
           <a id="signin">
-            <button class="add-btn button is-link" onclick="signupclick()">
-              <strong id="bttn-font">SIGN UP</strong>
+            <button id="signupbtn" class="add-btn button is-link">
+              <strong class="bttn-font">SIGN UP</strong>
             </button>
           </a>
         </div>
@@ -146,17 +146,16 @@
             <a href="blog.html" id="blog-link"><strong id="format-nav">BLOG</strong></a>
             <a id="format-link"><strong id="format-nav">CONTACT</strong></a>
             <div class="login-signup-burger">
-              <a id="login">
-                <button id="logbtn" class="add-btn button" onclick="loginclick()">
+              <a id="login-burger">
+                <button id="logbtn-burger" class="add-btn button">
                   <strong id="bttn-font">LOGIN</strong>
                 </button>
               </a>
               &nbsp; &nbsp;
-              <a id="signin">
+              <a id="signin-burger">
                 <button
-                  id="signbtn"
+                  id="signbtn-burger"
                   class="add-btn button"
-                  onclick="signupclick()"
                 >
                   <strong id="bttn-font">SIGN UP</strong>
                 </button>
@@ -233,5 +232,38 @@
         </div>
       </footer>
     <script src="app.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+  // Grab the elements for login and signup buttons and modals
+  var loginButton = document.getElementById('loginbtn');
+  var signupButton = document.getElementById('signupbtn');
+  var loginModal = document.getElementById('logmodal');
+  var signupModal = document.getElementById('signmodal');
+
+  // Function to open login modal
+  function openLoginModal() {
+    loginModal.classList.add('is-active');
+  }
+
+  // Function to open signup modal
+  function openSignupModal() {
+    signupModal.classList.add('is-active');
+  }
+
+  // Event listeners for login and signup buttons
+  loginButton.addEventListener('click', openLoginModal);
+  signupButton.addEventListener('click', openSignupModal);
+
+    // Close modals when clicking on the background or "X" button
+    document.querySelectorAll('.modal-background, .modal-close').forEach(function(el) {
+      el.addEventListener('click', function() {
+        loginModal.classList.remove('is-active');
+        signupModal.classList.remove('is-active');
+      });
+    });
+
+  });
+
+    </script>
   </body>
 </html>

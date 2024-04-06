@@ -396,55 +396,14 @@ document.addEventListener("DOMContentLoaded", function () {
 // };
 
 // MODAL POP UP IN HTML
-// Login Modal
-function logclick() {
-  var modal = document.getElementById("logmodal");
-  modal.style.display = "block";
-}
+// let loginmodal = document.querySelector("#logmodal");
+// let loginbutton = document.querySelector("#loginbtn");
+// let login_mbg = document.querySelector("#log_modalbg")
 
-function logmodalclose() {
-  var modal = document.getElementById("logmodal");
-  modal.style.display = "none";
-}
+// let signupmodal = document.querySelector("#signmodal");
+// let signupbutton = document.querySelector("#signupbtn");
+// let signup_mbg = document.querySelector("#sign_modalbg")
 
-// when cancel is clicked the fields empty
-function clearFields() {
-  var emailField = document.querySelector('#logmodal input[type="email"]');
-  var passwordField = document.querySelector(
-    '#logmodal input[type="password"]'
-  );
-
-  emailField.value = ""; // Clearing the email input field
-  passwordField.value = ""; // Clearing the password input field
-}
-
-// Function to handle cancel button click event
-document
-  .getElementById("logcancel_btn")
-  .addEventListener("click", function (event) {
-    event.preventDefault(); // Prevent the default form submission behavior
-    clearFields(); // Clear the input fields
-  });
-
-// SIGN UP MODAL
-function signupclick() {
-  var modal = document.getElementById("signmodal");
-  modal.style.display = "block";
-}
-
-// Function to close the signup modal
-function signmodalclose() {
-  var modal = document.getElementById("signmodal");
-  modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the signup modal, close it
-window.onclick = function (event) {
-  var modal = document.getElementById("signmodal");
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-};
 
 // JavaScript to handle the burger menu toggle
 document.addEventListener("DOMContentLoaded", function () {
