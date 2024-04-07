@@ -247,41 +247,56 @@ addEventcancel.addEventListener("click", () => {
   addEventForm.classList.remove("is-active");
 });
 
-// document.querySelector("#addevtsbt").addEventListener("click", () => {
-//   alert("event added");
-// });
-
 // storing events from add event from into DB
-const addevtsbt = document.querySelector("#addevtsbt");
-let evtname = r_e("evtname");
-let evttime = r_e("datetime");
-let evttype = r_e("evttype");
-let ptsassigned = r_e("ptsassigned");
-let descriptionevt = r_e("descriptionevt");
-// let evtcode = r_e("codeInput");
-
-addevtsbt.addEventListener("click", () => {
-  alert("event added");
-
-  let name = evtname.value;
-  let time = evttime.value;
-  let evttype = evttype.value;
-  let pts = ptsassigned.value;
-  let desc = descriptionevt.value;
-  // let code = evtcode.value;
+document.querySelector("#addevtsbt").addEventListener("click", () => {
+  let evtname = document.querySelector("#evtname").value;
+  let evttime = document.querySelector("#datetime").value;
+  let evttype = document.querySelector("#evttype").value;
+  let ptsassigned = document.querySelector("#ptsassigned").value;
+  let descriptionevt = document.querySelector("#descriptionevt").value;
   let event = {
-    name: name,
-    time: time,
+    name: evtname,
+    time: evttime,
     evttype: evttype,
-    pts: pts,
-    desc: desc,
-    // code: code,
+    pts: ptsassigned,
+    desc: descriptionevt,
   };
   db.collection("events")
     .add(event)
     .then(() => alert("Event added to database"))
     .catch((error) => console.error("Error adding event: ", error));
 });
+
+// const addevtsbt = document.querySelector("#addevtsbt");
+// let evtname = r_e("evtname");
+// let evttime = r_e("datetime");
+// let evttype = r_e("evttype");
+// let ptsassigned = r_e("ptsassigned");
+// let descriptionevt = r_e("descriptionevt");
+// // let evtcode = r_e("codeInput");
+
+// addevtsbt.addEventListener("click", () => {
+//   alert("event added");
+
+//   let name = evtname.value;
+//   let time = evttime.value;
+//   let evttype = evttype.value;
+//   let pts = ptsassigned.value;
+//   let desc = descriptionevt.value;
+//   // let code = evtcode.value;
+//   let event = {
+//     name: name,
+//     time: time,
+//     evttype: evttype,
+//     pts: pts,
+//     desc: desc,
+//     // code: code,
+//   };
+//   db.collection("events")
+//     .add(event)
+//     .then(() => alert("Event added to database"))
+//     .catch((error) => console.error("Error adding event: ", error));
+// });
 // Function to generate a random code
 function generateRandomCode(length) {
   const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
