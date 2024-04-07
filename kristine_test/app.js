@@ -119,6 +119,7 @@ document.addEventListener("click", function (event) {
   }
 });
 
+
 // Login/Signup Modal Open/Close 
 let loginmodal = document.querySelector("#logmodal");
 let loginbutton = document.querySelector("#loginbtn");
@@ -424,6 +425,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // document.getElementById("eventbtn").onclick = function () {
 //   openAddEventsPopup();
 // };
+
 
 // JavaScript to handle the burger menu toggle
 document.addEventListener("DOMContentLoaded", function () {
