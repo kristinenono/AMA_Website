@@ -44,15 +44,14 @@
               </div>
   
               <div class="field is-grouped">
-                <div class="control">
-                  <button class="button is-success">Submit</button>
+                <div class="control" action ="#">
+                    <button class="button is-link" type="submit" id="submit">Submit</button>
+                  </div>
+                  <div class="control">
+                    <a class="button is-link" id="log_cancel">Cancel</a>
+                  </div>
                 </div>
-                <!-- <div class="control">
-                  <button class="button is-success is-light">Cancel</button>
-                </div> -->
-              </div>
-  
-              <div class="error has-text-danger"></div>
+              <div id="log_error" class="has-text-danger"></div>
             </form>
           </div>
         </div>
@@ -63,6 +62,17 @@
           <div class="box">
             <label class="label title is-4">Sign Up</label>
             <form id="sign_form">
+              <div class="field">
+                <div class="control">
+                  <input
+                    class="input"
+                    type="text"
+                    placeholder="Full Name"
+                    id="signup_name"
+                    required
+                  />
+                </div>
+              </div>
               <!-- email -->
               <div class="field">
                 <label class="label">Email</label>
@@ -85,12 +95,16 @@
     
               <div class="field is-grouped">
                 <div class="control">
-                  <button class="button is-success">Submit</button>
-                </div>
-                <!-- <div class="control">
-                  <button class="button is-success is-light">Cancel</button>
-                </div> -->
+                    <button class="button is-link" type="submit">Submit</button>
+                  </div>
+                  <div class="control">
+                    <a class="button is-link" id="signup_cancel">Cancel</a>
+                  </div>
               </div>
+              <a class="is-link" id="user_found">
+                Already Have An Account? Sign In Here
+              </a>
+              <div id="signup_error" class="has-text-danger"></div>
             </form>
           </div>
         </div>

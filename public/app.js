@@ -524,3 +524,76 @@ document.querySelector("#addevtsbt").addEventListener("click", () => {
 //         .catch(error => console.error("Error adding event: ", error));
 //     */
 // });
+// authentication
+
+function configure_message_bar(message) {
+  r_e("message_bar").classList.remove("is-hidden");
+  r_e("message_bar").innerHTML = message;
+  setTimeout(() => {
+    r_e("message_bar").classList.add("is-hidden");
+    r_e("message_bar").innerHTML = "";
+  }, 3000);
+}
+
+r_e("sign_form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  let email_val = r_e("email_").value;
+  let password_val = r_e("password_").value;
+  let full_name_val = r_e("signup_name").value;
+  auth
+    .createUserWithEmailAndPassword(email_val, password_val)
+    .then(() => {
+      let dbuser = { email: email_val, full_name: full_name_val };
+      db.collection("ama_users").add(dbuser);
+      r_e("sign_form").reset();
+      r_e("signmodal").classList.remove("is-active");
+      configure_message_bar(
+        `Signed Up Successfully - Welcome ${full_name_val}!`
+      );
+      r_e("signup_error").innerHTML = "";
+    })
+    .catch((err) => {
+      r_e("signup_error").innerHTML = err.message;
+    });
+});
+
+r_e("signin_form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  let email_val = r_e("signin_email").value;
+  let password_val = r_e("signin_password").value;
+  auth
+    .signInWithEmailAndPassword(email_val, password_val)
+    .then(() => {
+      r_e("signin_form").reset();
+      r_e("signin_modal").classList.remove("is-active");
+      db.collection("coffee_users")
+        .where(`email`, `==`, `${email_val}`)
+        .get()
+        .then((user) => {
+          configure_message_bar(
+            `Signed In Successfully - Welcome Back ${
+              user.docs[0].data().full_name
+            }!`
+          );
+        });
+      r_e("signin_error").innerHTML = "";
+    })
+    .catch((err) => {
+      r_e("signin_error").innerHTML = err.message;
+    });
+});
+
+r_e("signout_button").addEventListener("click", () => {
+  auth
+    .signOut()
+    .then(() => {
+      configure_message_bar("Signed Out Successfully!");
+      if (r_e("check_worldloc") != null || r_e("check_beansloc") != null) {
+        appendContent(home_page_content);
+        r_e("home_signup").addEventListener("click", show_signup_modal);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
