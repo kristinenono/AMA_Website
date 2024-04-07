@@ -268,37 +268,37 @@ document.addEventListener("click", function (event) {
   }
 });
 
-// Login/Signup Modal Open/Close
-let loginmodal = document.querySelector("#logmodal");
-let loginbutton = document.querySelector("#loginbtn");
-let login_mbg = document.querySelector("#log_modalbg");
+// // Login/Signup Modal Open/Close
+// let loginmodal = document.querySelector("#logmodal");
+// let loginbutton = document.querySelector("#loginbtn");
+// let login_mbg = document.querySelector("#log_modalbg");
 
-let signupmodal = document.querySelector("#signmodal");
-let signupbutton = document.querySelector("#signupbtn");
-let signup_mbg = document.querySelector("#sign_modalbg");
+// let signupmodal = document.querySelector("#signmodal");
+// let signupbutton = document.querySelector("#signupbtn");
+// let signup_mbg = document.querySelector("#sign_modalbg");
 
-// function to open up login and signup modals
-function openLoginModal() {
-  loginmodal.classList.add("is-active");
-}
+// // function to open up login and signup modals
+// function openLoginModal() {
+//   loginmodal.classList.add("is-active");
+// }
 
-function openSignupModal() {
-  signupmodal.classList.add("is-active");
-}
+// function openSignupModal() {
+//   signupmodal.classList.add("is-active");
+// }
 
-// click functions for login and signup buttons to open up the modal
-loginbutton.addEventListener("click", openLoginModal);
-signupbutton.addEventListener("click", openSignupModal);
+// // click functions for login and signup buttons to open up the modal
+// loginbutton.addEventListener("click", openLoginModal);
+// signupbutton.addEventListener("click", openSignupModal);
 
-// Close modals when clicking on the background or "X" button
-document
-  .querySelectorAll(".modal-background, .modal-close")
-  .forEach(function (el) {
-    el.addEventListener("click", function () {
-      loginmodal.classList.remove("is-active");
-      signupmodal.classList.remove("is-active");
-    });
-  });
+// // Close modals when clicking on the background or "X" button
+// document
+//   .querySelectorAll(".modal-background, .modal-close")
+//   .forEach(function (el) {
+//     el.addEventListener("click", function () {
+//       loginmodal.classList.remove("is-active");
+//       signupmodal.classList.remove("is-active");
+//     });
+//   });
 
 // Login/Signup Modal Open/Close
 let loginmodal = document.querySelector("#logmodal");
