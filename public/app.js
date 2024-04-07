@@ -20,6 +20,36 @@ auth.onAuthStateChanged((user) => {
   }
 });
 
+// Grab the elements for login and signup buttons and modals
+var loginButton = document.getElementById("loginbtn");
+var signupButton = document.getElementById("signupbtn");
+var loginModal = document.getElementById("logmodal");
+var signupModal = document.getElementById("signmodal");
+
+// Function to open login modal
+function openLoginModal() {
+  loginModal.classList.add("is-active");
+}
+
+// Function to open signup modal
+function openSignupModal() {
+  signupModal.classList.add("is-active");
+}
+
+// Event listeners for login and signup buttons
+loginButton.addEventListener("click", openLoginModal);
+signupButton.addEventListener("click", openSignupModal);
+
+// Close modals when clicking on the background or "X" button
+document
+  .querySelectorAll(".modal-background, .modal-close")
+  .forEach(function (el) {
+    el.addEventListener("click", function () {
+      loginModal.classList.remove("is-active");
+      signupModal.classList.remove("is-active");
+    });
+  });
+
 // main functions to use
 console.log(firebase);
 const mainContent = document.getElementById("main-content");
