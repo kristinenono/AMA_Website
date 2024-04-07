@@ -1,23 +1,3 @@
-function r_e(id) {
-  return document.querySelector(`#${id}`);
-}
-let signmodal = r_e("signmodal");
-let logmodal = r_e("logmodal");
-let logbtn = r_e("logbtn");
-let signbtn = r_e("signbtn");
-
-// opening sign up and sign in modals :
-function openLoginModal() {
-  logmodal.classList.add("is-active");
-}
-
-function openSignupModal() {
-  signmodal.classList.add("is-active");
-  console.log();
-}
-
-// logbtn.addEventListener("click", openLoginModal);
-
 // main functions to use
 console.log(firebase);
 const mainContent = document.getElementById("main-content");
