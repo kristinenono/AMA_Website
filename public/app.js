@@ -1,55 +1,55 @@
-// check user
-auth.onAuthStateChanged((user) => {
-  if (user) {
-    r_e("indicator").innerHTML = `Signed In As ${user.email}`;
-    r_e("signout_button").classList.remove("is-hidden");
-    r_e("indicator").classList.remove("is-hidden");
-    r_e("signupbtn").classList.add("is-hidden");
-    r_e("signupbtn").classList.add("is-hidden");
-    if (r_e("joinbuttonhome") != null) {
-      r_e("joinbuttonhome").classList.add("is-hidden");
-    }
-  } else {
-    r_e("indicator").innerHTML = "";
-    r_e("signout_button").classList.add("is-hidden");
-    r_e("indicator").classList.add("is-hidden");
-    r_e("signupbtn").classList.remove("is-hidden");
-    r_e("signupbtn").classList.remove("is-hidden");
-    if (r_e("joinbuttonhome") != null) {
-      r_e("joinbuttonhome").classList.remove("is-hidden");
-    }
-  }
-});
+// // check user
+// auth.onAuthStateChanged((user) => {
+//   if (user) {
+//     r_e("indicator").innerHTML = `Signed In As ${user.email}`;
+//     r_e("signout_button").classList.remove("is-hidden");
+//     r_e("indicator").classList.remove("is-hidden");
+//     r_e("signupbtn").classList.add("is-hidden");
+//     r_e("signupbtn").classList.add("is-hidden");
+//     if (r_e("joinbuttonhome") != null) {
+//       r_e("joinbuttonhome").classList.add("is-hidden");
+//     }
+//   } else {
+//     r_e("indicator").innerHTML = "";
+//     r_e("signout_button").classList.add("is-hidden");
+//     r_e("indicator").classList.add("is-hidden");
+//     r_e("signupbtn").classList.remove("is-hidden");
+//     r_e("signupbtn").classList.remove("is-hidden");
+//     if (r_e("joinbuttonhome") != null) {
+//       r_e("joinbuttonhome").classList.remove("is-hidden");
+//     }
+//   }
+// });
 
-// Grab the elements for login and signup buttons and modals
-var loginButton = document.getElementById("loginbtn");
-var signupButton = document.getElementById("signupbtn");
-var loginModal = document.getElementById("logmodal");
-var signupModal = document.getElementById("signmodal");
+// // Grab the elements for login and signup buttons and modals
+// var loginButton = document.getElementById("loginbtn");
+// var signupButton = document.getElementById("signupbtn");
+// var loginModal = document.getElementById("logmodal");
+// var signupModal = document.getElementById("signmodal");
 
-// Function to open login modal
-function openLoginModal() {
-  loginModal.classList.add("is-active");
-}
+// // Function to open login modal
+// function openLoginModal() {
+//   loginModal.classList.add("is-active");
+// }
 
-// Function to open signup modal
-function openSignupModal() {
-  signupModal.classList.add("is-active");
-}
+// // Function to open signup modal
+// function openSignupModal() {
+//   signupModal.classList.add("is-active");
+// }
 
-// Event listeners for login and signup buttons
-loginButton.addEventListener("click", openLoginModal);
-signupButton.addEventListener("click", openSignupModal);
+// // Event listeners for login and signup buttons
+// loginButton.addEventListener("click", openLoginModal);
+// signupButton.addEventListener("click", openSignupModal);
 
-// Close modals when clicking on the background or "X" button
-document
-  .querySelectorAll(".modal-background, .modal-close")
-  .forEach(function (el) {
-    el.addEventListener("click", function () {
-      loginModal.classList.remove("is-active");
-      signupModal.classList.remove("is-active");
-    });
-  });
+// // Close modals when clicking on the background or "X" button
+// document
+//   .querySelectorAll(".modal-background, .modal-close")
+//   .forEach(function (el) {
+//     el.addEventListener("click", function () {
+//       loginModal.classList.remove("is-active");
+//       signupModal.classList.remove("is-active");
+//     });
+//   });
 
 // main functions to use
 console.log(firebase);
