@@ -557,16 +557,16 @@ r_e("sign_form").addEventListener("submit", (e) => {
     });
 });
 
-r_e("signin_form").addEventListener("submit", (e) => {
+r_e("log_form").addEventListener("submit", (e) => {
   e.preventDefault();
-  let email_val = r_e("signin_email").value;
-  let password_val = r_e("signin_password").value;
+  let email_val = r_e("email").value;
+  let password_val = r_e("password").value;
   auth
     .signInWithEmailAndPassword(email_val, password_val)
     .then(() => {
-      r_e("signin_form").reset();
-      r_e("signin_modal").classList.remove("is-active");
-      db.collection("coffee_users")
+      r_e("log_form").reset();
+      r_e("logmodal").classList.remove("is-active");
+      db.collection("ama_users")
         .where(`email`, `==`, `${email_val}`)
         .get()
         .then((user) => {
@@ -583,17 +583,17 @@ r_e("signin_form").addEventListener("submit", (e) => {
     });
 });
 
-r_e("signout_button").addEventListener("click", () => {
-  auth
-    .signOut()
-    .then(() => {
-      configure_message_bar("Signed Out Successfully!");
-      if (r_e("check_worldloc") != null || r_e("check_beansloc") != null) {
-        appendContent(home_page_content);
-        r_e("home_signup").addEventListener("click", show_signup_modal);
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-});
+// r_e("").addEventListener("click", () => {
+//   auth
+//     .signOut()
+//     .then(() => {
+//       configure_message_bar("Signed Out Successfully!");
+//       if (r_e("check_worldloc") != null || r_e("check_beansloc") != null) {
+//         appendContent(home_page_content);
+//         r_e("home_signup").addEventListener("click", show_signup_modal);
+//       }
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
+// });
