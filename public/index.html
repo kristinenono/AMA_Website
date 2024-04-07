@@ -16,54 +16,63 @@
   />
   </head>
   <body>
-    <header>
-          <!-- modal for login -->
-          <div class="modal" id="logmodal">
-            <div class="modal-background" id="signup_modalbg"></div>
-            <div class="modal-content">
-              <div class="box">
-                <label class="label title is-4">Sign Up</label>
-                <form id="signup_form">
-                  <!-- email -->
-                  <div class="field">
-                    <label class="label">Email</label>
-                    <div class="control">
-                      <input
-                        class="input"
-                        type="email"
-                        id="email"
-                        placeholder="knono@gmail.com"
-                      />
-                    </div>
-                  </div>
-                  <!-- password -->
-                  <div class="field">
-                    <label class="label">Password</label>
-                    <div class="control">
-                      <input class="input" type="password" id="password" />
-                    </div>
-                  </div>
-      
-                  <div class="field is-grouped">
-                    <div class="control">
-                      <button class="button is-success">Submit</button>
-                    </div>
-                    <!-- <div class="control">
-                      <button class="button is-success is-light">Cancel</button>
-                    </div> -->
-                  </div>
-      
-                  <div class="error has-text-danger"></div>
-                </form>
-              </div>
-            </div>
-          </div>
-      <div class="modal" id="signmodal">
-        <div class="modal-background" id="signin_modalbg"></div>
+      <!-- modal for login -->
+      <div class="modal" id="logmodal">
+        <div class="modal-background" id="log_modalbg"></div>
         <div class="modal-content">
           <div class="box">
             <label class="label title is-4">Log In</label>
-            <form id="signin_form">
+            <form id="log_form">
+              <!-- email -->
+              <div class="field">
+                <label class="label">Email</label>
+                <div class="control">
+                  <input
+                    class="input"
+                    type="email"
+                    id="email"
+                    placeholder="knono@gmail.com"
+                  />
+                </div>
+              </div>
+              <!-- password -->
+              <div class="field">
+                <label class="label">Password</label>
+                <div class="control">
+                  <input class="input" type="password" id="password" />
+                </div>
+              </div>
+  
+              <div class="field is-grouped">
+                <div class="control" action ="#">
+                    <button class="button is-link" type="submit" id="submit">Submit</button>
+                  </div>
+                  <div class="control">
+                    <a class="button is-link" id="log_cancel">Cancel</a>
+                  </div>
+                </div>
+              <div id="log_error" class="has-text-danger"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal" id="signmodal">
+        <div class="modal-background" id="sign_modalbg"></div>
+        <div class="modal-content">
+          <div class="box">
+            <label class="label title is-4">Sign Up</label>
+            <form id="sign_form">
+              <div class="field">
+                <div class="control">
+                  <input
+                    class="input"
+                    type="text"
+                    placeholder="Full Name"
+                    id="signup_name"
+                    required
+                  />
+                </div>
+              </div>
               <!-- email -->
               <div class="field">
                 <label class="label">Email</label>
@@ -83,96 +92,131 @@
                   <input class="input" type="password" id="password_" />
                 </div>
               </div>
-  
+    
               <div class="field is-grouped">
                 <div class="control">
-                  <button class="button is-success">Submit</button>
-                </div>
-                <!-- <div class="control">
-                  <button class="button is-success is-light">Cancel</button>
-                </div> -->
+                    <button class="button is-link" type="submit">Submit</button>
+                  </div>
+                  <div class="control">
+                    <a class="button is-link" id="signup_cancel">Cancel</a>
+                  </div>
               </div>
+              <a class="is-link" id="user_found">
+                Already Have An Account? Sign In Here
+              </a>
+              <div id="signup_error" class="has-text-danger"></div>
             </form>
           </div>
         </div>
       </div>
-      <nav>
-        <!-- website logo -->
-        <nav style="background-color: #f3f2ee; margin-top: 0">
-          <!-- website logo -->
-          <h1  id="navbar-item">
-            <img src="images/AMA_Logo.png" alt="" style="float: left" />
-            <div id="uw-madison">
-              <strong id="logo-text">University of Wisconsin Madison</strong>
-            </div>
-          </h1>
-          <a
-            role="button"
-            class="navbar-burger"
-            aria-label="menu"
-            aria-expanded="false"
-            data-target="navbar"
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </a>
-          <div class="login-signup">
-            <a id="login">
-              <button class="add-btn button is-link" onclick="logclick()">
-                <strong id="bttn-font">LOGIN</strong>
-              </button>
-            </a>
-            &nbsp; &nbsp;
-            <a id="signin">
-              <button class="add-btn button is-link" onclick="signupclick()">
-                <strong id="bttn-font">SIGN UP</strong>
-              </button>
-            </a>
-          </div>
-          <div class="navbar-menu is-justify-content-center">
-            <div class="navbar-item just">
-              <a href="index.html" id="home-link"
-                ><strong id="home-nav">HOME</strong></a
-              >
-              <a id="format-link"><strong id="format-nav">ABOUT</strong></a>
-              <div class="navbar-item dropdown">
-                <button class="bttn1">
-                  <strong id="format-nav">MEMBERS</strong>
+      <header>
+        <section class="hero is-halfheight">
+          <div class="hero-head">
+            <nav>
+              <div class="navbar is-transparent is-justify-content-end">
+            <div class="login-signup">
+              <a id="login">
+                <button id="loginbtn" class="add-btn button is-link">
+                  <strong class="bttn-font">LOGIN</strong>
                 </button>
-                <div class="dropdown-content">
-                  <div><a href="calendar.html" id="calendarbtn">CALENDAR</a></div>
-                  <div><a href="points.html" id="pointbtn">POINT SYSTEM</a></div>
+              </a>
+              <a id="signin">
+                <button id="signupbtn" class="add-btn button is-link">
+                  <strong class="bttn-font">SIGN UP</strong>
+                </button>
+              </a>
+              <div
+              class="navbar-item has-text-light is-hidden"
+              id="indicator"
+            ></div>
+              <a
+              class="navbar-item has-text-light is-hidden"
+              id="signout_button"
+              >Sign Out</a
+            >
+            </div>
+            </div>
+            <div style="background-color: #f3f2ee; margin-top: 0">
+              <!-- website logo -->
+              <h1  id="navbar-item">
+                <img src="images/AMA_Logo.png" alt="" style="float: left" />
+                <div id="uw-madison">
+                  <strong id="logo-text">University of Wisconsin Madison</strong>
                 </div>
-              </div>
-              <a href="blog.html" id="blog-link"><strong id="format-nav">BLOG</strong></a>
-              <a id="format-link"><strong id="format-nav">CONTACT</strong></a>
-              <div class="login-signup-burger">
-                <a id="login">
-                  <button id="logbtn" class="add-btn button" onclick="loginclick()">
-                    <strong id="bttn-font">LOGIN</strong>
-                  </button>
-                </a>
-                &nbsp; &nbsp;
-                <a id="signin">
-                  <button
-                    id="signbtn"
-                    class="add-btn button"
-                    onclick="signupclick()"
-                  >
-                    <strong id="bttn-font">SIGN UP</strong>
-                  </button>
-                </a>
+              </h1>
+            </div>
+          </nav>
+          </div>
+          <div class="'hero-body">
+      </div>
+<div class="hero-foot">
+  <nav>
+    <div class="navbar is-transparent">
+      <div class="navbar-brand">
+        <a
+          role="button"
+          class="navbar-burger"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navbar"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </a>
+      </div>
+        <div class="navbar-menu is-justify-content-center">
+          <div class="navbar-item just">
+            <a href="index.html" id="home-link"
+              ><strong id="home-nav">HOME</strong></a
+            >
+            <a id="format-link"><strong id="format-nav">ABOUT</strong></a>
+            <div class="navbar-item dropdown">
+              <button class="bttn1">
+                <strong id="format-nav">MEMBERS</strong>
+              </button>
+              <div class="dropdown-content">
+                <div><a href="calendar.html" id="calendarbtn">CALENDAR</a></div>
+                <div><a href="points.html" id="pointbtn">POINT SYSTEM</a></div>
               </div>
             </div>
+            <a href="blog.html" id="blog-link"><strong id="format-nav">BLOG</strong></a>
+            <a id="format-link"><strong id="format-nav">CONTACT</strong></a>
+            <div class="login-signup-burger">
+              <a id="login-burger">
+                <button id="logbtn-burger" class="add-btn button">
+                  <strong id="bttn-font">LOGIN</strong>
+                </button>
+              </a>
+              <div
+                  class="navbar-item has-text-light is-hidden"
+                  id="indicator"
+                ></div>
+              &nbsp; &nbsp;
+              <a id="signin-burger">
+                <button
+                  id="signbtn-burger"
+                  class="add-btn button"
+                >
+                  <strong id="bttn-font">SIGN UP</strong>
+                </button>
+              </a>
+            </div>
           </div>
-        </nav>
+        </div>
+        </div>
+      </nav>
+    </div>
+    </section>
+    <div
+        id="message_bar"
+        class="notification has-text-centered has-background-white is-hidden"
+      ></div>
     </header>
 
     <main id="main-content">
       <!-- Content will be dynamically loaded here -->
     </main>
-
     <footer>
         <div class="footer-box">
           <div class="footer-section">
@@ -262,6 +306,7 @@
         // define authentication variable
         let auth = firebase.auth();
         let db = firebase.firestore();
+        let ref = firebase.storage().ref();
       </script>
       <script src="app.js"></script>
   </body>

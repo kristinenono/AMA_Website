@@ -1,3 +1,56 @@
+// check user
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    r_e("indicator").innerHTML = `Signed In As ${user.email}`;
+    r_e("signout_button").classList.remove("is-hidden");
+    r_e("indicator").classList.remove("is-hidden");
+    r_e("signupbtn").classList.add("is-hidden");
+    r_e("signupbtn").classList.add("is-hidden");
+    if (r_e("joinbuttonhome") != null) {
+      r_e("joinbuttonhome").classList.add("is-hidden");
+    }
+  } else {
+    r_e("indicator").innerHTML = "";
+    r_e("signout_button").classList.add("is-hidden");
+    r_e("indicator").classList.add("is-hidden");
+    r_e("signupbtn").classList.remove("is-hidden");
+    r_e("signupbtn").classList.remove("is-hidden");
+    if (r_e("joinbuttonhome") != null) {
+      r_e("joinbuttonhome").classList.remove("is-hidden");
+    }
+  }
+});
+
+// Grab the elements for login and signup buttons and modals
+var loginButton = document.getElementById("loginbtn");
+var signupButton = document.getElementById("signupbtn");
+var loginModal = document.getElementById("logmodal");
+var signupModal = document.getElementById("signmodal");
+
+// Function to open login modal
+function openLoginModal() {
+  loginModal.classList.add("is-active");
+}
+
+// Function to open signup modal
+function openSignupModal() {
+  signupModal.classList.add("is-active");
+}
+
+// Event listeners for login and signup buttons
+loginButton.addEventListener("click", openLoginModal);
+signupButton.addEventListener("click", openSignupModal);
+
+// Close modals when clicking on the background or "X" button
+document
+  .querySelectorAll(".modal-background, .modal-close")
+  .forEach(function (el) {
+    el.addEventListener("click", function () {
+      loginModal.classList.remove("is-active");
+      signupModal.classList.remove("is-active");
+    });
+  });
+
 // main functions to use
 console.log(firebase);
 const mainContent = document.getElementById("main-content");
@@ -37,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <div>
               <p>
                   <button class="involvementButton1"><b>LEARN MORE</b></button>&nbsp;&nbsp;
-                  <button class="involvementButton2"><b>JOIN</b></button>
+                  <button class="involvementButton2" id="joinbuttonhome"><b>JOIN</b></button>
               </p>
           </div>
       </div>
@@ -57,12 +110,22 @@ document.addEventListener("DOMContentLoaded", function () {
   homeLink.addEventListener("click", loadHomePage);
 });
 
+// main functions for innerHTML
 function r_e(id) {
   return document.querySelector(`#${id}`);
 }
 function appendContent(html) {
   r_e("main").innerHTML = html;
 }
+
+// home page
+r_e("home-link").addEventListener("click", () => {
+  loadHomePage;
+  let check_auth = auth.currentUser;
+  if (check_auth != null) {
+    r_e("joinbuttonhome").classList.add("is-hidden");
+  }
+});
 
 let cal_page_content = `<main>
   <div id="cal_page" class="wrapper">
@@ -447,55 +510,13 @@ document.addEventListener("DOMContentLoaded", function () {
 // };
 
 // MODAL POP UP IN HTML
-// Login Modal
-function logclick() {
-  var modal = document.getElementById("logmodal");
-  modal.style.display = "block";
-}
+// let loginmodal = document.querySelector("#logmodal");
+// let loginbutton = document.querySelector("#loginbtn");
+// let login_mbg = document.querySelector("#log_modalbg")
 
-function logmodalclose() {
-  var modal = document.getElementById("logmodal");
-  modal.style.display = "none";
-}
-
-// when cancel is clicked the fields empty
-function clearFields() {
-  var emailField = document.querySelector('#logmodal input[type="email"]');
-  var passwordField = document.querySelector(
-    '#logmodal input[type="password"]'
-  );
-
-  emailField.value = ""; // Clearing the email input field
-  passwordField.value = ""; // Clearing the password input field
-}
-
-// Function to handle cancel button click event
-document
-  .getElementById("logcancel_btn")
-  .addEventListener("click", function (event) {
-    event.preventDefault(); // Prevent the default form submission behavior
-    clearFields(); // Clear the input fields
-  });
-
-// SIGN UP MODAL
-function signupclick() {
-  var modal = document.getElementById("signmodal");
-  modal.style.display = "block";
-}
-
-// Function to close the signup modal
-function signmodalclose() {
-  var modal = document.getElementById("signmodal");
-  modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the signup modal, close it
-window.onclick = function (event) {
-  var modal = document.getElementById("signmodal");
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-};
+// let signupmodal = document.querySelector("#signmodal");
+// let signupbutton = document.querySelector("#signupbtn");
+// let signup_mbg = document.querySelector("#sign_modalbg")
 
 // JavaScript to handle the burger menu toggle
 document.addEventListener("DOMContentLoaded", function () {
@@ -552,4 +573,77 @@ document.addEventListener("DOMContentLoaded", function () {
 //         .then(() => alert("Event added to database"))
 //         .catch(error => console.error("Error adding event: ", error));
 //     */
+// });
+// authentication
+
+function configure_message_bar(message) {
+  r_e("message_bar").classList.remove("is-hidden");
+  r_e("message_bar").innerHTML = message;
+  setTimeout(() => {
+    r_e("message_bar").classList.add("is-hidden");
+    r_e("message_bar").innerHTML = "";
+  }, 3000);
+}
+
+r_e("sign_form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  let email_val = r_e("email_").value;
+  let password_val = r_e("password_").value;
+  let full_name_val = r_e("signup_name").value;
+  auth
+    .createUserWithEmailAndPassword(email_val, password_val)
+    .then(() => {
+      let dbuser = { email: email_val, full_name: full_name_val };
+      db.collection("ama_users").add(dbuser);
+      r_e("sign_form").reset();
+      r_e("signmodal").classList.remove("is-active");
+      configure_message_bar(
+        `Signed Up Successfully - Welcome ${full_name_val}!`
+      );
+      r_e("signup_error").innerHTML = "";
+    })
+    .catch((err) => {
+      r_e("signup_error").innerHTML = err.message;
+    });
+});
+
+r_e("log_form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  let email_val = r_e("email").value;
+  let password_val = r_e("password").value;
+  auth
+    .signInWithEmailAndPassword(email_val, password_val)
+    .then(() => {
+      r_e("log_form").reset();
+      r_e("logmodal").classList.remove("is-active");
+      db.collection("ama_users")
+        .where(`email`, `==`, `${email_val}`)
+        .get()
+        .then((user) => {
+          configure_message_bar(
+            `Signed In Successfully - Welcome Back ${
+              user.docs[0].data().full_name
+            }!`
+          );
+        });
+      r_e("log_error").innerHTML = "";
+    })
+    .catch((err) => {
+      r_e("log_error").innerHTML = err.message;
+    });
+});
+
+// r_e("").addEventListener("click", () => {
+//   auth
+//     .signOut()
+//     .then(() => {
+//       configure_message_bar("Signed Out Successfully!");
+//       if (r_e("check_worldloc") != null || r_e("check_beansloc") != null) {
+//         appendContent(home_page_content);
+//         r_e("home_signup").addEventListener("click", show_signup_modal);
+//       }
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
 // });
