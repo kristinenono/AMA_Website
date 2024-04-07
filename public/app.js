@@ -1,3 +1,75 @@
+function configure_message_bar(message) {
+  r_e("message_bar").classList.remove("is-hidden");
+  r_e("message_bar").innerHTML = message;
+  setTimeout(() => {
+    r_e("message_bar").classList.add("is-hidden");
+    r_e("message_bar").innerHTML = "";
+  }, 3000);
+}
+
+r_e("sign_form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  let email_val = r_e("email_").value;
+  let password_val = r_e("password_").value;
+  let full_name_val = r_e("signup_name").value;
+  auth
+    .createUserWithEmailAndPassword(email_val, password_val)
+    .then(() => {
+      let dbuser = { email: email_val, full_name: full_name_val };
+      db.collection("ama_users").add(dbuser);
+      r_e("sign_form").reset();
+      r_e("signmodal").classList.remove("is-active");
+      configure_message_bar(
+        `Signed Up Successfully - Welcome ${full_name_val}!`
+      );
+      r_e("signup_error").innerHTML = "";
+    })
+    .catch((err) => {
+      r_e("signup_error").innerHTML = err.message;
+    });
+});
+
+r_e("log_form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  let email_val = r_e("email").value;
+  let password_val = r_e("password").value;
+  auth
+    .signInWithEmailAndPassword(email_val, password_val)
+    .then(() => {
+      r_e("log_form").reset();
+      r_e("logmodal").classList.remove("is-active");
+      db.collection("ama_users")
+        .where(`email`, `==`, `${email_val}`)
+        .get()
+        .then((user) => {
+          configure_message_bar(
+            `Signed In Successfully - Welcome Back ${
+              user.docs[0].data().full_name
+            }!`
+          );
+        });
+      r_e("log_error").innerHTML = "";
+    })
+    .catch((err) => {
+      r_e("log_error").innerHTML = err.message;
+    });
+});
+
+r_e("signout_button").addEventListener("click", () => {
+  auth
+    .signOut()
+    .then(() => {
+      configure_message_bar("Signed Out Successfully!");
+      if (r_e("cal_page") != null) {
+        loadHomePage;
+        r_e("joinbuttonhome").addEventListener("click", openSignupModal);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
 // check user
 auth.onAuthStateChanged((user) => {
   if (user) {
@@ -602,75 +674,3 @@ document.querySelector("#addevtsbt").addEventListener("click", () => {
 //     */
 // });
 // authentication
-
-function configure_message_bar(message) {
-  r_e("message_bar").classList.remove("is-hidden");
-  r_e("message_bar").innerHTML = message;
-  setTimeout(() => {
-    r_e("message_bar").classList.add("is-hidden");
-    r_e("message_bar").innerHTML = "";
-  }, 3000);
-}
-
-r_e("sign_form").addEventListener("submit", (e) => {
-  e.preventDefault();
-  let email_val = r_e("email_").value;
-  let password_val = r_e("password_").value;
-  let full_name_val = r_e("signup_name").value;
-  auth
-    .createUserWithEmailAndPassword(email_val, password_val)
-    .then(() => {
-      let dbuser = { email: email_val, full_name: full_name_val };
-      db.collection("ama_users").add(dbuser);
-      r_e("sign_form").reset();
-      r_e("signmodal").classList.remove("is-active");
-      configure_message_bar(
-        `Signed Up Successfully - Welcome ${full_name_val}!`
-      );
-      r_e("signup_error").innerHTML = "";
-    })
-    .catch((err) => {
-      r_e("signup_error").innerHTML = err.message;
-    });
-});
-
-r_e("log_form").addEventListener("submit", (e) => {
-  e.preventDefault();
-  let email_val = r_e("email").value;
-  let password_val = r_e("password").value;
-  auth
-    .signInWithEmailAndPassword(email_val, password_val)
-    .then(() => {
-      r_e("log_form").reset();
-      r_e("logmodal").classList.remove("is-active");
-      db.collection("ama_users")
-        .where(`email`, `==`, `${email_val}`)
-        .get()
-        .then((user) => {
-          configure_message_bar(
-            `Signed In Successfully - Welcome Back ${
-              user.docs[0].data().full_name
-            }!`
-          );
-        });
-      r_e("log_error").innerHTML = "";
-    })
-    .catch((err) => {
-      r_e("log_error").innerHTML = err.message;
-    });
-});
-
-r_e("signout_button").addEventListener("click", () => {
-  auth
-    .signOut()
-    .then(() => {
-      configure_message_bar("Signed Out Successfully!");
-      if (r_e("cal_page") != null) {
-        loadHomePage;
-        r_e("joinbuttonhome").addEventListener("click", openSignupModal);
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-});
