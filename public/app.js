@@ -1,3 +1,23 @@
+function r_e(id) {
+  return document.querySelector(`#${id}`);
+}
+let signmodal = r_e("signmodal");
+let logmodal = r_e("logmodal");
+let logbtn = r_e("logbtn");
+let signbtn = r_e("signbtn");
+
+// opening sign up and sign in modals :
+function openLoginModal() {
+  logmodal.classList.add("is-active");
+}
+
+function openSignupModal() {
+  signmodal.classList.add("is-active");
+  console.log();
+}
+
+// logbtn.addEventListener("click", openLoginModal);
+
 // main functions to use
 console.log(firebase);
 const mainContent = document.getElementById("main-content");
@@ -254,12 +274,22 @@ document.querySelector("#addevtsbt").addEventListener("click", () => {
   let evttype = document.querySelector("#evttype").value;
   let ptsassigned = document.querySelector("#ptsassigned").value;
   let descriptionevt = document.querySelector("#descriptionevt").value;
+  let evtcode = document.querySelector("#codeInput").value;
+
+  let month = new Date(evttime).getMonth() + 1;
+  let evtyear = new Date(evttime).getFullYear();
+
+  let season = month >= 1 && month <= 6 ? "SPRING" : "FALL";
+  console.log(season);
+  console.log(evtyear);
   let event = {
     name: evtname,
     time: evttime,
     evttype: evttype,
     pts: ptsassigned,
     desc: descriptionevt,
+    code: evtcode,
+    semester: `${season} ${evtyear}`,
   };
   db.collection("events")
     .add(event)
