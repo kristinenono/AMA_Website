@@ -3,19 +3,19 @@ auth.onAuthStateChanged((user) => {
     r_e("indicator").innerHTML = `Signed In As ${user.email}`;
     r_e("signout_button").classList.remove("is-hidden");
     r_e("indicator").classList.remove("is-hidden");
-    r_e("signup_button").classList.add("is-hidden");
-    r_e("signin_button").classList.add("is-hidden");
-    if (r_e("create_home") != null) {
-      r_e("create_home").classList.add("is-hidden");
+    r_e("signupbtn").classList.add("is-hidden");
+    r_e("signupbtn").classList.add("is-hidden");
+    if (r_e("joinbuttonhome") != null) {
+      r_e("joinbuttonhome").classList.add("is-hidden");
     }
   } else {
     r_e("indicator").innerHTML = "";
     r_e("signout_button").classList.add("is-hidden");
     r_e("indicator").classList.add("is-hidden");
-    r_e("signup_button").classList.remove("is-hidden");
-    r_e("signin_button").classList.remove("is-hidden");
-    if (r_e("create_home") != null) {
-      r_e("create_home").classList.remove("is-hidden");
+    r_e("signupbtn").classList.remove("is-hidden");
+    r_e("signupbtn").classList.remove("is-hidden");
+    if (r_e("joinbuttonhome") != null) {
+      r_e("joinbuttonhome").classList.remove("is-hidden");
     }
   }
 });
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <div>
               <p>
                   <button class="involvementButton1"><b>LEARN MORE</b></button>&nbsp;&nbsp;
-                  <button class="involvementButton2"><b>JOIN</b></button>
+                  <button class="involvementButton2" id="joinbuttonhome"><b>JOIN</b></button>
               </p>
           </div>
       </div>
