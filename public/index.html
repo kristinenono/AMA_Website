@@ -264,7 +264,6 @@
           </div>
         </div>
       </footer>
-    <script src="app.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
   // Grab the elements for login and signup buttons and modals
@@ -326,6 +325,7 @@
         // define authentication variable
         let auth = firebase.auth();
         let db = firebase.firestore();
+        let ref = firebase.storage().ref();
       </script>
       <script src="app.js"></script>
   </body>
