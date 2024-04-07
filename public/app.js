@@ -1,3 +1,25 @@
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    r_e("indicator").innerHTML = `Signed In As ${user.email}`;
+    r_e("signout_button").classList.remove("is-hidden");
+    r_e("indicator").classList.remove("is-hidden");
+    r_e("signup_button").classList.add("is-hidden");
+    r_e("signin_button").classList.add("is-hidden");
+    if (r_e("create_home") != null) {
+      r_e("create_home").classList.add("is-hidden");
+    }
+  } else {
+    r_e("indicator").innerHTML = "";
+    r_e("signout_button").classList.add("is-hidden");
+    r_e("indicator").classList.add("is-hidden");
+    r_e("signup_button").classList.remove("is-hidden");
+    r_e("signin_button").classList.remove("is-hidden");
+    if (r_e("create_home") != null) {
+      r_e("create_home").classList.remove("is-hidden");
+    }
+  }
+});
+
 // main functions to use
 const mainContent = document.getElementById("main-content");
 const homeLink = document.getElementById("home-link");
@@ -403,7 +425,6 @@ document.addEventListener("DOMContentLoaded", function () {
 // let signupmodal = document.querySelector("#signmodal");
 // let signupbutton = document.querySelector("#signupbtn");
 // let signup_mbg = document.querySelector("#sign_modalbg")
-
 
 // JavaScript to handle the burger menu toggle
 document.addEventListener("DOMContentLoaded", function () {
