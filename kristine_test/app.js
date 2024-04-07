@@ -119,6 +119,8 @@ document.addEventListener("click", function (event) {
   }
 });
 
+
+// Login/Signup Modal Open/Close 
 let loginmodal = document.querySelector("#logmodal");
 let loginbutton = document.querySelector("#loginbtn");
 let login_mbg = document.querySelector("#log_modalbg")

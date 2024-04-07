@@ -119,6 +119,36 @@ document.addEventListener("click", function (event) {
   }
 });
 
+// Login/Signup Modal Open/Close 
+let loginmodal = document.querySelector("#logmodal");
+let loginbutton = document.querySelector("#loginbtn");
+let login_mbg = document.querySelector("#log_modalbg")
+
+let signupmodal = document.querySelector("#signmodal");
+let signupbutton = document.querySelector("#signupbtn");
+let signup_mbg = document.querySelector("#sign_modalbg")
+
+// function to open up login and signup modals
+function openLoginModal() {
+  loginmodal.classList.add('is-active');
+};
+
+function openSignupModal() {
+  signupmodal.classList.add('is-active');
+};
+
+// click functions for login and signup buttons to open up the modal
+loginbutton.addEventListener('click', openLoginModal);
+signupbutton.addEventListener('click', openSignupModal);
+
+  // Close modals when clicking on the background or "X" button
+    document.querySelectorAll('.modal-background, .modal-close').forEach(function(el) {
+      el.addEventListener('click', function() {
+        loginmodal.classList.remove('is-active');
+        signupmodal.classList.remove('is-active');
+      });
+    });
+
 const calendarView = document.querySelector(".calview");
 const monthSelect = r_e("month-select");
 const prevMonthBtn = document.querySelector(".action_left");
@@ -394,48 +424,6 @@ document.addEventListener("DOMContentLoaded", function () {
 // document.getElementById("eventbtn").onclick = function () {
 //   openAddEventsPopup();
 // };
-
-// MODAL POP UP IN HTML
-
-  //     document.addEventListener('DOMContentLoaded', function() {
-  // // Grab the elements for login and signup buttons and modals
-  // var loginButton = document.getElementById('loginbtn');
-  // var signupButton = document.getElementById('signupbtn');
-  // var loginModal = document.getElementById('logmodal');
-  // var signupModal = document.getElementById('signmodal');
-
-  // // Function to open login modal
-  // function openLoginModal() {
-  //   loginModal.classList.add('is-active');
-  // }
-
-  // // Function to open signup modal
-  // function openSignupModal() {
-  //   signupModal.classList.add('is-active');
-  // }
-
-  // // Event listeners for login and signup buttons
-  // loginButton.addEventListener('click', openLoginModal);
-  // signupButton.addEventListener('click', openSignupModal);
-
-  //   // Close modals when clicking on the background or "X" button
-  //   document.querySelectorAll('.modal-background, .modal-close').forEach(function(el) {
-  //     el.addEventListener('click', function() {
-  //       loginModal.classList.remove('is-active');
-  //       signupModal.classList.remove('is-active');
-  //     });
-  //   });
-
-  // });
-
-let loginmodal = document.querySelector("#logmodal");
-let loginbutton = document.querySelector("#loginbtn");
-let login_mbg = document.querySelector("#log_modalbg")
-
-let signupmodal = document.querySelector("#signmodal");
-let signupbutton = document.querySelector("#signupbtn");
-let signup_mbg = document.querySelector("#sign_modalbg")
-
 
 // JavaScript to handle the burger menu toggle
 document.addEventListener("DOMContentLoaded", function () {
