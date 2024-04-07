@@ -576,10 +576,10 @@ r_e("log_form").addEventListener("submit", (e) => {
             }!`
           );
         });
-      r_e("signin_error").innerHTML = "";
+      r_e("log_error").innerHTML = "";
     })
     .catch((err) => {
-      r_e("signin_error").innerHTML = err.message;
+      r_e("log_error").innerHTML = err.message;
     });
 });
 
