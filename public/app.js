@@ -1,3 +1,4 @@
+// check user
 auth.onAuthStateChanged((user) => {
   if (user) {
     r_e("indicator").innerHTML = `Signed In As ${user.email}`;
@@ -109,12 +110,22 @@ document.addEventListener("DOMContentLoaded", function () {
   homeLink.addEventListener("click", loadHomePage);
 });
 
+// main functions for innerHTML
 function r_e(id) {
   return document.querySelector(`#${id}`);
 }
 function appendContent(html) {
   r_e("main").innerHTML = html;
 }
+
+// home page
+r_e("home-link").addEventListener("click", () => {
+  loadHomePage;
+  let check_auth = auth.currentUser;
+  if (check_auth != null) {
+    r_e("joinbuttonhome").classList.add("is-hidden");
+  }
+});
 
 let cal_page_content = `<main>
   <div id="cal_page" class="wrapper">
