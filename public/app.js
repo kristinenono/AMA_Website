@@ -77,7 +77,7 @@ auth.onAuthStateChanged((user) => {
     r_e("signout_button").classList.remove("is-hidden");
     r_e("indicator").classList.remove("is-hidden");
     r_e("signupbtn").classList.add("is-hidden");
-    r_e("signupbtn").classList.add("is-hidden");
+    r_e("loginbtn").classList.add("is-hidden");
     if (r_e("joinbuttonhome") != null) {
       r_e("joinbuttonhome").classList.add("is-hidden");
     }
