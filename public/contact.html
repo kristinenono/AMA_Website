@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Single Page Layout</title>
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/bcae03608a.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <header>
+      <!-- modal for login -->
+      <div id="logmodal" class="modal-h">
+        <!-- Modal content -->
+        <div class="modal-content-h">
+          <span class="modal-close-h" onclick="logmodalclose()">&times;</span>
+          <div class="modal-margin-h">
+            <!-- the sign in form for users -->
+            <form id="login_form">
+              <div id="login-form">
+                <p><b>TEMP LOG IN MODAL</b></p>
+              </div>
+              <!-- the email field -->
+              <p id="e-form">Email:</p>
+              <input
+                type="email"
+                placeholder="sampleemail@wisc.edu"
+                id="email-background"
+              />
+
+              <!-- the password field -->
+              <p id="e-form">Password:</p>
+              <input
+                type="password"
+                id="logpassword"
+                placeholder="password"
+                id="password-form"
+              />
+
+              <div class="button-container">
+                <button id="login_btn" class="loginbtn-style">
+                  <strong>Log In</strong>
+                </button>
+                <button
+                  id="logcancel_btn"
+                  class="loginbtn-style"
+                  onclick="closeModal()"
+                >
+                  <strong>Cancel</strong>
+                </button>
+              </div>
+              <!-- location where error is displayed if one occurs -->
+              <div class="error has-text-warning"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- sign up modal -->
+      <div id="signmodal" class="modal-h">
+        <!-- Modal content -->
+        <div class="modal-content-h">
+          <span class="modal-close-h" onclick="signmodalclose()">&times;</span>
+          <div class="modal-margin-h">
+            <!-- the sign in form for users -->
+            <form id="signup_form">
+              <div id="signup-forms">
+                <p><b>TEMP SIGN UP MODAL</b></p>
+              </div>
+              <!-- the email field -->
+              <p id="modal-format ">Email:</p>
+              <input
+                type="email"
+                placeholder="sampleemail@wisc.edu"
+                id="email-input"
+              />
+
+              <!-- the password field -->
+              <p id="modal-format ">Password:</p>
+              <input
+                type="password"
+                id="signpassword"
+                placeholder="password"
+                id="modal-password"
+              />
+
+              <div class="button-container">
+                <button id="signup_btn" class="loginbtn-style">
+                  <strong>Sign Up</strong>
+                </button>
+                <button id="signcancel_btn" class="loginbtn-style">
+                  <strong>Cancel</strong>
+                </button>
+              </div>
+              <!-- location where error is displayed if one occurs -->
+              <div class="error has-text-warning"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <nav>
+        <!-- website logo -->
+        <h1 class="navbar-item" id="navbar-item">
+          <img src="images/AMA_Logo.png" alt="" id="float-img" />
+          <div id="uw-madison">
+            <strong id="logo-text">University of Wisconsin Madison</strong>
+          </div>
+        </h1>
+        <a
+          role="button"
+          class="navbar-burger"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navbar"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </a>
+        <div class="login-signup">
+          <a id="login">
+            <button id="logbutton" class="add-btn button" onclick="logclick()">
+              <strong id="bttn-font">LOGIN</strong>
+            </button>
+          </a>
+          &nbsp; &nbsp;
+          <a id="signin">
+            <button
+              id="signbutton"
+              class="add-btn button"
+              onclick="signupclick()"
+            >
+              <strong id="bttn-font">SIGN UP</strong>
+            </button>
+          </a>
+        </div>
+        <div class="navbar-menu">
+          <div>
+            <a href="index.html" id="home-link"
+              ><strong id="home-nav">HOME</strong></a
+            >
+            <a id="format-link1"><strong id="format-nav">ABOUT</strong></a>
+            <div class="dropdown">
+              <button class="bttn1">
+                <strong id="format-nav">MEMBERS</strong>
+              </button>
+              <div class="dropdown-content">
+                <a href="calendar.html" id="calendarbtn">CALENDAR</a>
+                <a href="points.html" id="pointbtn">POINT SYSTEM</a>
+              </div>
+            </div>
+            <a href="blog.html" id="blog-link"
+              ><strong id="format-nav">BLOG</strong></a
+            >
+            <a id="format-link"><strong id="format-nav">CONTACT</strong></a>
+            <div class="login-signup-burger">
+              <a id="login">
+                <button id="logbtn" class="add-btn button">
+                  <strong id="bttn-font">LOGIN</strong>
+                </button>
+              </a>
+              &nbsp; &nbsp;
+              <a id="signin">
+                <button id="signbtn" class="add-btn button">
+                  <strong id="bttn-font">SIGN UP</strong>
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div id="contactSectionTop" class="contactSection-box contactTopFormat">
+        <h2 class="primaryheader">Let's get in touch.</h2>
+        <h3 class="tertiaryHeader">
+          <a href="mailto:amauwmadison@gmail.com">amauwmadison@gmail.com</a>
+        </h3>
+
+        <div class="social-icons-container">
+          <a
+            href="mailto:amauwmadison@gmail.com"
+            class="social-icon"
+            title="Email"
+          >
+            <i class="fas fa-envelope fa-2x"></i>
+          </a>
+          <a
+            href="https://www.instagram.com/amabadgers/"
+            class="social-icon"
+            title="Instagram"
+          >
+            <i class="fab fa-instagram fa-2x"></i>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/ama-badgers-5247a9252/"
+            class="social-icon"
+            title="LinkedIn"
+          >
+            <i class="fab fa-linkedin fa-2x"></i>
+          </a>
+          <a
+            href="https://www.tiktok.com/@ama.badgers"
+            class="social-icon"
+            title="TikTok"
+          >
+            <i class="fab fa-tiktok fa-2x"></i>
+          </a>
+        </div>
+      </div>
+
+      <div id="contactFormSection" class="contactFormSection">
+        <div class="contactFormText">
+          <h3 class="secondaryheader">Have a question?</h3>
+          <h4 class="tertiaryHeader">
+            Contact us through this form and we'll get back to you shortly.
+          </h4>
+        </div>
+        <div class="contactForm-flex">
+          <form action="https://api.web3forms.com/submit" method="POST">
+            <input
+              type="hidden"
+              name="access_key"
+              value="a4172b4c-7ec1-4f25-824e-9653e33b2437"
+              class="contact-form"
+              data-reveal="right"
+            />
+            <div class="field is-horizontal">
+              <div class="input-wrapper">
+                <input
+                  id="name"
+                  type="text"
+                  name="name"
+                  placeholder="First and Last Name *"
+                  required
+                  class="input-field"
+                />
+              </div>
+              <div class="input-wrapper">
+                <input
+                  id="name"
+                  type="email"
+                  name="email_address"
+                  placeholder="Email *"
+                  required
+                  class="input-field"
+                />
+              </div>
+            </div>
+
+            <textarea
+              id="message"
+              name="message"
+              placeholder="Message *"
+              required
+              class="input-field"
+            ></textarea>
+
+            <button type="submit" class="contactBtn" id="submit">
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-box">
+        <div class="footer-section">
+          <div class="navbar-items">
+            <img src="images/AMA_Logo_Footer.png" alt="" id="img_logo" />
+            <div id="uw-wisc">
+              <strong id="footer-uw-logo" class="text-logo"
+                >University of Wisconsin Madison</strong
+              >
+            </div>
+          </div>
+          <div class="social-icons" id="icons">
+            <a
+              href="https://www.linkedin.com/in/ama-badgers-5247a9252/"
+              id="social-icon"
+            >
+              <i class="fab fa-linkedin fa-2x"></i>
+            </a>
+            <a href="https://www.instagram.com/amabadgers/" id="social-icon">
+              <i class="fab fa-instagram fa-2x"></i>
+            </a>
+            <a href="https://www.facebook.com/AMAUWMadison/" id="social-icon">
+              <i class="fab fa-facebook fa-2x"></i>
+            </a>
+            <a href="https://twitter.com/amauwmadison?lang=en">
+              <i class="fab fa-twitter fa-2x"></i>
+            </a>
+          </div>
+          <div id="adress">
+            <p>975 University Ave, Madison, WI 53706</p>
+            <p id="phone">+00 000 000 000</p>
+          </div>
+        </div>
+        <div class="footer-section" id="footer-link-padding">
+          <div>
+            <div id="footer-padding">
+              <a href="#"><b>About Us</b></a>
+            </div>
+            <div id="footer-padding">
+              <a href="#"><b>Blog</b></a>
+            </div>
+            <div id="footer-padding">
+              <a href="#"><b>Point System</b></a>
+            </div>
+            <div id="footer-padding">
+              <a href="#"><b>Contact Us</b></a>
+            </div>
+            <div id="footer-padding">
+              <a href="calendar.html"><b>Events</b></a>
+            </div>
+            <div id="footer-padding">
+              <a href="#"><b>Become a Sponsor</b></a>
+            </div>
+          </div>
+        </div>
+        <div id="line"></div>
+        <div class="footer-section">
+          <h2>JOIN OUR EMAIL LIST</h2>
+          <p>
+            Want to become an official member of the Badger American Marketing
+            Association or just be added to the email list? Fill out our member
+            form to stay up to date on upcoming events!
+          </p>
+          <input type="text" placeholder="Enter your email here" />
+          <button id="submit_btn">
+            <p>SUBMIT</p>
+          </button>
+        </div>
+      </div>
+    </footer>
+    <script src="app.js"></script>
+  </body>
+</html>
