@@ -86,7 +86,7 @@ auth.onAuthStateChanged((user) => {
     r_e("signout_button").classList.add("is-hidden");
     r_e("indicator").classList.add("is-hidden");
     r_e("signupbtn").classList.remove("is-hidden");
-    r_e("signupbtn").classList.remove("is-hidden");
+    r_e("loginbtn").classList.remove("is-hidden");
     if (r_e("joinbuttonhome") != null) {
       r_e("joinbuttonhome").classList.remove("is-hidden");
     }
@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
     event.preventDefault();
     mainContent.innerHTML = `<div class="titleContainers">
       <div class="column column1">
-          <h1 class="title">Welcome to <br />AMA UW-Madison</h1>
+          <h1 class="title has-text-light">Welcome to <br />AMA UW-Madison</h1>
       </div>
       <div class="column column2">
           <img src="images/capitalPlaceholder.png" alt="MadisonCapital" width="100%" height="100%" />
