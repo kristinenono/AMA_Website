@@ -93,81 +93,50 @@ auth.onAuthStateChanged((user) => {
   }
 });
 
-// // Grab the elements for login and signup buttons and modals
-// var loginButton = document.getElementById("loginbtn");
-// var signupButton = document.getElementById("signupbtn");
-// var loginModal = document.getElementById("logmodal");
-// var signupModal = document.getElementById("signmodal");
+// Grab the elements for login and signup buttons and modals
+var loginButton = document.getElementById("loginbtn");
+var signupButton = document.getElementById("signupbtn");
+var loginModal = document.getElementById("logmodal");
+var signupModal = document.getElementById("signmodal");
 
-// // Function to open login modal
-// function openLoginModal() {
-//   loginModal.classList.add("is-active");
-// }
-
-// // Function to open signup modal
-// function openSignupModal() {
-//   signupModal.classList.add("is-active");
-// }
-
-// // Event listeners for login and signup buttons
-// loginButton.addEventListener("click", openLoginModal);
-// signupButton.addEventListener("click", openSignupModal);
-
-// // Close modals when clicking on the background or "X" button
-// document
-//   .querySelectorAll(".modal-background, .modal-close")
-//   .forEach(function (el) {
-//     el.addEventListener("click", function () {
-//       loginModal.classList.remove("is-active");
-//       signupModal.classList.remove("is-active");
-//     });
-//   });
-
-// let signup_cancel = document.querySelector("#signup_cancel");
-// signup_cancel.addEventListener("click", () => {
-//   r_e("signmodal").classList.remove("is-active");
-// });
-// let log_cancel = document.querySelector("#log_cancel");
-// log_cancel.addEventListener("click", loginModal.classList.remove("is-active"));
-// r_e("user_found").addEventListener("click", () => {
-//   if (signup_modal.classList.contains("is-active")) {
-//     signup_modal.classList.remove("is-active");
-//     login_modal.classList.add("is-active");
-//   }
-// });
-
-// MOVE MODAL TO THE TOP
-// Login/Signup Modal Open/Close
-let loginmodal = document.querySelector("#logmodal");
-let loginbutton = document.querySelector("#loginbtn");
-let login_mbg = document.querySelector("#log_modalbg");
-
-let signupmodal = document.querySelector("#signmodal");
-let signupbutton = document.querySelector("#signupbtn");
-let signup_mbg = document.querySelector("#sign_modalbg");
-
-// function to open up login and signup modals
+// Function to open login modal
 function openLoginModal() {
-  loginmodal.classList.add("is-active");
+  loginModal.classList.add("is-active");
 }
 
+// Function to open signup modal
 function openSignupModal() {
-  signupmodal.classList.add("is-active");
+  signupModal.classList.add("is-active");
 }
 
-// click functions for login and signup buttons to open up the modal
-loginbutton.addEventListener("click", openLoginModal);
-signupbutton.addEventListener("click", openSignupModal);
+// Event listeners for login and signup buttons
+loginButton.addEventListener("click", openLoginModal);
+signupButton.addEventListener("click", openSignupModal);
 
 // Close modals when clicking on the background or "X" button
 document
   .querySelectorAll(".modal-background, .modal-close")
   .forEach(function (el) {
     el.addEventListener("click", function () {
-      loginmodal.classList.remove("is-active");
-      signupmodal.classList.remove("is-active");
+      loginModal.classList.remove("is-active");
+      signupModal.classList.remove("is-active");
     });
   });
+
+let signup_cancel = document.querySelector("#signup_cancel");
+signup_cancel.addEventListener("click", () => {
+  r_e("signmodal").classList.remove("is-active");
+});
+let log_cancel = document.querySelector("#log_cancel");
+log_cancel.addEventListener("click", () => {
+  loginModal.classList.remove("is-active");
+});
+r_e("user_found").addEventListener("click", () => {
+  if (signup_modal.classList.contains("is-active")) {
+    signup_modal.classList.remove("is-active");
+    login_modal.classList.add("is-active");
+  }
+});
 
 let home_page_content = `<div class="titleContainers">
 <div class="column column1">
