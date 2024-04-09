@@ -487,6 +487,108 @@ r_e("pointbtn").addEventListener("click", () => {
     appendContent(points_content);
   }
 });
+// contact page content
+let contact_content = `<div id="contactSectionTop" class="contactSection-box contactTopFormat">
+<h2 class="primaryheader">Let's get in touch.</h2>
+<h3 class="tertiaryHeader">
+  <a href="mailto:amauwmadison@gmail.com">amauwmadison@gmail.com</a>
+</h3>
+
+<div class="social-icons-container">
+  <a
+    href="mailto:amauwmadison@gmail.com"
+    class="social-icon"
+    title="Email"
+  >
+    <i class="fas fa-envelope fa-2x"></i>
+  </a>
+  <a
+    href="https://www.instagram.com/amabadgers/"
+    class="social-icon"
+    title="Instagram"
+  >
+    <i class="fab fa-instagram fa-2x"></i>
+  </a>
+  <a
+    href="https://www.linkedin.com/in/ama-badgers-5247a9252/"
+    class="social-icon"
+    title="LinkedIn"
+  >
+    <i class="fab fa-linkedin fa-2x"></i>
+  </a>
+  <a
+    href="https://www.tiktok.com/@ama.badgers"
+    class="social-icon"
+    title="TikTok"
+  >
+    <i class="fab fa-tiktok fa-2x"></i>
+  </a>
+</div>
+</div>
+
+<div id="contactFormSection" class="contactFormSection">
+<div class="contactFormText">
+  <h3 class="secondaryheader">Have a question?</h3>
+  <h4 class="tertiaryHeader">
+    Contact us through this form and we'll get back to you shortly.
+  </h4>
+</div>
+<div class="contactForm-flex">
+  <form action="https://api.web3forms.com/submit" method="POST">
+    <input
+      type="hidden"
+      name="access_key"
+      value="a4172b4c-7ec1-4f25-824e-9653e33b2437"
+      class="contact-form"
+      data-reveal="right"
+    />
+    <div class="field is-horizontal">
+      <div class="input-wrapper">
+        <input
+          id="name"
+          type="text"
+          name="name"
+          placeholder="First and Last Name *"
+          required
+          class="input-field"
+        />
+      </div>
+      <div class="input-wrapper">
+        <input
+          id="name"
+          type="email"
+          name="email_address"
+          placeholder="Email *"
+          required
+          class="input-field"
+        />
+      </div>
+    </div>
+
+    <textarea
+      id="message"
+      name="message"
+      placeholder="Message *"
+      required
+      class="input-field"
+    ></textarea>
+
+    <button type="submit" class="contactBtn" id="submit">
+      Send Message
+    </button>
+  </form>
+</div>
+</div>`;
+r_e("contact-link").addEventListener("click", () => {
+  appendContent(contact_content);
+  let check_auth = auth.currentUser;
+  if (check_auth == null) {
+    signup_modal.classList.add("is-active");
+  }
+  if (check_auth != null) {
+    appendContent(contact_content);
+  }
+});
 let blog_content = ` <main>
 <div class="blogpage">
   <div id="blogSection" class="blogSection-box">
@@ -752,98 +854,6 @@ r_e("blog-link").addEventListener("click", () => {
   }
 });
 
-// contact page content
-let contact_content = `<div id="contactSectionTop" class="contactSection-box contactTopFormat">
-<h2 class="primaryheader">Let's get in touch.</h2>
-<h3 class="tertiaryHeader">
-  <a href="mailto:amauwmadison@gmail.com">amauwmadison@gmail.com</a>
-</h3>
-
-<div class="social-icons-container">
-  <a
-    href="mailto:amauwmadison@gmail.com"
-    class="social-icon"
-    title="Email"
-  >
-    <i class="fas fa-envelope fa-2x"></i>
-  </a>
-  <a
-    href="https://www.instagram.com/amabadgers/"
-    class="social-icon"
-    title="Instagram"
-  >
-    <i class="fab fa-instagram fa-2x"></i>
-  </a>
-  <a
-    href="https://www.linkedin.com/in/ama-badgers-5247a9252/"
-    class="social-icon"
-    title="LinkedIn"
-  >
-    <i class="fab fa-linkedin fa-2x"></i>
-  </a>
-  <a
-    href="https://www.tiktok.com/@ama.badgers"
-    class="social-icon"
-    title="TikTok"
-  >
-    <i class="fab fa-tiktok fa-2x"></i>
-  </a>
-</div>
-</div>
-
-<div id="contactFormSection" class="contactFormSection">
-<div class="contactFormText">
-  <h3 class="secondaryheader">Have a question?</h3>
-  <h4 class="tertiaryHeader">
-    Contact us through this form and we'll get back to you shortly.
-  </h4>
-</div>
-<div class="contactForm-flex">
-  <form action="https://api.web3forms.com/submit" method="POST">
-    <input
-      type="hidden"
-      name="access_key"
-      value="a4172b4c-7ec1-4f25-824e-9653e33b2437"
-      class="contact-form"
-      data-reveal="right"
-    />
-    <div class="field is-horizontal">
-      <div class="input-wrapper">
-        <input
-          id="name"
-          type="text"
-          name="name"
-          placeholder="First and Last Name *"
-          required
-          class="input-field"
-        />
-      </div>
-      <div class="input-wrapper">
-        <input
-          id="name"
-          type="email"
-          name="email_address"
-          placeholder="Email *"
-          required
-          class="input-field"
-        />
-      </div>
-    </div>
-
-    <textarea
-      id="message"
-      name="message"
-      placeholder="Message *"
-      required
-      class="input-field"
-    ></textarea>
-
-    <button type="submit" class="contactBtn" id="submit">
-      Send Message
-    </button>
-  </form>
-</div>
-</div>`;
 let test = r_e("");
 
 // Get the modal
@@ -1032,17 +1042,6 @@ function saveEdit(postId) {
 
 // Call the function to display existing posts when the page loads
 show_posts();
-
-r_e("contact-link").addEventListener("click", () => {
-  appendContent(contact_content);
-  let check_auth = auth.currentUser;
-  if (check_auth == null) {
-    signup_modal.classList.add("is-active");
-  }
-  if (check_auth != null) {
-    appendContent(contact_content);
-  }
-});
 
 const calendarView = document.querySelector(".calview");
 const monthSelect = r_e("month-select");
