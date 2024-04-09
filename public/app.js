@@ -131,10 +131,11 @@ let log_cancel = document.querySelector("#log_cancel");
 log_cancel.addEventListener("click", () => {
   loginModal.classList.remove("is-active");
 });
+
 r_e("user_found").addEventListener("click", () => {
-  if (signup_modal.classList.contains("is-active")) {
-    signup_modal.classList.remove("is-active");
-    login_modal.classList.add("is-active");
+  if (signupModal.classList.contains("is-active")) {
+    signupModal.classList.remove("is-active");
+    loginModal.classList.add("is-active");
   }
 });
 
@@ -798,9 +799,9 @@ cal_page_content += `<div class="colormargins margin-right">
 </main>`;
 
 // click event for cal
-r_e("calendarbtn").addEventListener("click", () => {
-  appendContent(cal_page_content);
-});
+// r_e("calendarbtn").addEventListener("click", () => {
+//   appendContent(cal_page_content);
+// });
 // addEventModal
 let addEventForm = r_e("popupmodal");
 
@@ -965,15 +966,6 @@ document.addEventListener("DOMContentLoaded", function () {
 // document.getElementById("eventbtn").onclick = function () {
 //   openAddEventsPopup();
 // };
-
-// MODAL POP UP IN HTML
-// let loginmodal = document.querySelector("#logmodal");
-// let loginbutton = document.querySelector("#loginbtn");
-// let login_mbg = document.querySelector("#log_modalbg")
-
-// let signupmodal = document.querySelector("#signmodal");
-// let signupbutton = document.querySelector("#signupbtn");
-// let signup_mbg = document.querySelector("#sign_modalbg")
 
 // JavaScript to handle the burger menu toggle
 document.addEventListener("DOMContentLoaded", function () {
