@@ -1366,3 +1366,45 @@ textarea.input-field {
   background-color: var(--secondaryred);
   color: white;
 }
+/* blog page */
+.blogSection-box {
+  width: 75%;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+#blogSection {
+  width: 75%;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 50px auto;
+  text-align: center;
+}
+.addPostBtn {
+  margin-top: 30px;
+  background-color: #1f304f;
+  border: none;
+  width: 10rem;
+  height: 3rem;
+  color: #fafbfc;
+  font-family: var(--titleFontFamily);
+  font-size: 20px;
+  border-radius: var(--radius-8);
+}
+.addPostBtn:hover {
+  background-color: var(--lightGray);
+  color: var(--primarynavy);
+}
+#submitPost {
+  margin-top: 10px;
+  background-color: #1f304f;
+  border: none;
+  width: 6rem;
+  height: 3rem;
+  color: #fafbfc;
+  font-family: var(--titleFontFamily);
+  font-size: 18px;
+  border-radius: var(--radius-8);
+}
