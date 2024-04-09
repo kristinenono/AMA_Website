@@ -324,6 +324,9 @@ r_e("calendarbtn").addEventListener("click", () => {
     </div>
     <div class="calview">
 </div>`;
+    cal_page_content += `<div class="colormargins margin-right">
+<a href="#" class="add-btn2" id="eventbtn">Add Event</a>
+</main>`;
     appendContent(cal_page_content);
   }
 });
@@ -659,38 +662,6 @@ r_e("contact-link").addEventListener("click", () => {
   }
 });
 
-// // Login/Signup Modal Open/Close
-// let loginmodal = document.querySelector("#logmodal");
-// let loginbutton = document.querySelector("#loginbtn");
-// let login_mbg = document.querySelector("#log_modalbg");
-
-// let signupmodal = document.querySelector("#signmodal");
-// let signupbutton = document.querySelector("#signupbtn");
-// let signup_mbg = document.querySelector("#sign_modalbg");
-
-// // function to open up login and signup modals
-// function openLoginModal() {
-//   loginmodal.classList.add("is-active");
-// }
-
-// function openSignupModal() {
-//   signupmodal.classList.add("is-active");
-// }
-
-// // click functions for login and signup buttons to open up the modal
-// loginbutton.addEventListener("click", openLoginModal);
-// signupbutton.addEventListener("click", openSignupModal);
-
-// // Close modals when clicking on the background or "X" button
-// document
-//   .querySelectorAll(".modal-background, .modal-close")
-//   .forEach(function (el) {
-//     el.addEventListener("click", function () {
-//       loginmodal.classList.remove("is-active");
-//       signupmodal.classList.remove("is-active");
-//     });
-//   });
-
 const calendarView = document.querySelector(".calview");
 const monthSelect = r_e("month-select");
 const prevMonthBtn = document.querySelector(".action_left");
@@ -798,10 +769,6 @@ cal_page_content += `<div class="colormargins margin-right">
 <a href="#" class="add-btn2" id="eventbtn">Add Event</a>
 </main>`;
 
-// click event for cal
-// r_e("calendarbtn").addEventListener("click", () => {
-//   appendContent(cal_page_content);
-// });
 // addEventModal
 let addEventForm = r_e("popupmodal");
 
@@ -900,27 +867,6 @@ eventclose4.addEventListener("click", () => {
   eventCard4.classList.remove("is-active");
 });
 
-// // JavaScript to handle the burger menu toggle
-// document.addEventListener("DOMContentLoaded", function () {
-//   const burger = document.querySelector(".navbar-burger");
-//   const menu = document.querySelector(".navbar-menu");
-//   const loginSignupBurger = document.querySelector(".login-signup-burger");
-
-//   burger.addEventListener("click", function () {
-//     burger.classList.toggle("active");
-//     menu.classList.toggle("active");
-//     loginSignupBurger.classList.toggle("active"); // Toggle login and signup in burger menu
-//   });
-
-//   window.addEventListener("resize", function () {
-//     if (window.innerWidth > 768) {
-//       burger.classList.remove("active");
-//       menu.classList.remove("active");
-//       loginSignupBurger.classList.remove("active"); // Remove active class on resize
-//     }
-//   });
-// });
-
 document.addEventListener("DOMContentLoaded", function () {
   const viewEventLinks = document.querySelectorAll(".events-button");
   const eventCard = document.getElementById("eventCard");
@@ -966,28 +912,6 @@ document.addEventListener("DOMContentLoaded", function () {
 // document.getElementById("eventbtn").onclick = function () {
 //   openAddEventsPopup();
 // };
-
-// JavaScript to handle the burger menu toggle
-document.addEventListener("DOMContentLoaded", function () {
-  const burger = document.querySelector(".navbar-burger");
-  const menu = document.querySelector(".navbar-menu");
-  const loginSignupBurger = document.querySelector(".login-signup-burger");
-  const backgroundDiv = document.querySelector(".background-div");
-
-  burger.addEventListener("click", function () {
-    burger.classList.toggle("active");
-    menu.classList.toggle("active");
-    loginSignupBurger.classList.toggle("active"); // Toggle login and signup in burger menu
-  });
-
-  window.addEventListener("resize", function () {
-    if (window.innerWidth > 768) {
-      burger.classList.remove("active");
-      menu.classList.remove("active");
-      loginSignupBurger.classList.remove("active"); // Remove active class on resize
-    }
-  });
-});
 
 // console.log(firebase);
 
