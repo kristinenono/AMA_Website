@@ -54,13 +54,63 @@ b. What are you planning to do today?
 Nothing today - plan on working on fixing the point system page and looking at the auth and what we can do to fix it. 
 c. Any problems are you facing?
 
+
+
 Wyatt
 a. What did you do yesterday?
-nothing
-b. What are you planning to do today?
-started working on his version of the html and the cards page
-c. Any problems are you facing?
-waiting on the auth to be completed. 
 
+b. What are you planning to do today?
+
+c. Any problems are you facing?
+
+
+*#2: 4.9.24*
+Carly
+a. What did you do yesterday?
+getting the auth to work, updating the modals, and adding css styling to the buttons
+b. What are you planning to do today?
+calendar
+c. Any problems are you facing?
+join button should be leading to a contact us page 
+
+Anvita
+a. What did you do yesterday?
+tried to work on the auth and worked on the date formatting for the points page 
+b. What are you planning to do today?
+work on the calendar to make sure it loads correctly 
+c. Any problems are you facing?
+the calendar doesnt work
+
+Kristine
+a. What did you do yesterday?
+tried to work on the auth
+b. What are you planning to do today?
+working on the styling and making the save button work in the points system
+c. Any problems are you facing?
+nothing
+
+Grace
+a. What did you do yesterday?
+worked on the blog page and pushed it 
+b. What are you planning to do today?
+try and start on what we are working on on thursday for the user levels 
+c. Any problems are you facing?
+no
+
+Kieren
+a. What did you do yesterday?
+tried on the auth
+b. What are you planning to do today?
+worked on the database and connecting db members and points to table, moving inline script to js
+c. Any problems are you facing?
+
+
+Wyatt
+a. What did you do yesterday?
+finished the html and css for both member points and cal 
+b. What are you planning to do today?
+completing the js to link the button on the cal page to the points, starting to db
+c. Any problems are you facing?
+no
 
 
