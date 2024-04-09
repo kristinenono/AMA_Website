@@ -528,6 +528,36 @@ r_e("calendarbtn").addEventListener("click", () => {
 
     eventclose4.addEventListener("click", () => {
       eventCard4.classList.remove("is-active");
+      document.querySelector("#addevtsbt").addEventListener("click", () => {
+        alert("event added");
+      });
+      const addevtsbt = r_e("addevtsbt");
+      let evtname = r_e("evtname");
+      let evttime = r_e("datetime");
+      let evttype = r_e("evttype");
+      let ptsassigned = r_e("ptsassigned");
+      let descriptionevt = r_e("descriptionevt");
+
+      addevtsbt.addEventListener("click", () => {
+        alert("event added");
+        // Uncomment the below lines if you're ready to use them for adding event details to the database
+        let name = evtname.value;
+        let time = evttime.value;
+        let type = evttype.value;
+        let pts = ptsassigned.value;
+        let desc = descriptionevt.value;
+        let event = {
+          name: name,
+          time: time,
+          type: type,
+          pts: pts,
+          desc: desc,
+        };
+        db.collection("events")
+          .add(event)
+          .then(() => alert("Event added to database"))
+          .catch((error) => console.error("Error adding event: ", error));
+      });
     });
 
     // // JavaScript to handle the burger menu toggle
@@ -932,38 +962,6 @@ r_e("contact-link").addEventListener("click", () => {
 
 // console.log(firebase);
 
-document.querySelector("#addevtsbt").addEventListener("click", () => {
-  alert("event added");
-});
-// const addevtsbt = r_e("addevtsbt");
-// let evtname = r_e("evtname");
-// let evttime = r_e("datetime");
-// let evttype = r_e("evttype");
-// let ptsassigned = r_e("ptsassigned");
-// let descriptionevt = r_e("descriptionevt");
-
-// addevtsbt.addEventListener("click", () => {
-//   alert("event added");
-//   // Uncomment the below lines if you're ready to use them for adding event details to the database
-//   /*
-//     let name = evtname.value;
-//     let time = evttime.value;
-//     let type = evttype.value;
-//     let pts = ptsassigned.value;
-//     let desc = descriptionevt.value;
-//     let event = {
-//         name: name,
-//         time: time,
-//         type: type,
-//         pts: pts,
-//         desc: desc,
-//     };
-//     db.collection("events")
-//         .add(event)
-//         .then(() => alert("Event added to database"))
-//         .catch(error => console.error("Error adding event: ", error));
-//     */
-// });
 // authentication
 
 // expand burger
