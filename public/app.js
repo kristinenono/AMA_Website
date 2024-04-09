@@ -274,6 +274,7 @@ r_e("abt-link").addEventListener("click", () => {
 
 // Cal page content
 r_e("calendarbtn").addEventListener("click", () => {
+  configure_message_bar("must sign in to view");
   let check_auth = auth.currentUser;
   if (check_auth == null) {
     signup_modal.classList.add("is-active");
