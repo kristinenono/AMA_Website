@@ -1,3 +1,26 @@
+var loginButton = document.getElementById("loginbtn");
+var signupButton = document.getElementById("signupbtn");
+var loginModal = document.getElementById("logmodal");
+var signupModal = document.getElementById("signmodal");
+
+// Function to open login modal
+function openLoginModal() {
+  loginModal.classList.add("is-active");
+}
+
+// Function to open signup modal
+function openSignupModal() {
+  signupModal.classList.add("is-active");
+}
+
+try {
+  // Your code that might throw an error goes here
+  loginButton.addEventListener("click", openLoginModal);
+  signupButton.addEventListener("click", openSignupModal);
+} catch (error) {
+  // Handle the error
+  console.error("An error occurred:", error);
+}
 // main functions to use
 console.log(firebase);
 const mainContent = document.getElementById("main-content");
