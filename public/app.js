@@ -487,69 +487,262 @@ r_e("pointbtn").addEventListener("click", () => {
     appendContent(points_content);
   }
 });
-let blog_content = `<div class="container my-4">
-<div class="card">
-  <header class="card-header">
-    <p class="card-header-title">Blog Title</p>
-    </button>
-  </header>
-  <div class="card-content">
-    <div class="content">
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus, aspernatur? Nobis perspiciatis illum incidunt vero quia doloribus assumenda aperiam. Culpa quidem porro harum tenetur maxime repellat doloremque, quod iusto alias reiciendis minima placeat. Autem impedit unde ducimus, maxime voluptatibus, ut vitae at ratione harum iure optio ullam quidem repellendus? Architecto rem consectetur, dolore praesentium similique unde eius? Eveniet, fuga eum quasi veritatis repellendus soluta dignissimos porro cum, tenetur quisquam repudiandae dolore. Aspernatur, explicabo amet. Eius voluptatibus tempora sunt inventore ipsam laborum, reprehenderit libero voluptate aperiam, nesciunt harum deserunt aspernatur eaque magni commodi. Sit illum totam assumenda! Voluptatum tempora ex temporibus!
-      <br />
-      <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-    </div>
+let blog_content = ` <main>
+<div class="blogpage">
+  <div id="blogSection" class="blogSection-box">
+    <h2 class="primaryheader">Blog</h2>
+    <p class="primaryBody">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum at
+      magni porro voluptatibus, quasi doloribus provident officiis, illo
+      hic laborum distinctio mollitia quis minima ducimus.
+    </p>
+    <button id="addPostButton" class="addPostBtn">Add a post</button>
   </div>
-  <footer class="card-footer">
-    <a href="#" class="card-footer-item">Save</a>
-    <a href="#" class="card-footer-item">Edit</a>
-    <a href="#" class="card-footer-item">Delete</a>
-  </footer>
-</div>
-</div> 
-<div class="container my-4">
-<div class="card">
-  <header class="card-header">
-    <p class="card-header-title">Blog Title</p>
-    </button>
-  </header>
-  <div class="card-content">
-    <div class="content">
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus, aspernatur? Nobis perspiciatis illum incidunt vero quia doloribus assumenda aperiam. Culpa quidem porro harum tenetur maxime repellat doloremque, quod iusto alias reiciendis minima placeat. Autem impedit unde ducimus, maxime voluptatibus, ut vitae at ratione harum iure optio ullam quidem repellendus? Architecto rem consectetur, dolore praesentium similique unde eius? Eveniet, fuga eum quasi veritatis repellendus soluta dignissimos porro cum, tenetur quisquam repudiandae dolore. Aspernatur, explicabo amet. Eius voluptatibus tempora sunt inventore ipsam laborum, reprehenderit libero voluptate aperiam, nesciunt harum deserunt aspernatur eaque magni commodi. Sit illum totam assumenda! Voluptatum tempora ex temporibus!
-      <br />
-      <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+
+  <div id="addPostForm" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <div class="box">
+        <h1
+          id="addPostTitle"
+          class="card-header-title is-centered is-large is-size-4"
+        >
+          Add a Blog Post
+        </h1>
+        <div class="field">
+          <label class="label">Title</label>
+          <div class="control">
+            <input class="input" type="text" id="title" />
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Message</label>
+          <div class="control">
+            <textarea class="textarea" id="message"></textarea>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Author</label>
+          <div class="control">
+            <input class="input" type="text" id="author" />
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Date</label>
+          <div class="control">
+            <input class="input" type="date" id="date" />
+          </div>
+        </div>
+        <button id="submitPost" class="button">Submit</button>
+      </div>
     </div>
+    <button class="modal-close is-large" aria-label="close"></button>
   </div>
-  <footer class="card-footer">
-    <a href="#" class="card-footer-item">Save</a>
-    <a href="#" class="card-footer-item">Edit</a>
-    <a href="#" class="card-footer-item">Delete</a>
-  </footer>
-</div>
-</div> 
-<div class="container my-4">
-<div class="card">
-  <header class="card-header">
-    <p class="card-header-title">Blog Title</p>
-    </button>
-  </header>
-  <div class="card-content">
-    <div class="content">
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus, aspernatur? Nobis perspiciatis illum incidunt vero quia doloribus assumenda aperiam. Culpa quidem porro harum tenetur maxime repellat doloremque, quod iusto alias reiciendis minima placeat. Autem impedit unde ducimus, maxime voluptatibus, ut vitae at ratione harum iure optio ullam quidem repellendus? Architecto rem consectetur, dolore praesentium similique unde eius? Eveniet, fuga eum quasi veritatis repellendus soluta dignissimos porro cum, tenetur quisquam repudiandae dolore. Aspernatur, explicabo amet. Eius voluptatibus tempora sunt inventore ipsam laborum, reprehenderit libero voluptate aperiam, nesciunt harum deserunt aspernatur eaque magni commodi. Sit illum totam assumenda! Voluptatum tempora ex temporibus!
-      <br />
-      <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-    </div>
+
+  <!-- all posts from the database -->
+  <div
+    id="all_posts"
+    class="has-background-lightgray p-4 m-3 has-background-grey-lighter"
+  >
+    <h1 class="title">All posts</h1>
   </div>
-  <footer class="card-footer">
-    <a href="#" class="card-footer-item">Save</a>
-    <a href="#" class="card-footer-item">Edit</a>
-    <a href="#" class="card-footer-item">Delete</a>
-  </footer>
 </div>
-</div> `;
+</main>`;
+// Blog page content
 // Blog page content
 r_e("blog-link").addEventListener("click", () => {
   appendContent(blog_content);
+
+  // Wait for the content to be appended to the DOM
+  setTimeout(() => {
+    // Get the modal
+    var modal = document.getElementById("addPostForm");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("addPostButton");
+
+    // Get the <span> element that closes the modal
+    var span = modal.querySelector(".modal-close");
+
+    // When the user clicks the button, open the modal
+    btn.onclick = function () {
+      modal.classList.add("is-active");
+    };
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+      modal.classList.remove("is-active");
+    };
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.classList.remove("is-active");
+      }
+    };
+
+    // Handle form submission
+    document.querySelector("#submitPost").addEventListener("click", () => {
+      // construct the post object
+      let post = {
+        title: document.querySelector("#title").value,
+        message: document.querySelector("#message").value,
+        author: document.querySelector("#author").value,
+        date: document.querySelector("#date").value,
+      };
+
+      // store the post object into the Firestore collection "allPosts"
+      db.collection("allPosts")
+        .add(post)
+        .then(() => {
+          alert("Post added");
+          modal.classList.remove("is-active"); // Hide the modal after successful submission
+        })
+        .catch((error) => {
+          console.error("Error adding post: ", error);
+        });
+    });
+
+    // Function to show all posts
+    function show_posts() {
+      db.collection("allPosts")
+        .get()
+        .then((querySnapshot) => {
+          let html = "";
+          querySnapshot.forEach((doc) => {
+            const post = doc.data();
+            const postId = doc.id;
+            html += `
+                    <div class="container my-4">
+                      <div class="card" id="${postId}">
+                        <header class="card-header">
+                          <p class="card-header-title">${post.title}</p>
+                        </header>
+                        <div class="card-content">
+                          <div class="content">
+                            ${post.message}
+                            <br><br>
+                            <p class="card-header-subtitle"><span style="font-size: smaller; font-weight: bold;">By: ${post.author} // <time datetime="${post.date}">${post.date}</time></span></p>
+                          </div>
+                        </div>
+                        <footer class="card-footer">
+                          <a href="#" class="card-footer-item" onclick="editPost('${postId}')">Edit</a>
+                          <a href="#" class="card-footer-item" onclick="deletePost('${postId}')">Delete</a>
+                        </footer>
+                      </div>
+                    </div>`;
+          });
+          document.querySelector("#all_posts").innerHTML = html;
+        })
+        .catch((error) => {
+          console.error("Error getting posts: ", error);
+        });
+    }
+
+    // Function to delete a post
+    function deletePost(postId) {
+      if (confirm("Are you sure you want to delete this post?")) {
+        db.collection("allPosts")
+          .doc(postId)
+          .delete()
+          .then(() => {
+            console.log("Post successfully deleted!");
+            show_posts();
+          })
+          .catch((error) => {
+            console.error("Error removing post: ", error);
+          });
+      }
+    }
+
+    // Function to edit a post
+    function editPost(postId) {
+      // Retrieve the post data from Firestore using the postId
+      db.collection("allPosts")
+        .doc(postId)
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            const post = doc.data();
+            // Populate the form fields with the retrieved post data
+            document.querySelector("#title").value = post.title;
+            document.querySelector("#message").value = post.message;
+            document.querySelector("#author").value = post.author;
+            document.querySelector("#date").value = post.date;
+
+            // Display a form with input fields for editing
+            const editForm = `
+            <div class="box">
+              <h2 class="card-header-title is-centered is-2 mt-0" style="font-size: larger;">Edit Post</h2>
+<div class="field">
+  <label class="label">Title</label>
+  <div class="control">
+    <input class="input" type="text" id="edit_title" value="${post.title}" />
+  </div>
+</div>
+<div class="field">
+  <label class="label">Message</label>
+  <div class="control">
+    <textarea class="textarea" type="text" id="edit_message" value="${post.message}"></textarea>
+
+  </div>
+</div>
+<div class="field">
+  <label class="label">Author</label>
+  <div class="control">
+    <input class="input" type="text" id="edit_author" value="${post.author}" />
+</div>
+<div class="field">
+  <label class="label">Date</label>
+  <div class="control">
+    <input class="input" type="date" id="edit_date" value="${post.date}" />
+  </div>
+</div>
+<div class="field is-grouped">
+  <div class="control">
+    <button class="addPostBtn" onclick="saveEdit('${postId}')">Save</button>
+  </div>
+</div>
+</div>
+
+          `;
+            document.querySelector(`#${postId}`).innerHTML = editForm;
+          } else {
+            console.log("No such document!");
+          }
+        })
+        .catch((error) => {
+          console.error("Error getting document:", error);
+        });
+    }
+
+    // Function to save edited post
+    function saveEdit(postId) {
+      const editedPost = {
+        title: document.querySelector("#edit_title").value,
+        message: document.querySelector("#edit_message").value,
+        author: document.querySelector("#edit_author").value,
+        date: document.querySelector("#edit_date").value,
+      };
+
+      // Update the post in Firestore
+      db.collection("allPosts")
+        .doc(postId)
+        .update(editedPost)
+        .then(() => {
+          console.log("Post successfully updated!");
+          // Reload the posts after updating
+          show_posts();
+        })
+        .catch((error) => {
+          console.error("Error updating post:", error);
+        });
+    }
+
+    // Call the function to display existing posts when the page loads
+    show_posts();
+  }, 0);
+
   let check_auth = auth.currentUser;
   if (check_auth == null) {
     signup_modal.classList.add("is-active");
@@ -651,6 +844,195 @@ let contact_content = `<div id="contactSectionTop" class="contactSection-box con
   </form>
 </div>
 </div>`;
+let test = r_e("");
+
+// Get the modal
+let modal = document.getElementById("#addPostForm");
+
+// Get the button that opens the modal
+let btn = document.getElementById("addPostButton");
+
+// Get the <span> element that closes the modal
+let span = modal.querySelector(".modal-close");
+
+// When the user clicks the button, open the modal
+btn.onclick = function () {
+  modal.classList.add("is-active");
+};
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function () {
+  modal.classList.remove("is-active");
+};
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.classList.remove("is-active");
+  }
+};
+
+// Handle form submission
+document.querySelector("#submitPost").addEventListener("click", () => {
+  // construct the post object
+  let post = {
+    title: document.querySelector("#title").value,
+    message: document.querySelector("#message").value,
+    author: document.querySelector("#author").value,
+    date: document.querySelector("#date").value,
+  };
+
+  // store the post object into the Firestore collection "allPosts"
+  db.collection("allPosts")
+    .add(post)
+    .then(() => {
+      alert("Post added");
+      modal.classList.remove("is-active"); // Hide the modal after successful submission
+    })
+    .catch((error) => {
+      console.error("Error adding post: ", error);
+    });
+});
+
+// Function to show all posts
+function show_posts() {
+  db.collection("allPosts")
+    .get()
+    .then((querySnapshot) => {
+      let html = "";
+      querySnapshot.forEach((doc) => {
+        const post = doc.data();
+        const postId = doc.id;
+        html += `
+                    <div class="container my-4">
+                      <div class="card" id="${postId}">
+                        <header class="card-header">
+                          <p class="card-header-title">${post.title}</p>
+                        </header>
+                        <div class="card-content">
+                          <div class="content">
+                            ${post.message}
+                            <br><br>
+                            <p class="card-header-subtitle"><span style="font-size: smaller; font-weight: bold;">By: ${post.author} // <time datetime="${post.date}">${post.date}</time></span></p>
+                          </div>
+                        </div>
+                        <footer class="card-footer">
+                          <a href="#" class="card-footer-item" onclick="editPost('${postId}')">Edit</a>
+                          <a href="#" class="card-footer-item" onclick="deletePost('${postId}')">Delete</a>
+                        </footer>
+                      </div>
+                    </div>`;
+      });
+      document.querySelector("#all_posts").innerHTML = html;
+    })
+    .catch((error) => {
+      console.error("Error getting posts: ", error);
+    });
+}
+
+// Function to delete a post
+function deletePost(postId) {
+  if (confirm("Are you sure you want to delete this post?")) {
+    db.collection("allPosts")
+      .doc(postId)
+      .delete()
+      .then(() => {
+        console.log("Post successfully deleted!");
+        show_posts();
+      })
+      .catch((error) => {
+        console.error("Error removing post: ", error);
+      });
+  }
+}
+
+// Function to edit a post
+function editPost(postId) {
+  // Retrieve the post data from Firestore using the postId
+  db.collection("allPosts")
+    .doc(postId)
+    .get()
+    .then((doc) => {
+      if (doc.exists) {
+        const post = doc.data();
+        // Populate the form fields with the retrieved post data
+        document.querySelector("#title").value = post.title;
+        document.querySelector("#message").value = post.message;
+        document.querySelector("#author").value = post.author;
+        document.querySelector("#date").value = post.date;
+
+        // Display a form with input fields for editing
+        const editForm = `
+            <div class="box">
+              <h2 class="card-header-title is-centered is-2 mt-0" style="font-size: larger;">Edit Post</h2>
+<div class="field">
+  <label class="label">Title</label>
+  <div class="control">
+    <input class="input" type="text" id="edit_title" value="${post.title}" />
+  </div>
+</div>
+<div class="field">
+  <label class="label">Message</label>
+  <div class="control">
+    <textarea class="textarea" type="text" id="edit_message" value="${post.message}"></textarea>
+
+  </div>
+</div>
+<div class="field">
+  <label class="label">Author</label>
+  <div class="control">
+    <input class="input" type="text" id="edit_author" value="${post.author}" />
+</div>
+<div class="field">
+  <label class="label">Date</label>
+  <div class="control">
+    <input class="input" type="date" id="edit_date" value="${post.date}" />
+  </div>
+</div>
+<div class="field is-grouped">
+  <div class="control">
+    <button class="addPostBtn" onclick="saveEdit('${postId}')">Save</button>
+  </div>
+</div>
+</div>
+
+          `;
+        document.querySelector(`#${postId}`).innerHTML = editForm;
+      } else {
+        console.log("No such document!");
+      }
+    })
+    .catch((error) => {
+      console.error("Error getting document:", error);
+    });
+}
+
+// Function to save edited post
+function saveEdit(postId) {
+  const editedPost = {
+    title: document.querySelector("#edit_title").value,
+    message: document.querySelector("#edit_message").value,
+    author: document.querySelector("#edit_author").value,
+    date: document.querySelector("#edit_date").value,
+  };
+
+  // Update the post in Firestore
+  db.collection("allPosts")
+    .doc(postId)
+    .update(editedPost)
+    .then(() => {
+      console.log("Post successfully updated!");
+      // Reload the posts after updating
+      show_posts();
+    })
+    .catch((error) => {
+      console.error("Error updating post:", error);
+    });
+}
+
+// Call the function to display existing posts when the page loads
+show_posts();
+
 r_e("contact-link").addEventListener("click", () => {
   appendContent(contact_content);
   let check_auth = auth.currentUser;
@@ -770,6 +1152,7 @@ cal_page_content += `<div class="colormargins margin-right">
 </main>`;
 
 // addEventModal
+
 let addEventForm = r_e("popupmodal");
 
 function show_addEvent_form() {
@@ -969,7 +1352,6 @@ function expand_burger() {
 }
 burger_stack.addEventListener("click", expand_burger);
 
-//BLOG FUNCTIONS
 // console.log(firebase);
 // let r1 = {
 //   ID: "a123",
