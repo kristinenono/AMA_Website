@@ -284,45 +284,246 @@ r_e("calendarbtn").addEventListener("click", () => {
   }
   if (check_auth != null) {
     let cal_page_content = `
-  <div id="cal_page" class="wrapper">
+    <div id="cal_page" class="wrapper">
     <!-- LEFT MARGIN -->
     <div class="colormargins margin-left">
       <h2 class="heading-tag-upcoming-event">Upcoming Events</h2>
       <div class="flex-container">
-        <div class="box margin-event">
+        <div class="box margin-event ">
           <h2>Philathropy event</h2>
-
-          <a href="#" class="events-button">View Event Here! </a>
-
-          <div id="eventCard" class="event-card hidden">
-            <!-- Content of the event card goes here -->
-            <h2 class="secondaryheader">Event Title</h2>
+          <a href="#" class="events-button" id="eventbtn1">View Event Here! </a>
+          <div class="modal is-hidden" id="card_modal_1">
+            <div class = "modal-background" id= "cardbg_1"></div>
+            <div class="modal-content section has-background-white">
+            <h2 class="secondaryheader2">Event Title</h2>
+            <form>
             <p class="primaryBody">Date: [Event Date]</p>
             <p class="primaryBody">Location: [Event Location]</p>
-            <!-- Add more details as needed -->
             <button id="editEventCard">Edit</button>
             <button id="deleteEventCard">Delete</button>
             <button id="closeEventCard">Close</button>
+          </form>
           </div>
-        </div>
-        <div class="box margin-event">
-          <h2>Professional Development Event</h2>
+          </div>
+          </div>
+          <div class="box margin-event">
+            <h2>Professional Development event</h2>
+            <a href="#" class="events-button" id="eventbtn2">View Event Here! </a>
+            <div class="modal is-hidden" id="card_modal_2">
+              <div class = "modal-background" id= "cardbg_2"></div>
+              <div class="modal-content section has-background-white">
+              <h2 class="secondaryheader2">Event Title</h2>
+              <form>
+              <p class="primaryBody">Date: [Event Date]</p>
+              <p class="primaryBody">Location: [Event Location]</p>
+              <button id="editEventCard">Edit</button>
+              <button id="deleteEventCard">Delete</button>
+              <button id="closeEventCard2">Close</button>
+            </form>
+            </div>
+            </div>
+            </div>
+            <div class="box margin-event">
+              <h2>Social event</h2>
+              <a href="#" class="events-button" id="eventbtn3">View Event Here! </a>
+              <div class="modal is-hidden" id="card_modal_3">
+                <div class = "modal-background" id= "cardbg_3"></div>
+                <div class="modal-content section has-background-white">
+                <h2 class="secondaryheader2">Event Title</h2>
+                <form>
+                <p class="primaryBody">Date: [Event Date]</p>
+                <p class="primaryBody">Location: [Event Location]</p>
+                <button id="editEventCard">Edit</button>
+                <button id="deleteEventCard">Delete</button>
+                <button id="closeEventCard3">Close</button>
+              </form>
+              </div>
+              </div>
+              </div>
+              <div class="box margin-event">
+                <h2>Speaker event</h2>
+                <a href="#" class="events-button" id="eventbtn4">View Event Here! </a>
+                <div class="modal is-hidden" id="card_modal_4">
+                  <div class = "modal-background" id= "cardbg_4"></div>
+                  <div class="modal-content section has-background-white">
+                  <h2 class="secondaryheader2">Event Title</h2>
+                  <form>
+                  <p class="primaryBody">Date: [Event Date]</p>
+                  <p class="primaryBody">Location: [Event Location]</p>
+                  <button id="editEventCard">Edit</button>
+                  <button id="deleteEventCard">Delete</button>
+                  <button id="closeEventCard4">Close</button>
+                </form>
+                </div>
+                </div>
+                </div>
+    </div>
+    </div>
 
-          <a href="#" class="events-button">View Event Here! </a>
+    <!-- CENTER OF PAGE where calendar goes-->
+    <div id="sample" class="colormargins page-content">
+      <div class="navcal">
+        <span class="today">
+          <button id="today-btn">Today</button>
+        </span>
+        <button class="action_left">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <select class="selectdrop" id="month-select">
+          <option value="January">January</option>
+          <option value="February">February</option>
+          <option value="March">March</option>
+          <option value="April">April</option>
+          <option value="May">May</option>
+          <option value="June">June</option>
+          <option value="July">July</option>
+          <option value="August">August</option>
+          <option value="September">September</option>
+          <option value="October">October</option>
+          <option value="November">November</option>
+          <option value="December">December</option>
+        </select>
+        <button class="action_right">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+        <span class="yearblock">
+          <button id="yearblock"></button>
+        </span>
+      </div>
+      <div class="calview">
+        <div class="weekdayview">
+          <div class="dayofweek">Lorem, ipsum.</div>
+          <div class="dayofweek">Lorem, ipsum.</div>
+          <div class="dayofweek">Lorem, ipsum.</div>
+          <div class="dayofweek">Lorem, ipsum.</div>
+          <div class="dayofweek">Lorem, ipsum.</div>
+          <div class="dayofweek">Lorem, ipsum.</div>
+          <div class="dayofweek">Lorem, ipsum.</div>
         </div>
-        <div class="box margin-event">
-          <h2>Speaker Event</h2>
-
-          <a href="#" class="events-button">View Event Here! </a>
+        <div class="weekview">
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
         </div>
-        <div class="box margin-event">
-          <h2>Social Event</h2>
-
-          <a href="#" class="events-button">View Event Here! </a>
+        <div class="weekview">
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+        </div>
+        <div class="weekview">
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+        </div>
+        <div class="weekview">
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+        </div>
+        <div class="weekview">
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
+          <div class="dayview">Lorem, ipsum.</div>
         </div>
       </div>
     </div>
-    <div class="calview">
+    <!-- RIGHT MARGIN -->
+    <div class="colormargins margin-right">
+      <a href="#" class="add-btn2" id="eventbtn">Add Event</a>
+      <div class="modal is-hidden" id="popupmodal">
+        <div class = "modal-background" id= "popupbg"></div>
+        <div class="modal-content section has-background-white">
+        <h2 class="title">New Event</h2>
+        <form id="cal_form_modal">
+        <div class="field">
+        <label class="label" >Name of Event</label>
+        <div class="control">
+          <input class="input" id = "evtname" type="text" placeholder="LinkedIn Workshop" />
+        </div>
+        </div>
+        <div class="field">
+        <label class="label">Date and Time of Event</label>
+        <div class="control">
+          <input
+            class="input"
+            id = "datetime"
+            type="datetime-local"
+            placeholder="12-01-22 01:22"
+          />
+        </div>
+        </div>
+        <div class="field">
+        <label class="label">Choose Event Category</label>
+        <div class="control">
+          <div class="select">
+            <select name="" id="evttype">
+              <option>--select--</option>
+              <option value="">Philanthropy</option>
+              <option value="">Professional Development</option>
+              <option value="">Speaker Event</option>
+              <option value="">Social Event</option>
+            </select>
+          </div>
+        </div>
+        </div>
+        <div class="field">
+        <label class="label">Points Assigned</label>
+        <div class="control">
+          <input class="input" id = "ptsassigned" type="number" placeholder="5" />
+        </div>
+        </div>
+        <div class="field">
+        <label class="label">Description of Event</label>
+        <div class="control">
+          <textarea
+            cols="20"
+            rows="12"
+            id = "descriptionevt"
+            placeholder="Dress Code: Business Casual 
+        Location: Grainger"
+          ></textarea>
+        </div>
+        </div>
+        <div class="field has-addons">
+        <div class="control">
+          <input id="codeInput" class="input" type="text" placeholder="Generate Code" />
+        </div>
+        <div class="control">
+          <a id="generateButton" class="button btncolor">Go</a>
+        </div>
+        </div>
+        <div class="field is-grouped">
+        <div class="control">
+          <button class="button" id = "addevtsbt">Submit</button>
+        </div>
+        <div class="control">
+          <button class="button" id="addEventcncl">Cancel</button>
+        </div>
+        </div>
+        </div>
+      </form>
+        </div></div>
+</div>
 </div>`;
     appendContent(cal_page_content);
   }
