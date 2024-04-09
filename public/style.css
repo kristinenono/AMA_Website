@@ -526,7 +526,7 @@ input[type="submit"] {
   font-size: 20px;
 }
 
-#calendarbtn {
+/* #calendarbtn {
   color: #f3f2ee;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 20px;
@@ -542,38 +542,37 @@ input[type="submit"] {
 #calendarbtn:hover,
 #pointbtn:hover {
   background-color: #b22b25;
-}
+} */
 
 /* .dropdown {
   position: relative;
   display: inline-block;
 } */
 
-.bttn1 {
+/* .bttn1 {
   border: none;
   cursor: pointer;
   outline: none;
   /* background-color: #1f304f; */
-  color: #f3f2ee;
-  /* font-family: Arial, Helvetica, sans-serif;
+/* color: #f3f2ee; */
+/* font-family: Arial, Helvetica, sans-serif;
   font-size: 20px;
   padding: 10px 20px; */
-}
+/* }
 
-.bttn1:hover {
+/* .bttn1:hover {
   background-color: #b22b25;
-}
+} */
 
-.dropdown-content {
+/* .dropdown-content {
   display: none;
   position: absolute;
   background-color: #1f304f;
   color: var(--bodyTextColorWhite);
   min-width: 160px;
   z-index: 1;
-}
-
-.dropdown-content a {
+} */
+*/ */ .dropdown-content a {
   color: #f3f2ee;
   padding: 12px 16px;
   display: block;

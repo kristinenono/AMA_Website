@@ -136,103 +136,150 @@ auth.onAuthStateChanged((user) => {
 //   }
 // });
 
-// expand burger
-let burger_stack = documentquerySelector("#burger_stack");
-let burger_menu = document.q.uerySelector("#burger_menu");
-let home_burger = document.querySelector("#home-link");
-let about_burger = document.querySelector("#abt-link");
-let members_burger = document.querySelector("#members-link");
-let blog_burger = document.querySelector("#blog-link");
-let contact_burger = document.querySelector("#contact-link");
-function expand_burger() {
-  burger_menu.classList.toggle("is-active");
-  burger_menu.classList.toggle("has-background-light");
-  burger_stack.classList.toggle("is-active");
-  home_burger.classList.toggle("has-text-light");
-  about_burger.classList.toggle("has-text-light");
-  members_burger.classList.toggle("has-text-light");
-  blog_burger.classList.toggle("has-text-light");
-  contact_burger.classList.toggle("has-text-light");
-}
-burger_stack.addEventListener("click", expand_burger);
+let home_page_content = `<div class="titleContainers">
+<div class="column column1">
+    <h1 class="title has-text-light">Welcome to <br />AMA UW-Madison</h1>
+</div>
+<div class="column column2">
+    <img src="images/capitalPlaceholder.png" alt="MadisonCapital" width="100%" height="100%" />
+</div>
+</div>
+<div id="aboutSection" class="aboutSection-box">
+<h2 class="primaryheader">About us</h2>
+<p class="primaryBody">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum at magni
+    porro voluptatibus, quasi doloribus provident officiis, illo hic laborum
+    distinctio mollitia quis minima ducimus.
+</p>
+</div>
+<div id="involvementSection" class="involvementSection">
+<div class="involvementText">
+    <h3 class="secondaryheader">Get involved</h3>
+    <h4 class="tertiaryHeader">Our primary events include:</h4>
+    <ul class="primaryBody">
+        <li>Member meetings</li>
+        <li>Professional developments</li>
+        <li>Social events</li>
+        <li>Community outreach</li>
+        <li>And more!</li>
+    </ul>
+    <div>
+        <p>
+            <button class="involvementButton1"><b>LEARN MORE</b></button>&nbsp;&nbsp;
+            <button class="involvementButton2" id="joinbuttonhome"><b>JOIN</b></button>
+        </p>
+    </div>
+</div>
+<div class="involvementImage-flex">
+    <img src="images/Bucks_event.png" alt="AMA Event" width="100%" height="Auto" />
+</div>
+</div>`;
 
 // main functions to use
-console.log(firebase);
-const mainContent = document.getElementById("main-content");
-const homeLink = document.getElementById("home-link");
+// console.log(firebase);
+// const mainContent = document.getElementById("main-content");
+// const homeLink = document.getElementById("home-link");
 
-document.addEventListener("DOMContentLoaded", function () {
-  // Function to load the home page content
-  function loadHomePage(event) {
-    event.preventDefault();
-    mainContent.innerHTML = `<div class="titleContainers">
-      <div class="column column1">
-          <h1 class="title has-text-light">Welcome to <br />AMA UW-Madison</h1>
-      </div>
-      <div class="column column2">
-          <img src="images/capitalPlaceholder.png" alt="MadisonCapital" width="100%" height="100%" />
-      </div>
-    </div>
-    <div id="aboutSection" class="aboutSection-box">
-      <h2 class="primaryheader">About us</h2>
-      <p class="primaryBody">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum at magni
-          porro voluptatibus, quasi doloribus provident officiis, illo hic laborum
-          distinctio mollitia quis minima ducimus.
-      </p>
-    </div>
-    <div id="involvementSection" class="involvementSection">
-      <div class="involvementText">
-          <h3 class="secondaryheader">Get involved</h3>
-          <h4 class="tertiaryHeader">Our primary events include:</h4>
-          <ul class="primaryBody">
-              <li>Member meetings</li>
-              <li>Professional developments</li>
-              <li>Social events</li>
-              <li>Community outreach</li>
-              <li>And more!</li>
-          </ul>
-          <div>
-              <p>
-                  <button class="involvementButton1"><b>LEARN MORE</b></button>&nbsp;&nbsp;
-                  <button class="involvementButton2" id="joinbuttonhome"><b>JOIN</b></button>
-              </p>
-          </div>
-      </div>
-      <div class="involvementImage-flex">
-          <img src="images/Bucks_event.png" alt="AMA Event" width="100%" height="Auto" />
-      </div>
-    </div>`;
-  }
+// document.addEventListener("DOMContentLoaded", function () {
+//   // Function to load the home page content
+//   function loadHomePage(event) {
+//     event.preventDefault();
+//     mainContent.innerHTML = `<div class="titleContainers">
+//       <div class="column column1">
+//           <h1 class="title has-text-light">Welcome to <br />AMA UW-Madison</h1>
+//       </div>
+//       <div class="column column2">
+//           <img src="images/capitalPlaceholder.png" alt="MadisonCapital" width="100%" height="100%" />
+//       </div>
+//     </div>
+//     <div id="aboutSection" class="aboutSection-box">
+//       <h2 class="primaryheader">About us</h2>
+//       <p class="primaryBody">
+//           Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum at magni
+//           porro voluptatibus, quasi doloribus provident officiis, illo hic laborum
+//           distinctio mollitia quis minima ducimus.
+//       </p>
+//     </div>
+//     <div id="involvementSection" class="involvementSection">
+//       <div class="involvementText">
+//           <h3 class="secondaryheader">Get involved</h3>
+//           <h4 class="tertiaryHeader">Our primary events include:</h4>
+//           <ul class="primaryBody">
+//               <li>Member meetings</li>
+//               <li>Professional developments</li>
+//               <li>Social events</li>
+//               <li>Community outreach</li>
+//               <li>And more!</li>
+//           </ul>
+//           <div>
+//               <p>
+//                   <button class="involvementButton1"><b>LEARN MORE</b></button>&nbsp;&nbsp;
+//                   <button class="involvementButton2" id="joinbuttonhome"><b>JOIN</b></button>
+//               </p>
+//           </div>
+//       </div>
+//       <div class="involvementImage-flex">
+//           <img src="images/Bucks_event.png" alt="AMA Event" width="100%" height="Auto" />
+//       </div>
+//     </div>`;
+//   }
 
-  // Call the loadHomePage function
-  loadHomePage(new Event("click"));
+//   // Call the loadHomePage function
+//   loadHomePage(new Event("click"));
 
-  // Get the home link element
-  const homeLink = document.getElementById("home-link");
+//   // Get the home link element
+//   const homeLink = document.getElementById("home-link");
 
-  // Add an event listener to load the home page when the home link is clicked
-  homeLink.addEventListener("click", loadHomePage);
-});
+//   // Add an event listener to load the home page when the home link is clicked
+//   homeLink.addEventListener("click", loadHomePage);
+// });
 
 // main functions for innerHTML
 function r_e(id) {
   return document.querySelector(`#${id}`);
 }
 function appendContent(html) {
-  r_e("main").innerHTML = html;
+  r_e("main-content").innerHTML = html;
 }
+
+// Member drop down button
+var dropdownButton = r_e("members-link");
+var dropdownContent = document.querySelector(".dropdown-content");
+
+dropdownButton.addEventListener("click", () => {
+  dropdownContent.classList.remove("is-hidden");
+});
+
+document.addEventListener("click", function (event) {
+  if (!event.target.closest(".dropdown")) {
+    dropdownContent.classList.remove("show");
+  }
+});
 
 // home page
 r_e("home-link").addEventListener("click", () => {
-  loadHomePage;
+  appendContent(home_page_content);
   let check_auth = auth.currentUser;
   if (check_auth != null) {
     r_e("joinbuttonhome").classList.add("is-hidden");
   }
 });
 
-let cal_page_content = `<main>
+let abt_content = `<div> TESTING </div>`;
+
+//about page
+r_e("abt-link").addEventListener("click", () => {
+  appendContent(abt_content);
+});
+
+// Cal page content
+r_e("calendarbtn").addEventListener("click", () => {
+  let check_auth = auth.currentUser;
+  if (check_auth == null) {
+    signup_modal.classList.add("is-active");
+  }
+  if (check_auth != null) {
+    let cal_page_content = `
   <div id="cal_page" class="wrapper">
     <!-- LEFT MARGIN -->
     <div class="colormargins margin-left">
@@ -273,18 +320,235 @@ let cal_page_content = `<main>
     </div>
     <div class="calview">
 </div>`;
-
-// Member drop down button
-var dropdownButton = document.querySelector(".bttn1");
-var dropdownContent = document.querySelector(".dropdown-content");
-
-dropdownButton.addEventListener("click", function () {
-  dropdownContent.classList.toggle("show");
+    appendContent(cal_page_content);
+  }
 });
 
-document.addEventListener("click", function (event) {
-  if (!event.target.closest(".dropdown")) {
-    dropdownContent.classList.remove("show");
+// points page content
+r_e("pointbtn").addEventListener("click", () => {
+  let check_auth = auth.currentUser;
+  if (check_auth == null) {
+    signup_modal.classList.add("is-active");
+  }
+  if (check_auth != null) {
+    let points_content = `<div class="filter-container">
+    <label for="nameSearch">Search by Name:</label>
+    <input type="text" id="nameSearch" placeholder="Search name...">
+    <label for="semesterFilter">Filter by Semester:</label>
+    <select id="semesterFilter">
+        <option value="">All</option>
+        <option value="Fall 2023">Fall 2023</option>
+        <option value="Spring 2024">Spring 2024</option>
+        <option value="Fall 2024">Fall 2024</option>
+        <option value="Spring 2025">Spring 2025</option>
+        <!-- Add more options as needed -->
+    </select>
+    <!-- <label for="eventFilter">Filter by Event:</label>
+    <select id="eventFilter">
+        <option data-event="Total Points">All</option>
+        <option data-event="Philanthropy Points">Philanthropy Points</option>
+        <option data-event="Developement Points">Developement Points</option>
+        <option data-event="Social Points">Social Points</option>
+        <option data-event="Speaker Points">Speaker Points</option>
+    </select> -->
+    <button id="applyFilters">Apply Filters</button>
+</div>                 
+<table>
+    <thead>
+        <tr>
+            <th>Member</th>
+            <th>Semester</th>
+            <th>Philanthropy Points</th>
+            <th>Developement Points</th>
+            <th>Social Points</th>
+            <th>Speaker Points</th>
+            <th>Total Points</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>John Doe</td>
+            <td>Spring 2024</td>
+            <td>3</td>
+            <td>1</td>
+            <td>2</td>
+            <td>1</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Jane Smith</td>
+            <td>Spring 2024</td>
+            <td>2</td>
+            <td>1</td>
+            <td>2</td>
+            <td>1</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Michael Johnson</td>
+            <td>Spring 2025</td>
+            <td>1</td>
+            <td>1</td>
+            <td>2</td>
+            <td>1</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Emma Lee</td>
+            <td>Spring 2024</td>
+            <td>3</td>
+            <td>12</td>
+            <td>2</td>
+            <td>1</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Emma Lee</td>
+            <td>Fall 2024</td>
+            <td>3</td>
+            <td>3</td>
+            <td>2</td>
+            <td>1</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>X</td>
+            <td>Fall 2023</td>
+            <td>3</td>
+            <td>1</td>
+            <td>2</td>
+            <td>1</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>X</td>
+            <td>Spring 2024</td>
+            <td>3</td>
+            <td>1</td>
+            <td>2</td>
+            <td>2</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>X</td>
+            <td>Spring 2024</td>
+            <td>3</td>
+            <td>1</td>
+            <td>2</td>
+            <td>1</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>X</td>
+            <td>Spring 2024</td>
+            <td>3</td>
+            <td>1</td>
+            <td>2</td>
+            <td>0</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>X</td>
+            <td>Spring 2024</td>
+            <td>3</td>
+            <td>1</td>
+            <td>2</td>
+            <td>1</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>X</td>
+            <td>Fall 2024</td>
+            <td>3</td>
+            <td>2</td>
+            <td>2</td>
+            <td>1</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>X</td>
+            <td>Fall 2024</td>
+            <td>3</td>
+            <td>4</td>
+            <td>2</td>
+            <td>1</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>`;
+
+    appendContent(points_content);
+  }
+});
+let blog_content = `<div class="container my-4">
+<div class="card">
+  <header class="card-header">
+    <p class="card-header-title">Blog Title</p>
+    </button>
+  </header>
+  <div class="card-content">
+    <div class="content">
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus, aspernatur? Nobis perspiciatis illum incidunt vero quia doloribus assumenda aperiam. Culpa quidem porro harum tenetur maxime repellat doloremque, quod iusto alias reiciendis minima placeat. Autem impedit unde ducimus, maxime voluptatibus, ut vitae at ratione harum iure optio ullam quidem repellendus? Architecto rem consectetur, dolore praesentium similique unde eius? Eveniet, fuga eum quasi veritatis repellendus soluta dignissimos porro cum, tenetur quisquam repudiandae dolore. Aspernatur, explicabo amet. Eius voluptatibus tempora sunt inventore ipsam laborum, reprehenderit libero voluptate aperiam, nesciunt harum deserunt aspernatur eaque magni commodi. Sit illum totam assumenda! Voluptatum tempora ex temporibus!
+      <br />
+      <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+    </div>
+  </div>
+  <footer class="card-footer">
+    <a href="#" class="card-footer-item">Save</a>
+    <a href="#" class="card-footer-item">Edit</a>
+    <a href="#" class="card-footer-item">Delete</a>
+  </footer>
+</div>
+</div> 
+<div class="container my-4">
+<div class="card">
+  <header class="card-header">
+    <p class="card-header-title">Blog Title</p>
+    </button>
+  </header>
+  <div class="card-content">
+    <div class="content">
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus, aspernatur? Nobis perspiciatis illum incidunt vero quia doloribus assumenda aperiam. Culpa quidem porro harum tenetur maxime repellat doloremque, quod iusto alias reiciendis minima placeat. Autem impedit unde ducimus, maxime voluptatibus, ut vitae at ratione harum iure optio ullam quidem repellendus? Architecto rem consectetur, dolore praesentium similique unde eius? Eveniet, fuga eum quasi veritatis repellendus soluta dignissimos porro cum, tenetur quisquam repudiandae dolore. Aspernatur, explicabo amet. Eius voluptatibus tempora sunt inventore ipsam laborum, reprehenderit libero voluptate aperiam, nesciunt harum deserunt aspernatur eaque magni commodi. Sit illum totam assumenda! Voluptatum tempora ex temporibus!
+      <br />
+      <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+    </div>
+  </div>
+  <footer class="card-footer">
+    <a href="#" class="card-footer-item">Save</a>
+    <a href="#" class="card-footer-item">Edit</a>
+    <a href="#" class="card-footer-item">Delete</a>
+  </footer>
+</div>
+</div> 
+<div class="container my-4">
+<div class="card">
+  <header class="card-header">
+    <p class="card-header-title">Blog Title</p>
+    </button>
+  </header>
+  <div class="card-content">
+    <div class="content">
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus, aspernatur? Nobis perspiciatis illum incidunt vero quia doloribus assumenda aperiam. Culpa quidem porro harum tenetur maxime repellat doloremque, quod iusto alias reiciendis minima placeat. Autem impedit unde ducimus, maxime voluptatibus, ut vitae at ratione harum iure optio ullam quidem repellendus? Architecto rem consectetur, dolore praesentium similique unde eius? Eveniet, fuga eum quasi veritatis repellendus soluta dignissimos porro cum, tenetur quisquam repudiandae dolore. Aspernatur, explicabo amet. Eius voluptatibus tempora sunt inventore ipsam laborum, reprehenderit libero voluptate aperiam, nesciunt harum deserunt aspernatur eaque magni commodi. Sit illum totam assumenda! Voluptatum tempora ex temporibus!
+      <br />
+      <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+    </div>
+  </div>
+  <footer class="card-footer">
+    <a href="#" class="card-footer-item">Save</a>
+    <a href="#" class="card-footer-item">Edit</a>
+    <a href="#" class="card-footer-item">Delete</a>
+  </footer>
+</div>
+</div> `;
+// Blog page content
+r_e("blog-link").addEventListener("click", () => {
+  appendContent(blog_content);
+  let check_auth = auth.currentUser;
+  if (check_auth == null) {
+    signup_modal.classList.add("is-active");
+  }
+  if (check_auth != null) {
+    appendContent(blog_content);
   }
 });
 
@@ -429,7 +693,7 @@ function generateCalendar(date) {
   calendarView.innerHTML = calendarHtml; // Set the calendar HTML to the innerHTML of the calendarView
   monthSelect.value = monthNames[currentMonth];
 }
-generateCalendar(currentDate);
+
 const todayBtn = document.querySelector("#today-btn");
 todayBtn.addEventListener("click", function () {
   currentDate = new Date(); // Reset currentDate to today's date
@@ -694,3 +958,23 @@ document.querySelector("#addevtsbt").addEventListener("click", () => {
 //     */
 // });
 // authentication
+
+// expand burger
+let burger_stack = documentquerySelector("#burger_stack");
+let burger_menu = document.q.uerySelector("#burger_menu");
+let home_burger = document.querySelector("#home-link");
+let about_burger = document.querySelector("#abt-link");
+let members_burger = document.querySelector("#members-link");
+let blog_burger = document.querySelector("#blog-link");
+let contact_burger = document.querySelector("#contact-link");
+function expand_burger() {
+  burger_menu.classList.toggle("is-active");
+  burger_menu.classList.toggle("has-background-light");
+  burger_stack.classList.toggle("is-active");
+  home_burger.classList.toggle("has-text-light");
+  about_burger.classList.toggle("has-text-light");
+  members_burger.classList.toggle("has-text-light");
+  blog_burger.classList.toggle("has-text-light");
+  contact_burger.classList.toggle("has-text-light");
+}
+burger_stack.addEventListener("click", expand_burger);
