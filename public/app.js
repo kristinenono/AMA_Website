@@ -136,6 +136,26 @@ auth.onAuthStateChanged((user) => {
 //   }
 // });
 
+// expand burger
+let burger_stack = documentquerySelector("#burger_stack");
+let burger_menu = document.q.uerySelector("#burger_menu");
+let home_burger = document.querySelector("#home-link");
+let about_burger = document.querySelector("#abt-link");
+let members_burger = document.querySelector("#members-link");
+let blog_burger = document.querySelector("#blog-link");
+let contact_burger = document.querySelector("#contact-link");
+function expand_burger() {
+  burger_menu.classList.toggle("is-active");
+  burger_menu.classList.toggle("has-background-light");
+  burger_stack.classList.toggle("is-active");
+  home_burger.classList.toggle("has-text-light");
+  about_burger.classList.toggle("has-text-light");
+  members_burger.classList.toggle("has-text-light");
+  blog_burger.classList.toggle("has-text-light");
+  contact_burger.classList.toggle("has-text-light");
+}
+burger_stack.addEventListener("click", expand_burger);
+
 // main functions to use
 console.log(firebase);
 const mainContent = document.getElementById("main-content");
@@ -541,26 +561,26 @@ eventclose4.addEventListener("click", () => {
   eventCard4.classList.remove("is-active");
 });
 
-// JavaScript to handle the burger menu toggle
-document.addEventListener("DOMContentLoaded", function () {
-  const burger = document.querySelector(".navbar-burger");
-  const menu = document.querySelector(".navbar-menu");
-  const loginSignupBurger = document.querySelector(".login-signup-burger");
+// // JavaScript to handle the burger menu toggle
+// document.addEventListener("DOMContentLoaded", function () {
+//   const burger = document.querySelector(".navbar-burger");
+//   const menu = document.querySelector(".navbar-menu");
+//   const loginSignupBurger = document.querySelector(".login-signup-burger");
 
-  burger.addEventListener("click", function () {
-    burger.classList.toggle("active");
-    menu.classList.toggle("active");
-    loginSignupBurger.classList.toggle("active"); // Toggle login and signup in burger menu
-  });
+//   burger.addEventListener("click", function () {
+//     burger.classList.toggle("active");
+//     menu.classList.toggle("active");
+//     loginSignupBurger.classList.toggle("active"); // Toggle login and signup in burger menu
+//   });
 
-  window.addEventListener("resize", function () {
-    if (window.innerWidth > 768) {
-      burger.classList.remove("active");
-      menu.classList.remove("active");
-      loginSignupBurger.classList.remove("active"); // Remove active class on resize
-    }
-  });
-});
+//   window.addEventListener("resize", function () {
+//     if (window.innerWidth > 768) {
+//       burger.classList.remove("active");
+//       menu.classList.remove("active");
+//       loginSignupBurger.classList.remove("active"); // Remove active class on resize
+//     }
+//   });
+// });
 
 document.addEventListener("DOMContentLoaded", function () {
   const viewEventLinks = document.querySelectorAll(".events-button");

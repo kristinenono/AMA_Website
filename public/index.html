@@ -155,35 +155,31 @@
     <div class="navbar is-transparent">
       <div class="navbar-brand">
         <a
-          role="button"
           class="navbar-burger"
-          aria-label="menu"
-          aria-expanded="false"
-          data-target="navbar"
-        >
+         id="burger_stack">
           <span></span>
           <span></span>
           <span></span>
         </a>
       </div>
-        <div class="navbar-menu is-justify-content-center">
-          <div class="navbar-item just">
-            <a href="index.html" id="home-link"
-              ><strong id="home-nav">HOME</strong></a
+        <div class="navbar-menu is-justify-content-center" id="burger_menu">
+          <div class="navbar-start">
+            <a class="navbar-item" id="home-link"
+              ><strong>HOME</strong></a
             >
-            <a id="format-link"><strong id="format-nav">ABOUT</strong></a>
-            <div class="navbar-item dropdown">
-              <button class="bttn1">
-                <strong id="format-nav">MEMBERS</strong>
+            <a class="navbar-item" id="abt-link"><strong>ABOUT</strong></a>
+            <div class="navbar-item has-text-light bttn1 dropdown">
+              <button class="has-text-light bttn1 " id="members-link">
+                <strong>MEMBERS</strong>
               </button>
               <div class="dropdown-content">
-                <div><a href="calendar.html" id="calendarbtn">CALENDAR</a></div>
-                <div><a href="points.html" id="pointbtn">POINT SYSTEM</a></div>
+                <div><a id="calendarbtn">CALENDAR</a></div>
+                <div><a id="pointbtn">POINT SYSTEM</a></div>
               </div>
             </div>
-            <a href="blog.html" id="blog-link"><strong id="format-nav">BLOG</strong></a>
-            <a href="contact.html" id="format-link"><strong id="format-nav">CONTACT</strong></a>
-            <div class="login-signup-burger">
+            <a class="navbar-item" id="blog-link"><strong >BLOG</strong></a>
+            <a class="navbar-item" id="contact-link"><strong>CONTACT</strong></a>
+            <!-- <div class="login-signup-burger">
               <a id="login-burger">
                 <button id="logbtn-burger" class="add-btn button">
                   <strong id="bttn-font">LOGIN</strong>
@@ -200,9 +196,9 @@
                   class="add-btn button"
                 >
                   <strong id="bttn-font">SIGN UP</strong>
-                </button>
-              </a>
-            </div>
+                </button> -->
+              <!-- </a> -->
+            <!-- </div> -->
           </div>
         </div>
         </div>
