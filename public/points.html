@@ -273,6 +273,28 @@ function calculateTotalPoints() {
         row.cells[eventColumns - 1].textContent = totalPoints;
     });
 }
+// Function to get the current semester based on the current date
+function getCurrentSemester() {
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth(); // Month is zero-based
+
+    // Determine the semester based on the current month
+    let currentSemester;
+    if (currentMonth >= 0 && currentMonth <= 5) {
+        currentSemester = "Spring " + currentDate.getFullYear();
+    } else {
+        currentSemester = "Fall " + currentDate.getFullYear();
+    }
+
+    return currentSemester;
+}
+
+// Set the current semester text when the page loads
+window.addEventListener("load", function () {
+    document.getElementById("semesterFilter").value = getCurrentSemester();
+    document.getElementById("applyFilters").click();
+
+});
 
 // Calculate total points when the page loads
 window.addEventListener("load", calculateTotalPoints);
