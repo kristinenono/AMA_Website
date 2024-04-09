@@ -136,6 +136,39 @@ auth.onAuthStateChanged((user) => {
 //   }
 // });
 
+// MOVE MODAL TO THE TOP
+// Login/Signup Modal Open/Close
+let loginmodal = document.querySelector("#logmodal");
+let loginbutton = document.querySelector("#loginbtn");
+let login_mbg = document.querySelector("#log_modalbg");
+
+let signupmodal = document.querySelector("#signmodal");
+let signupbutton = document.querySelector("#signupbtn");
+let signup_mbg = document.querySelector("#sign_modalbg");
+
+// function to open up login and signup modals
+function openLoginModal() {
+  loginmodal.classList.add("is-active");
+}
+
+function openSignupModal() {
+  signupmodal.classList.add("is-active");
+}
+
+// click functions for login and signup buttons to open up the modal
+loginbutton.addEventListener("click", openLoginModal);
+signupbutton.addEventListener("click", openSignupModal);
+
+// Close modals when clicking on the background or "X" button
+document
+  .querySelectorAll(".modal-background, .modal-close")
+  .forEach(function (el) {
+    el.addEventListener("click", function () {
+      loginmodal.classList.remove("is-active");
+      signupmodal.classList.remove("is-active");
+    });
+  });
+
 let home_page_content = `<div class="titleContainers">
 <div class="column column1">
     <h1 class="title has-text-light">Welcome to <br />AMA UW-Madison</h1>
@@ -584,38 +617,6 @@ r_e("blog-link").addEventListener("click", () => {
 //       signupmodal.classList.remove("is-active");
 //     });
 //   });
-
-// Login/Signup Modal Open/Close
-let loginmodal = document.querySelector("#logmodal");
-let loginbutton = document.querySelector("#loginbtn");
-let login_mbg = document.querySelector("#log_modalbg");
-
-let signupmodal = document.querySelector("#signmodal");
-let signupbutton = document.querySelector("#signupbtn");
-let signup_mbg = document.querySelector("#sign_modalbg");
-
-// function to open up login and signup modals
-function openLoginModal() {
-  loginmodal.classList.add("is-active");
-}
-
-function openSignupModal() {
-  signupmodal.classList.add("is-active");
-}
-
-// click functions for login and signup buttons to open up the modal
-loginbutton.addEventListener("click", openLoginModal);
-signupbutton.addEventListener("click", openSignupModal);
-
-// Close modals when clicking on the background or "X" button
-document
-  .querySelectorAll(".modal-background, .modal-close")
-  .forEach(function (el) {
-    el.addEventListener("click", function () {
-      loginmodal.classList.remove("is-active");
-      signupmodal.classList.remove("is-active");
-    });
-  });
 
 const calendarView = document.querySelector(".calview");
 const monthSelect = r_e("month-select");
