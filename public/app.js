@@ -490,9 +490,7 @@ r_e("pointbtn").addEventListener("click", () => {
 // contact page content
 let contact_content = `<div id="contactSectionTop" class="contactSection-box contactTopFormat">
 <h2 class="primaryheader">Let's get in touch.</h2>
-<h3 class="tertiaryHeader">
-  <a href="mailto:amauwmadison@gmail.com">amauwmadison@gmail.com</a>
-</h3>
+
 
 <div class="social-icons-container">
   <a
@@ -528,10 +526,10 @@ let contact_content = `<div id="contactSectionTop" class="contactSection-box con
 
 <div id="contactFormSection" class="contactFormSection">
 <div class="contactFormText">
-  <h3 class="secondaryheader">Have a question?</h3>
+  <h3 class="secondaryheader">Interested in AMA?</h3>
   <h4 class="tertiaryHeader">
-    Contact us through this form and we'll get back to you shortly.
-  </h4>
+Please fill out this contact form or you can reach us us at
+<a href="mailto:amauwmadison@gmail.com"> amauwmadison@gmail.com</a> </h4> 
 </div>
 <div class="contactForm-flex">
   <form action="https://api.web3forms.com/submit" method="POST">
