@@ -333,64 +333,68 @@ r_e("calendarbtn").addEventListener("click", () => {
 
 // points page content
 r_e("pointbtn").addEventListener("click", () => {
-  let check_auth = auth.currentUser;
+  /*let check_auth = auth.currentUser;
   if (check_auth == null) {
     signup_modal.classList.add("is-active");
   }
-  if (check_auth != null) {
-    let points_content = `<div class="filter-container">
-    <label for="nameSearch">Search by Name:</label>
-    <input type="text" id="nameSearch" placeholder="Search name...">
-    <label for="semesterFilter">Filter by Semester:</label>
-    <select id="semesterFilter">
-        <option value="">All</option>
-        <option value="Fall 2023">Fall 2023</option>
-        <option value="Spring 2024">Spring 2024</option>
-        <option value="Fall 2024">Fall 2024</option>
-        <option value="Spring 2025">Spring 2025</option>
-        <!-- Add more options as needed -->
-    </select>
-    <!-- <label for="eventFilter">Filter by Event:</label>
-    <select id="eventFilter">
-        <option data-event="Total Points">All</option>
-        <option data-event="Philanthropy Points">Philanthropy Points</option>
-        <option data-event="Developement Points">Developement Points</option>
-        <option data-event="Social Points">Social Points</option>
-        <option data-event="Speaker Points">Speaker Points</option>
-    </select> -->
-    <button id="applyFilters">Apply Filters</button>
-</div>                 
-<table>
-    <thead>
-        <tr>
-            <th>Member</th>
-            <th>Semester</th>
-            <th>Philanthropy Points</th>
-            <th>Developement Points</th>
-            <th>Social Points</th>
-            <th>Speaker Points</th>
-            <th>Total Points</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>John Doe</td>
-            <td>Spring 2024</td>
-            <td>3</td>
-            <td>1</td>
-            <td>2</td>
-            <td>1</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Jane Smith</td>
-            <td>Spring 2024</td>
-            <td>2</td>
-            <td>1</td>
-            <td>2</td>
-            <td>1</td>
-            <td></td>
-        </tr>
+  if (check_auth != null) { */
+  let points_content = `<div class="columns is-centered">
+  <div class="column is-four-fifths">
+  <div>
+    <div class="field is-grouped">
+      <div class="control">
+        <label for="nameSearch" class="label">Search by Name:</label>
+        <input type="text" id="nameSearch" class="input" placeholder="Search name...">
+      </div>
+      <div class="control">
+      <label for="semesterFilter" class="label">Filter by Semester:</label>
+      <div class="select">
+                  <select id="semesterFilter">
+                      <option value="">All</option>
+                      <option value="Fall 2023">Fall 2023</option>
+                      <option value="Spring 2024">Spring 2024</option>
+                      <option value="Fall 2024">Fall 2024</option>
+                      <option value="Spring 2025">Spring 2025</option>
+                  </select>
+              </div>
+          </div>
+          <div class="control" style="margin-top: 1.5rem;">
+            <button id="applyFilters" class="button is-primary is-fullwidth has-text-centered">Apply Filters</button>
+          </div>
+      </div>
+  </div>
+  <div class="table-container">
+      <table class="table is-fullwidth is-striped is-hoverable">
+          <thead>
+              <tr>
+                  <th class="has-text-white">Member</th>
+                  <th class="has-text-white">Semester</th>
+                  <th class="has-text-white">Philanthropy Points</th>
+                  <th class="has-text-white">Development Points</th>
+                  <th class="has-text-white">Social Points</th>
+                  <th class="has-text-white">Speaker Points</th>
+                  <th class="has-text-white">Total Points</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td>John Doe</td>
+                  <td>Spring 2024</td>
+                  <td>3</td>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>1</td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <td>Jane Smith</td>
+                  <td>Spring 2024</td>
+                  <td>2</td>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>1</td>
+                  <td></td>
+              </tr>
         <tr>
             <td>Michael Johnson</td>
             <td>Spring 2025</td>
@@ -418,75 +422,102 @@ r_e("pointbtn").addEventListener("click", () => {
             <td>1</td>
             <td></td>
         </tr>
-        <tr>
-            <td>X</td>
-            <td>Fall 2023</td>
-            <td>3</td>
-            <td>1</td>
-            <td>2</td>
-            <td>1</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>X</td>
-            <td>Spring 2024</td>
-            <td>3</td>
-            <td>1</td>
-            <td>2</td>
-            <td>2</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>X</td>
-            <td>Spring 2024</td>
-            <td>3</td>
-            <td>1</td>
-            <td>2</td>
-            <td>1</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>X</td>
-            <td>Spring 2024</td>
-            <td>3</td>
-            <td>1</td>
-            <td>2</td>
-            <td>0</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>X</td>
-            <td>Spring 2024</td>
-            <td>3</td>
-            <td>1</td>
-            <td>2</td>
-            <td>1</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>X</td>
-            <td>Fall 2024</td>
-            <td>3</td>
-            <td>2</td>
-            <td>2</td>
-            <td>1</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>X</td>
-            <td>Fall 2024</td>
-            <td>3</td>
-            <td>4</td>
-            <td>2</td>
-            <td>1</td>
-            <td></td>
-        </tr>
     </tbody>
 </table>`;
 
-    appendContent(points_content);
+  appendContent(points_content);
+
+  // Function to calculate total points for each row initially and after filters are applied
+  function calculateTotalPoints() {
+    // Get all table rows
+    const tableRows = document.querySelectorAll("tbody tr");
+
+    // Loop through each table row
+    tableRows.forEach((row) => {
+      const eventColumns = row.cells.length;
+      let totalPoints = 0;
+      // Loop through columns containing points (columns 2 to 5)
+      for (let i = 2; i < 6; i++) {
+        totalPoints += parseInt(row.cells[i].textContent) || 0; // Parse the text content to integer
+      }
+      // Display the total points in the last cell of the row
+      row.cells[eventColumns - 1].textContent = totalPoints;
+    });
   }
+
+  // Function to get the current semester based on the current date
+  function getCurrentSemester() {
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth(); // Month is zero-based
+
+    // Determine the semester based on the current month
+    let currentSemester;
+    if (currentMonth >= 0 && currentMonth <= 5) {
+      currentSemester = "Spring " + currentDate.getFullYear();
+    } else {
+      currentSemester = "Fall " + currentDate.getFullYear();
+    }
+
+    return currentSemester;
+  }
+
+  // Set the current semester text when the page loads
+  window.addEventListener("load", function () {
+    // document.getElementById("current-semester").textContent = getCurrentSemester();
+    document.getElementById("semesterFilter").value = getCurrentSemester();
+    document.getElementById("applyFilters").click();
+  });
+
+  // Calculate total points when the page loads
+  window.addEventListener("load", calculateTotalPoints);
+
+  document
+    .getElementById("applyFilters")
+    .addEventListener("click", function () {
+      // Get the filter values
+      const nameSearchValue = document
+        .getElementById("nameSearch")
+        .value.trim()
+        .toLowerCase();
+      const semesterFilterValue = document
+        .getElementById("semesterFilter")
+        .value.toLowerCase();
+
+      // Get all table rows
+      const tableRows = document.querySelectorAll("tbody tr");
+
+      // Loop through each table row
+      tableRows.forEach((row) => {
+        // Get the values of the cells in the current row
+        const name = row.cells[0].textContent.toLowerCase();
+        const semester = row.cells[1].textContent.toLowerCase();
+
+        // Check if the row matches the filters
+        const nameMatches = name.includes(nameSearchValue);
+        const semesterMatches =
+          semesterFilterValue === "" ||
+          semester === semesterFilterValue ||
+          semesterFilterValue === "all";
+
+        // If the row matches the filters, display it; otherwise, hide it
+        if (nameMatches && semesterMatches) {
+          row.style.display = "";
+        } else {
+          row.style.display = "none";
+        }
+
+        // Calculate total points for each row
+        let totalPoints = 0;
+        for (let i = 2; i < row.cells.length - 1; i++) {
+          totalPoints += parseInt(row.cells[i].textContent); // Parse the text content to integer
+        }
+        // Display the total points in the last cell of the row
+        row.cells[row.cells.length - 1].textContent = totalPoints;
+      });
+    });
+  //}
 });
+
 // contact page content
 let contact_content = `<div id="contactSectionTop" class="contactSection-box contactTopFormat">
 <h2 class="primaryheader">Let's get in touch.</h2>
