@@ -113,7 +113,8 @@
         <section class="hero is-quarter-height">
           <div class="hero-head">
             <nav>
-              <div class="navbar is-transparent is-justify-content-end">
+              <div class="navbar is-transparent">
+                <div class="is-justify-content-end">
             <div class="navbar-brand login-signup is-justify-content-end">
               <a class="navbar-item" id="login">
                 <button id="loginbtn" class="add-btn">
@@ -134,9 +135,9 @@
               id="signout_button"
               >Sign Out</a
             >
+          </div>
             </div>
-            </div>
-            </nav>
+            
             <div>
               <!-- website logo -->
               <h1  id="navbar-item">
@@ -146,6 +147,8 @@
                 </div>
               </h1>
             </div>
+          </div>
+          </nav>
           </div>
           <div class="'hero-body">
       </div>
@@ -213,7 +216,7 @@
     <main id="main-content">
       <div class="titleContainers">
         <div class="column column1">
-            <h1 class="title has-text-light">Welcome to <br />AMA UW-Madison</h1>
+            <h1 class="title is-1 has-text-light" id="title_uw">Welcome to <br />AMA UW-Madison</h1>
         </div>
         <div class="column column2">
             <img src="images/capitalPlaceholder.png" alt="MadisonCapital" width="100%" height="100%" />
@@ -302,7 +305,7 @@
           </div>
           <div id="line"></div>
           <div class="footer-section">
-            <h2>JOIN OUR EMAIL LIST</h2>
+            <h2 id ="foot_right">JOIN OUR EMAIL LIST</h2>
             <p>Want to become an official member of the Badger American Marketing Association or just be added to the email list? Fill out our member form to stay up to date on upcoming events!</p>
             <input type="text" placeholder="Enter your email here">
             <button id="submit_btn">
