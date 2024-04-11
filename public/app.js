@@ -527,6 +527,27 @@ r_e("calendarbtn").addEventListener("click", () => {
     </div>
   </main>`;
     appendContent(cal_page_content);
+
+    // Set the month select dropdown value to the current month
+    const monthSelect = document.getElementById("month-select");
+    const currentMonth = currentDate.getMonth(); // Get the current month index
+    monthSelect.selectedIndex = currentMonth;
+
+    document.getElementById("today-btn").addEventListener("click", () => {
+      const currentDate = new Date(); // Get the current date
+      const currentMonth = currentDate.getMonth(); // Get the current month index
+      const currentYear = currentDate.getFullYear(); // Get the current year
+      const firstDayOfMonth = new Date(currentYear, currentMonth, 1); // Get the first day of the current month
+      document.querySelector(".calview").innerHTML = generateCalendarHTML(
+        firstDayOfMonth,
+        currentMonth
+      );
+
+      // Update the month select dropdown value to the current month
+      const monthSelect = document.getElementById("month-select");
+      monthSelect.selectedIndex = currentMonth;
+    });
+
     document
       .getElementById("month-select")
       .addEventListener("change", (event) => {
@@ -542,6 +563,39 @@ r_e("calendarbtn").addEventListener("click", () => {
           firstDayOfSelectedMonth
         );
       });
+
+    document.querySelector(".action_left").addEventListener("click", () => {
+      currentDate.setMonth(currentDate.getMonth() - 1); // Move to the previous month
+      const currentMonth = currentDate.getMonth(); // Get the updated month index
+      const currentYear = currentDate.getFullYear(); // Get the updated year
+      const firstDayOfMonth = new Date(currentYear, currentMonth, 1); // Get the first day of the updated month
+      document.querySelector(".calview").innerHTML = generateCalendarHTML(
+        firstDayOfMonth,
+        currentMonth
+      );
+
+      // Update the month select dropdown value to the updated month
+      monthSelect.selectedIndex = currentMonth;
+    });
+
+    document.querySelector(".action_right").addEventListener("click", () => {
+      currentDate.setMonth(currentDate.getMonth() + 1); // Move to the next month
+      const currentMonth = currentDate.getMonth(); // Get the updated month index
+      const currentYear = currentDate.getFullYear(); // Get the updated year
+      const firstDayOfMonth = new Date(currentYear, currentMonth, 1); // Get the first day of the updated month
+      document.querySelector(".calview").innerHTML = generateCalendarHTML(
+        firstDayOfMonth,
+        currentMonth
+      );
+
+      // Update the month select dropdown value to the updated month
+      monthSelect.selectedIndex = currentMonth;
+    });
+
+    // Set the content of yearblock to the current year
+    document.getElementById(
+      "yearblock"
+    ).textContent = `${currentDate.getFullYear()}`;
   }
 });
 
