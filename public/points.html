@@ -233,6 +233,32 @@
         }
       });
     });
+    // EDIT BUTTON
+let editbutton = document.getElementById("editbtn");
+let savecancelbtn = document.getElementById("savecancelbtn");
+
+// open save and cancel when edit button is clicked
+function showsavecancel() {
+  savecancelbtn.classList.remove("is-hidden")
+  savecancelbtn.classList.add("is-active");
+  editbutton.classList.add("is-hidden")
+}
+
+editbutton.addEventListener("click", showsavecancel);
+
+// SAVE CANCEL BUTTON
+let editsave = document.getElementById("editsave");
+let editcancel =document.getElementById("editcancel");
+
+// when the cancel button is clicked it will hide and bring back the edit button
+function canceledit() {
+  savecancelbtn.classList.add("is-hidden")
+  savecancelbtn.classList.remove("is-active");
+  editbutton.classList.remove("is-hidden")
+}
+
+editcancel.addEventListener("click", canceledit);
+
     </script>
     </main>
     <footer>
