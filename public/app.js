@@ -447,7 +447,6 @@ r_e("calendarbtn").addEventListener("click", () => {
           ${generateCalendarHTML(currentDate)}
         </div>
       </div>
-      
       <div class="colormargins margin-right">
           <a href="#" class="add-btn2" id="eventbtn">Add Event</a>
           <div class="modal is-hidden" id="popupmodal">
@@ -527,6 +526,107 @@ r_e("calendarbtn").addEventListener("click", () => {
     </div>
   </main>`;
     appendContent(cal_page_content);
+    // addEventModal
+    let addEventForm = r_e("popupmodal");
+
+    function show_addEvent_form() {
+      addEventForm.classList.remove("is-hidden");
+      addEventForm.classList.add("is-active");
+    }
+
+    let addEventbtn = r_e("eventbtn");
+    addEventbtn.addEventListener("click", show_addEvent_form);
+
+    let addEventcancel = r_e("addEventcncl");
+    addEventcancel.addEventListener("click", () => {
+      addEventForm.classList.remove("is-active");
+    });
+    // eventcardModal
+    let eventCard1 = r_e("card_modal_1");
+    let eventbtn1 = r_e("eventbtn1");
+    let eventclose1 = r_e("closeEventCard");
+
+    function showEventCard1() {
+      eventCard1.classList.remove("is-hidden");
+      eventCard1.classList.add("is-active");
+    }
+    eventbtn1.addEventListener("click", showEventCard1);
+
+    eventclose1.addEventListener("click", () => {
+      eventCard1.classList.remove("is-active");
+    });
+    // eventcardModal2
+    let eventCard2 = r_e("card_modal_2");
+    let eventbtn2 = r_e("eventbtn2");
+    let eventclose2 = r_e("closeEventCard2");
+
+    function showEventCard2() {
+      eventCard2.classList.remove("is-hidden");
+      eventCard2.classList.add("is-active");
+    }
+    eventbtn2.addEventListener("click", showEventCard2);
+
+    eventclose2.addEventListener("click", () => {
+      eventCard2.classList.remove("is-active");
+    });
+
+    // / eventcardModal3
+    let eventCard3 = r_e("card_modal_3");
+    let eventbtn3 = r_e("eventbtn3");
+    let eventclose3 = r_e("closeEventCard3");
+
+    function showEventCard3() {
+      eventCard3.classList.remove("is-hidden");
+      eventCard3.classList.add("is-active");
+    }
+    eventbtn3.addEventListener("click", showEventCard3);
+
+    eventclose3.addEventListener("click", () => {
+      eventCard3.classList.remove("is-active");
+    });
+
+    // / eventcardModal4
+    let eventCard4 = r_e("card_modal_4");
+    let eventbtn4 = r_e("eventbtn4");
+    let eventclose4 = r_e("closeEventCard4");
+
+    function showEventCard4() {
+      eventCard4.classList.remove("is-hidden");
+      eventCard4.classList.add("is-active");
+    }
+    eventbtn4.addEventListener("click", showEventCard4);
+
+    eventclose4.addEventListener("click", () => {
+      eventCard4.classList.remove("is-active");
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const viewEventLinks = document.querySelectorAll(".events-button");
+      const eventCard = document.getElementById("eventCard");
+      const closeEventCardBtn = document.getElementById("eventCard");
+      // Add an event listener to the close button
+      document
+        .getElementById("closeAddEventsPopup")
+        .addEventListener("click", closeAddEventsPopup);
+
+      // Function to close the add events popup
+      function closeAddEventsPopup() {
+        var addEventsPopup = document.getElementById("addEventsPopup");
+        addEventsPopup.style.display = "none";
+      }
+
+      // Show the event card when any "View Event Here" link is clicked
+      viewEventLinks.forEach(function (link) {
+        link.addEventListener("click", function () {
+          eventCard.classList.remove("hidden");
+        });
+      });
+
+      // Close the event card when the close button is clicked
+      closeEventCardBtn.addEventListener("click", function () {
+        eventCard.classList.add("hidden");
+      });
+    });
   }
 });
 
@@ -861,125 +961,6 @@ r_e("contact-link").addEventListener("click", () => {
   }
 });
 
-// // Login/Signup Modal Open/Close
-// let loginmodal = document.querySelector("#logmodal");
-// let loginbutton = document.querySelector("#loginbtn");
-// let login_mbg = document.querySelector("#log_modalbg");
-
-// let signupmodal = document.querySelector("#signmodal");
-// let signupbutton = document.querySelector("#signupbtn");
-// let signup_mbg = document.querySelector("#sign_modalbg");
-
-// // function to open up login and signup modals
-// function openLoginModal() {
-//   loginmodal.classList.add("is-active");
-// }
-
-// function openSignupModal() {
-//   signupmodal.classList.add("is-active");
-// }
-
-// // click functions for login and signup buttons to open up the modal
-// loginbutton.addEventListener("click", openLoginModal);
-// signupbutton.addEventListener("click", openSignupModal);
-
-// // Close modals when clicking on the background or "X" button
-// document
-//   .querySelectorAll(".modal-background, .modal-close")
-//   .forEach(function (el) {
-//     el.addEventListener("click", function () {
-//       loginmodal.classList.remove("is-active");
-//       signupmodal.classList.remove("is-active");
-//     });
-//   });
-
-// eventcardModal
-let eventCard1 = r_e("card_modal_1");
-let eventbtn1 = r_e("eventbtn1");
-let eventclose1 = r_e("closeEventCard");
-
-function showEventCard1() {
-  eventCard1.classList.remove("is-hidden");
-  eventCard1.classList.add("is-active");
-}
-eventbtn1.addEventListener("click", showEventCard1);
-
-eventclose1.addEventListener("click", () => {
-  eventCard1.classList.remove("is-active");
-});
-// eventcardModal2
-let eventCard2 = r_e("card_modal_2");
-let eventbtn2 = r_e("eventbtn2");
-let eventclose2 = r_e("closeEventCard2");
-
-function showEventCard2() {
-  eventCard2.classList.remove("is-hidden");
-  eventCard2.classList.add("is-active");
-}
-eventbtn2.addEventListener("click", showEventCard2);
-
-eventclose2.addEventListener("click", () => {
-  eventCard2.classList.remove("is-active");
-});
-
-// / eventcardModal3
-let eventCard3 = r_e("card_modal_3");
-let eventbtn3 = r_e("eventbtn3");
-let eventclose3 = r_e("closeEventCard3");
-
-function showEventCard3() {
-  eventCard3.classList.remove("is-hidden");
-  eventCard3.classList.add("is-active");
-}
-eventbtn3.addEventListener("click", showEventCard3);
-
-eventclose3.addEventListener("click", () => {
-  eventCard3.classList.remove("is-active");
-});
-
-// / eventcardModal4
-let eventCard4 = r_e("card_modal_4");
-let eventbtn4 = r_e("eventbtn4");
-let eventclose4 = r_e("closeEventCard4");
-
-function showEventCard4() {
-  eventCard4.classList.remove("is-hidden");
-  eventCard4.classList.add("is-active");
-}
-eventbtn4.addEventListener("click", showEventCard4);
-
-eventclose4.addEventListener("click", () => {
-  eventCard4.classList.remove("is-active");
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-  const viewEventLinks = document.querySelectorAll(".events-button");
-  const eventCard = document.getElementById("eventCard");
-  const closeEventCardBtn = document.getElementById("eventCard");
-  // Add an event listener to the close button
-  document
-    .getElementById("closeAddEventsPopup")
-    .addEventListener("click", closeAddEventsPopup);
-
-  // Function to close the add events popup
-  function closeAddEventsPopup() {
-    var addEventsPopup = document.getElementById("addEventsPopup");
-    addEventsPopup.style.display = "none";
-  }
-
-  // Show the event card when any "View Event Here" link is clicked
-  viewEventLinks.forEach(function (link) {
-    link.addEventListener("click", function () {
-      eventCard.classList.remove("hidden");
-    });
-  });
-
-  // Close the event card when the close button is clicked
-  closeEventCardBtn.addEventListener("click", function () {
-    eventCard.classList.add("hidden");
-  });
-});
-
 // JavaScript to handle the burger menu toggle
 document.addEventListener("DOMContentLoaded", function () {
   const burger = document.querySelector(".navbar-burger");
@@ -1003,39 +984,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // console.log(firebase);
-
-document.querySelector("#addevtsbt").addEventListener("click", () => {
-  alert("event added");
-});
-// const addevtsbt = r_e("addevtsbt");
-// let evtname = r_e("evtname");
-// let evttime = r_e("datetime");
-// let evttype = r_e("evttype");
-// let ptsassigned = r_e("ptsassigned");
-// let descriptionevt = r_e("descriptionevt");
-
-// addevtsbt.addEventListener("click", () => {
-//   alert("event added");
-//   // Uncomment the below lines if you're ready to use them for adding event details to the database
-//   /*
-//     let name = evtname.value;
-//     let time = evttime.value;
-//     let type = evttype.value;
-//     let pts = ptsassigned.value;
-//     let desc = descriptionevt.value;
-//     let event = {
-//         name: name,
-//         time: time,
-//         type: type,
-//         pts: pts,
-//         desc: desc,
-//     };
-//     db.collection("events")
-//         .add(event)
-//         .then(() => alert("Event added to database"))
-//         .catch(error => console.error("Error adding event: ", error));
-//     */
-// });
 // authentication
 
 // expand burger
