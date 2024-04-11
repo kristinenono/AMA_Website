@@ -272,7 +272,180 @@ r_e("home-link").addEventListener("click", () => {
   }
 });
 
-let abt_content = `<div> TESTING </div>`;
+let abt_content = `<main>
+<div id="contactSectionTop" class="contactSection-box contactTopFormat">
+  <h2 class="primaryheader">More About Us</h2>
+  <div class="social-icons-container">
+    <a href="#" class="social-icon" title="Email">
+      <p>EVENT TYPES</p>
+    </a>
+    <a href="#aboutHeaderSection" class="social-icon" title="Instagram">
+      <p>MEMBERSHIP REQUIREMENTS</p>
+    </a>
+    <a href="#corporatePartnerships" class="social-icon" title="LinkedIn">
+      <p>CORPORATE PARTNERSHIPS</p>
+    </a>
+  </div>
+</div>
+
+<h3 class="aboutHeader">Event Types</h3>
+
+<div class="gridContainer">
+  <ul class="grid-list">
+    <li>
+      <div class="service-card has-after">
+        <div class="card-content">
+          <div class="aboutCardContent">
+            <div class="aboutCardTxt-flex">
+              <h3 class="aboutCardImg">CARD IMAGE HERE</h3>
+              <h3 class="aboutCardHeader">Speaker/Member Meetings</h3>
+              <h4>
+                Each semester, we invite ~5 companies to speak at our
+                Member Meetings. These meetings provide fantastic
+                opportunities to learn from marketing professionals and
+                network with them.
+              </h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="service-card has-after">
+        <div class="card-content">
+          <div class="aboutCardContent">
+            <div class="aboutCardTxt-flex">
+              <h3 class="aboutCardImg">CARD IMAGE HERE</h3>
+              <h3 class="aboutCardHeader">
+                Professional Development Workshops
+              </h3>
+              <h4>
+                Each semester, we invite ~5 companies to speak at our
+                Member Meetings. These meetings provide fantastic
+                opportunities to learn from marketing professionals and
+                network with them.
+              </h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="service-card has-after">
+        <div class="card-content">
+          <div class="aboutCardContent">
+            <div class="aboutCardTxt-flex">
+              <h3 class="aboutCardImg">CARD IMAGE HERE</h3>
+              <h3 class="aboutCardHeader">Social Events</h3>
+              <h4>
+                Each semester, we invite ~5 companies to speak at our
+                Member Meetings. These meetings provide fantastic
+                opportunities to learn from marketing professionals and
+                network with them.
+              </h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="service-card has-after">
+        <div class="card-content">
+          <div class="aboutCardContent">
+            <div class="aboutCardTxt-flex">
+              <h3 class="aboutCardImg">CARD IMAGE HERE</h3>
+              <h3 class="aboutCardHeader">DEI Workshops</h3>
+              <h4>
+                Each semester, we invite ~5 companies to speak at our
+                Member Meetings. These meetings provide fantastic
+                opportunities to learn from marketing professionals and
+                network with them.
+              </h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="service-card has-after">
+        <div class="card-content">
+          <div class="aboutCardContent">
+            <div class="aboutCardTxt-flex">
+              <h3 class="aboutCardImg">CARD IMAGE HERE</h3>
+              <h3 class="aboutCardHeader">Volunteer Events</h3>
+              <h4>
+                Each semester, we invite ~5 companies to speak at our
+                Member Meetings. These meetings provide fantastic
+                opportunities to learn from marketing professionals and
+                network with them.
+              </h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="service-card has-after">
+        <div class="card-content">
+          <div class="aboutCardContent">
+            <div class="aboutCardTxt-flex">
+              <h3 class="aboutCardImg">CARD IMAGE HERE</h3>
+              <h3 class="aboutCardHeader">Leadership Opportunities</h3>
+              <h4>
+                Each semester, we invite ~5 companies to speak at our
+                Member Meetings. These meetings provide fantastic
+                opportunities to learn from marketing professionals and
+                network with them.
+              </h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+    <!-- Repeat for other services -->
+  </ul>
+</div>
+<div id="aboutHeaderSection">
+  <div class="contactFormText">
+    <h3 class="aboutHeader">Membership Requirements</h3>
+    <h4 id="aboutHeaderParagraph"></h4>
+  </div>
+  <div class="contactForm-flex">
+    <p>IMAGE HERE</p>
+  </div>
+</div>
+<div class="membershipRequirementsSection">
+  <h4 class="aboutCardHeader2">
+    <strong>1) Dues:</strong>
+  </h4>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti
+    recusandae odit repellendus velit quia numquam id consectetur
+    explicabo odio dolor?
+  </p>
+</div>
+<div class="membershipRequirementsSection">
+  <h4 class="aboutCardHeader2">
+    <strong>2) Point Requirements:</strong>
+  </h4>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti
+    recusandae odit repellendus velit quia numquam id consectetur
+    explicabo odio dolor?
+  </p>
+</div>
+<div id="aboutHeaderSection2">
+  <div class="contactFormText">
+    <p>IMAGE HERE</p>
+  </div>
+  <div class="contactForm-flex">
+    <h3 id="corporatePartnerships" class="aboutHeader">
+      Corporate Partnerships
+    </h3>
+    <h4 id="aboutHeaderParagraph"></h4>
+  </div>
+</div>
+</main>`;
 
 //about page
 r_e("abt-link").addEventListener("click", () => {

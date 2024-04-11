@@ -1432,3 +1432,146 @@ textarea.input-field {
 .margin-class {
   margin-top: 35px;
 }
+* about page */ .aboutContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+.aboutText {
+  flex: 0 0 45%;
+  margin-bottom: 20px;
+}
+.aboutImage {
+  flex: 0 0 45%;
+}
+.aboutImage img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+.aboutContainer:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+.aboutPrimaryHeader {
+  margin: 0 auto;
+  font-family: var(--titleFontFamily);
+  font-size: 50px;
+  color: var(--primaryblack);
+  font-weight: bolder;
+  text-align: center;
+  color: var(--primarynavy);
+}
+
+.contactTopFormat .primaryheader {
+  color: var(--bodyTextColorWhite);
+}
+.aboutCardContent {
+  flex: 1;
+  text-align: center;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Center the text within the card */
+
+.aboutCardTxt-flex {
+  flex: 1;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+.aboutCardImg {
+  text-align: center;
+}
+.aboutCardHeader {
+  font: var(--bodyFontFamily);
+  font-size: 23px;
+  font-weight: 500;
+  margin-bottom: 3px;
+  margin-top: 3px;
+  color: var(--primarynavy);
+}
+.aboutCardHeader2 {
+  font: var(--bodyFontFamily);
+  font-size: 23px;
+  font-weight: 500;
+  color: var(--primarynavy);
+}
+.aboutHeader {
+  text-align: center;
+  font-size: 38px;
+  font-family: var(--bodyFontFamily);
+  color: var(--primarynavy);
+  font-weight: bold;
+}
+
+#aboutHeaderSection {
+  display: flex;
+  padding: 30px;
+  background-color: white;
+}
+#aboutHeaderSection2 {
+  display: flex;
+  padding: 30px;
+  padding-top: 40px;
+}
+
+.membershipRequirementsSection {
+  background-color: white;
+  padding-left: 15%;
+  padding-right: 40%;
+  padding-top: 15px;
+  padding-bottom: 30px;
+}
+
+.grid-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.grid-list li {
+  width: calc(35% - 0.2px); /* Two items per row with some spacing */
+  background-color: var(--lightGray);
+
+  border-top: 30px solid var(--primarywhite); /* Add a white border */
+  border-bottom: 30px solid var(--primarywhite); /* Add a white border */
+}
+
+/* For smaller screens, make each item full width */
+@media screen and (max-width: 768px) {
+  .grid-list li {
+    width: 100%;
+  }
+}
+/* Adjust the padding and margin of the service-card and its content */
+
+/* Reduce the font size and spacing of the card content */
+.service-card .card-content {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  line-height: 1.4;
+  justify-content: center;
+  text-align: center;
+}
+.service-card .card-content .aboutCardContent {
+  order: -1; /* Move the image to the top */
+  text-align: center;
+}
+
+/* Make adjustments for smaller screens */
+@media screen and (max-width: 768px) {
+  .service-card {
+    width: calc(50% - 20px); /* Two items per row with some spacing */
+  }
+}
+/* For the last item in each row, remove the right margin to prevent overflow */
+.grid-list li:nth-child(2n) {
+  margin-right: 0;
+}
