@@ -600,32 +600,30 @@ r_e("calendarbtn").addEventListener("click", () => {
       eventCard4.classList.remove("is-active");
     });
 
-    document.addEventListener("DOMContentLoaded", function () {
-      const viewEventLinks = document.querySelectorAll(".events-button");
-      const eventCard = document.getElementById("eventCard");
-      const closeEventCardBtn = document.getElementById("eventCard");
-      // Add an event listener to the close button
-      document
-        .getElementById("closeAddEventsPopup")
-        .addEventListener("click", closeAddEventsPopup);
+    const viewEventLinks = document.querySelectorAll(".events-button");
+    const eventCard = document.getElementById("eventCard");
+    const closeEventCardBtn = document.getElementById("eventCard");
+    // Add an event listener to the close button
+    document
+      .getElementById("closeAddEventsPopup")
+      .addEventListener("click", closeAddEventsPopup);
 
-      // Function to close the add events popup
-      function closeAddEventsPopup() {
-        var addEventsPopup = document.getElementById("addEventsPopup");
-        addEventsPopup.style.display = "none";
-      }
+    // Function to close the add events popup
+    function closeAddEventsPopup() {
+      var addEventsPopup = document.getElementById("addEventsPopup");
+      addEventsPopup.style.display = "none";
+    }
 
-      // Show the event card when any "View Event Here" link is clicked
-      viewEventLinks.forEach(function (link) {
-        link.addEventListener("click", function () {
-          eventCard.classList.remove("hidden");
-        });
+    // Show the event card when any "View Event Here" link is clicked
+    viewEventLinks.forEach(function (link) {
+      link.addEventListener("click", function () {
+        eventCard.classList.remove("hidden");
       });
+    });
 
-      // Close the event card when the close button is clicked
-      closeEventCardBtn.addEventListener("click", function () {
-        eventCard.classList.add("hidden");
-      });
+    // Close the event card when the close button is clicked
+    closeEventCardBtn.addEventListener("click", function () {
+      eventCard.classList.add("hidden");
     });
   }
 });
