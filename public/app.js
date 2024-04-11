@@ -708,6 +708,24 @@ r_e("calendarbtn").addEventListener("click", () => {
         .catch((error) => console.error("Error adding event: ", error));
       addEventForm.classList.remove("is-active");
     });
+    // Function to generate a random code
+    function generateRandomCode(length) {
+      const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+      let code = "";
+      for (let i = 0; i < length; i++) {
+        code += characters.charAt(
+          Math.floor(Math.random() * characters.length)
+        );
+      }
+      return code;
+    }
+
+    // Function to update the input field with the generated code
+    function updateCodeInput() {
+      const codeInput = document.getElementById("codeInput");
+      const randomCode = generateRandomCode(8); // Generate a random 8-character code (adjust length as needed)
+      codeInput.value = randomCode;
+    }
     // // eventcardModal
 
     const viewEventLinks = document.querySelectorAll(".events-button");
