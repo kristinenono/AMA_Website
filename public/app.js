@@ -402,14 +402,14 @@ function handleDayClick(day) {
   // Your code to handle the click event for a specific day in the calendar
 }
 
-// Cal page content
 r_e("calendarbtn").addEventListener("click", () => {
-  configure_message_bar("must sign in to view");
   let check_auth = auth.currentUser;
+  console.log("btn clicked");
   if (check_auth == null) {
-    signup_modal.classList.add("is-active");
-  }
-  if (check_auth != null) {
+    // User is not signed in
+    alert("You must sign in to view the calendar.");
+  } else {
+    // User is signed in
     let cal_page_content = `<main>
     <div id="cal_page" class="wrapper">
       <!-- LEFT MARGIN -->
@@ -417,7 +417,7 @@ r_e("calendarbtn").addEventListener("click", () => {
         <h2 class="heading-tag-upcoming-event">Upcoming Events</h2>
         <div class="flex-container">
           <div class="box margin-event">
-            <h2>Philathropy event</h2>
+            <h2>Philanthropy event</h2>
             <a href="#" class="events-button">View Event Here! </a>
             <div id="eventCard" class="event-card hidden">
               <!-- Content of the event card goes here -->
@@ -433,16 +433,169 @@ r_e("calendarbtn").addEventListener("click", () => {
           <!-- Other event boxes go here -->
         </div>
       </div>
-      <div class="calview">
-        <!-- Calendar view will be populated here -->
-        ${generateCalendarHTML(currentDate)}
+      <div id="sample" class="colormargins page-content">
+      <div class="navcal">
+        <span class="today">
+          <button id="today-btn">Today</button>
+        </span>
+        <button class="action_left">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <select class="selectdrop" id="month-select">
+          <option value="January">January</option>
+          <option value="February">February</option>
+          <option value="March">March</option>
+          <option value="April">April</option>
+          <option value="May">May</option>
+          <option value="June">June</option>
+          <option value="July">July</option>
+          <option value="August">August</option>
+          <option value="September">September</option>
+          <option value="October">October</option>
+          <option value="November">November</option>
+          <option value="December">December</option>
+        </select>
+        <button class="action_right">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+        <span class="yearblock">
+          <button id="yearblock"></button>
+        </span>
       </div>
-      <!-- Other elements of the page go here -->
+        <div class="calview">
+          <!-- Calendar view will be populated here -->
+          ${generateCalendarHTML(currentDate)}
+        </div>
+      </div>
+      
+      <div class="colormargins margin-right">
+          <a href="#" class="add-btn2" id="eventbtn">Add Event</a>
+          <div class="modal is-hidden" id="popupmodal">
+            <div class = "modal-background" id= "popupbg"></div>
+            <div class="modal-content section has-background-white">
+            <h2 class="title">New Event</h2>
+            <form id="cal_form_modal">
+            <div class="field">
+            <label class="label" >Name of Event</label>
+            <div class="control">
+              <input class="input" id = "evtname" type="text" placeholder="LinkedIn Workshop" />
+            </div>
+            </div>
+            <div class="field">
+            <label class="label">Date and Time of Event</label>
+            <div class="control">
+              <input
+                class="input"
+                id = "datetime"
+                type="datetime-local"
+                placeholder="12-01-22 01:22"
+              />
+            </div>
+            </div>
+            <div class="field">
+            <label class="label">Choose Event Category</label>
+            <div class="control">
+              <div class="select">
+                <select name="" id="evttype">
+                  <option>--select--</option>
+                  <option value="">Philanthropy</option>
+                  <option value="">Professional Development</option>
+                  <option value="">Speaker Event</option>
+                  <option value="">Social Event</option>
+                </select>
+              </div>
+            </div>
+            </div>
+            <div class="field">
+            <label class="label">Points Assigned</label>
+            <div class="control">
+              <input class="input" id = "ptsassigned" type="number" placeholder="5" />
+            </div>
+            </div>
+            <div class="field">
+            <label class="label">Description of Event</label>
+            <div class="control">
+              <textarea
+                cols="20"
+                rows="12"
+                id = "descriptionevt"
+                placeholder="Dress Code: Business Casual 
+            Location: Grainger"
+              ></textarea>
+            </div>
+            </div>
+            <div class="field has-addons">
+            <div class="control">
+              <input id="codeInput" class="input" type="text" placeholder="Generate Code" />
+            </div>
+            <div class="control">
+              <a id="generateButton" class="button btncolor">Go</a>
+            </div>
+            </div>
+            <div class="field is-grouped">
+            <div class="control">
+              <button class="button" id = "addevtsbt">Submit</button>
+            </div>
+            <div class="control">
+              <button class="button" id="addEventcncl">Cancel</button>
+            </div>
+            </div>
+            </div>
+          </form>
+            </div></div>
+    </div>
     </div>
   </main>`;
-    document.body.innerHTML += cal_page_content;
+    appendContent(cal_page_content);
   }
 });
+
+//   if (check_auth != null) {
+// r_e("calendarbtn").addEventListener("click", () => {
+//   alert("alert!!!!");
+// });
+
+// Cal page content
+// r_e("calendarbtn").addEventListener("click", () => {
+//   configure_message_bar("must sign in to view");
+//   let check_auth = auth.currentUser;
+//   if (check_auth == null) {
+//     signupModal.classList.add("is-active");
+//   }
+//   if (check_auth != null) {
+//     let cal_page_content = `<main>
+//     <div id="cal_page" class="wrapper">
+//       <!-- LEFT MARGIN -->
+//       <div class="colormargins margin-left">
+//         <h2 class="heading-tag-upcoming-event">Upcoming Events</h2>
+//         <div class="flex-container">
+//           <div class="box margin-event">
+//             <h2>Philathropy event</h2>
+//             <a href="#" class="events-button">View Event Here! </a>
+//             <div id="eventCard" class="event-card hidden">
+//               <!-- Content of the event card goes here -->
+//               <h2 class="secondaryheader">Event Title</h2>
+//               <p class="primaryBody">Date: [Event Date]</p>
+//               <p class="primaryBody">Location: [Event Location]</p>
+//               <!-- Add more details as needed -->
+//               <button id="editEventCard">Edit</button>
+//               <button id="deleteEventCard">Delete</button>
+//               <button id="closeEventCard">Close</button>
+//             </div>
+//           </div>
+//           <!-- Other event boxes go here -->
+//         </div>
+//       </div>
+//       <div class="calview">
+//         <!-- Calendar view will be populated here -->
+//         ${generateCalendarHTML(currentDate)}
+//       </div>
+//       <!-- Other elements of the page go here -->
+//     </div>
+//   </main>`;
+//     document.body.innerHTML += cal_page_content;
+//   }
+// });
 
 // points page content
 r_e("pointbtn").addEventListener("click", () => {
