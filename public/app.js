@@ -141,7 +141,7 @@ r_e("user_found").addEventListener("click", () => {
 
 let home_page_content = `<div class="titleContainers">
 <div class="column column1">
-    <h1 class="title is-1 has-text-light">Welcome to <br />AMA UW-Madison</h1>
+    <h1 class="title is-1 has-text-light" id="title_uw">Welcome to <br />AMA UW-Madison</h1>
 </div>
 <div class="column column2">
     <img src="images/capitalPlaceholder.png" alt="MadisonCapital" width="100%" height="100%" />
