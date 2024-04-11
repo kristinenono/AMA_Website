@@ -1,3 +1,4 @@
+// INDEX PAGE
 function configure_message_bar(message) {
   r_e("message_bar").classList.remove("is-hidden");
   r_e("message_bar").innerHTML = message;
@@ -142,6 +143,7 @@ r_e("user_found").addEventListener("click", () => {
     loginModal.classList.add("is-active");
   }
 });
+
 
 let home_page_content = `<div class="titleContainers">
 <div class="column column1">

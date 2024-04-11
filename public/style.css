@@ -61,12 +61,11 @@ body {
 }
 .mainbackground {
   background-color: #f3f2ee;
-}
+}x
 
 .title {
   font-family: var(--titleFontFamily);
   font-size: var(--titleFontSize);
-  text-align: left;
   color: var(--primarywhite);
   font-size: 5vw;
   margin-left: 5rem;
@@ -1172,6 +1171,7 @@ button p {
   padding-top: 5%;
 }
 
+/* POINTS PAGE */
 /* table */
 table {
   width: 80%;
@@ -1185,7 +1185,7 @@ table {
 th,
 td {
   padding: 15px;
-  text-align: left;
+  text-align: center;
   border-bottom: 1px solid #dddddd;
 }
 th {
@@ -1226,10 +1226,23 @@ tr:hover {
 }
 
 /* filter button */
-#applyFilters {
+.redbtn{
+  font: var(--titleFontFamily);
   background-color: #b22b25;
-  border: none;
   color: white;
+}
+.redbtn:active {
+  background-color: #1f304f;
+}
+.bluebtn{
+  font: var(--titleFontFamily);
+  background-color: #1f304f;
+  color: white;
+}
+.bluebtn:active {
+  background-color: #b22b25;
+}
+.pointbtn{
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -1238,11 +1251,18 @@ tr:hover {
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 10px;
+  font-weight: bolder;
 }
 
-#applyFilters:active {
-  background-color: #1f304f;
+.editsavecancel {
+  display: flex; /* This makes the container a flex container */
+  flex-direction:row; /* Aligns children (buttons) in a column */
+  align-items: center; /* Centers the buttons horizontally in the container */
+  justify-content: center; /* Centers the buttons vertically in the container */
+  margin: 2rem;
 }
+
+
 /* CONTACT PAGE */
 
 .contactTopFormat {

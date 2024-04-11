@@ -10,6 +10,10 @@
       src="https://kit.fontawesome.com/bcae03608a.js"
       crossorigin="anonymous"
     ></script>
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+  />
   </head>
   <body>
     <header>
@@ -65,11 +69,16 @@
                 <option data-event="Social Points">Social Points</option>
                 <option data-event="Speaker Points">Speaker Points</option>
             </select> -->
-            <button id="applyFilters">Apply Filters</button>
-        </div>                 
-        <table>
+            <button id="applyFilters" class="redbtn pointbtn">Apply Filters</button>
+            <button id="editbtn" class="bluebtn pointbtn">Edit Points</button>
+        </div>   
+        <div id="savecancelbtn" class="container editsavecancel is-hidden">
+          <button id="editsave" class="bluebtn pointbtn">Save</button>
+          <button id="editcancel" class="redbtn pointbtn">Cancel</button>
+        </div>              
+        <table class="table is-bordered is-striped is-hoverable">
             <thead>
-                <tr>
+                <tr class="has-text-white">
                     <th>Member</th>
                     <th>Semester</th>
                     <th>Philanthropy Points</th>
@@ -252,7 +261,7 @@
           </div>
         </div>
       </footer>
-    <script src="app.js"></script>
+    <!-- <script src="app.js"></script> -->
     <script> //Still working on this, I'll move it to app.js when I'm done!
     // Filter members & semester for points table
     
@@ -333,6 +342,34 @@ document.getElementById("applyFilters").addEventListener("click", function () {
         row.cells[row.cells.length - 1].textContent = totalPoints;
     });
 });
+
+// EDIT BUTTON
+let editbutton = document.getElementById("editbtn");
+let savecancelbtn = document.getElementById("savecancelbtn");
+
+// open save and cancel when edit button is clicked
+function showsavecancel() {
+  savecancelbtn.classList.remove("is-hidden")
+  savecancelbtn.classList.add("is-active");
+  editbutton.classList.add("is-hidden")
+}
+
+editbutton.addEventListener("click", showsavecancel);
+
+// SAVE CANCEL BUTTON
+let editsave = document.getElementById("editsave");
+let editcancel =document.getElementById("editcancel");
+
+// when the cancel button is clicked it will hide and bring back the edit button
+function canceledit() {
+  savecancelbtn.classList.add("is-hidden")
+  savecancelbtn.classList.remove("is-active");
+  editbutton.classList.remove("is-hidden")
+}
+
+editcancel.addEventListener("click", canceledit);
+
+
         </script>
   </body>
 </html>
