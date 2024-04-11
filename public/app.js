@@ -366,21 +366,21 @@ function generateCalendarHTML(date) {
 }
 
 // Function to generate a random code
-function generateRandomCode(length) {
-  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-  let code = "";
-  for (let i = 0; i < length; i++) {
-    code += characters.charAt(Math.floor(Math.random() * characters.length));
-  }
-  return code;
-}
+// function generateRandomCode(length) {
+//   const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+//   let code = "";
+//   for (let i = 0; i < length; i++) {
+//     code += characters.charAt(Math.floor(Math.random() * characters.length));
+//   }
+//   return code;
+// }
 
-// Function to update the input field with the generated code
-function updateCodeInput() {
-  const codeInput = document.getElementById("codeInput");
-  const randomCode = generateRandomCode(8); // Generate a random 8-character code (adjust length as needed)
-  codeInput.value = randomCode;
-}
+// // Function to update the input field with the generated code
+// function updateCodeInput() {
+//   const codeInput = document.getElementById("codeInput");
+//   const randomCode = generateRandomCode(8); // Generate a random 8-character code (adjust length as needed)
+//   codeInput.value = randomCode;
+// }
 
 r_e("calendarbtn").addEventListener("click", () => {
   let check_auth = auth.currentUser;
@@ -531,10 +531,10 @@ r_e("calendarbtn").addEventListener("click", () => {
               <div class="select">
                 <select name="" id="evttype">
                   <option>--select--</option>
-                  <option value="">Philanthropy</option>
-                  <option value="">Professional Development</option>
-                  <option value="">Speaker Event</option>
-                  <option value="">Social Event</option>
+                  <option value="Philanthropy">Philanthropy</option>
+                  <option value="Professional Development">Professional Development</option>
+                  <option value="Speaker Event">Speaker Event</option>
+                  <option value="Social Event">Social Event</option>
                 </select>
               </div>
             </div>
@@ -671,6 +671,11 @@ r_e("calendarbtn").addEventListener("click", () => {
     let ptsassigned = r_e("ptsassigned");
     let descriptionevt = r_e("descriptionevt");
 
+    let month = new Date(evttime).getMonth() + 1;
+    let evtyear = new Date(evttime).getFullYear();
+
+    let season = month >= 1 && month <= 6 ? "SPRING" : "FALL";
+
     addevtsbt.addEventListener("click", (e) => {
       console.log("eventsbtnclicked");
       e.preventDefault();
@@ -679,12 +684,16 @@ r_e("calendarbtn").addEventListener("click", () => {
       let type = evttype.value;
       let pts = ptsassigned.value;
       let desc = descriptionevt.value;
+      let evtcode = document.querySelector("#codeInput").value;
+      let month = new Date(evttime).getMonth() + 1;
+      let evtyear = new Date(evttime).getFullYear();
       let event = {
         name: name,
         time: time,
         type: type,
         pts: pts,
         desc: desc,
+        semester: `${season} ${evtyear}`,
       };
       db.collection("events")
         .add(event)
