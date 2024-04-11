@@ -1,3 +1,4 @@
+// INDEX PAGE
 function configure_message_bar(message) {
   r_e("message_bar").classList.remove("is-hidden");
   r_e("message_bar").innerHTML = message;
@@ -138,6 +139,7 @@ r_e("user_found").addEventListener("click", () => {
     loginModal.classList.add("is-active");
   }
 });
+
 
 let home_page_content = `<div class="titleContainers">
 <div class="column column1">
@@ -331,7 +333,14 @@ r_e("calendarbtn").addEventListener("click", () => {
   }
 });
 
-// points page content
+
+
+
+
+
+
+
+// POINT PAGE
 r_e("pointbtn").addEventListener("click", () => {
   /*let check_auth = auth.currentUser;
   if (check_auth == null) {
@@ -518,7 +527,15 @@ r_e("pointbtn").addEventListener("click", () => {
   //}
 });
 
-// contact page content
+// EDIT BUTTON
+// move the js from the points.html into here
+
+
+
+
+
+
+// CONTACT PAGE
 let contact_content = `<div id="contactSectionTop" class="contactSection-box contactTopFormat">
 <h2 class="primaryheader">Let's get in touch.</h2>
 

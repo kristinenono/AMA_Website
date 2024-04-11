@@ -1162,6 +1162,7 @@ button p {
   padding-top: 5%;
 }
 
+/* POINTS PAGE */
 /* table */
 table {
   width: 80%;
@@ -1216,10 +1217,23 @@ tr:hover {
 }
 
 /* filter button */
-#applyFilters {
+.redbtn{
+  font: var(--titleFontFamily);
   background-color: #b22b25;
-  border: none;
   color: white;
+}
+.redbtn:active {
+  background-color: #1f304f;
+}
+.bluebtn{
+  font: var(--titleFontFamily);
+  background-color: #1f304f;
+  color: white;
+}
+.bluebtn:active {
+  background-color: #b22b25;
+}
+.pointbtn{
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -1228,30 +1242,18 @@ tr:hover {
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 10px;
+  font-weight: bolder;
 }
 
-#applyFilters:active {
-  background-color: #1f304f;
+.editsavecancel {
+  display: flex; /* This makes the container a flex container */
+  flex-direction:row; /* Aligns children (buttons) in a column */
+  align-items: center; /* Centers the buttons horizontally in the container */
+  justify-content: center; /* Centers the buttons vertically in the container */
+  margin: 2rem;
 }
 
-/* edit points button */
-.editbtn {
-  background-color: #1f304f;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 10px;
-}
 
-.editbtn:active {
-  background-color: #b22b25;
-}
 /* CONTACT PAGE */
 
 .contactTopFormat {
