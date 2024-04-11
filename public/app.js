@@ -664,6 +664,13 @@ r_e("calendarbtn").addEventListener("click", () => {
     addEventcancel.addEventListener("click", () => {
       addEventForm.classList.remove("is-active");
     });
+    document
+      .querySelectorAll(".modal-background, .modal-close")
+      .forEach(function (el) {
+        el.addEventListener("click", function () {
+          addEventForm.classList.remove("is-active");
+        });
+      });
     const addevtsbt = r_e("addevtsbt");
     let evtname = r_e("evtname");
     let evttime = r_e("datetime");
