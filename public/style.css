@@ -61,12 +61,11 @@ body {
 }
 .mainbackground {
   background-color: #f3f2ee;
-}
+}x
 
 .title {
   font-family: var(--titleFontFamily);
   font-size: var(--titleFontSize);
-  text-align: left;
   color: var(--primarywhite);
   font-size: 5vw;
   margin-left: 5rem;
@@ -1176,7 +1175,7 @@ table {
 th,
 td {
   padding: 15px;
-  text-align: left;
+  text-align: center;
   border-bottom: 1px solid #dddddd;
 }
 th {
@@ -1233,6 +1232,25 @@ tr:hover {
 
 #applyFilters:active {
   background-color: #1f304f;
+}
+
+/* edit points button */
+.editbtn {
+  background-color: #1f304f;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.editbtn:active {
+  background-color: #b22b25;
 }
 /* CONTACT PAGE */
 
