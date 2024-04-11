@@ -452,59 +452,527 @@ r_e("abt-link").addEventListener("click", () => {
   appendContent(abt_content);
 });
 
-// Cal page content
-r_e("calendarbtn").addEventListener("click", () => {
-  configure_message_bar("must sign in to view");
-  let check_auth = auth.currentUser;
-  if (check_auth == null) {
-    signup_modal.classList.add("is-active");
+const calendarView = document.querySelector(".calview");
+const monthSelect = r_e("month-select");
+const prevMonthBtn = document.querySelector(".action_left");
+const nextMonthBtn = document.querySelector(".action_right");
+const yearblock = r_e("yearblock");
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+const dayNames = ["Sun", "Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];
+
+let currentDate = new Date();
+
+function generateCalendarHTML(date) {
+  const totalDays = 42;
+  let currentYear = date.getFullYear();
+  let currentMonth = date.getMonth();
+  let firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
+  let daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+  let dayCellsGenerated = 0;
+  let emptyCellsCount = 0;
+
+  let calendarHtml = "<div class='weekdayview'>";
+  for (let title = 0; title <= 6; title++) {
+    calendarHtml += `<div class='dayofweek'>${dayNames[title]}</div>`;
   }
-  if (check_auth != null) {
-    let cal_page_content = `
-  <div id="cal_page" class="wrapper">
-    <!-- LEFT MARGIN -->
-    <div class="colormargins margin-left">
-      <h2 class="heading-tag-upcoming-event">Upcoming Events</h2>
-      <div class="flex-container">
+  calendarHtml += "</div><div class='monthview'><div class='weekview'>";
+
+  for (let i = 0; i < firstDayOfMonth; i++) {
+    calendarHtml += '<div class="dayview empty"></div>';
+    dayCellsGenerated++;
+    emptyCellsCount++;
+  }
+  for (let day = 1; day <= daysInMonth; day++) {
+    calendarHtml += `<div class="dayview">${day}</div>`;
+    dayCellsGenerated++;
+    if (dayCellsGenerated % 7 === 0 && dayCellsGenerated !== totalDays) {
+      calendarHtml += '</div><div class="weekview">';
+      emptyCellsCount = 0; // Reset empty cells count at the start of a new week
+    }
+  }
+
+  while (dayCellsGenerated < totalDays) {
+    calendarHtml += '<div class="dayview empty"></div>';
+    dayCellsGenerated++;
+    emptyCellsCount++;
+    if (dayCellsGenerated % 7 === 0 && dayCellsGenerated !== totalDays) {
+      calendarHtml += '</div><div class="weekview">';
+      emptyCellsCount = 0; // Reset empty cells count at the start of a new week
+    }
+  }
+
+  if (emptyCellsCount === 7) {
+    // Remove the last weekview div if all its cells are empty
+    calendarHtml = calendarHtml.substring(
+      0,
+      calendarHtml.lastIndexOf('<div class="weekview">')
+    );
+  }
+
+  calendarHtml += "</div>"; // Close the last weekview or monthview div properly
+  return calendarHtml; // Return the calendar HTML string
+}
+
+// Function to generate a random code
+// function generateRandomCode(length) {
+//   const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+//   let code = "";
+//   for (let i = 0; i < length; i++) {
+//     code += characters.charAt(Math.floor(Math.random() * characters.length));
+//   }
+//   return code;
+// }
+
+// // Function to update the input field with the generated code
+// function updateCodeInput() {
+//   const codeInput = document.getElementById("codeInput");
+//   const randomCode = generateRandomCode(8); // Generate a random 8-character code (adjust length as needed)
+//   codeInput.value = randomCode;
+// }
+
+r_e("calendarbtn").addEventListener("click", () => {
+  let check_auth = auth.currentUser;
+  console.log("btn clicked");
+  if (check_auth == null) {
+    // User is not signed in
+    alert("You must sign in to view the calendar.");
+  } else {
+    // User is signed in
+    let cal_page_content = `<main>
+    <div id="cal_page" class="wrapper">
+      <!-- LEFT MARGIN -->
+      <div class="colormargins margin-left">
+        <h2 class="heading-tag-upcoming-event">Upcoming Events</h2>
+        <div class="flex-container">
+        <div class="box margin-event ">
+        <h2>Philathropy event</h2>
+        <a href="#" class="events-button" id="eventbtn1">View Event Here! </a>
+        <div class="modal is-hidden" id="card_modal_1">
+          <div class = "modal-background" id= "cardbg_1"></div>
+          <div class="modal-content section has-background-white">
+          <h2 class="secondaryheader2">Event Title</h2>
+          <form>
+          <p class="primaryBody">Date: [Event Date]</p>
+          <p class="primaryBody">Location: [Event Location]</p>
+          <button id="editEventCard">Edit</button>
+          <button id="deleteEventCard">Delete</button>
+          <button id="closeEventCard">Close</button>
+        </form>
+        </div>
+        </div>
+        </div>
         <div class="box margin-event">
-          <h2>Philathropy event</h2>
-
-          <a href="#" class="events-button">View Event Here! </a>
-
-          <div id="eventCard" class="event-card hidden">
-            <!-- Content of the event card goes here -->
-            <h2 class="secondaryheader">Event Title</h2>
+          <h2>Professional Development event</h2>
+          <a href="#" class="events-button" id="eventbtn2">View Event Here! </a>
+          <div class="modal is-hidden" id="card_modal_2">
+            <div class = "modal-background" id= "cardbg_2"></div>
+            <div class="modal-content section has-background-white">
+            <h2 class="secondaryheader2">Event Title</h2>
+            <form>
             <p class="primaryBody">Date: [Event Date]</p>
             <p class="primaryBody">Location: [Event Location]</p>
-            <!-- Add more details as needed -->
             <button id="editEventCard">Edit</button>
             <button id="deleteEventCard">Delete</button>
-            <button id="closeEventCard">Close</button>
+            <button id="closeEventCard2">Close</button>
+          </form>
           </div>
-        </div>
-        <div class="box margin-event">
-          <h2>Professional Development Event</h2>
-
-          <a href="#" class="events-button">View Event Here! </a>
-        </div>
-        <div class="box margin-event">
-          <h2>Speaker Event</h2>
-
-          <a href="#" class="events-button">View Event Here! </a>
-        </div>
-        <div class="box margin-event">
-          <h2>Social Event</h2>
-
-          <a href="#" class="events-button">View Event Here! </a>
+          </div>
+          </div>
+          <div class="box margin-event">
+            <h2>Social event</h2>
+            <a href="#" class="events-button" id="eventbtn3">View Event Here! </a>
+            <div class="modal is-hidden" id="card_modal_3">
+              <div class = "modal-background" id= "cardbg_3"></div>
+              <div class="modal-content section has-background-white">
+              <h2 class="secondaryheader2">Event Title</h2>
+              <form>
+              <p class="primaryBody">Date: [Event Date]</p>
+              <p class="primaryBody">Location: [Event Location]</p>
+              <button id="editEventCard">Edit</button>
+              <button id="deleteEventCard">Delete</button>
+              <button id="closeEventCard3">Close</button>
+            </form>
+            </div>
+            </div>
+            </div>
+            <div class="box margin-event">
+              <h2>Speaker event</h2>
+              <a href="#" class="events-button" id="eventbtn4">View Event Here! </a>
+              <div class="modal is-hidden" id="card_modal_4">
+                <div class = "modal-background" id= "cardbg_4"></div>
+                <div class="modal-content section has-background-white">
+                <h2 class="secondaryheader2">Event Title</h2>
+                <form>
+                <p class="primaryBody">Date: [Event Date]</p>
+                <p class="primaryBody">Location: [Event Location]</p>
+                <button id="editEventCard">Edit</button>
+                <button id="deleteEventCard">Delete</button>
+                <button id="closeEventCard4">Close</button>
+              </form>
+              </div>
+              </div>
+              </div>
+          
         </div>
       </div>
+      <div id="sample" class="colormargins page-content">
+      <div class="navcal">
+        <span class="today">
+          <button id="today-btn">Today</button>
+        </span>
+        <button class="action_left">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <select class="selectdrop" id="month-select">
+          <option value="January">January</option>
+          <option value="February">February</option>
+          <option value="March">March</option>
+          <option value="April">April</option>
+          <option value="May">May</option>
+          <option value="June">June</option>
+          <option value="July">July</option>
+          <option value="August">August</option>
+          <option value="September">September</option>
+          <option value="October">October</option>
+          <option value="November">November</option>
+          <option value="December">December</option>
+        </select>
+        <button class="action_right">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+        <span class="yearblock">
+          <button id="yearblock"></button>
+        </span>
+      </div>
+        <div class="calview">
+          <!-- Calendar view will be populated here -->
+          ${generateCalendarHTML(currentDate)}
+        </div>
+      </div>
+      <div class="colormargins margin-right">
+          <a href="#" class="add-btn2" id="eventbtn">Add Event</a>
+          <div class="modal is-hidden" id="popupmodal">
+            <div class = "modal-background" id= "popupbg"></div>
+            <div class="modal-content section has-background-white">
+            <h2 class="title">New Event</h2>
+            <form id="cal_form_modal">
+            <div class="field">
+            <label class="label" >Name of Event</label>
+            <div class="control">
+              <input class="input" id = "evtname" type="text" placeholder="LinkedIn Workshop" />
+            </div>
+            </div>
+            <div class="field">
+            <label class="label">Date and Time of Event</label>
+            <div class="control">
+              <input
+                class="input"
+                id = "datetime"
+                type="datetime-local"
+                placeholder="12-01-22 01:22"
+              />
+            </div>
+            </div>
+            <div class="field">
+            <label class="label">Choose Event Category</label>
+            <div class="control">
+              <div class="select">
+                <select name="" id="evttype">
+                  <option>--select--</option>
+                  <option value="Philanthropy">Philanthropy</option>
+                  <option value="Professional Development">Professional Development</option>
+                  <option value="Speaker Event">Speaker Event</option>
+                  <option value="Social Event">Social Event</option>
+                </select>
+              </div>
+            </div>
+            </div>
+            <div class="field">
+            <label class="label">Points Assigned</label>
+            <div class="control">
+              <input class="input" id = "ptsassigned" type="number" placeholder="5" />
+            </div>
+            </div>
+            <div class="field">
+            <label class="label">Description of Event</label>
+            <div class="control">
+              <textarea
+                cols="20"
+                rows="12"
+                id = "descriptionevt"
+                placeholder="Dress Code: Business Casual 
+            Location: Grainger"
+              ></textarea>
+            </div>
+            </div>
+            <div class="field has-addons">
+            <div class="control">
+              <input id="codeInput" class="input" type="text" placeholder="Generate Code" />
+            </div>
+            <div class="control">
+              <a id="generateButton" class="button btncolor">Go</a>
+            </div>
+            </div>
+            <div class="field is-grouped">
+            <div class="control">
+              <button class="button" id = "addevtsbt">Submit</button>
+            </div>
+            <div class="control">
+              <button class="button" id="addEventcncl">Cancel</button>
+            </div>
+            </div>
+            </div>
+          </form>
+            </div></div>
     </div>
-    <div class="calview">
-</div>`;
-    cal_page_content += `<div class="colormargins margin-right">
-<a href="#" class="add-btn2" id="eventbtn">Add Event</a>
-</main>`;
+    </div>
+  </main>`;
     appendContent(cal_page_content);
+
+    // Set the month select dropdown value to the current month
+    const monthSelect = document.getElementById("month-select");
+    const currentMonth = currentDate.getMonth(); // Get the current month index
+    monthSelect.selectedIndex = currentMonth;
+
+    document.getElementById("today-btn").addEventListener("click", () => {
+      const currentDate = new Date(); // Get the current date
+      const currentMonth = currentDate.getMonth(); // Get the current month index
+      const currentYear = currentDate.getFullYear(); // Get the current year
+      const firstDayOfMonth = new Date(currentYear, currentMonth, 1); // Get the first day of the current month
+      document.querySelector(".calview").innerHTML = generateCalendarHTML(
+        firstDayOfMonth,
+        currentMonth
+      );
+
+      // Update the month select dropdown value to the current month
+      const monthSelect = document.getElementById("month-select");
+      monthSelect.selectedIndex = currentMonth;
+    });
+
+    document
+      .getElementById("month-select")
+      .addEventListener("change", (event) => {
+        const selectedMonth = event.target.value;
+        const selectedMonthIndex = monthNames.indexOf(selectedMonth);
+        const currentYear = new Date().getFullYear(); // Get the current year
+        const firstDayOfSelectedMonth = new Date(
+          currentYear,
+          selectedMonthIndex,
+          1
+        );
+        document.querySelector(".calview").innerHTML = generateCalendarHTML(
+          firstDayOfSelectedMonth
+        );
+      });
+
+    document.querySelector(".action_left").addEventListener("click", () => {
+      currentDate.setMonth(currentDate.getMonth() - 1); // Move to the previous month
+      const currentMonth = currentDate.getMonth(); // Get the updated month index
+      const currentYear = currentDate.getFullYear(); // Get the updated year
+      const firstDayOfMonth = new Date(currentYear, currentMonth, 1); // Get the first day of the updated month
+      document.querySelector(".calview").innerHTML = generateCalendarHTML(
+        firstDayOfMonth,
+        currentMonth
+      );
+
+      // Update the month select dropdown value to the updated month
+      monthSelect.selectedIndex = currentMonth;
+    });
+
+    document.querySelector(".action_right").addEventListener("click", () => {
+      currentDate.setMonth(currentDate.getMonth() + 1); // Move to the next month
+      const currentMonth = currentDate.getMonth(); // Get the updated month index
+      const currentYear = currentDate.getFullYear(); // Get the updated year
+      const firstDayOfMonth = new Date(currentYear, currentMonth, 1); // Get the first day of the updated month
+      document.querySelector(".calview").innerHTML = generateCalendarHTML(
+        firstDayOfMonth,
+        currentMonth
+      );
+
+      // Update the month select dropdown value to the updated month
+      monthSelect.selectedIndex = currentMonth;
+    });
+
+    // Set the content of yearblock to the current year
+    document.getElementById(
+      "yearblock"
+    ).textContent = `${currentDate.getFullYear()}`;
+    // addEventModal
+    let addEventForm = r_e("popupmodal");
+
+    function show_addEvent_form() {
+      addEventForm.classList.remove("is-hidden");
+      addEventForm.classList.add("is-active");
+    }
+
+    let addEventbtn = r_e("eventbtn");
+    addEventbtn.addEventListener("click", show_addEvent_form);
+
+    let addEventcancel = r_e("addEventcncl");
+    addEventcancel.addEventListener("click", () => {
+      addEventForm.classList.remove("is-active");
+    });
+    document
+      .querySelectorAll(".modal-background, .modal-close")
+      .forEach(function (el) {
+        el.addEventListener("click", function () {
+          addEventForm.classList.remove("is-active");
+        });
+      });
+    const addevtsbt = r_e("addevtsbt");
+    let evtname = r_e("evtname");
+    let evttime = r_e("datetime");
+    let evttype = r_e("evttype");
+    let ptsassigned = r_e("ptsassigned");
+    let descriptionevt = r_e("descriptionevt");
+
+    let month = new Date(evttime).getMonth() + 1;
+    let evtyear = new Date(evttime).getFullYear();
+
+    let season = month >= 1 && month <= 6 ? "SPRING" : "FALL";
+
+    addevtsbt.addEventListener("click", (e) => {
+      console.log("eventsbtnclicked");
+      e.preventDefault();
+      let name = evtname.value;
+      let time = evttime.value;
+      let type = evttype.value;
+      let pts = ptsassigned.value;
+      let desc = descriptionevt.value;
+      let evtcode = document.querySelector("#codeInput").value;
+      let month = new Date(evttime).getMonth() + 1;
+      let evtyear = new Date(evttime).getFullYear();
+      let event = {
+        name: name,
+        time: time,
+        type: type,
+        pts: pts,
+        desc: desc,
+        semester: `${season} ${evtyear}`,
+      };
+      db.collection("events")
+        .add(event)
+        .then(() => alert("Event added to database"))
+        .catch((error) => console.error("Error adding event: ", error));
+      addEventForm.classList.remove("is-active");
+    });
+    // Function to generate a random code
+    function generateRandomCode(length) {
+      const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+      let code = "";
+      for (let i = 0; i < length; i++) {
+        code += characters.charAt(
+          Math.floor(Math.random() * characters.length)
+        );
+      }
+      return code;
+    }
+
+    // Function to update the input field with the generated code
+    function updateCodeInput() {
+      const codeInput = document.getElementById("codeInput");
+      const randomCode = generateRandomCode(8); // Generate a random 8-character code (adjust length as needed)
+      codeInput.value = randomCode;
+    }
+    // // eventcardModal
+
+    const viewEventLinks = document.querySelectorAll(".events-button");
+    const eventCard = document.getElementById("eventCard");
+    const closeEventCardBtn = document.getElementById("eventCard");
+
+    let eventCard1 = r_e("card_modal_1");
+    let eventbtn1 = r_e("eventbtn1");
+    let eventclose1 = r_e("closeEventCard");
+
+    function showEventCard1() {
+      eventCard1.classList.remove("is-hidden");
+      eventCard1.classList.add("is-active");
+    }
+    eventbtn1.addEventListener("click", showEventCard1);
+
+    eventclose1.addEventListener("click", () => {
+      eventCard1.classList.remove("is-active");
+    });
+    // eventcardModal2
+    let eventCard2 = r_e("card_modal_2");
+    let eventbtn2 = r_e("eventbtn2");
+    let eventclose2 = r_e("closeEventCard2");
+
+    function showEventCard2() {
+      eventCard2.classList.remove("is-hidden");
+      eventCard2.classList.add("is-active");
+    }
+    eventbtn2.addEventListener("click", showEventCard2);
+
+    eventclose2.addEventListener("click", () => {
+      eventCard2.classList.remove("is-active");
+    });
+
+    // / eventcardModal3
+    let eventCard3 = r_e("card_modal_3");
+    let eventbtn3 = r_e("eventbtn3");
+    let eventclose3 = r_e("closeEventCard3");
+
+    function showEventCard3() {
+      eventCard3.classList.remove("is-hidden");
+      eventCard3.classList.add("is-active");
+    }
+    eventbtn3.addEventListener("click", showEventCard3);
+
+    eventclose3.addEventListener("click", () => {
+      eventCard3.classList.remove("is-active");
+    });
+
+    // / eventcardModal4
+    let eventCard4 = r_e("card_modal_4");
+    let eventbtn4 = r_e("eventbtn4");
+    let eventclose4 = r_e("closeEventCard4");
+
+    function showEventCard4() {
+      eventCard4.classList.remove("is-hidden");
+      eventCard4.classList.add("is-active");
+    }
+    eventbtn4.addEventListener("click", showEventCard4);
+
+    eventclose4.addEventListener("click", () => {
+      eventCard4.classList.remove("is-active");
+    });
+
+    // Add an event listener to the close button
+    document
+      .getElementById("closeAddEventsPopup")
+      .addEventListener("click", closeAddEventsPopup);
+
+    // Function to close the add events popup
+    function closeAddEventsPopup() {
+      var addEventsPopup = document.getElementById("addEventsPopup");
+      addEventsPopup.style.display = "none";
+    }
+
+    // Show the event card when any "View Event Here" link is clicked
+    viewEventLinks.forEach(function (link) {
+      link.addEventListener("click", function () {
+        eventCard.classList.remove("hidden");
+      });
+    });
+
+    // Close the event card when the close button is clicked
+    closeEventCardBtn.addEventListener("click", function () {
+      eventCard.classList.add("hidden");
+    });
   }
 });
 
@@ -1552,294 +2020,6 @@ function saveEdit(postId) {
 
 // Call the function to display existing posts when the page loads
 show_posts();
-
-const calendarView = document.querySelector(".calview");
-const monthSelect = r_e("month-select");
-const prevMonthBtn = document.querySelector(".action_left");
-const nextMonthBtn = document.querySelector(".action_right");
-const yearblock = r_e("yearblock");
-const monthNames = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-const dayNames = ["Sun", "Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];
-
-let currentDate = new Date();
-
-function generateCalendar(date) {
-  const totalDays = 42;
-  calendarView.innerHTML = "";
-  let currentYear = date.getFullYear();
-  let currentMonth = date.getMonth();
-  let firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
-  let daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-  let dayCellsGenerated = 0;
-  let emptyCellsCount = 0;
-
-  yearblock.innerHTML = currentYear;
-  // adding in a comment to restore the js
-  let calendarHtml = "<div class='weekdayview'>";
-  for (let title = 0; title <= 6; title++) {
-    calendarHtml += `<div class='dayofweek'>${dayNames[title]}</div>`;
-  }
-  calendarHtml += "</div><div class='monthview'><div class='weekview'>";
-
-  for (let i = 0; i < firstDayOfMonth; i++) {
-    calendarHtml += '<div class="dayview empty"></div>';
-    dayCellsGenerated++;
-    emptyCellsCount++;
-  }
-  for (let day = 1; day <= daysInMonth; day++) {
-    calendarHtml += `<div class="dayview">${day}</div>`;
-    dayCellsGenerated++;
-    if (dayCellsGenerated % 7 === 0 && dayCellsGenerated !== totalDays) {
-      calendarHtml += '</div><div class="weekview">';
-      emptyCellsCount = 0; // Reset empty cells count at the start of a new week
-    }
-  }
-
-  while (dayCellsGenerated < totalDays) {
-    calendarHtml += '<div class="dayview empty"></div>';
-    dayCellsGenerated++;
-    emptyCellsCount++;
-    if (dayCellsGenerated % 7 === 0 && dayCellsGenerated !== totalDays) {
-      calendarHtml += '</div><div class="weekview">';
-      emptyCellsCount = 0; // Reset empty cells count at the start of a new week
-    }
-  }
-
-  if (emptyCellsCount === 7) {
-    // Remove the last weekview div if all its cells are empty
-    calendarHtml = calendarHtml.substring(
-      0,
-      calendarHtml.lastIndexOf('<div class="weekview">')
-    );
-  }
-
-  calendarHtml += "</div>"; // Close the last weekview or monthview div properly
-  calendarView.innerHTML = calendarHtml; // Set the calendar HTML to the innerHTML of the calendarView
-  monthSelect.value = monthNames[currentMonth];
-}
-
-const todayBtn = document.querySelector("#today-btn");
-todayBtn.addEventListener("click", function () {
-  currentDate = new Date(); // Reset currentDate to today's date
-  generateCalendar(currentDate); // Regenerate the calendar for the current month
-});
-
-function changeMonth(step) {
-  currentDate.setMonth(currentDate.getMonth() + step);
-  generateCalendar(currentDate);
-}
-
-monthSelect.addEventListener("change", function () {
-  currentDate.setMonth(monthNames.indexOf(this.value));
-  generateCalendar(currentDate);
-});
-
-prevMonthBtn.addEventListener("click", function () {
-  changeMonth(-1);
-});
-
-nextMonthBtn.addEventListener("click", function () {
-  changeMonth(1);
-}); // Get the Today button
-cal_page_content += calendarView;
-
-cal_page_content += `<div class="colormargins margin-right">
-<a href="#" class="add-btn2" id="eventbtn">Add Event</a>
-</main>`;
-
-// addEventModal
-
-let addEventForm = r_e("popupmodal");
-
-function show_addEvent_form() {
-  addEventForm.classList.remove("is-hidden");
-  addEventForm.classList.add("is-active");
-}
-
-let addEventbtn = r_e("eventbtn");
-addEventbtn.addEventListener("click", show_addEvent_form);
-
-let addEventcancel = r_e("addEventcncl");
-addEventcancel.addEventListener("click", () => {
-  addEventForm.classList.remove("is-active");
-});
-
-// Function to generate a random code
-function generateRandomCode(length) {
-  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-  let code = "";
-  for (let i = 0; i < length; i++) {
-    code += characters.charAt(Math.floor(Math.random() * characters.length));
-  }
-  return code;
-}
-
-// Function to update the input field with the generated code
-function updateCodeInput() {
-  const codeInput = document.getElementById("codeInput");
-  const randomCode = generateRandomCode(8); // Generate a random 8-character code (adjust length as needed)
-  codeInput.value = randomCode;
-}
-
-// Event listener for the "Go" button click event
-const generateButton = document.getElementById("generateButton");
-if (generateButton) {
-  generateButton.addEventListener("click", updateCodeInput);
-}
-
-// eventcardModal
-let eventCard1 = r_e("card_modal_1");
-let eventbtn1 = r_e("eventbtn1");
-let eventclose1 = r_e("closeEventCard");
-
-function showEventCard1() {
-  eventCard1.classList.remove("is-hidden");
-  eventCard1.classList.add("is-active");
-}
-eventbtn1.addEventListener("click", showEventCard1);
-
-eventclose1.addEventListener("click", () => {
-  eventCard1.classList.remove("is-active");
-});
-// eventcardModal2
-let eventCard2 = r_e("card_modal_2");
-let eventbtn2 = r_e("eventbtn2");
-let eventclose2 = r_e("closeEventCard2");
-
-function showEventCard2() {
-  eventCard2.classList.remove("is-hidden");
-  eventCard2.classList.add("is-active");
-}
-eventbtn2.addEventListener("click", showEventCard2);
-
-eventclose2.addEventListener("click", () => {
-  eventCard2.classList.remove("is-active");
-});
-
-// / eventcardModal3
-let eventCard3 = r_e("card_modal_3");
-let eventbtn3 = r_e("eventbtn3");
-let eventclose3 = r_e("closeEventCard3");
-
-function showEventCard3() {
-  eventCard3.classList.remove("is-hidden");
-  eventCard3.classList.add("is-active");
-}
-eventbtn3.addEventListener("click", showEventCard3);
-
-eventclose3.addEventListener("click", () => {
-  eventCard3.classList.remove("is-active");
-});
-
-// / eventcardModal4
-let eventCard4 = r_e("card_modal_4");
-let eventbtn4 = r_e("eventbtn4");
-let eventclose4 = r_e("closeEventCard4");
-
-function showEventCard4() {
-  eventCard4.classList.remove("is-hidden");
-  eventCard4.classList.add("is-active");
-}
-eventbtn4.addEventListener("click", showEventCard4);
-
-eventclose4.addEventListener("click", () => {
-  eventCard4.classList.remove("is-active");
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-  const viewEventLinks = document.querySelectorAll(".events-button");
-  const eventCard = document.getElementById("eventCard");
-  const closeEventCardBtn = document.getElementById("eventCard");
-  // Add an event listener to the close button
-  document
-    .getElementById("closeAddEventsPopup")
-    .addEventListener("click", closeAddEventsPopup);
-
-  // Function to close the add events popup
-  function closeAddEventsPopup() {
-    var addEventsPopup = document.getElementById("addEventsPopup");
-    addEventsPopup.style.display = "none";
-  }
-
-  // Show the event card when any "View Event Here" link is clicked
-  viewEventLinks.forEach(function (link) {
-    link.addEventListener("click", function () {
-      eventCard.classList.remove("hidden");
-    });
-  });
-
-  // Close the event card when the close button is clicked
-  closeEventCardBtn.addEventListener("click", function () {
-    eventCard.classList.add("hidden");
-  });
-});
-
-// // Add Events Popup
-// var addEventsPopup = document.getElementById("addEventsPopup");
-
-// // Function to open the popup
-// function openAddEventsPopup() {
-//   addEventsPopup.style.display = "block";
-// }
-
-// // Function to close the popup
-// function closeAddEventsPopup() {
-//   addEventsPopup.style.display = "none";
-// }
-
-// // Attach the open function to your "Add Event" button
-// document.getElementById("eventbtn").onclick = function () {
-//   openAddEventsPopup();
-// };
-
-// console.log(firebase);
-
-document.querySelector("#addevtsbt").addEventListener("click", () => {
-  alert("event added");
-});
-// const addevtsbt = r_e("addevtsbt");
-// let evtname = r_e("evtname");
-// let evttime = r_e("datetime");
-// let evttype = r_e("evttype");
-// let ptsassigned = r_e("ptsassigned");
-// let descriptionevt = r_e("descriptionevt");
-
-// addevtsbt.addEventListener("click", () => {
-//   alert("event added");
-//   // Uncomment the below lines if you're ready to use them for adding event details to the database
-//   /*
-//     let name = evtname.value;
-//     let time = evttime.value;
-//     let type = evttype.value;
-//     let pts = ptsassigned.value;
-//     let desc = descriptionevt.value;
-//     let event = {
-//         name: name,
-//         time: time,
-//         type: type,
-//         pts: pts,
-//         desc: desc,
-//     };
-//     db.collection("events")
-//         .add(event)
-//         .then(() => alert("Event added to database"))
-//         .catch(error => console.error("Error adding event: ", error));
-//     */
-// });
-// authentication
 
 // expand burger
 let burger_stack = documentquerySelector("#burger_stack");
