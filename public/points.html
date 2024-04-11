@@ -78,127 +78,162 @@
         </div>              
         <table class="table is-bordered is-striped is-hoverable">
             <thead>
-                <tr class="has-text-white">
-                    <th>Member</th>
-                    <th>Semester</th>
-                    <th>Philanthropy Points</th>
-                    <th>Developement Points</th>
-                    <th>Social Points</th>
-                    <th>Speaker Points</th>
-                    <th>Total Points</th>
-                </tr>
+              <tr>
+                <th class="has-text-white">Member</th>
+                <th class="has-text-white">Semester</th>
+                <th class="has-text-white">Philanthropy Points</th>
+                <th class="has-text-white">Development Points</th>
+                <th class="has-text-white">Social Points</th>
+                <th class="has-text-white">Speaker Points</th>
+                <th class="has-text-white">Total Points</th>
+            </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>John Doe</td>
-                    <td>Spring 2024</td>
-                    <td>3</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>1</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Jane Smith</td>
-                    <td>Spring 2024</td>
-                    <td>2</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>1</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Michael Johnson</td>
-                    <td>Spring 2025</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>1</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Emma Lee</td>
-                    <td>Spring 2024</td>
-                    <td>3</td>
-                    <td>12</td>
-                    <td>2</td>
-                    <td>1</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Emma Lee</td>
-                    <td>Fall 2024</td>
-                    <td>3</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>1</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>X</td>
-                    <td>Fall 2023</td>
-                    <td>3</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>1</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>X</td>
-                    <td>Spring 2024</td>
-                    <td>3</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>2</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>X</td>
-                    <td>Spring 2024</td>
-                    <td>3</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>1</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>X</td>
-                    <td>Spring 2024</td>
-                    <td>3</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>0</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>X</td>
-                    <td>Spring 2024</td>
-                    <td>3</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>1</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>X</td>
-                    <td>Fall 2024</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>2</td>
-                    <td>1</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>X</td>
-                    <td>Fall 2024</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>2</td>
-                    <td>1</td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
+            <tbody
+        id="all_people"
+        class="has-background-lightgray p-4 m-3 has-background-grey-lighter"
+      >
+        <!-- Table rows will be dynamically added here -->
+      </tbody>
+    </table>
+    <script>
+    function getCurrentSemester() {
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth(); // Month is zero-based
+
+        // Determine the semester based on the current month
+        let currentSemester;
+        if (currentMonth >= 0 && currentMonth <= 5) {
+            currentSemester = "Spring " + currentDate.getFullYear();
+        } else {
+            currentSemester = "Fall " + currentDate.getFullYear();
+        }
+
+        return currentSemester;
+    }
+
+    function updateTableWithData(memberTotalPoints) {
+        const tableBody = document.getElementById("all_people");
+        tableBody.innerHTML = ""; // Clear existing table rows
+
+        // Iterate over each member and populate the table
+        for (const fullName in memberTotalPoints) {
+            const totalPoints = memberTotalPoints[fullName];
+
+            // Create a new row for the member
+            const newRow = document.createElement("tr");
+            newRow.innerHTML = `
+                <td>${fullName}</td>
+                <td>${getCurrentSemester()}</td>
+                <td>${totalPoints.philanthropy}</td>
+                <td>${totalPoints.professional_development}</td>
+                <td>${totalPoints.social}</td>
+                <td>${totalPoints.speaker}</td>
+                <td>${totalPoints.philanthropy + totalPoints.professional_development + totalPoints.social + totalPoints.speaker}</td>
+            `;
+
+            // Append the row to the table
+            tableBody.appendChild(newRow);
+        }
+
+        calculateTotalPoints(); // Calculate total points after populating individual points
+    }
+
+    function fetchAndPopulatePoints() {
+        db.collection("ama_users").get().then((userSnapshot) => {
+            const rows = document.querySelectorAll("#all_people tr");
+
+            // Create an object to store total points for each member
+            const memberTotalPoints = {};
+
+            // Iterate over each document in the user snapshot
+            userSnapshot.forEach((userDoc) => {
+                const fullName = userDoc.data().full_name;
+                memberTotalPoints[fullName] = {
+                    philanthropy: 0,
+                    professional_development: 0,
+                    social: 0,
+                    speaker: 0
+                };
+            });
+
+            // Get member points from member_points collection
+            db.collection("member_points").get().then((snapshot) => {
+                // Iterate over each document in the member points snapshot
+                snapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const fullName = data.attendedMembers;
+                    const eventType = data.eventType.toLowerCase();
+                    const eventPoints = parseInt(data.eventPoints) || 0;
+
+                    // Check if the member exists in the object
+                    if (memberTotalPoints[fullName]) {
+                        // Add points to the respective event type
+                        memberTotalPoints[fullName][eventType] += eventPoints;
+                    }
+                });
+
+                updateTableWithData(memberTotalPoints);
+            }).catch((error) => {
+                console.error("Error getting member points documents: ", error);
+            });
+        }).catch((error) => {
+            console.error("Error getting users documents: ", error);
+        });
+    }
+
+    function calculateTotalPoints() {
+        const rows = document.querySelectorAll("#all_people tr");
+        rows.forEach((row) => {
+            let totalPoints = 0;
+            for (let i = 2; i < row.cells.length - 1; i++) {
+                totalPoints += parseInt(row.cells[i].textContent) || 0;
+            }
+            row.cells[row.cells.length - 1].textContent = totalPoints;
+        });
+    }
+
+    // Call the function to fetch and populate points when the page loads
+    window.onload = function () {
+        fetchAndPopulatePoints();
+    };
+
+    document
+    .getElementById("applyFilters")
+    .addEventListener("click", function () {
+      // Get the filter values
+      const nameSearchValue = document
+        .getElementById("nameSearch")
+        .value.trim()
+        .toLowerCase();
+      const semesterFilterValue = document
+        .getElementById("semesterFilter")
+        .value.toLowerCase();
+
+      // Get all table rows
+      const tableRows = document.querySelectorAll("tbody tr");
+
+      // Loop through each table row
+      tableRows.forEach((row) => {
+        // Get the values of the cells in the current row
+        const name = row.cells[0].textContent.toLowerCase();
+        const semester = row.cells[1].textContent.toLowerCase();
+
+        // Check if the row matches the filters
+        const nameMatches = name.includes(nameSearchValue);
+        const semesterMatches =
+          semesterFilterValue === "" ||
+          semester === semesterFilterValue ||
+          semesterFilterValue === "all";
+
+        // If the row matches the filters, display it; otherwise, hide it
+        if (nameMatches && semesterMatches) {
+          row.style.display = "";
+        } else {
+          row.style.display = "none";
+        }
+      });
+    });
+    </script>
     </main>
     <footer>
         <div class="footer-box">
@@ -262,114 +297,41 @@
         </div>
       </footer>
     <!-- <script src="app.js"></script> -->
-    <script> //Still working on this, I'll move it to app.js when I'm done!
-    // Filter members & semester for points table
-    
-   // Function to calculate total points for each row initially and after filters are applied
-function calculateTotalPoints() {
-    // Get all table rows
-    const tableRows = document.querySelectorAll("tbody tr");
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
 
-    // Loop through each table row
-    tableRows.forEach((row) => {
-        const eventColumns = row.cells.length;
-        let totalPoints = 0;
-        // Loop through columns containing points (columns 2 to 5)
-        for (let i = 2; i < 6; i++) {
-            totalPoints += parseInt(row.cells[i].textContent) || 0; // Parse the text content to integer
-        }
-        // Display the total points in the last cell of the row
-        row.cells[eventColumns - 1].textContent = totalPoints;
-    });
-}
-// Function to get the current semester based on the current date
-function getCurrentSemester() {
-    const currentDate = new Date();
-    const currentMonth = currentDate.getMonth(); // Month is zero-based
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-storage.js"></script>
 
-    // Determine the semester based on the current month
-    let currentSemester;
-    if (currentMonth >= 0 && currentMonth <= 5) {
-        currentSemester = "Spring " + currentDate.getFullYear();
-    } else {
-        currentSemester = "Fall " + currentDate.getFullYear();
-    }
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
 
-    return currentSemester;
-}
+    <script>
+      // TODO
+      // Copy **only** your firebaseConfig from Google Firebae and add it below
 
-// Set the current semester text when the page loads
-window.addEventListener("load", function () {
-    document.getElementById("semesterFilter").value = getCurrentSemester();
-    document.getElementById("applyFilters").click();
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyBEZAtfgyF88HPoBR94OxTJe0Io7lyKbjA",
+        authDomain: "amabadgers.firebaseapp.com",
+        projectId: "amabadgers",
+        storageBucket: "amabadgers.appspot.com",
+        messagingSenderId: "131147849099",
+        appId: "1:131147849099:web:a969b845dd736bbc2de38e",
+        measurementId: "G-907H1EJYVP",
+      };
 
-});
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      // define authentication variable
+      let auth = firebase.auth();
+      let db = firebase.firestore();
 
-// Calculate total points when the page loads
-window.addEventListener("load", calculateTotalPoints);
+      // define a storage reference
+      let ref = firebase.storage().ref();
 
-document.getElementById("applyFilters").addEventListener("click", function () {
-    // Get the filter values
-    const nameSearchValue = document.getElementById("nameSearch").value.trim().toLowerCase();
-    const semesterFilterValue = document.getElementById("semesterFilter").value.toLowerCase();
-
-    // Get all table rows
-    const tableRows = document.querySelectorAll("tbody tr");
-
-    // Loop through each table row
-    tableRows.forEach((row) => {
-        // Get the values of the cells in the current row
-        const name = row.cells[0].textContent.toLowerCase();
-        const semester = row.cells[1].textContent.toLowerCase();
-
-        // Check if the row matches the filters
-        const nameMatches = name.includes(nameSearchValue);
-        const semesterMatches = semesterFilterValue === "" || semester === semesterFilterValue || semesterFilterValue === "all";
-
-        // If the row matches the filters, display it; otherwise, hide it
-        if (nameMatches && semesterMatches) {
-            row.style.display = "";
-        } else {
-            row.style.display = "none";
-        }
-
-        // Calculate total points for each row
-        let totalPoints = 0;
-        for (let i = 2; i < row.cells.length - 1; i++) {
-            totalPoints += parseInt(row.cells[i].textContent); // Parse the text content to integer
-        }
-        // Display the total points in the last cell of the row
-        row.cells[row.cells.length - 1].textContent = totalPoints;
-    });
-});
-
-// EDIT BUTTON
-let editbutton = document.getElementById("editbtn");
-let savecancelbtn = document.getElementById("savecancelbtn");
-
-// open save and cancel when edit button is clicked
-function showsavecancel() {
-  savecancelbtn.classList.remove("is-hidden")
-  savecancelbtn.classList.add("is-active");
-  editbutton.classList.add("is-hidden")
-}
-
-editbutton.addEventListener("click", showsavecancel);
-
-// SAVE CANCEL BUTTON
-let editsave = document.getElementById("editsave");
-let editcancel =document.getElementById("editcancel");
-
-// when the cancel button is clicked it will hide and bring back the edit button
-function canceledit() {
-  savecancelbtn.classList.add("is-hidden")
-  savecancelbtn.classList.remove("is-active");
-  editbutton.classList.remove("is-hidden")
-}
-
-editcancel.addEventListener("click", canceledit);
-
-
-        </script>
+    </script>
   </body>
 </html>
