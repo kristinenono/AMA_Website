@@ -365,21 +365,6 @@ function generateCalendarHTML(date) {
   return calendarHtml; // Return the calendar HTML string
 }
 
-function resetToToday() {
-  currentDate = new Date(); // Reset currentDate to today's date
-  generateCalendarHTML(currentDate); // Generate calendar HTML for the current month
-}
-
-function changeMonth(step) {
-  currentDate.setMonth(currentDate.getMonth() + step);
-  generateCalendarHTML(currentDate);
-}
-
-function handleMonthSelectChange() {
-  currentDate.setMonth(monthNames.indexOf(this.value));
-  generateCalendarHTML(currentDate);
-}
-
 // Function to generate a random code
 function generateRandomCode(length) {
   const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -395,11 +380,6 @@ function updateCodeInput() {
   const codeInput = document.getElementById("codeInput");
   const randomCode = generateRandomCode(8); // Generate a random 8-character code (adjust length as needed)
   codeInput.value = randomCode;
-}
-
-// Function to handle the event when the user selects a day in the calendar
-function handleDayClick(day) {
-  // Your code to handle the click event for a specific day in the calendar
 }
 
 r_e("calendarbtn").addEventListener("click", () => {
@@ -549,53 +529,6 @@ r_e("calendarbtn").addEventListener("click", () => {
     appendContent(cal_page_content);
   }
 });
-
-//   if (check_auth != null) {
-// r_e("calendarbtn").addEventListener("click", () => {
-//   alert("alert!!!!");
-// });
-
-// Cal page content
-// r_e("calendarbtn").addEventListener("click", () => {
-//   configure_message_bar("must sign in to view");
-//   let check_auth = auth.currentUser;
-//   if (check_auth == null) {
-//     signupModal.classList.add("is-active");
-//   }
-//   if (check_auth != null) {
-//     let cal_page_content = `<main>
-//     <div id="cal_page" class="wrapper">
-//       <!-- LEFT MARGIN -->
-//       <div class="colormargins margin-left">
-//         <h2 class="heading-tag-upcoming-event">Upcoming Events</h2>
-//         <div class="flex-container">
-//           <div class="box margin-event">
-//             <h2>Philathropy event</h2>
-//             <a href="#" class="events-button">View Event Here! </a>
-//             <div id="eventCard" class="event-card hidden">
-//               <!-- Content of the event card goes here -->
-//               <h2 class="secondaryheader">Event Title</h2>
-//               <p class="primaryBody">Date: [Event Date]</p>
-//               <p class="primaryBody">Location: [Event Location]</p>
-//               <!-- Add more details as needed -->
-//               <button id="editEventCard">Edit</button>
-//               <button id="deleteEventCard">Delete</button>
-//               <button id="closeEventCard">Close</button>
-//             </div>
-//           </div>
-//           <!-- Other event boxes go here -->
-//         </div>
-//       </div>
-//       <div class="calview">
-//         <!-- Calendar view will be populated here -->
-//         ${generateCalendarHTML(currentDate)}
-//       </div>
-//       <!-- Other elements of the page go here -->
-//     </div>
-//   </main>`;
-//     document.body.innerHTML += cal_page_content;
-//   }
-// });
 
 // points page content
 r_e("pointbtn").addEventListener("click", () => {
