@@ -21,199 +21,43 @@
         <div class="colormargins margin-left">
           <h2 class="heading-tag-upcoming-event">Upcoming Events</h2>
           <div class="flex-container">
-            <div class="box margin-event ">
+            <div class="box margin-event">
               <h2>Philathropy event</h2>
-              <a href="#" class="events-button" id="eventbtn1">View Event Here! </a>
-              <div class="modal is-hidden" id="card_modal_1">
-                <div class = "modal-background" id= "cardbg_1"></div>
-                <div class="modal-content section has-background-white">
-                <h2 class="secondaryheader2">Event Title</h2>
-                <form>
+    
+              <a href="#" class="events-button">View Event Here! </a>
+    
+              <div id="eventCard" class="event-card hidden">
+                <!-- Content of the event card goes here -->
+                <h2 class="secondaryheader">Event Title</h2>
                 <p class="primaryBody">Date: [Event Date]</p>
                 <p class="primaryBody">Location: [Event Location]</p>
+                <!-- Add more details as needed -->
                 <button id="editEventCard">Edit</button>
                 <button id="deleteEventCard">Delete</button>
                 <button id="closeEventCard">Close</button>
-              </form>
               </div>
-              </div>
-              </div>
-              <div class="box margin-event">
-                <h2>Professional Development event</h2>
-                <a href="#" class="events-button" id="eventbtn2">View Event Here! </a>
-                <div class="modal is-hidden" id="card_modal_2">
-                  <div class = "modal-background" id= "cardbg_2"></div>
-                  <div class="modal-content section has-background-white">
-                  <h2 class="secondaryheader2">Event Title</h2>
-                  <form>
-                  <p class="primaryBody">Date: [Event Date]</p>
-                  <p class="primaryBody">Location: [Event Location]</p>
-                  <button id="editEventCard">Edit</button>
-                  <button id="deleteEventCard">Delete</button>
-                  <button id="closeEventCard2">Close</button>
-                </form>
-                </div>
-                </div>
-                </div>
-                <div class="box margin-event">
-                  <h2>Social event</h2>
-                  <a href="#" class="events-button" id="eventbtn3">View Event Here! </a>
-                  <div class="modal is-hidden" id="card_modal_3">
-                    <div class = "modal-background" id= "cardbg_3"></div>
-                    <div class="modal-content section has-background-white">
-                    <h2 class="secondaryheader2">Event Title</h2>
-                    <form>
-                    <p class="primaryBody">Date: [Event Date]</p>
-                    <p class="primaryBody">Location: [Event Location]</p>
-                    <button id="editEventCard">Edit</button>
-                    <button id="deleteEventCard">Delete</button>
-                    <button id="closeEventCard3">Close</button>
-                  </form>
-                  </div>
-                  </div>
-                  </div>
-                  <div class="box margin-event">
-                    <h2>Speaker event</h2>
-                    <a href="#" class="events-button" id="eventbtn4">View Event Here! </a>
-                    <div class="modal is-hidden" id="card_modal_4">
-                      <div class = "modal-background" id= "cardbg_4"></div>
-                      <div class="modal-content section has-background-white">
-                      <h2 class="secondaryheader2">Event Title</h2>
-                      <form>
-                      <p class="primaryBody">Date: [Event Date]</p>
-                      <p class="primaryBody">Location: [Event Location]</p>
-                      <button id="editEventCard">Edit</button>
-                      <button id="deleteEventCard">Delete</button>
-                      <button id="closeEventCard4">Close</button>
-                    </form>
-                    </div>
-                    </div>
-                    </div>
-        </div>
-        </div>
-
-        <!-- CENTER OF PAGE where calendar goes-->
-        <div id="sample" class="colormargins page-content">
-          <div class="navcal">
-            <span class="today">
-              <button id="today-btn">Today</button>
-            </span>
-            <button class="action_left">
-              <i class="fa-solid fa-chevron-left"></i>
-            </button>
-            <select class="selectdrop" id="month-select">
-              <option value="January">January</option>
-              <option value="February">February</option>
-              <option value="March">March</option>
-              <option value="April">April</option>
-              <option value="May">May</option>
-              <option value="June">June</option>
-              <option value="July">July</option>
-              <option value="August">August</option>
-              <option value="September">September</option>
-              <option value="October">October</option>
-              <option value="November">November</option>
-              <option value="December">December</option>
-            </select>
-            <button class="action_right">
-              <i class="fa-solid fa-chevron-right"></i>
-            </button>
-            <span class="yearblock">
-              <button id="yearblock"></button>
-            </span>
-          </div>
-          <div class="calview">
-            <div class="weekdayview">
-              <div class="dayofweek">Lorem, ipsum.</div>
-              <div class="dayofweek">Lorem, ipsum.</div>
-              <div class="dayofweek">Lorem, ipsum.</div>
-              <div class="dayofweek">Lorem, ipsum.</div>
-              <div class="dayofweek">Lorem, ipsum.</div>
-              <div class="dayofweek">Lorem, ipsum.</div>
-              <div class="dayofweek">Lorem, ipsum.</div>
             </div>
-            <div class="weekview">
-              <div class="dayview">Lorem, ipsum.</div>
-              <div class="dayview">Lorem, ipsum.</div>
-              <div class="dayview">Lorem, ipsum.</div>
-              <div class="dayview">Lorem, ipsum.</div>
-              <div class="dayview">Lorem, ipsum.</div>
-              <div class="dayview">Lorem, ipsum.</div>
-              <div class="dayview">Lorem, ipsum.</div>
+            <div class="box margin-event">
+              <h2>Professional Development Event</h2>
+    
+              <a href="#" class="events-button">View Event Here! </a>
             </div>
-            <div class="weekview">
-              <div class="dayview">Lorem, ipsum.</div>
-              <div class="dayview">Lorem, ipsum.</div>
-              <div class="dayview">Lorem, ipsum.</div>
-              <div class="dayview">Lorem, ipsum.</div>
-              <div class="dayview">Lorem, ipsum.</div>
-              <div class="dayview">Lorem, ipsum.</div>
-              <div class="dayview">Lorem, ipsum.</div>
+            <div class="box margin-event">
+              <h2>Speaker Event</h2>
+    
+              <a href="#" class="events-button">View Event Here! </a>
             </div>
-            <div class="weekview">
-              <div class="dayview">Lorem, ipsum.</div>
-              <div class="dayview">Lorem, ipsum.</div>
-              <div class="dayview">Lorem, ipsum.</div>
-              <div class="dayview">Lorem, ipsum.</div>
-              <div class="dayview">Lorem, ipsum.</div>
-              <div class="dayview">Lorem, ipsum.</div>
-              <div class="dayview">Lorem, ipsum.</div>
-            </div>
-            <div class="weekview">
-              <div class="dayview">Lorem, ipsum.</div>
-              <div class="dayview">Lorem, ipsum.</div>
-              <div class="dayview">Lorem, ipsum.</div>
-              <div class="dayview">Lorem, ipsum.</div>
-              <div class="dayview">Lorem, ipsum.</div>
-              <div class="dayview">Lorem, ipsum.</div>
-              <div class="dayview">Lorem, ipsum.</div>
-            </div>
-            <div class="weekview">
-              <div class="dayview">Lorem, ipsum.</div>
-              <div class="dayview">Lorem, ipsum.</div>
-              <div class="dayview">Lorem, ipsum.</div>
-              <div class="dayview">Lorem, ipsum.</div>
-              <div class="dayview">Lorem, ipsum.</div>
-              <div class="dayview">Lorem, ipsum.</div>
-              <div class="dayview">Lorem, ipsum.</div>
+            <div class="box margin-event">
+              <h2>Social Event</h2>
+    
+              <a href="#" class="events-button">View Event Here! </a>
             </div>
           </div>
         </div>
-        <!-- RIGHT MARGIN -->
-        <div class="colormargins margin-right">
-          <a href="#" class="add-btn2" id="eventbtn">Go to Points</a>
+        <div class="calview">
     </div>
-  </div>
-    </main>
-    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
-
-    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
-    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-storage.js"></script>
-
-    <!-- Add Firebase products that you want to use -->
-    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
-
-    <script>
-      // TODO
-      // Copy **only** your firebaseConfig from Google Firebae and add it below
-      const firebaseConfig = {
-        apiKey: "AIzaSyBEZAtfgyF88HPoBR94OxTJe0Io7lyKbjA",
-        authDomain: "amabadgers.firebaseapp.com",
-        projectId: "amabadgers",
-        storageBucket: "amabadgers.appspot.com",
-        messagingSenderId: "131147849099",
-        appId: "1:131147849099:web:a969b845dd736bbc2de38e",
-      
-      };
-
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
-      // define authentication variable
-      let auth = firebase.auth();
-      let db = firebase.firestore();
-    </script>
-    <script src="app.js"></script>
+    <div class="colormargins margin-right">
+      <a href="#" class="add-btn2" id="eventbtn">View Points</a>
+      </main>
   </body>
 </html>
