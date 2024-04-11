@@ -275,6 +275,7 @@ r_e("abt-link").addEventListener("click", () => {
   appendContent(abt_content);
 });
 
+<<<<<<< HEAD
 let cal_page_content = `
   <div id="cal_page" class="wrapper">
         <!-- LEFT MARGIN -->
@@ -622,6 +623,259 @@ r_e("calendarbtn").addEventListener("click", () => {
     cal_page_content += `<div class="colormargins margin-right">
 <a href="#" class="add-btn2" id="eventbtn">Add Event</a>
 </main>`;
+=======
+// Define the functions
+
+// Member drop down button
+var dropdownButton = document.querySelector(".bttn1");
+var dropdownContent = document.querySelector(".dropdown-content");
+
+dropdownButton.addEventListener("click", function () {
+  dropdownContent.classList.toggle("show");
+});
+
+document.addEventListener("click", function (event) {
+  if (!event.target.closest(".dropdown")) {
+    dropdownContent.classList.remove("show");
+  }
+});
+
+const calendarView = document.querySelector(".calview");
+const monthSelect = r_e("month-select");
+const prevMonthBtn = document.querySelector(".action_left");
+const nextMonthBtn = document.querySelector(".action_right");
+const yearblock = r_e("yearblock");
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+const dayNames = ["Sun", "Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];
+
+let currentDate = new Date();
+
+function generateCalendarHTML(date) {
+  const totalDays = 42;
+  let currentYear = date.getFullYear();
+  let currentMonth = date.getMonth();
+  let firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
+  let daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+  let dayCellsGenerated = 0;
+  let emptyCellsCount = 0;
+
+  let calendarHtml = "<div class='weekdayview'>";
+  for (let title = 0; title <= 6; title++) {
+    calendarHtml += `<div class='dayofweek'>${dayNames[title]}</div>`;
+  }
+  calendarHtml += "</div><div class='monthview'><div class='weekview'>";
+
+  for (let i = 0; i < firstDayOfMonth; i++) {
+    calendarHtml += '<div class="dayview empty"></div>';
+    dayCellsGenerated++;
+    emptyCellsCount++;
+  }
+  for (let day = 1; day <= daysInMonth; day++) {
+    calendarHtml += `<div class="dayview">${day}</div>`;
+    dayCellsGenerated++;
+    if (dayCellsGenerated % 7 === 0 && dayCellsGenerated !== totalDays) {
+      calendarHtml += '</div><div class="weekview">';
+      emptyCellsCount = 0; // Reset empty cells count at the start of a new week
+    }
+  }
+
+  while (dayCellsGenerated < totalDays) {
+    calendarHtml += '<div class="dayview empty"></div>';
+    dayCellsGenerated++;
+    emptyCellsCount++;
+    if (dayCellsGenerated % 7 === 0 && dayCellsGenerated !== totalDays) {
+      calendarHtml += '</div><div class="weekview">';
+      emptyCellsCount = 0; // Reset empty cells count at the start of a new week
+    }
+  }
+
+  if (emptyCellsCount === 7) {
+    // Remove the last weekview div if all its cells are empty
+    calendarHtml = calendarHtml.substring(
+      0,
+      calendarHtml.lastIndexOf('<div class="weekview">')
+    );
+  }
+
+  calendarHtml += "</div>"; // Close the last weekview or monthview div properly
+  return calendarHtml; // Return the calendar HTML string
+}
+
+// Function to generate a random code
+function generateRandomCode(length) {
+  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let code = "";
+  for (let i = 0; i < length; i++) {
+    code += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  return code;
+}
+
+// Function to update the input field with the generated code
+function updateCodeInput() {
+  const codeInput = document.getElementById("codeInput");
+  const randomCode = generateRandomCode(8); // Generate a random 8-character code (adjust length as needed)
+  codeInput.value = randomCode;
+}
+
+r_e("calendarbtn").addEventListener("click", () => {
+  let check_auth = auth.currentUser;
+  console.log("btn clicked");
+  if (check_auth == null) {
+    // User is not signed in
+    alert("You must sign in to view the calendar.");
+  } else {
+    // User is signed in
+    let cal_page_content = `<main>
+    <div id="cal_page" class="wrapper">
+      <!-- LEFT MARGIN -->
+      <div class="colormargins margin-left">
+        <h2 class="heading-tag-upcoming-event">Upcoming Events</h2>
+        <div class="flex-container">
+          <div class="box margin-event">
+            <h2>Philanthropy event</h2>
+            <a href="#" class="events-button">View Event Here! </a>
+            <div id="eventCard" class="event-card hidden">
+              <!-- Content of the event card goes here -->
+              <h2 class="secondaryheader">Event Title</h2>
+              <p class="primaryBody">Date: [Event Date]</p>
+              <p class="primaryBody">Location: [Event Location]</p>
+              <!-- Add more details as needed -->
+              <button id="editEventCard">Edit</button>
+              <button id="deleteEventCard">Delete</button>
+              <button id="closeEventCard">Close</button>
+            </div>
+          </div>
+          <!-- Other event boxes go here -->
+        </div>
+      </div>
+      <div id="sample" class="colormargins page-content">
+      <div class="navcal">
+        <span class="today">
+          <button id="today-btn">Today</button>
+        </span>
+        <button class="action_left">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <select class="selectdrop" id="month-select">
+          <option value="January">January</option>
+          <option value="February">February</option>
+          <option value="March">March</option>
+          <option value="April">April</option>
+          <option value="May">May</option>
+          <option value="June">June</option>
+          <option value="July">July</option>
+          <option value="August">August</option>
+          <option value="September">September</option>
+          <option value="October">October</option>
+          <option value="November">November</option>
+          <option value="December">December</option>
+        </select>
+        <button class="action_right">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+        <span class="yearblock">
+          <button id="yearblock"></button>
+        </span>
+      </div>
+        <div class="calview">
+          <!-- Calendar view will be populated here -->
+          ${generateCalendarHTML(currentDate)}
+        </div>
+      </div>
+      
+      <div class="colormargins margin-right">
+          <a href="#" class="add-btn2" id="eventbtn">Add Event</a>
+          <div class="modal is-hidden" id="popupmodal">
+            <div class = "modal-background" id= "popupbg"></div>
+            <div class="modal-content section has-background-white">
+            <h2 class="title">New Event</h2>
+            <form id="cal_form_modal">
+            <div class="field">
+            <label class="label" >Name of Event</label>
+            <div class="control">
+              <input class="input" id = "evtname" type="text" placeholder="LinkedIn Workshop" />
+            </div>
+            </div>
+            <div class="field">
+            <label class="label">Date and Time of Event</label>
+            <div class="control">
+              <input
+                class="input"
+                id = "datetime"
+                type="datetime-local"
+                placeholder="12-01-22 01:22"
+              />
+            </div>
+            </div>
+            <div class="field">
+            <label class="label">Choose Event Category</label>
+            <div class="control">
+              <div class="select">
+                <select name="" id="evttype">
+                  <option>--select--</option>
+                  <option value="">Philanthropy</option>
+                  <option value="">Professional Development</option>
+                  <option value="">Speaker Event</option>
+                  <option value="">Social Event</option>
+                </select>
+              </div>
+            </div>
+            </div>
+            <div class="field">
+            <label class="label">Points Assigned</label>
+            <div class="control">
+              <input class="input" id = "ptsassigned" type="number" placeholder="5" />
+            </div>
+            </div>
+            <div class="field">
+            <label class="label">Description of Event</label>
+            <div class="control">
+              <textarea
+                cols="20"
+                rows="12"
+                id = "descriptionevt"
+                placeholder="Dress Code: Business Casual 
+            Location: Grainger"
+              ></textarea>
+            </div>
+            </div>
+            <div class="field has-addons">
+            <div class="control">
+              <input id="codeInput" class="input" type="text" placeholder="Generate Code" />
+            </div>
+            <div class="control">
+              <a id="generateButton" class="button btncolor">Go</a>
+            </div>
+            </div>
+            <div class="field is-grouped">
+            <div class="control">
+              <button class="button" id = "addevtsbt">Submit</button>
+            </div>
+            <div class="control">
+              <button class="button" id="addEventcncl">Cancel</button>
+            </div>
+            </div>
+            </div>
+          </form>
+            </div></div>
+    </div>
+    </div>
+  </main>`;
+>>>>>>> anvita3
     appendContent(cal_page_content);
   }
 });
@@ -1091,6 +1345,7 @@ r_e("contact-link").addEventListener("click", () => {
   }
 });
 
+<<<<<<< HEAD
 // // Add Events Popup
 // var addEventsPopup = document.getElementById("addEventsPopup");
 
@@ -1108,6 +1363,148 @@ r_e("contact-link").addEventListener("click", () => {
 // document.getElementById("eventbtn").onclick = function () {
 //   openAddEventsPopup();
 // };
+=======
+// // Login/Signup Modal Open/Close
+// let loginmodal = document.querySelector("#logmodal");
+// let loginbutton = document.querySelector("#loginbtn");
+// let login_mbg = document.querySelector("#log_modalbg");
+
+// let signupmodal = document.querySelector("#signmodal");
+// let signupbutton = document.querySelector("#signupbtn");
+// let signup_mbg = document.querySelector("#sign_modalbg");
+
+// // function to open up login and signup modals
+// function openLoginModal() {
+//   loginmodal.classList.add("is-active");
+// }
+
+// function openSignupModal() {
+//   signupmodal.classList.add("is-active");
+// }
+
+// // click functions for login and signup buttons to open up the modal
+// loginbutton.addEventListener("click", openLoginModal);
+// signupbutton.addEventListener("click", openSignupModal);
+
+// // Close modals when clicking on the background or "X" button
+// document
+//   .querySelectorAll(".modal-background, .modal-close")
+//   .forEach(function (el) {
+//     el.addEventListener("click", function () {
+//       loginmodal.classList.remove("is-active");
+//       signupmodal.classList.remove("is-active");
+//     });
+//   });
+
+// eventcardModal
+let eventCard1 = r_e("card_modal_1");
+let eventbtn1 = r_e("eventbtn1");
+let eventclose1 = r_e("closeEventCard");
+
+function showEventCard1() {
+  eventCard1.classList.remove("is-hidden");
+  eventCard1.classList.add("is-active");
+}
+eventbtn1.addEventListener("click", showEventCard1);
+
+eventclose1.addEventListener("click", () => {
+  eventCard1.classList.remove("is-active");
+});
+// eventcardModal2
+let eventCard2 = r_e("card_modal_2");
+let eventbtn2 = r_e("eventbtn2");
+let eventclose2 = r_e("closeEventCard2");
+
+function showEventCard2() {
+  eventCard2.classList.remove("is-hidden");
+  eventCard2.classList.add("is-active");
+}
+eventbtn2.addEventListener("click", showEventCard2);
+
+eventclose2.addEventListener("click", () => {
+  eventCard2.classList.remove("is-active");
+});
+
+// / eventcardModal3
+let eventCard3 = r_e("card_modal_3");
+let eventbtn3 = r_e("eventbtn3");
+let eventclose3 = r_e("closeEventCard3");
+
+function showEventCard3() {
+  eventCard3.classList.remove("is-hidden");
+  eventCard3.classList.add("is-active");
+}
+eventbtn3.addEventListener("click", showEventCard3);
+
+eventclose3.addEventListener("click", () => {
+  eventCard3.classList.remove("is-active");
+});
+
+// / eventcardModal4
+let eventCard4 = r_e("card_modal_4");
+let eventbtn4 = r_e("eventbtn4");
+let eventclose4 = r_e("closeEventCard4");
+
+function showEventCard4() {
+  eventCard4.classList.remove("is-hidden");
+  eventCard4.classList.add("is-active");
+}
+eventbtn4.addEventListener("click", showEventCard4);
+
+eventclose4.addEventListener("click", () => {
+  eventCard4.classList.remove("is-active");
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const viewEventLinks = document.querySelectorAll(".events-button");
+  const eventCard = document.getElementById("eventCard");
+  const closeEventCardBtn = document.getElementById("eventCard");
+  // Add an event listener to the close button
+  document
+    .getElementById("closeAddEventsPopup")
+    .addEventListener("click", closeAddEventsPopup);
+
+  // Function to close the add events popup
+  function closeAddEventsPopup() {
+    var addEventsPopup = document.getElementById("addEventsPopup");
+    addEventsPopup.style.display = "none";
+  }
+
+  // Show the event card when any "View Event Here" link is clicked
+  viewEventLinks.forEach(function (link) {
+    link.addEventListener("click", function () {
+      eventCard.classList.remove("hidden");
+    });
+  });
+
+  // Close the event card when the close button is clicked
+  closeEventCardBtn.addEventListener("click", function () {
+    eventCard.classList.add("hidden");
+  });
+});
+
+// JavaScript to handle the burger menu toggle
+document.addEventListener("DOMContentLoaded", function () {
+  const burger = document.querySelector(".navbar-burger");
+  const menu = document.querySelector(".navbar-menu");
+  const loginSignupBurger = document.querySelector(".login-signup-burger");
+  const backgroundDiv = document.querySelector(".background-div");
+
+  burger.addEventListener("click", function () {
+    burger.classList.toggle("active");
+    menu.classList.toggle("active");
+    loginSignupBurger.classList.toggle("active"); // Toggle login and signup in burger menu
+  });
+
+  window.addEventListener("resize", function () {
+    if (window.innerWidth > 768) {
+      burger.classList.remove("active");
+      menu.classList.remove("active");
+      loginSignupBurger.classList.remove("active"); // Remove active class on resize
+    }
+  });
+});
+>>>>>>> anvita3
 
 // console.log(firebase);
 
@@ -1164,213 +1561,3 @@ function expand_burger() {
   contact_burger.classList.toggle("has-text-light");
 }
 burger_stack.addEventListener("click", expand_burger);
-
-//BLOG FUNCTIONS
-// console.log(firebase);
-// let r1 = {
-//   ID: "a123",
-//   name: "nonna kitchen",
-//   loc_code: 13,
-//   style: ["american", "chinese", "italian"],
-// };
-
-// r2 is a document in the restaurants collection
-// let r2 = {
-//   ID: "b789",
-//   name: "johns burger",
-//   loc_code: 20,
-//   style: ["italian"],
-//   noise_level: "low",
-// };
-
-// db.collection("restaurants").add(r2);
-
-// db.collection("restaurants").doc("abc1234").set(r2);
-
-// store info from form into db
-
-// create a click event hander on the submit button
-
-document.querySelector("#submit").addEventListener("click", () => {
-  // store the selected hobbies in an array
-
-  let user_hobbies = [];
-  let hobbies = document.querySelectorAll(".hobbies");
-  // console.log(hobbies);
-
-  hobbies.forEach((h) => {
-    if (h.checked == true) {
-      user_hobbies.push(h.value);
-    }
-  });
-
-  // console.log(user_hobbies);
-
-  // construct the person object
-  let person = {
-    name: document.querySelector("#name").value,
-    age: parseInt(document.querySelector("#age").value),
-    color: document.querySelector("#favcolor").value,
-    hobbies: user_hobbies,
-  };
-
-  //   store the person obj into the people collection
-
-  db.collection("people")
-    .add(person)
-    .then(() => alert("person added"));
-});
-
-// update sally's age and fav color and add madison as her fav city
-// db.collection("people").doc("0ZysVBXcqVY9LFCB2ETx").update({
-//   age: 24,
-//   color: "white",
-//   city: "madison",
-// });
-
-// add pete and jackie as sally's siblings
-// db.collection("people")
-//   .doc("0ZysVBXcqVY9LFCB2ETx")
-//   .update({
-//     siblings: ["pete", "jackie"],
-//   });
-
-// add tom as a new sibling for sally
-
-// db.collection("people")
-//   .doc("0ZysVBXcqVY9LFCB2ETx")
-//   .update({
-//     siblings: firebase.firestore.FieldValue.arrayUnion("tom"),
-//   });
-
-// remove pete from sally's siblings
-
-// db.collection("people")
-//   .doc("0ZysVBXcqVY9LFCB2ETx")
-//   .update({
-//     siblings: firebase.firestore.FieldValue.arrayRemove("pete"),
-//   });
-
-// show the list of all people stored in the db
-
-function show_people() {
-  db.collection("people")
-    .get()
-    .then((res) => {
-      let data = res.docs;
-
-      let html = ``;
-      data.forEach((d) => {
-        html += `<p>${d.data().name}</p>`;
-      });
-
-      // append the html variable to the document
-      document.querySelector("#all_people").innerHTML += html;
-    });
-}
-// call the show_people function
-
-// show_people();
-
-// show all people whose age is greater than 25 and less than 43
-
-// db.collection("people")
-//   .where("age", ">", 25)
-//   .where("age", "<", 43)
-//   .get()
-//   .then((res) => {
-//     let data = res.docs;
-
-//     let html = ``;
-//     data.forEach((d) => {
-//       html += `<p>${d.data().name}</p>`;
-//     });
-
-//     // append the html variable to the document
-//     document.querySelector("#all_people").innerHTML += html;
-//   });
-
-// show all people who have the name sally
-
-// db.collection("people")
-//   .where("name", "==", "sally")
-//   .get()
-//   .then((res) => {
-//     let data = res.docs;
-
-//     let html = ``;
-//     data.forEach((d) => {
-//       html += `<p>${d.data().name}</p>`;
-//     });
-
-//     // append the html variable to the document
-//     document.querySelector("#all_people").innerHTML += html;
-//   });
-
-// show all people who have the name sally or pete
-
-// db.collection("people")
-//   .where("name", "in", ["sally", "Sally", "Pete", "pete"])
-//   .get()
-//   .then((res) => {
-//     let data = res.docs;
-
-//     let html = ``;
-//     data.forEach((d) => {
-//       html += `<p>${d.data().name}</p>`;
-//     });
-
-//     // append the html variable to the document
-//     document.querySelector("#all_people").innerHTML += html;
-//   });
-
-// show all people who have swimming as a hobby
-// db.collection("people")
-//   .where("hobbies", "array-contains", "swimming")
-//   .get()
-//   .then((res) => {
-//     let data = res.docs;
-
-//     let html = ``;
-//     data.forEach((d) => {
-//       html += `<p>${d.data().name}</p>`;
-//     });
-
-//     // append the html variable to the document
-//     document.querySelector("#all_people").innerHTML += html;
-//   });
-
-//  show all people who have swimming or reading as a hobby
-
-// db.collection("people")
-//   .where("hobbies", "array-contains-any", ["swimming", "reading"])
-//   .get()
-//   .then((res) => {
-//     let data = res.docs;
-
-//     let html = ``;
-//     data.forEach((d) => {
-//       html += `<p>${d.data().name}</p>`;
-//     });
-
-//     // append the html variable to the document
-//     document.querySelector("#all_people").innerHTML += html;
-//   });
-
-// show all people with a name sally and age greater than 35
-
-db.collection("people")
-  .where("name", "==", "sally")
-  .where("age", ">", 35)
-  .get()
-  .then((res) => {
-    let data = res.docs;
-
-    let html = ``;
-    data.forEach((d) => {
-      html += `<p>${d.data().name}</p>`;
-    });
-
-    // append the html variable to the document
-    document.querySelector("#all_people").innerHTML += html;
-  });
