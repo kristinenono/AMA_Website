@@ -21,7 +21,7 @@
         <div class="modal-background" id="log_modalbg"></div>
         <div class="modal-content">
           <div class="box">
-            <label class="label title is-centered is-4">Log In</label>
+            <label class="label title is-4">Log In</label>
             <form id="log_form">
               <!-- email -->
               <div class="field">
@@ -60,10 +60,9 @@
         <div class="modal-background" id="sign_modalbg"></div>
         <div class="modal-content">
           <div class="box">
-            <label class="label title is-centered is-4">Sign Up</label>
+            <label class="label title is-4">Sign Up</label>
             <form id="sign_form">
               <div class="field">
-                <label class="label">Full Name</label>
                 <div class="control">
                   <input
                     class="input"
@@ -114,8 +113,7 @@
         <section class="hero is-quarter-height">
           <div class="hero-head">
             <nav>
-              <div class="navbar is-transparent">
-                <div class="is-justify-content-end">
+              <div class="navbar is-transparent is-justify-content-end">
             <div class="navbar-brand login-signup is-justify-content-end">
               <a class="navbar-item" id="login">
                 <button id="loginbtn" class="add-btn">
@@ -132,15 +130,13 @@
               id="indicator"
             ></div>
               <a
-              class="navbar-item"
-              id="signout"
-              ><button id="signout_button" class="add-btn">
-                <strong class="bttn-font">SIGN OUT</strong>
-              </button></a
+              class="navbar-item has-text-light is-hidden button is-link"
+              id="signout_button"
+              >Sign Out</a
             >
-          </div>
             </div>
-            
+            </div>
+            </nav>
             <div>
               <!-- website logo -->
               <h1  id="navbar-item">
@@ -150,8 +146,6 @@
                 </div>
               </h1>
             </div>
-          </div>
-          </nav>
           </div>
           <div class="'hero-body">
       </div>
@@ -173,18 +167,37 @@
               ><strong>HOME</strong></a
             >
             <a class="navbar-item" id="abt-link"><strong>ABOUT</strong></a>
-            <div class="navbar-item dropdown" >
+            <div class="navbar-item has-text-light dropdown" >
               <a class="has-text-light bttn1" id="members-link" >
                 <strong>MEMBERS</strong>
               </a>
-              <div class="dropdown-content is-hidden has-background-grey">
+              <div class="dropdown-content is-hidden">
                 <div><a id="calendarbtn">CALENDAR</a></div>
                 <div><a id="pointbtn">POINT SYSTEM</a></div>
               </div>
             </div>
             <a class="navbar-item" id="blog-link"><strong >BLOG</strong></a>
             <a class="navbar-item" id="contact-link"><strong>CONTACT</strong></a>
-          
+            <!-- <div class="login-signup-burger">
+              <a id="login-burger">
+                <button id="logbtn-burger" class="add-btn button">
+                  <strong id="bttn-font">LOGIN</strong>
+                </button>
+              </a>
+              <div
+                  class="navbar-item has-text-light is-hidden"
+                  id="indicator"
+                ></div>
+              &nbsp; &nbsp;
+              <a id="signin-burger">
+                <button
+                  id="signbtn-burger"
+                  class="add-btn button"
+                >
+                  <strong id="bttn-font">SIGN UP</strong>
+                </button> -->
+              <!-- </a> -->
+            <!-- </div> -->
           </div>
         </div>
         </div>
@@ -200,7 +213,7 @@
     <main id="main-content">
       <div class="titleContainers">
         <div class="column column1">
-            <h1 class="title is-1 has-text-light" id="title_uw">Welcome to <br />AMA UW-Madison</h1>
+            <h1 class="title has-text-light">Welcome to <br />AMA UW-Madison</h1>
         </div>
         <div class="column column2">
             <img src="images/capitalPlaceholder.png" alt="MadisonCapital" width="100%" height="100%" />
@@ -289,11 +302,11 @@
           </div>
           <div id="line"></div>
           <div class="footer-section">
-            <h2 id ="foot_right">JOIN OUR EMAIL LIST</h2>
+            <h2>JOIN OUR EMAIL LIST</h2>
             <p>Want to become an official member of the Badger American Marketing Association or just be added to the email list? Fill out our member form to stay up to date on upcoming events!</p>
-            <input type="text" placeholder=" Enter your email here">
+            <input type="text" placeholder="Enter your email here">
             <button id="submit_btn">
-              <p><b>SUBMIT</b></p>
+              <p>SUBMIT</p>
             </button>
           </div>
         </div>
