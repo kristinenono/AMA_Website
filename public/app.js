@@ -527,6 +527,21 @@ r_e("calendarbtn").addEventListener("click", () => {
     </div>
   </main>`;
     appendContent(cal_page_content);
+    document
+      .getElementById("month-select")
+      .addEventListener("change", (event) => {
+        const selectedMonth = event.target.value;
+        const selectedMonthIndex = monthNames.indexOf(selectedMonth);
+        const currentYear = new Date().getFullYear(); // Get the current year
+        const firstDayOfSelectedMonth = new Date(
+          currentYear,
+          selectedMonthIndex,
+          1
+        );
+        document.querySelector(".calview").innerHTML = generateCalendarHTML(
+          firstDayOfSelectedMonth
+        );
+      });
   }
 });
 
