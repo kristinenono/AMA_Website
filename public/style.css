@@ -1201,28 +1201,39 @@ tr:hover {
 }
 
 .filter-container {
-  align-items: left;
+  align-items: center;
   width: 75%;
-  margin: 50px auto;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.filter-container .filtername, .filter-container .filtersem {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
 }
 
 .filter-container label {
-  font-size: 16px;
   margin-right: 10px;
+  font-size: 16px;
 }
 
-.filter-container select {
+.filter-container select, .filter-container input[type="text"] {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
+  flex-grow: 1;
 }
+
 .filter-container input[type="text"] {
-  width: 20%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
+  max-width: 100%;
 }
 
 /* filter button */
