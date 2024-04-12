@@ -839,22 +839,40 @@ r_e("calendarbtn").addEventListener("click", () => {
     let ptsassigned = r_e("ptsassigned");
     let descriptionevt = r_e("descriptionevt");
 
-    let month = new Date(evttime).getMonth() + 1;
-    let evtyear = new Date(evttime).getFullYear();
+    // let season = month >= 1 && month <= 6 ? "SPRING" : "FALL";
+    document.getElementById("generateButton").addEventListener("click", () => {
+      function generateRandomCode(length) {
+        const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        let code = "";
+        for (let i = 0; i < length; i++) {
+          code += characters.charAt(
+            Math.floor(Math.random() * characters.length)
+          );
+        }
+        return code;
+      }
 
-    let season = month >= 1 && month <= 6 ? "SPRING" : "FALL";
+      // Call the generateRandomCode function to get a random code
+      const randomCode = generateRandomCode(8); // Generate an 8-character code (adjust length as needed)
 
+      // Update the code input field with the generated code
+      document.getElementById("codeInput").value = randomCode;
+    });
     addevtsbt.addEventListener("click", (e) => {
       console.log("eventsbtnclicked");
       e.preventDefault();
       let name = evtname.value;
       let time = evttime.value;
+      let month = new Date(time).getMonth() + 1;
+      let evtyear = new Date(time).getFullYear();
+      let season = month >= 1 && month <= 6 ? "SPRING" : "FALL";
       let type = evttype.value;
       let pts = ptsassigned.value;
       let desc = descriptionevt.value;
       let evtcode = document.querySelector("#codeInput").value;
-      let month = new Date(evttime).getMonth() + 1;
-      let evtyear = new Date(evttime).getFullYear();
+      // let month = new Date(evttime).getMonth() + 1;
+      // let evtyear = new Date(evttime).getFullYear();
+      console.log(evtyear);
       let event = {
         name: name,
         time: time,
@@ -862,31 +880,23 @@ r_e("calendarbtn").addEventListener("click", () => {
         pts: pts,
         desc: desc,
         semester: `${season} ${evtyear}`,
+        code: evtcode,
       };
       db.collection("events")
         .add(event)
-        .then(() => alert("Event added to database"))
+        .then(() => {
+          alert("Event added to database");
+          // Clear form fields after successful submission
+          evtname.value = "";
+          evttime.value = "";
+          evttype.value = "";
+          ptsassigned.value = "";
+          descriptionevt.value = "";
+          document.getElementById("codeInput").value = ""; // Clear generated code field
+        })
         .catch((error) => console.error("Error adding event: ", error));
       addEventForm.classList.remove("is-active");
     });
-    // Function to generate a random code
-    function generateRandomCode(length) {
-      const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-      let code = "";
-      for (let i = 0; i < length; i++) {
-        code += characters.charAt(
-          Math.floor(Math.random() * characters.length)
-        );
-      }
-      return code;
-    }
-
-    // Function to update the input field with the generated code
-    function updateCodeInput() {
-      const codeInput = document.getElementById("codeInput");
-      const randomCode = generateRandomCode(8); // Generate a random 8-character code (adjust length as needed)
-      codeInput.value = randomCode;
-    }
     // // eventcardModal
 
     const viewEventLinks = document.querySelectorAll(".events-button");
