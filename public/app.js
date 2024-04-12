@@ -807,9 +807,8 @@ r_e("calendarbtn").addEventListener("click", () => {
     });
 
     // Set the content of yearblock to the current year
-    document.getElementById(
-      "yearblock"
-    ).textContent = `${currentDate.getFullYear()}`;
+    document.getElementById("yearblock").textContent =
+      `${currentDate.getFullYear()}`;
     // addEventModal
     let addEventForm = r_e("popupmodal");
 
@@ -1841,7 +1840,26 @@ r_e("blog-link").addEventListener("click", () => {
     appendContent(blog_content);
   }
 });
+r_e("blog-link").addEventListener("click", () => {
+  r_e("addPostButton").classList.add("is-hidden");
 
+  //check user
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+      // User is logged in
+      console.log("User email:", user.email);
+
+      // Check if the user's email matches
+      if (user.email === "gracevanzeeland@gmail.com") {
+        r_e("addPostButton").classList.remove("is-hidden");
+      } else {
+      }
+    } else {
+      // User is not logged in
+      console.log("User not logged in");
+    }
+  });
+});
 let test = r_e("");
 
 // Get the modal
