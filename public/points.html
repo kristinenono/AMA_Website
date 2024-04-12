@@ -233,17 +233,45 @@
         }
       });
     });
+
+
     // EDIT BUTTON
 let editbutton = document.getElementById("editbtn");
 let savecancelbtn = document.getElementById("savecancelbtn");
 
+// for the original points to be saved
+let originalvalues = [];
+
+
+// function to allow the points to be edited
+function editpointsmode(editMode) {
+    const pointsCells = document.querySelectorAll("tbody tr td:nth-child(n+3):nth-child(-n+6)");
+    
+    if (editMode) {
+        originalValues = []; // Reset original values
+        pointsCells.forEach(cell => {
+            // Store the original text
+            originalValues.push(cell.innerText);
+            // Replace cell content with an input element
+            cell.innerHTML = `<input class="input" type="number" value="${cell.innerText}" placeholder="${cell.innerText}" style="width: 100%;">`;
+        });
+    } else {
+        // If not edit mode, we revert back to the original text or save new values
+        pointsCells.forEach((cell, index) => {
+            const input = cell.querySelector("input");
+            // If input exists, use its value; otherwise, use the original text
+            cell.innerText = input ? input.value : originalValues[index];
+        });
+    }
+}
+
 // open save and cancel when edit button is clicked
 function showsavecancel() {
+  editpointsmode(true);
   savecancelbtn.classList.remove("is-hidden")
   savecancelbtn.classList.add("is-active");
   editbutton.classList.add("is-hidden")
 }
-
 editbutton.addEventListener("click", showsavecancel);
 
 // SAVE CANCEL BUTTON
@@ -254,10 +282,24 @@ let editcancel =document.getElementById("editcancel");
 function canceledit() {
   savecancelbtn.classList.add("is-hidden")
   savecancelbtn.classList.remove("is-active");
-  editbutton.classList.remove("is-hidden")
+  editbutton.classList.remove("is-hidden");
+  editpointsmode(false);
+  fetchAndPopulatePoints();
+  
 }
-
 editcancel.addEventListener("click", canceledit);
+
+// when the save button is clicked it will save all the values from the edit and update the database
+function saveedit() {
+    // Code to reset UI after save
+    savecancelbtn.classList.add("is-hidden");
+    editbutton.classList.remove("is-hidden");
+    // Disable edit mode
+    editpointsmode(false);
+    // Optionally, refresh the table data
+    fetchAndPopulatePoints();
+}
+editsave.addEventListener("click", saveedit);
 
     </script>
     </main>
