@@ -61,9 +61,8 @@ body {
 }
 .mainbackground {
   background-color: #f3f2ee;
-}x
-
-.title {
+}
+x .title {
   font-family: var(--titleFontFamily);
   font-size: var(--titleFontSize);
   color: var(--primarywhite);
@@ -110,6 +109,10 @@ body {
 }
 
 /* button */
+.is-hidden {
+  display: none;
+}
+
 .add-btn {
   font: var(--titleFontFamily);
   background-color: #1f304f;
@@ -1211,7 +1214,8 @@ tr:hover {
   flex-wrap: wrap;
 }
 
-.filter-container .filtername, .filter-container .filtersem {
+.filter-container .filtername,
+.filter-container .filtersem {
   display: flex;
   flex-grow: 1;
   align-items: center;
@@ -1224,7 +1228,8 @@ tr:hover {
   font-size: 16px;
 }
 
-.filter-container select, .filter-container input[type="text"] {
+.filter-container select,
+.filter-container input[type="text"] {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -1237,7 +1242,7 @@ tr:hover {
 }
 
 /* filter button */
-.redbtn{
+.redbtn {
   font: var(--titleFontFamily);
   background-color: #b22b25;
   color: white;
@@ -1245,7 +1250,7 @@ tr:hover {
 .redbtn:active {
   background-color: #1f304f;
 }
-.bluebtn{
+.bluebtn {
   font: var(--titleFontFamily);
   background-color: #1f304f;
   color: white;
@@ -1253,7 +1258,7 @@ tr:hover {
 .bluebtn:active {
   background-color: #b22b25;
 }
-.pointbtn{
+.pointbtn {
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -1267,12 +1272,11 @@ tr:hover {
 
 .editsavecancel {
   display: flex; /* This makes the container a flex container */
-  flex-direction:row; /* Aligns children (buttons) in a column */
+  flex-direction: row; /* Aligns children (buttons) in a column */
   align-items: center; /* Centers the buttons horizontally in the container */
   justify-content: center; /* Centers the buttons vertically in the container */
   margin: 2rem;
 }
-
 
 /* CONTACT PAGE */
 

@@ -807,9 +807,8 @@ r_e("calendarbtn").addEventListener("click", () => {
     });
 
     // Set the content of yearblock to the current year
-    document.getElementById(
-      "yearblock"
-    ).textContent = `${currentDate.getFullYear()}`;
+    document.getElementById("yearblock").textContent =
+      `${currentDate.getFullYear()}`;
     // addEventModal
     let addEventForm = r_e("popupmodal");
 
@@ -1586,7 +1585,7 @@ let blog_content = ` <main>
       magni porro voluptatibus, quasi doloribus provident officiis, illo
       hic laborum distinctio mollitia quis minima ducimus.
     </p>
-    <button id="addPostButton" class="addPostBtn">Add a post</button>
+    <button id="addPostButton" class="addPostBtn" >Add a post</button>
   </div>
 
   <div id="addPostForm" class="modal">
@@ -1638,13 +1637,15 @@ let blog_content = ` <main>
   </div>
 </div>
 </main>`;
-// Blog page content
+
 // Blog page content
 r_e("blog-link").addEventListener("click", () => {
   appendContent(blog_content);
 
   // Wait for the content to be appended to the DOM
   setTimeout(() => {
+    // Attach the event listener to handle changes in authentication state
+
     // Get the modal
     var modal = document.getElementById("addPostForm");
 
@@ -1715,7 +1716,7 @@ r_e("blog-link").addEventListener("click", () => {
                             <p class="card-header-subtitle"><span style="font-size: smaller; font-weight: bold;">By: ${post.author} // <time datetime="${post.date}">${post.date}</time></span></p>
                           </div>
                         </div>
-                        <footer class="card-footer">
+                        <footer id="editDeleteFooter" class="card-footer">
                           <a href="#" class="card-footer-item" onclick="editPost('${postId}')">Edit</a>
                           <a href="#" class="card-footer-item" onclick="deletePost('${postId}')">Delete</a>
                         </footer>
@@ -1841,6 +1842,26 @@ r_e("blog-link").addEventListener("click", () => {
     appendContent(blog_content);
   }
 });
+r_e("blog-link").addEventListener("click", () => {
+  r_e("addPostButton").classList.add("is-hidden");
+
+  //check user
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+      // User is logged in
+      console.log("User email:", user.email);
+
+      // Check if the user's email matches
+      if (user.email === "gracevanzeeland@gmail.com") {
+        r_e("addPostButton").classList.remove("is-hidden");
+      } else {
+      }
+    } else {
+      // User is not logged in
+      console.log("User not logged in");
+    }
+  });
+});
 
 let test = r_e("");
 
@@ -1922,6 +1943,11 @@ function show_posts() {
                     </div>`;
       });
       document.querySelector("#all_posts").innerHTML = html;
+      // Access elements inside each post here
+      var editDeleteFooter = document
+        .getElementById(`${postId}`)
+        .querySelector("#editDeleteFooter");
+      // Now you can access elements inside the footer with the id "editDeleteFooter" for each post
     })
     .catch((error) => {
       console.error("Error getting posts: ", error);
@@ -1989,7 +2015,7 @@ function editPost(postId) {
 </div>
 <div class="field is-grouped">
   <div class="control">
-    <button class="addPostBtn" onclick="saveEdit('${postId}')">Save</button>
+    <button id="addPostBtn" class="addPostBtn" class="is-hidden" onclick="saveEdit('${postId}')">Save</button>
   </div>
 </div>
 </div>
