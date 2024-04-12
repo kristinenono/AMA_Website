@@ -883,6 +883,7 @@ r_e("calendarbtn").addEventListener("click", () => {
         code: evtcode,
       };
       db.collection("events")
+        // adding event
         .add(event)
         .then(() => {
           alert("Event added to database");
