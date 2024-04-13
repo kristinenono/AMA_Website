@@ -596,76 +596,25 @@ r_e("calendarbtn").addEventListener("click", () => {
       <div class="colormargins margin-left">
         <h2 class="heading-tag-upcoming-event">Upcoming Events</h2>
         <div class="flex-container">
-        <div class="box margin-event ">
-        <h2>Philathropy event</h2>
-        <a href="#" class="events-button" id="eventbtn1">View Event Here! </a>
-        <div class="modal is-hidden" id="card_modal_1">
-          <div class = "modal-background" id= "cardbg_1"></div>
-          <div class="modal-content section has-background-white">
-          <h2 class="secondaryheader2">Event Title</h2>
-          <form>
-          <p class="primaryBody">Date: [Event Date]</p>
-          <p class="primaryBody">Location: [Event Location]</p>
-          <button id="editEventCard">Edit</button>
-          <button id="deleteEventCard">Delete</button>
-          <button id="closeEventCard">Close</button>
-        </form>
-        </div>
-        </div>
-        </div>
-        <div class="box margin-event">
-          <h2>Professional Development event</h2>
-          <a href="#" class="events-button" id="eventbtn2">View Event Here! </a>
-          <div class="modal is-hidden" id="card_modal_2">
-            <div class = "modal-background" id= "cardbg_2"></div>
-            <div class="modal-content section has-background-white">
-            <h2 class="secondaryheader2">Event Title</h2>
-            <form>
-            <p class="primaryBody">Date: [Event Date]</p>
-            <p class="primaryBody">Location: [Event Location]</p>
-            <button id="editEventCard">Edit</button>
-            <button id="deleteEventCard">Delete</button>
-            <button id="closeEventCard2">Close</button>
-          </form>
-          </div>
-          </div>
-          </div>
-          <div class="box margin-event">
-            <h2>Social event</h2>
-            <a href="#" class="events-button" id="eventbtn3">View Event Here! </a>
-            <div class="modal is-hidden" id="card_modal_3">
-              <div class = "modal-background" id= "cardbg_3"></div>
-              <div class="modal-content section has-background-white">
-              <h2 class="secondaryheader2">Event Title</h2>
-              <form>
-              <p class="primaryBody">Date: [Event Date]</p>
-              <p class="primaryBody">Location: [Event Location]</p>
-              <button id="editEventCard">Edit</button>
-              <button id="deleteEventCard">Delete</button>
-              <button id="closeEventCard3">Close</button>
-            </form>
-            </div>
-            </div>
-            </div>
-            <div class="box margin-event">
-              <h2>Speaker event</h2>
-              <a href="#" class="events-button" id="eventbtn4">View Event Here! </a>
-              <div class="modal is-hidden" id="card_modal_4">
-                <div class = "modal-background" id= "cardbg_4"></div>
-                <div class="modal-content section has-background-white">
-                <h2 class="secondaryheader2">Event Title</h2>
-                <form>
-                <p class="primaryBody">Date: [Event Date]</p>
-                <p class="primaryBody">Location: [Event Location]</p>
-                <button id="editEventCard">Edit</button>
-                <button id="deleteEventCard">Delete</button>
-                <button id="closeEventCard4">Close</button>
-              </form>
-              </div>
-              </div>
-              </div>
+        <div id="all_events"></div>
+        <div class="modal is-hidden" id="eventModal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title" id="eventModalTitle"></p>
+      <button class="delete" aria-label="close" id="closeModal"></button>
+    </header>
+    <section class="modal-card-body" id="eventModalContent">
+      <!-- Event details will be populated here -->
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button" id="closeModalButton">Close</button>
+    </footer>
+  </div>
+</div>
+      
           
-        </div>
+         </div>
       </div>
       <div id="sample" class="colormargins page-content">
       <div class="navcal">
@@ -935,7 +884,67 @@ r_e("calendarbtn").addEventListener("click", () => {
         .catch((error) => console.error("Error adding event: ", error));
       addEventForm.classList.remove("is-active");
     });
-    // // eventcardModal
+    function show_event_cards() {
+      db.collection("events")
+        .orderBy("time")
+        .limit(4) // Limit to the first 4 closest events
+        .get()
+        .then((querySnapshot) => {
+          let html = "";
+          querySnapshot.forEach((doc) => {
+            const event = doc.data();
+            const eventId = doc.id;
+            html += `
+              <div class="box margin-event">
+                <h2>${event.name}</h2>
+                <!-- "View Event Here" link -->
+                <a href="#" class="view-event-link" data-event-id="${eventId}">View Event Here!</a>
+              </div>
+              <!-- Hidden modal for event details -->
+              <div class="modal is-hidden" id="eventModal_${eventId}">
+                <div class="modal-background"></div>
+                <div class="modal-content">
+                  <div class="box">
+                    <h2>${event.name}</h2>
+                    <p>Date: ${event.time}</p>
+                    <p>Description: ${event.desc}</p>
+                    <p>Type: ${event.type}</p>
+                  </div>
+                  <button class="modal-close" aria-label="close"></button>
+                </div>
+              </div>
+            `;
+          });
+          document.querySelector("#all_events").innerHTML = html;
+
+          // Add event listeners to each "View Event Here" link
+          document.querySelectorAll(".view-event-link").forEach((link) => {
+            link.addEventListener("click", function (event) {
+              event.preventDefault(); // Prevent default link behavior
+              const eventId = this.getAttribute("data-event-id");
+              // Show the corresponding hidden modal
+              document
+                .getElementById(`eventModal_${eventId}`)
+                .classList.remove("is-hidden");
+            });
+          });
+
+          // Add event listeners to close modals
+          document.querySelectorAll(".modal-close").forEach((element) => {
+            element.addEventListener("click", function () {
+              // Hide the modal when the close button is clicked
+              const modalId = this.closest(".modal").id;
+              document.getElementById(modalId).classList.add("is-hidden");
+            });
+          });
+        })
+        .catch((error) => {
+          console.error("Error getting events: ", error);
+        });
+    }
+
+    // Refresh the list of events
+    show_event_cards(); // <-- Call the function to update the event list
 
     const viewEventLinks = document.querySelectorAll(".events-button");
     const eventCard = document.getElementById("eventCard");
