@@ -124,17 +124,17 @@ x .title {
 }
 /* home page modal styling */
 /* submit and cancel button formats for the signup/login modals */
-.submitmodalbtn{
+.submitmodalbtn {
   background-color: #1f304f;
   border-color: #dbdbdb;
   border-width: 1px;
   color: #fff;
   cursor: pointer;
   justify-content: center;
-  padding-bottom: calc(.5em - 1px);
+  padding-bottom: calc(0.5em - 1px);
   padding-left: 1em;
   padding-right: 1em;
-  padding-top: calc(.5em - 1px);
+  padding-top: calc(0.5em - 1px);
   text-align: center;
   white-space: nowrap;
   -webkit-appearance: none;
@@ -150,17 +150,17 @@ x .title {
   vertical-align: top;
 }
 
-.cancelmodalbtn{
+.cancelmodalbtn {
   background-color: #b22b25;
   border-color: #dbdbdb;
   border-width: 1px;
   color: #fff;
   cursor: pointer;
   justify-content: center;
-  padding-bottom: calc(.5em - 1px);
+  padding-bottom: calc(0.5em - 1px);
   padding-left: 1em;
   padding-right: 1em;
-  padding-top: calc(.5em - 1px);
+  padding-top: calc(0.5em - 1px);
   text-align: center;
   white-space: nowrap;
   -webkit-appearance: none;
@@ -176,7 +176,7 @@ x .title {
   vertical-align: top;
 }
 
-.haveaccount{
+.haveaccount {
   color: #1f304f;
 }
 
@@ -1018,8 +1018,6 @@ button {
   font-weight: 400;
 }
 
-
-
 button p {
   color: #f3f2ee;
   font-family: Arial, Helvetica, sans-serif;
@@ -1342,7 +1340,8 @@ tr:hover {
 }
 
 .contactForm-flex {
-  flex: 1;
+  display: flex;
+  align-items: flex-start;
   margin-right: 5%;
   margin-bottom: 3rem;
   margin-left: 10%;
@@ -1388,6 +1387,9 @@ textarea.input-field {
   height: 120px;
   max-height: 240px;
   resize: vertical;
+}
+.contactForm-flex img {
+  margin-left: 20px; /* Add some margin to the left of the image */
 }
 .contactForm-flex #name {
   width: calc(100%);
@@ -1488,7 +1490,7 @@ textarea.input-field {
 .margin-class {
   margin-top: 35px;
 }
-* about page */ .aboutContainer {
+.aboutContainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -1559,13 +1561,25 @@ textarea.input-field {
   color: var(--primarynavy);
 }
 .aboutHeader {
+  margin-top: 60px;
   text-align: center;
   font-size: 38px;
   font-family: var(--bodyFontFamily);
   color: var(--primarynavy);
   font-weight: bold;
 }
-
+.aboutHeader2 {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 38px;
+  font-family: var(--bodyFontFamily);
+  color: var(--primarynavy);
+  font-weight: bold;
+}
+.aboutCardImg {
+  color: var(--secondaryred);
+  font-size: 2rem;
+}
 #aboutHeaderSection {
   display: flex;
   padding: 30px;
@@ -1576,13 +1590,35 @@ textarea.input-field {
   padding: 30px;
   padding-top: 40px;
 }
-
+.membership-info {
+  flex: 1; /* Let the membership information take up the remaining space */
+}
+.membership-info2 {
+  flex: 1; /* Let the membership information take up the remaining space */
+  text-align: left;
+}
 .membershipRequirementsSection {
   background-color: white;
-  padding-left: 15%;
-  padding-right: 40%;
   padding-top: 15px;
   padding-bottom: 30px;
+  /* text-align: left; */
+}
+.requirements-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.requirements-column {
+  flex: 0 0 48%; /* Two columns, each taking up 48% of the container */
+}
+#speakerEventImg {
+  width: 45%;
+  margin-right: 180px;
+  margin-top: 20px;
+}
+#execImage {
+  margin-left: 180px;
+  margin-top: 60px;
 }
 
 .grid-list {
@@ -1592,11 +1628,13 @@ textarea.input-field {
 }
 
 .grid-list li {
-  width: calc(35% - 0.2px); /* Two items per row with some spacing */
+  width: calc(30% - 0.2px); /* Two items per row with some spacing */
   background-color: var(--lightGray);
-
+  border-left: 30px solid var(--primarywhite);
+  border-right: 30px solid var(--primarywhite);
   border-top: 30px solid var(--primarywhite); /* Add a white border */
   border-bottom: 30px solid var(--primarywhite); /* Add a white border */
+  border-radius: 45px;
 }
 
 /* For smaller screens, make each item full width */
