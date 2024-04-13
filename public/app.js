@@ -650,7 +650,7 @@ r_e("calendarbtn").addEventListener("click", () => {
           ${generateCalendarHTML(currentDate)}
         </div>
       </div>
-      ${rightMarginHTML(auth.currentUser.email == "test_admin@amabadgers.com")}
+      ${rightMarginHTML(auth.currentUser.email == "amauwmadison@gmail.com")}
     </div>
   </main>`;
     appendContent(cal_page_content);
@@ -810,7 +810,7 @@ r_e("calendarbtn").addEventListener("click", () => {
       }
   }
 
-  if (auth.currentUser.email == "test_admin@amabadgers.com") {
+  if (auth.currentUser.email == "amauwmadison@gmail.com") {
       function show_addEvent_form() {
         addEventForm.classList.remove("is-hidden");
         addEventForm.classList.add("is-active");
@@ -1072,7 +1072,7 @@ r_e("pointbtn").addEventListener("click", () => {
 
 
 function displayContentBasedOnEmail(email) {
-  const adminEmail = "test_admin@amabadgers.com";
+  const adminEmail = "amauwmadison@gmail.com";
 
   if (email === adminEmail) {
     addContent(true);
