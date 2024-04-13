@@ -178,7 +178,7 @@ let home_page_content = `<div class="titleContainers">
     </ul>
     <div>
         <p>
-            <button class="involvementButton1"><b>LEARN MORE</b></button>&nbsp;&nbsp;
+            <button class="involvementButton1" id="learnbuttonhome"><b>LEARN MORE</b></button>
             <button class="involvementButton2" id="joinbuttonhome"><b>JOIN</b></button>
         </p>
     </div>
@@ -1335,6 +1335,11 @@ r_e("contact-link").addEventListener("click", () => {
   if (check_auth != null) {
     appendContent(contact_content);
   }
+});
+//join button
+r_e("joinbuttonhome").addEventListener("click", () => {
+  appendContent(contact_content);
+  console.log("learnbuttonclicked");
 });
 let blog_content = ` <main>
 <div class="blogpage">
