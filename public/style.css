@@ -1331,6 +1331,7 @@ tr:hover {
 }
 #contactFormSection {
   display: flex;
+  /* Move left by 15% of the page width */
 }
 
 .contactFormText {
@@ -1344,7 +1345,7 @@ tr:hover {
   align-items: flex-start;
   margin-right: 5%;
   margin-bottom: 3rem;
-  margin-left: 10%;
+  margin-left: 5%;
   text-align: center;
 }
 .contactForm-flex .field {
@@ -1397,18 +1398,12 @@ textarea.input-field {
 
 .contactForm-flex #email {
   width: calc(100%);
-  margin-right: 5px;
 }
 .contactForm-flex input[type="text"],
 .contactForm-flex input[type="email"] {
-  height: 40px;
-  width: 310px;
-  margin-right: 5px;
+  width: 100%;
 }
-.contactForm-flex input[type="email"] {
-  margin-top: 10px;
-  margin-left: 63px;
-}
+
 .contactForm-flex .input-field,
 .contactForm-flex textarea,
 .contactForm-flex button {
