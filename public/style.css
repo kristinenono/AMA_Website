@@ -109,6 +109,10 @@ x .title {
 }
 
 /* button */
+.is-hidden {
+  display: none;
+}
+
 .add-btn {
   font: var(--titleFontFamily);
   background-color: #1f304f;
