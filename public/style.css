@@ -137,7 +137,6 @@ x .title {
   padding-top: calc(0.5em - 1px);
   text-align: center;
   white-space: nowrap;
-  -webkit-appearance: none;
   align-items: center;
   border: 1px solid transparent;
   border-radius: 4px;
@@ -163,7 +162,6 @@ x .title {
   padding-top: calc(0.5em - 1px);
   text-align: center;
   white-space: nowrap;
-  -webkit-appearance: none;
   align-items: center;
   border: 1px solid transparent;
   border-radius: 4px;
