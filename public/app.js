@@ -1116,9 +1116,8 @@ function addContent(isAdmin) {
   updateTableWithData(memberTotalPoints);
   } else {
     let points_content = `<div class="columns is-centered mt-4">
-    <!-- First column with right padding -->
     <div class="column pr-outer">
-        <div class="card px-4 py-3 has-text-centered">
+        <div class="card px-4 py-3 has-text-centered" event-type="philanthropy">
             <header class="card-header has-background-link-dark">
                 <p class="card-header-title has-text-white is-centered">Philathropy</p>
             </header>
@@ -1130,7 +1129,7 @@ function addContent(isAdmin) {
         </div>
     </div>
     <div class="column">
-        <div class="card px-4 py-3 has-text-centered">
+        <div class="card px-4 py-3 has-text-centered" event-type="professional_development">
             <header class="card-header has-background-link-dark">
                 <p class="card-header-title has-text-white is-centered">Professional Development</p>
             </header>
@@ -1142,7 +1141,7 @@ function addContent(isAdmin) {
         </div>
     </div>
     <div class="column">
-        <div class="card px-4 py-3 has-text-centered">
+        <div class="card px-4 py-3 has-text-centered" event-type="social">
             <header class="card-header has-background-link-dark">
                 <p class="card-header-title has-text-white is-centered">Social</p>
             </header>
@@ -1153,9 +1152,8 @@ function addContent(isAdmin) {
             </div>
         </div>
     </div>
-    <!-- Last column with left padding -->
     <div class="column pl-outer">
-        <div class="card px-4 py-3 has-text-centered">
+        <div class="card px-4 py-3 has-text-centered" event-type="speaker">
             <header class="card-header has-background-link-dark">
                 <p class="card-header-title has-text-white is-centered">Speaker</p>
             </header>
@@ -1169,7 +1167,7 @@ function addContent(isAdmin) {
 </div>
 <div class="columns is-centered mt-4">
     <div class="column is-half">
-        <div class="card px-4 py-3 has-text-centered">
+        <div class="card px-4 py-3 has-text-centered" event-type="total">
             <header class="card-header has-background-link-dark">
                 <p class="card-header-title has-text-white is-centered">Total Points</p>
             </header>
@@ -1182,6 +1180,10 @@ function addContent(isAdmin) {
     </div>
 </div>`
     appendContent(points_content)
+    let memberTotalPoints = {};
+    PopulatePoints()
+    updateCardsWithPoints(memberTotalPoints)
+
   }
 }
 function fetchAndPopulatePoints() {
@@ -1347,7 +1349,63 @@ function attachEventListeners() {
   document.getElementById("editcancel").addEventListener("click", canceledit);
 }
 
+function PopulatePoints() {
+  db.collection("ama_users").get().then((userSnapshot) => {
+      // Initialize an object to store total points per user, by event type
+      const memberTotalPoints = {};
 
+      // Iterate over each user document
+      userSnapshot.forEach((userDoc) => {
+          const fullName = userDoc.data().full_name;
+          memberTotalPoints[fullName] = {
+              philanthropy: 0,
+              professional_development: 0,
+              social: 0,
+              speaker: 0,
+              total: 0
+          };
+      });
+
+      // Fetch member points
+      db.collection("member_points").get().then((snapshot) => {
+          // Process each point document
+          snapshot.forEach((doc) => {
+              const data = doc.data();
+              const fullName = auth.currentUser.full_name; // Assuming member name stored here
+              const eventType = data.eventType.toLowerCase().replace(/\s+/g, '_'); // Format to match key names in the object
+              const eventPoints = parseInt(data.points) || 0;
+
+              // Accumulate points if user is found
+              if (memberTotalPoints[fullName] && memberTotalPoints[fullName][eventType] !== undefined) {
+                  memberTotalPoints[fullName][eventType] += eventPoints;
+              }
+          });
+
+          updateCardsWithPoints(memberTotalPoints);
+      }).catch((error) => {
+          console.error("Error getting member points documents: ", error);
+      });
+  }).catch((error) => {
+      console.error("Error getting users documents: ", error);
+  });
+}
+
+function updateCardsWithPoints(memberTotalPoints) {
+  // Update each card with the total points for each event type
+  Object.keys(memberTotalPoints).forEach(fullName => {
+      const points = memberTotalPoints[fullName];
+      for (const eventType in points) {
+          const selector = `.card[event-type="${eventType}"] .content`;
+          const contentDiv = document.querySelector(selector);
+          if (contentDiv) {
+              contentDiv.textContent = points[eventType];
+          }
+      }
+  });
+}
+
+// Start fetching and populating points
+fetchAndPopulatePoints();
 
 
 
