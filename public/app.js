@@ -650,82 +650,7 @@ r_e("calendarbtn").addEventListener("click", () => {
           ${generateCalendarHTML(currentDate)}
         </div>
       </div>
-      <div class="colormargins margin-right">
-          <a href="#" class="add-btn2" id="eventbtn">Add Event</a>
-          <div class="modal is-hidden" id="popupmodal">
-            <div class = "modal-background" id= "popupbg"></div>
-            <div class="modal-content section has-background-white">
-            <h2 class="title">New Event</h2>
-            <form id="cal_form_modal">
-            <div class="field">
-            <label class="label" >Name of Event</label>
-            <div class="control">
-              <input class="input" id = "evtname" type="text" placeholder="LinkedIn Workshop" />
-            </div>
-            </div>
-            <div class="field">
-            <label class="label">Date and Time of Event</label>
-            <div class="control">
-              <input
-                class="input"
-                id = "datetime"
-                type="datetime-local"
-                placeholder="12-01-22 01:22"
-              />
-            </div>
-            </div>
-            <div class="field">
-            <label class="label">Choose Event Category</label>
-            <div class="control">
-              <div class="select">
-                <select name="" id="evttype">
-                  <option>--select--</option>
-                  <option value="Philanthropy">Philanthropy</option>
-                  <option value="Professional Development">Professional Development</option>
-                  <option value="Speaker Event">Speaker Event</option>
-                  <option value="Social Event">Social Event</option>
-                </select>
-              </div>
-            </div>
-            </div>
-            <div class="field">
-            <label class="label">Points Assigned</label>
-            <div class="control">
-              <input class="input" id = "ptsassigned" type="number" placeholder="5" />
-            </div>
-            </div>
-            <div class="field">
-            <label class="label">Description of Event</label>
-            <div class="control">
-              <textarea
-                cols="20"
-                rows="12"
-                id = "descriptionevt"
-                placeholder="Dress Code: Business Casual
-            Location: Grainger"
-              ></textarea>
-            </div>
-            </div>
-            <div class="field has-addons">
-            <div class="control">
-              <input id="codeInput" class="input" type="text" placeholder="Generate Code" />
-            </div>
-            <div class="control">
-              <a id="generateButton" class="button btncolor">Go</a>
-            </div>
-            </div>
-            <div class="field is-grouped">
-            <div class="control">
-              <button class="button" id = "addevtsbt">Submit</button>
-            </div>
-            <div class="control">
-              <button class="button" id="addEventcncl">Cancel</button>
-            </div>
-            </div>
-            </div>
-          </form>
-            </div></div>
-    </div>
+      ${rightMarginHTML(auth.currentUser.email == "test_admin@amabadgers.com")}
     </div>
   </main>`;
     appendContent(cal_page_content);
@@ -797,93 +722,193 @@ r_e("calendarbtn").addEventListener("click", () => {
     // Set the content of yearblock to the current year
     document.getElementById("yearblock").textContent =
       `${currentDate.getFullYear()}`;
-    // addEventModal
-    let addEventForm = r_e("popupmodal");
+      let addEventForm = r_e("popupmodal");
 
-    function show_addEvent_form() {
-      addEventForm.classList.remove("is-hidden");
-      addEventForm.classList.add("is-active");
-    }
-
-    let addEventbtn = r_e("eventbtn");
-    addEventbtn.addEventListener("click", show_addEvent_form);
-
-    let addEventcancel = r_e("addEventcncl");
-    addEventcancel.addEventListener("click", () => {
-      addEventForm.classList.remove("is-active");
-    });
-    document
-      .querySelectorAll(".modal-background, .modal-close")
-      .forEach(function (el) {
-        el.addEventListener("click", function () {
-          addEventForm.classList.remove("is-active");
-        });
-      });
-    const addevtsbt = r_e("addevtsbt");
-    let evtname = r_e("evtname");
-    let evttime = r_e("datetime");
-    let evttype = r_e("evttype");
-    let ptsassigned = r_e("ptsassigned");
-    let descriptionevt = r_e("descriptionevt");
-
-    // let season = month >= 1 && month <= 6 ? "SPRING" : "FALL";
-    document.getElementById("generateButton").addEventListener("click", () => {
-      function generateRandomCode(length) {
-        const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        let code = "";
-        for (let i = 0; i < length; i++) {
-          code += characters.charAt(
-            Math.floor(Math.random() * characters.length)
-          );
-        }
-        return code;
+    function rightMarginHTML(is_admin) {
+      if (is_admin) {
+        return `<div class="colormargins margin-right">
+        <a href="#" class="add-btn2" id="eventbtn">Add Event</a>
+        <div class="modal is-hidden" id="popupmodal">
+          <div class = "modal-background" id= "popupbg"></div>
+          <div class="modal-content section has-background-white">
+          <h2 class="title">New Event</h2>
+          <form id="cal_form_modal">
+          <div class="field">
+          <label class="label" >Name of Event</label>
+          <div class="control">
+            <input class="input" id = "evtname" type="text" placeholder="LinkedIn Workshop" />
+          </div>
+          </div>
+          <div class="field">
+          <label class="label">Date and Time of Event</label>
+          <div class="control">
+            <input
+              class="input"
+              id = "datetime"
+              type="datetime-local"
+              placeholder="12-01-22 01:22"
+            />
+          </div>
+          </div>
+          <div class="field">
+          <label class="label">Choose Event Category</label>
+          <div class="control">
+            <div class="select">
+              <select name="" id="evttype">
+                <option>--select--</option>
+                <option value="Philanthropy">Philanthropy</option>
+                <option value="Professional Development">Professional Development</option>
+                <option value="Speaker Event">Speaker Event</option>
+                <option value="Social Event">Social Event</option>
+              </select>
+            </div>
+          </div>
+          </div>
+          <div class="field">
+          <label class="label">Points Assigned</label>
+          <div class="control">
+            <input class="input" id = "ptsassigned" type="number" placeholder="5" />
+          </div>
+          </div>
+          <div class="field">
+          <label class="label">Description of Event</label>
+          <div class="control">
+            <textarea
+              cols="20"
+              rows="12"
+              id = "descriptionevt"
+              placeholder="Dress Code: Business Casual
+          Location: Grainger"
+            ></textarea>
+          </div>
+          </div>
+          <div class="field has-addons">
+          <div class="control">
+            <input id="codeInput" class="input" type="text" placeholder="Generate Code" />
+          </div>
+          <div class="control">
+            <a id="generateButton" class="button btncolor">Go</a>
+          </div>
+          </div>
+          <div class="field is-grouped">
+          <div class="control">
+            <button class="button" id = "addevtsbt">Submit</button>
+          </div>
+          <div class="control">
+            <button class="button" id="addEventcncl">Cancel</button>
+          </div>
+          </div>
+          </div>
+        </form>
+          </div></div>
+  </div>`
+      } else {
+        return `<div class="colormargins margin-right">
+        <a href="#" class="add-btn2" id="ptbtn">View Points</a>
+        </main>
+    </div>`
       }
+  }
 
-      // Call the generateRandomCode function to get a random code
-      const randomCode = generateRandomCode(8); // Generate an 8-character code (adjust length as needed)
+  if (auth.currentUser.email == "test_admin@amabadgers.com") {
+      function show_addEvent_form() {
+        addEventForm.classList.remove("is-hidden");
+        addEventForm.classList.add("is-active");
+      }
+    
+      let addEventbtn = r_e("eventbtn");
+      addEventbtn.addEventListener("click", show_addEvent_form);
+    
+      let addEventcancel = r_e("addEventcncl");
+      addEventcancel.addEventListener("click", () => {
+        addEventForm.classList.remove("is-active");
+      });
+      document
+        .querySelectorAll(".modal-background, .modal-close")
+        .forEach(function (el) {
+          el.addEventListener("click", function () {
+            addEventForm.classList.remove("is-active");
+          });
+        });
+      const addevtsbt = r_e("addevtsbt");
+      let evtname = r_e("evtname");
+      let evttime = r_e("datetime");
+      let evttype = r_e("evttype");
+      let ptsassigned = r_e("ptsassigned");
+      let descriptionevt = r_e("descriptionevt");
+    
+      // let season = month >= 1 && month <= 6 ? "SPRING" : "FALL";
+      document.getElementById("generateButton").addEventListener("click", () => {
+        function generateRandomCode(length) {
+          const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+          let code = "";
+          for (let i = 0; i < length; i++) {
+            code += characters.charAt(
+              Math.floor(Math.random() * characters.length)
+            );
+          }
+          return code;
+        }
+    
+        // Call the generateRandomCode function to get a random code
+        const randomCode = generateRandomCode(8); // Generate an 8-character code (adjust length as needed)
+    
+        // Update the code input field with the generated code
+        document.getElementById("codeInput").value = randomCode;
+      });
+      addevtsbt.addEventListener("click", (e) => {
+        console.log("eventsbtnclicked");
+        e.preventDefault();
+        let name = evtname.value;
+        let time = evttime.value;
+        let month = new Date(time).getMonth() + 1;
+        let evtyear = new Date(time).getFullYear();
+        let season = month >= 1 && month <= 6 ? "SPRING" : "FALL";
+        let type = evttype.value;
+        let pts = ptsassigned.value;
+        let desc = descriptionevt.value;
+        let evtcode = document.querySelector("#codeInput").value;
+        // let month = new Date(evttime).getMonth() + 1;
+        // let evtyear = new Date(evttime).getFullYear();
+        console.log(evtyear);
+        let event = {
+          name: name,
+          time: time,
+          type: type,
+          pts: pts,
+          desc: desc,
+          semester: `${season} ${evtyear}`,
+          code: evtcode,
+        };
+        db.collection("events")
+          .add(event)
+          .then(() => {
+            alert("Event added to database");
+            // Clear form fields after successful submission
+            evtname.value = "";
+            evttime.value = "";
+            evttype.value = "";
+            ptsassigned.value = "";
+            descriptionevt.value = "";
+            document.getElementById("codeInput").value = ""; // Clear generated code field
+          })
+          .catch((error) => console.error("Error adding event: ", error));
+        addEventForm.classList.remove("is-active");
+      });
+    } else {
+  r_e("ptbtn").addEventListener("click", () => {
+    let check_auth = auth.currentUser;
+    console.log("btn clicked");
+    if (check_auth == null) {
+      // User is not signed in
+      alert("You must sign in to view the points page");
+    } else {
+      displayContentBasedOnEmail(check_auth.email)
+    }
+    });
+  }
 
-      // Update the code input field with the generated code
-      document.getElementById("codeInput").value = randomCode;
-    });
-    addevtsbt.addEventListener("click", (e) => {
-      console.log("eventsbtnclicked");
-      e.preventDefault();
-      let name = evtname.value;
-      let time = evttime.value;
-      let month = new Date(time).getMonth() + 1;
-      let evtyear = new Date(time).getFullYear();
-      let season = month >= 1 && month <= 6 ? "SPRING" : "FALL";
-      let type = evttype.value;
-      let pts = ptsassigned.value;
-      let desc = descriptionevt.value;
-      let evtcode = document.querySelector("#codeInput").value;
-      // let month = new Date(evttime).getMonth() + 1;
-      // let evtyear = new Date(evttime).getFullYear();
-      console.log(evtyear);
-      let event = {
-        name: name,
-        time: time,
-        type: type,
-        pts: pts,
-        desc: desc,
-        semester: `${season} ${evtyear}`,
-        code: evtcode,
-      };
-      db.collection("events")
-        .add(event)
-        .then(() => {
-          alert("Event added to database");
-          // Clear form fields after successful submission
-          evtname.value = "";
-          evttime.value = "";
-          evttype.value = "";
-          ptsassigned.value = "";
-          descriptionevt.value = "";
-          document.getElementById("codeInput").value = ""; // Clear generated code field
-        })
-        .catch((error) => console.error("Error adding event: ", error));
-      addEventForm.classList.remove("is-active");
-    });
+
     function show_event_cards() {
       db.collection("events")
         .orderBy("time")
@@ -942,7 +967,7 @@ r_e("calendarbtn").addEventListener("click", () => {
           console.error("Error getting events: ", error);
         });
     }
-
+    
     // Refresh the list of events
     show_event_cards(); // <-- Call the function to update the event list
 
@@ -1391,14 +1416,18 @@ function PopulatePoints() {
 }
 
 function updateCardsWithPoints(memberTotalPoints) {
-  // Update each card with the total points for each event type
+  console.log("Updating cards with the following points data:", memberTotalPoints);
+
   Object.keys(memberTotalPoints).forEach(fullName => {
       const points = memberTotalPoints[fullName];
       for (const eventType in points) {
           const selector = `.card[event-type="${eventType}"] .content`;
           const contentDiv = document.querySelector(selector);
           if (contentDiv) {
-              contentDiv.textContent = points[eventType];
+              contentDiv.textContent = `${points[eventType]}`; // Ensure string format
+              console.log(`Updated ${eventType} points to ${points[eventType]}`);
+          } else {
+              console.log(`No element found for selector: ${selector}`);
           }
       }
   });
