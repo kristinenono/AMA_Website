@@ -142,6 +142,12 @@ r_e("user_found").addEventListener("click", () => {
     loginModal.classList.add("is-active");
   }
 });
+r_e("user_notfound").addEventListener("click", () => {
+  if (loginModal.classList.contains("is-active")) {
+    loginModal.classList.remove("is-active");
+    signupModal.classList.add("is-active");
+  }
+});
 
 let home_page_content = `<div class="titleContainers">
 <div class="column column1">

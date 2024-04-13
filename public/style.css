@@ -177,6 +177,10 @@ body {
   vertical-align: top;
 }
 
+.haveaccount{
+  color: #1f304f;
+}
+
 /* Calendar Page */
 .margin-left {
   flex: 1;

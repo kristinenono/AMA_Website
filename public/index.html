@@ -42,8 +42,8 @@
                   <input class="input" type="password" id="password" />
                 </div>
               </div>
-  
-              <div class="field is-grouped">
+
+              <div class="field is-justify-content-center is-grouped">
                 <div class="control" action ="#">
                     <button class="submitmodalbtn" type="submit" id="submit">Submit</button>
                   </div>
@@ -51,6 +51,11 @@
                     <a class="cancelmodalbtn" id="log_cancel">Cancel</a>
                   </div>
                 </div>
+                <a class="haveaccount" id="user_notfound">
+                  Don't Have an Account? Sign Up
+                </a> 
+              </div> 
+
               <div id="log_error" class="has-text-danger"></div>
             </form>
           </div>
@@ -94,17 +99,20 @@
                 </div>
               </div>
     
-              <div class="field is-grouped">
+              <div class="field is-justify-content-center is-grouped">
                 <div class="control">
                     <button class="submitmodalbtn" type="submit">Submit</button>
                   </div>
                   <div class="control">
                     <a class="cancelmodalbtn" id="signup_cancel">Cancel</a>
                   </div>
-              </div>
-              <a class="is-link" id="user_found">
-                Already Have An Account? Sign In Here
+                </div>  
+                <a class="haveaccount" id="user_found">
+                Already Have An Account? Log In
               </a>
+              </div>
+
+
               <div id="signup_error" class="has-text-danger"></div>
             </form>
           </div>
