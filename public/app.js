@@ -444,20 +444,20 @@ let abt_content = `      <div id="contactSectionTop" class="contactSection-box c
     </div>
   </div>
   <img
-    id="execImage"
-    src="/AMA_Website/public/images/Exec_board.png"
-    alt="Membership Image"
-  />
-</div>
-</div>
+            id="execImage"
+            src="/public/images/Exec_board.png"
+            alt="Membership Image"
+          />
+        </div>
+      </div>
 
-<div id="aboutHeaderSection2">
-<div class="contactForm-flex">
-  <img
-    id="speakerEventImg"
-    src="/AMA_Website/public/images/Speaker_event.png"
-    alt="Membership Image"
-  />
+      <div id="aboutHeaderSection2">
+        <div class="contactForm-flex">
+          <img
+            id="speakerEventImg"
+            src="/public/images/Speaker_event.png"
+            alt="Membership Image"
+          />
   <div class="membership-info2">
     <h3 class="aboutHeader2">Corporate Partnerships</h3>
     <div class="membershipRequirementsSection2">
