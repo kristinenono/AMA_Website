@@ -124,45 +124,57 @@ body {
   background-color: #b22b25;
 }
 /* home page modal styling */
-.modal-h {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-}
-.modal-content-h {
+/* submit and cancel button formats for the signup/login modals */
+.submitmodalbtn{
   background-color: #1f304f;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-}
-
-.modal-close-h {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  align-content: center;
-}
-
-.modal-close-h:hover,
-.modal-close-h:focus {
-  color: #000;
-  text-decoration: none;
+  border-color: #dbdbdb;
+  border-width: 1px;
+  color: #fff;
   cursor: pointer;
+  justify-content: center;
+  padding-bottom: calc(.5em - 1px);
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: calc(.5em - 1px);
+  text-align: center;
+  white-space: nowrap;
+  -webkit-appearance: none;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  box-shadow: none;
+  display: inline-flex;
+  font-size: 1rem;
+  height: 2.5em;
+  line-height: 1.5;
+  position: relative;
+  vertical-align: top;
 }
-.modal-margin-h {
-  width: 20%;
-  height: 20%;
-  margin: auto;
+
+.cancelmodalbtn{
+  background-color: #b22b25;
+  border-color: #dbdbdb;
+  border-width: 1px;
+  color: #fff;
+  cursor: pointer;
+  justify-content: center;
+  padding-bottom: calc(.5em - 1px);
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: calc(.5em - 1px);
+  text-align: center;
+  white-space: nowrap;
+  -webkit-appearance: none;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  box-shadow: none;
+  display: inline-flex;
+  font-size: 1rem;
+  height: 2.5em;
+  line-height: 1.5;
+  position: relative;
+  vertical-align: top;
 }
 
 /* Calendar Page */
@@ -972,13 +984,6 @@ footer {
   color: gray;
 }
 
-input[type="text"] {
-  margin-top: 10px;
-  height: 35px;
-  width: calc(100% - 20px);
-  border: 1px solid black;
-}
-
 button {
   margin-top: 10px;
   border: none;
@@ -996,6 +1001,8 @@ button {
   background-color: #b22b25;
   width: 50%;
 }
+
+
 
 button p {
   color: #f3f2ee;
@@ -1142,6 +1149,7 @@ button p {
   margin: auto;
   display: block;
 }
+
 #modal-password {
   background-color: F3F2EE;
   margin: auto;
