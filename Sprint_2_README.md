@@ -71,6 +71,8 @@ c. Any problems are you facing?
 No
 
 **#2: 4.9.24**
+
+
 Carly
 a. What did you do yesterday?
 getting the auth to work, updating the modals, and adding css styling to the buttons
@@ -120,20 +122,32 @@ c. Any problems are you facing?
 no
 
 **Sprint Review**
+
+
 **a. What did you learn from doing our first sprint?**
 Better at using branches and divided the work up better! We had less issues with merging compared to last time.
 We also learned a lot with the js and were able to divide up the hard parts of it.
+
+
 **b. What did go well? Why?**
-We had a lot of moving parts so when there was one problem we were able to bring it all together once it was resolved. We also made sure that the work was more divided and there were not as many issues with the merging. 
+We had a lot of moving parts so when there was one problem we were able to bring it all together once it was resolved. We also made sure that the work was more divided and there were not as many issues with the merging.
+
+
 **c. What didn’t go well? Why not?**
 The trello could have been more updated and more clear on people's work.
 Problems with the points page and the calendar became a problem but then once it was resolved it was better!
-Storage became a problem one night because we were all working on it and wanted to continue!
+Storage became a problem one night because we were all working on it and wanted to continue.
+
+
 **d. How can you make things better next time?**
 trello, usage for storage and distributing work
+
+
 **e. Are you satisfied with what you already completed?**
 yes! We feel like we made good progress and there are small bugs and other things to work out. 
-**f. Which group was invited? What are your observations/notes?**
-The other group definitely showed that they put in a lot of work for this sprint, and were very good at explaining what they have done/still working on. 
 
-**Everybody was present?**
+
+**f. Which group was invited? What are your observations/notes?**
+Group 8 - The other group definitely showed that they put in a lot of work for this sprint, and were very good at explaining what they have done/still working on. They had a lot of similar points on improvement and where they thought they did better, which shows that we were learning from each other's reviews. 
+
+**Everybody was present?** yes 
