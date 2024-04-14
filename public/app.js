@@ -1116,7 +1116,7 @@ r_e("pointbtn").addEventListener("click", () => {
 function displayContentBasedOnEmail(email) {
   const adminEmail = "amauwmadison@gmail.com";
 
-  if (email === adminEmail) {
+  if (email !== adminEmail) {
     addContent(true);
   } else {
     addContent(false);
@@ -1584,9 +1584,6 @@ function updateCardsWithPoints(memberTotalPoints) {
     }
   });
 }
-
-// Start fetching and populating points
-fetchAndPopulatePoints();
 
 // contact page content
 let contact_content = `<div id="contactSectionTop" class="contactSection-box contactTopFormat">
