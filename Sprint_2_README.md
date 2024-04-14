@@ -1,3 +1,6 @@
+**GitHub Repo**
+https://github.com/kristinenono/AMA_Website.git
+
 **User Stories:**
 1. As a public viewer, I want to see all pages to learn more information about AMA at Madison
 2. As an executive member, I want to be able to add events to the event calendar to consistently update members regarding our events. 
@@ -58,11 +61,11 @@ c. Any problems are you facing?
 
 Wyatt
 a. What did you do yesterday?
-
+Nothing
 b. What are you planning to do today?
-
+Working on putting together the different points pages and looking at the auth
 c. Any problems are you facing?
-
+No
 
 *#2: 4.9.24*
 Carly
