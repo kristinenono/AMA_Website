@@ -1,0 +1,36 @@
+/* Default styles - applying to smaller screens */
+.navbar-menu {
+    width: 100%;
+    justify-content: center;
+}
+
+.navbar-content {
+    display: flex;
+    flex-direction: column; /* Stack items vertically on smaller screens */
+    justify-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.navbaritem, .navbar-link {
+    color: black; /* Default text color for smaller screens */
+    display: flex;
+    line-height: 1.5;
+    padding: 0.5rem 0.75rem; /* Adjust padding for better spacing */
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    width: 100%; /* Ensures full width for better touch targets on mobile */
+}
+
+/* Styles for larger screens */
+@media (min-width: 1024px) {
+    .navbar-content {
+        flex-direction: row; /* Switch to horizontal layout */
+    }
+    .navbaritem, .navbar-link {
+        color: white; /* Text color changes to white on larger screens */
+        width: auto; /* Allow natural width on larger screens */
+    }
+}
