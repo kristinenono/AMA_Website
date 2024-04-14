@@ -1133,13 +1133,11 @@ function addContent(isAdmin) {
     <div class="filtersem">
       <label for="semesterFilter">Filter by Semester:</label>
       <select id="semesterFilter">
-          <option value="">All</option>
-          <option value="Fall 2023">Fall 2023</option>
-          <option value="Spring 2024">Spring 2024</option>
-          <option value="Fall 2024">Fall 2024</option>
-          <option value="Spring 2025">Spring 2025</option>
-          <!-- Add more options as needed -->
-      </select>
+              <option value="SPRING 2024">SPRING 2024</option>
+              <option value="FALL 2024">FALL 2024</option>
+              <option value="SPRING 2025">SPRING 2025</option>
+              <option value="FALL 2025">FALL 2025</option>
+          </select>
       <!-- <label for="eventFilter">Filter by Event:</label>
       <select id="eventFilter">
           <option data-event="Total Points">All</option>
@@ -1178,15 +1176,100 @@ function addContent(isAdmin) {
     appendContent(points_content);
     defineEditFunctions();
     attachEventListeners();
-    let memberTotalPoints = {};
-    fetchAndPopulatePoints(memberTotalPoints);
-    updateTableWithData(memberTotalPoints);
+    fetchAndPopulatePoints();
+
+    function fetchAndPopulatePoints(selectedSemester, searchQuery) {
+      selectedSemester = selectedSemester || getCurrentSemester(); // Default to current semester if not provided
+      db.collection("ama_users")
+        .get()
+        .then((userSnapshot) => {
+          const rows = document.querySelectorAll("#all_people tr");
+
+          // Create an object to store total points for each member
+          const memberTotalPoints = {};
+
+          // Iterate over each document in the user snapshot
+          userSnapshot.forEach((userDoc) => {
+            const fullName = userDoc.data().full_name;
+            memberTotalPoints[fullName] = {
+              philanthropy: 0,
+              professional_development: 0,
+              social: 0,
+              speaker: 0,
+            };
+          });
+
+          // Get member points from member_points collection
+          db.collection("member_points")
+            .get()
+            .then((snapshot) => {
+              // Iterate over each document in the member points snapshot
+              snapshot.forEach((doc) => {
+                const data = doc.data();
+                const fullName = data.member;
+                const eventType = data.eventType.toLowerCase();
+                const eventPoints = parseInt(data.points) || 0;
+                const pointSemester = data.pointSemester.toUpperCase();
+
+                // Check if the member exists in the object and the points are for the selected semester
+                if (
+                  memberTotalPoints[fullName] &&
+                  (selectedSemester === pointSemester ||
+                    (selectedSemester === getCurrentSemester() &&
+                      pointSemester === getCurrentSemester())) &&
+                  // Check if the search query matches the member's name
+                  (searchQuery
+                    ? fullName.toLowerCase().includes(searchQuery)
+                    : true)
+                ) {
+                  // Add points to the respective event type
+                  memberTotalPoints[fullName][eventType] += eventPoints;
+                }
+              });
+
+              // Pass selected semester to updateTableWithData function
+              // Pass the searchQuery to the updateTableWithData function
+              updateTableWithData(
+                memberTotalPoints,
+                selectedSemester,
+                searchQuery
+              );
+            })
+            .catch((error) => {
+              console.error("Error getting member points documents: ", error);
+            });
+        })
+        .catch((error) => {
+          console.error("Error getting users documents: ", error);
+        });
+    }
+
+    // Call the function to fetch and populate points when the page loads
+    window.onload = function () {
+      fetchAndPopulatePoints();
+    };
+
+    document
+      .getElementById("applyFilters")
+      .addEventListener("click", function () {
+        // Get the filter values
+        const nameSearchValue = document
+          .getElementById("nameSearch")
+          .value.trim()
+          .toLowerCase();
+        const semesterFilterValue = document
+          .getElementById("semesterFilter")
+          .value.toUpperCase();
+
+        // Call fetchAndPopulatePoints with the selected semester and search query
+        fetchAndPopulatePoints(semesterFilterValue, nameSearchValue);
+      });
   } else {
     let points_content = `<div class="columns is-centered mt-4">
     <div class="column pr-outer">
         <div class="card px-4 py-3 has-text-centered" event-type="philanthropy">
             <header class="card-header has-background-link-dark">
-                <p class="card-header-title has-text-white is-centered">Philathropy</p>
+                <p class="card-header-title has-text-white is-centered">Philanthropy</p>
             </header>
             <div class="card-content">
                 <div class="content">
@@ -1252,94 +1335,6 @@ function addContent(isAdmin) {
     updateCardsWithPoints(memberTotalPoints);
   }
 }
-function fetchAndPopulatePoints() {
-  db.collection("ama_users")
-    .get()
-    .then((userSnapshot) => {
-      const rows = document.querySelectorAll("#all_people tr");
-
-      const memberTotalPoints = {};
-
-      // Iterate over each document in the user snapshot
-      userSnapshot.forEach((userDoc) => {
-        const fullName = userDoc.data().full_name;
-        memberTotalPoints[fullName] = {
-          philanthropy: 0,
-          professional_development: 0,
-          social: 0,
-          speaker: 0,
-        };
-      });
-
-      // Get member points from member_points collection
-      db.collection("member_points")
-        .get()
-        .then((snapshot) => {
-          // Iterate over each document in the member points snapshot
-          snapshot.forEach((doc) => {
-            const data = doc.data();
-            const fullName = data.attendedMembers;
-            const eventType = data.eventType.toLowerCase();
-            const eventPoints = parseInt(data.eventPoints) || 0;
-
-            // Check if the member exists in the object
-            if (memberTotalPoints[fullName]) {
-              // Add points to the respective event type
-              memberTotalPoints[fullName][eventType] += eventPoints;
-            }
-          });
-
-          updateTableWithData(memberTotalPoints);
-        })
-        .catch((error) => {
-          console.error("Error getting member points documents: ", error);
-        });
-    })
-    .catch((error) => {
-      console.error("Error getting users documents: ", error);
-    });
-}
-function updateTableWithData(memberTotalPoints) {
-  const tableBody = document.getElementById("all_people");
-  tableBody.innerHTML = ""; // Clear existing table rows
-
-  // Iterate over each member and populate the table
-  for (const fullName in memberTotalPoints) {
-    const totalPoints = memberTotalPoints[fullName];
-
-    // Create a new row for the member
-    const newRow = document.createElement("tr");
-    newRow.innerHTML = `
-          <td>${fullName}</td>
-          <td>${getCurrentSemester()}</td>
-          <td>${totalPoints.philanthropy}</td>
-          <td>${totalPoints.professional_development}</td>
-          <td>${totalPoints.social}</td>
-          <td>${totalPoints.speaker}</td>
-          <td>${
-            totalPoints.philanthropy +
-            totalPoints.professional_development +
-            totalPoints.social +
-            totalPoints.speaker
-          }</td>
-      `;
-
-    // Append the row to the table
-    tableBody.appendChild(newRow);
-  }
-
-  calculateTotalPoints(); // Calculate total points after populating individual points
-}
-function calculateTotalPoints() {
-  const rows = document.querySelectorAll("#all_people tr");
-  rows.forEach((row) => {
-    let totalPoints = 0;
-    for (let i = 2; i < row.cells.length - 1; i++) {
-      totalPoints += parseInt(row.cells[i].textContent) || 0;
-    }
-    row.cells[row.cells.length - 1].textContent = totalPoints;
-  });
-}
 function getCurrentSemester() {
   const currentDate = new Date();
   const currentMonth = currentDate.getMonth(); // Month is zero-based
@@ -1347,12 +1342,58 @@ function getCurrentSemester() {
   // Determine the semester based on the current month
   let currentSemester;
   if (currentMonth >= 0 && currentMonth <= 5) {
-    currentSemester = "Spring " + currentDate.getFullYear();
+    currentSemester = "SPRING " + currentDate.getFullYear();
   } else {
-    currentSemester = "Fall " + currentDate.getFullYear();
+    currentSemester = "FALL " + currentDate.getFullYear();
   }
 
-  return currentSemester;
+  return currentSemester.toUpperCase();
+}
+
+function updateTableWithData(memberTotalPoints, selectedSemester, searchQuery) {
+  const tableBody = document.getElementById("all_people");
+  tableBody.innerHTML = ""; // Clear existing table rows
+
+  // Iterate over each member and populate the table
+  for (const fullName in memberTotalPoints) {
+    const totalPoints = memberTotalPoints[fullName];
+
+    // Check if the member's name matches the search query
+    if (searchQuery && !fullName.toLowerCase().includes(searchQuery)) {
+      continue; // Skip this member if it doesn't match the search query
+    }
+
+    // Create a new row for the member
+    const newRow = document.createElement("tr");
+    newRow.innerHTML = `
+      <td>${fullName}</td>
+      <td>${selectedSemester}</td>
+      <td>${totalPoints.philanthropy}</td>
+      <td>${totalPoints.professional_development}</td>
+      <td>${totalPoints.social}</td>
+      <td>${totalPoints.speaker}</td>
+      <td>${
+        totalPoints.philanthropy +
+        totalPoints.professional_development +
+        totalPoints.social +
+        totalPoints.speaker
+      }</td>
+  `;
+
+    // Append the row to the table
+    tableBody.appendChild(newRow);
+  }
+  function calculateTotalPoints() {
+    const rows = document.querySelectorAll("#all_people tr");
+    rows.forEach((row) => {
+      let totalPoints = 0;
+      for (let i = 2; i < row.cells.length - 1; i++) {
+        totalPoints += parseInt(row.cells[i].textContent) || 0;
+      }
+      row.cells[row.cells.length - 1].textContent = totalPoints;
+    });
+  }
+  calculateTotalPoints(); // Calculate total points after populating individual points
 }
 
 function defineEditFunctions() {
@@ -1399,43 +1440,80 @@ document.addEventListener("DOMContentLoaded", function () {
   defineEditFunctions(); // This now also handles attaching event listeners
 });
 
-function applyFilters() {
-  const nameSearchValue = document
-    .getElementById("nameSearch")
-    .value.trim()
-    .toLowerCase();
-  const semesterFilterValue = document
-    .getElementById("semesterFilter")
-    .value.toLowerCase();
-
-  const tableRows = document.querySelectorAll("tbody tr");
-
-  tableRows.forEach((row) => {
-    const name = row.cells[0].textContent.toLowerCase();
-    const semester = row.cells[1].textContent.toLowerCase();
-
-    const nameMatches = name.includes(nameSearchValue);
-    const semesterMatches =
-      semesterFilterValue === "" ||
-      semester === semesterFilterValue ||
-      semesterFilterValue === "all";
-
-    if (nameMatches && semesterMatches) {
-      row.style.display = "";
-    } else {
-      row.style.display = "none";
-    }
-  });
-}
 function attachEventListeners() {
-  document
-    .getElementById("applyFilters")
-    .addEventListener("click", applyFilters);
   document.getElementById("editbtn").addEventListener("click", showsavecancel);
   document.getElementById("editsave").addEventListener("click", saveedit);
   document.getElementById("editcancel").addEventListener("click", canceledit);
 }
 
+const eventsCollectionRef = db.collection("events"); // Replace "events" with the actual name of your events collection
+const formResponsesCollectionRef = db.collection("form_responses"); // Replace "form_responses" with the actual name of your form responses collection
+const mergedCollectionRef = db.collection("member_points"); // Replace "merged_data" with the actual name of your merged data collection
+
+//Need to fix so that the function can take form_responses.attended_members as an array
+
+async function mergeDataAndDeleteDuplicates() {
+  try {
+    const eventsSnapshot = await eventsCollectionRef.get();
+    const formResponsesSnapshot = await formResponsesCollectionRef.get();
+    const mergedDocsSnapshot = await mergedCollectionRef.get();
+
+    const formResponsesData = {};
+    formResponsesSnapshot.forEach((doc) => {
+      const formData = doc.data();
+      formResponsesData[formData.code] = formData;
+    });
+
+    const existingKeys = new Set();
+    const batch = firebase.firestore().batch();
+
+    eventsSnapshot.forEach((eventsDoc) => {
+      const eventData = eventsDoc.data();
+      const eventCode = eventData.code;
+
+      if (formResponsesData[eventCode]) {
+        const formResponseData = formResponsesData[eventCode];
+        const key = `${eventCode}_${formResponseData.attended_members}`;
+
+        if (!existingKeys.has(key)) {
+          existingKeys.add(key);
+          const mergedData = {
+            code: eventCode,
+            eventType: eventData.type,
+            points: eventData.pts,
+            pointSemester: eventData.semester,
+            member: formResponseData.attended_members,
+            key: key,
+          };
+          batch.set(mergedCollectionRef.doc(key), mergedData);
+        }
+      }
+    });
+
+    await batch.commit();
+
+    const uniqueKeys = new Set();
+    const deleteBatch = firebase.firestore().batch();
+
+    mergedDocsSnapshot.forEach((doc) => {
+      const key = doc.data().key;
+      if (uniqueKeys.has(key)) {
+        deleteBatch.delete(doc.ref);
+      } else {
+        uniqueKeys.add(key);
+      }
+    });
+
+    await deleteBatch.commit();
+
+    console.log("Operation completed successfully.");
+  } catch (error) {
+    console.error("Operation failed: ", error);
+  }
+}
+
+// Execute the function to merge data and delete duplicates
+mergeDataAndDeleteDuplicates();
 function PopulatePoints() {
   db.collection("ama_users")
     .get()
