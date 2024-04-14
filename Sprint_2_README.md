@@ -1,6 +1,9 @@
 **GitHub Repo**
 https://github.com/kristinenono/AMA_Website.git
 
+**Website Link:**
+https://amabadgers.web.app/
+
 **User Stories:**
 1. As a public viewer, I want to see all pages to learn more information about AMA at Madison
 2. As an executive member, I want to be able to add events to the event calendar to consistently update members regarding our events. 
@@ -67,7 +70,7 @@ Working on putting together the different points pages and looking at the auth
 c. Any problems are you facing?
 No
 
-*#2: 4.9.24*
+**#2: 4.9.24**
 Carly
 a. What did you do yesterday?
 getting the auth to work, updating the modals, and adding css styling to the buttons
@@ -116,4 +119,11 @@ completing the js to link the button on the cal page to the points, starting to 
 c. Any problems are you facing?
 no
 
-
+**Sprint Review**
+a. What did you learn from doing our first sprint?
+b. What did go well? Why?
+c. What didn’t go well? Why not?
+d. How can you make things better next time?
+e. Are you satisfied with what you already completed?
+f. Which group was invited? What are your observations/notes?
+Everybody was present?
