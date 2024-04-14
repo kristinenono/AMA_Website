@@ -587,7 +587,8 @@ r_e("calendarbtn").addEventListener("click", () => {
   console.log("btn clicked");
   if (check_auth == null) {
     // User is not signed in
-    alert("You must sign in to view the calendar.");
+    signupModal.classList.remove("is-active");
+    loginModal.classList.add("is-active");
   } else {
     // User is signed in
     let cal_page_content = `<main>
@@ -720,9 +721,10 @@ r_e("calendarbtn").addEventListener("click", () => {
     });
 
     // Set the content of yearblock to the current year
-    document.getElementById("yearblock").textContent =
-      `${currentDate.getFullYear()}`;
-      let addEventForm = r_e("popupmodal");
+    document.getElementById(
+      "yearblock"
+    ).textContent = `${currentDate.getFullYear()}`;
+    let addEventForm = r_e("popupmodal");
 
     function rightMarginHTML(is_admin) {
       if (is_admin) {
@@ -801,24 +803,24 @@ r_e("calendarbtn").addEventListener("click", () => {
           </div>
         </form>
           </div></div>
-  </div>`
+  </div>`;
       } else {
         return `<div class="colormargins margin-right">
         <a href="#" class="add-btn2" id="ptbtn">View Points</a>
         </main>
-    </div>`
+    </div>`;
       }
-  }
+    }
 
-  if (auth.currentUser.email == "amauwmadison@gmail.com") {
+    if (auth.currentUser.email == "amauwmadison@gmail.com") {
       function show_addEvent_form() {
         addEventForm.classList.remove("is-hidden");
         addEventForm.classList.add("is-active");
       }
-    
+
       let addEventbtn = r_e("eventbtn");
       addEventbtn.addEventListener("click", show_addEvent_form);
-    
+
       let addEventcancel = r_e("addEventcncl");
       addEventcancel.addEventListener("click", () => {
         addEventForm.classList.remove("is-active");
@@ -836,26 +838,28 @@ r_e("calendarbtn").addEventListener("click", () => {
       let evttype = r_e("evttype");
       let ptsassigned = r_e("ptsassigned");
       let descriptionevt = r_e("descriptionevt");
-    
+
       // let season = month >= 1 && month <= 6 ? "SPRING" : "FALL";
-      document.getElementById("generateButton").addEventListener("click", () => {
-        function generateRandomCode(length) {
-          const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-          let code = "";
-          for (let i = 0; i < length; i++) {
-            code += characters.charAt(
-              Math.floor(Math.random() * characters.length)
-            );
+      document
+        .getElementById("generateButton")
+        .addEventListener("click", () => {
+          function generateRandomCode(length) {
+            const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            let code = "";
+            for (let i = 0; i < length; i++) {
+              code += characters.charAt(
+                Math.floor(Math.random() * characters.length)
+              );
+            }
+            return code;
           }
-          return code;
-        }
-    
-        // Call the generateRandomCode function to get a random code
-        const randomCode = generateRandomCode(8); // Generate an 8-character code (adjust length as needed)
-    
-        // Update the code input field with the generated code
-        document.getElementById("codeInput").value = randomCode;
-      });
+
+          // Call the generateRandomCode function to get a random code
+          const randomCode = generateRandomCode(8); // Generate an 8-character code (adjust length as needed)
+
+          // Update the code input field with the generated code
+          document.getElementById("codeInput").value = randomCode;
+        });
       addevtsbt.addEventListener("click", (e) => {
         console.log("eventsbtnclicked");
         e.preventDefault();
@@ -896,18 +900,17 @@ r_e("calendarbtn").addEventListener("click", () => {
         addEventForm.classList.remove("is-active");
       });
     } else {
-  r_e("ptbtn").addEventListener("click", () => {
-    let check_auth = auth.currentUser;
-    console.log("btn clicked");
-    if (check_auth == null) {
-      // User is not signed in
-      alert("You must sign in to view the points page");
-    } else {
-      displayContentBasedOnEmail(check_auth.email)
+      r_e("ptbtn").addEventListener("click", () => {
+        let check_auth = auth.currentUser;
+        console.log("btn clicked");
+        if (check_auth == null) {
+          // User is not signed in
+          alert("You must sign in to view the points page");
+        } else {
+          displayContentBasedOnEmail(check_auth.email);
+        }
+      });
     }
-    });
-  }
-
 
     function show_event_cards() {
       db.collection("events")
@@ -934,6 +937,36 @@ r_e("calendarbtn").addEventListener("click", () => {
                     <p>Date: ${event.time}</p>
                     <p>Description: ${event.desc}</p>
                     <p>Type: ${event.type}</p>
+                    <p><button class="button" id=submit_points"> Submit Points </button>
+                    <div class="modal is-hidden" id="attd_mod">
+      <div class="modal-background"></div>
+      <div class="modal-content section has-background-white">
+        <h2 class="title">Member Attendance Form</h2>
+        <form id="member_attend">
+          <div class="field">
+            <label class="label">Name of AMA Member</label>
+            <div class="control">
+              <input type="text" id="evtattd" placeholder="Bucky Badger" />
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Code Provided in Event</label>
+            <div class="control">
+              <input type="text" id="genevtcode" placeholder="877hs3" />
+            </div>
+          </div>
+          <div class="field is-grouped">
+            <div class="control">
+              <button class="button" id="addevtsbt">Submit</button>
+            </div>
+            <div class="control">
+              <button class="button" id="addEventcncl">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    </p>
                   </div>
                   <button class="modal-close" aria-label="close"></button>
                 </div>
@@ -951,6 +984,9 @@ r_e("calendarbtn").addEventListener("click", () => {
               document
                 .getElementById(`eventModal_${eventId}`)
                 .classList.remove("is-hidden");
+              document
+                .getElementById(`eventModal_${eventId}`)
+                .classList.add("is-active");
             });
           });
 
@@ -967,7 +1003,7 @@ r_e("calendarbtn").addEventListener("click", () => {
           console.error("Error getting events: ", error);
         });
     }
-    
+
     // Refresh the list of events
     show_event_cards(); // <-- Call the function to update the event list
 
@@ -1057,6 +1093,13 @@ r_e("calendarbtn").addEventListener("click", () => {
     });
   }
 });
+// let attd_but = r_e("submit_points");
+// attd_but.addEventListener("click", () => {
+//   const modalId = this.closest(".modal").id;
+//   document.getElementById(modalId).classList.add("is-hidden");
+//   r_e("attd_mod").classList.remove("is-hidden");
+//   r_e("attd_mod").classList.add("is-active");
+// });
 
 // points page content
 r_e("pointbtn").addEventListener("click", () => {
@@ -1066,10 +1109,9 @@ r_e("pointbtn").addEventListener("click", () => {
     // User is not signed in
     alert("You must sign in to view the points page");
   } else {
-    displayContentBasedOnEmail(check_auth.email)
+    displayContentBasedOnEmail(check_auth.email);
   }
 });
-
 
 function displayContentBasedOnEmail(email) {
   const adminEmail = "amauwmadison@gmail.com";
@@ -1133,12 +1175,12 @@ function addContent(isAdmin) {
   <!-- Table rows will be dynamically added here -->
 </tbody>
 </table>`;
-  appendContent(points_content);
-  defineEditFunctions();
-  attachEventListeners();
-  let memberTotalPoints = {};
-  fetchAndPopulatePoints(memberTotalPoints)
-  updateTableWithData(memberTotalPoints);
+    appendContent(points_content);
+    defineEditFunctions();
+    attachEventListeners();
+    let memberTotalPoints = {};
+    fetchAndPopulatePoints(memberTotalPoints);
+    updateTableWithData(memberTotalPoints);
   } else {
     let points_content = `<div class="columns is-centered mt-4">
     <div class="column pr-outer">
@@ -1203,54 +1245,59 @@ function addContent(isAdmin) {
             </div>
         </div>
     </div>
-</div>`
-    appendContent(points_content)
+</div>`;
+    appendContent(points_content);
     let memberTotalPoints = {};
-    PopulatePoints()
-    updateCardsWithPoints(memberTotalPoints)
-
+    PopulatePoints();
+    updateCardsWithPoints(memberTotalPoints);
   }
 }
 function fetchAndPopulatePoints() {
-  db.collection("ama_users").get().then((userSnapshot) => {
+  db.collection("ama_users")
+    .get()
+    .then((userSnapshot) => {
       const rows = document.querySelectorAll("#all_people tr");
 
       const memberTotalPoints = {};
 
       // Iterate over each document in the user snapshot
       userSnapshot.forEach((userDoc) => {
-          const fullName = userDoc.data().full_name;
-          memberTotalPoints[fullName] = {
-              philanthropy: 0,
-              professional_development: 0,
-              social: 0,
-              speaker: 0
-          };
+        const fullName = userDoc.data().full_name;
+        memberTotalPoints[fullName] = {
+          philanthropy: 0,
+          professional_development: 0,
+          social: 0,
+          speaker: 0,
+        };
       });
 
       // Get member points from member_points collection
-      db.collection("member_points").get().then((snapshot) => {
+      db.collection("member_points")
+        .get()
+        .then((snapshot) => {
           // Iterate over each document in the member points snapshot
           snapshot.forEach((doc) => {
-              const data = doc.data();
-              const fullName = data.attendedMembers;
-              const eventType = data.eventType.toLowerCase();
-              const eventPoints = parseInt(data.eventPoints) || 0;
+            const data = doc.data();
+            const fullName = data.attendedMembers;
+            const eventType = data.eventType.toLowerCase();
+            const eventPoints = parseInt(data.eventPoints) || 0;
 
-              // Check if the member exists in the object
-              if (memberTotalPoints[fullName]) {
-                  // Add points to the respective event type
-                  memberTotalPoints[fullName][eventType] += eventPoints;
-              }
+            // Check if the member exists in the object
+            if (memberTotalPoints[fullName]) {
+              // Add points to the respective event type
+              memberTotalPoints[fullName][eventType] += eventPoints;
+            }
           });
 
           updateTableWithData(memberTotalPoints);
-      }).catch((error) => {
+        })
+        .catch((error) => {
           console.error("Error getting member points documents: ", error);
-      });
-  }).catch((error) => {
+        });
+    })
+    .catch((error) => {
       console.error("Error getting users documents: ", error);
-  });
+    });
 }
 function updateTableWithData(memberTotalPoints) {
   const tableBody = document.getElementById("all_people");
@@ -1258,22 +1305,27 @@ function updateTableWithData(memberTotalPoints) {
 
   // Iterate over each member and populate the table
   for (const fullName in memberTotalPoints) {
-      const totalPoints = memberTotalPoints[fullName];
+    const totalPoints = memberTotalPoints[fullName];
 
-      // Create a new row for the member
-      const newRow = document.createElement("tr");
-      newRow.innerHTML = `
+    // Create a new row for the member
+    const newRow = document.createElement("tr");
+    newRow.innerHTML = `
           <td>${fullName}</td>
           <td>${getCurrentSemester()}</td>
           <td>${totalPoints.philanthropy}</td>
           <td>${totalPoints.professional_development}</td>
           <td>${totalPoints.social}</td>
           <td>${totalPoints.speaker}</td>
-          <td>${totalPoints.philanthropy + totalPoints.professional_development + totalPoints.social + totalPoints.speaker}</td>
+          <td>${
+            totalPoints.philanthropy +
+            totalPoints.professional_development +
+            totalPoints.social +
+            totalPoints.speaker
+          }</td>
       `;
 
-      // Append the row to the table
-      tableBody.appendChild(newRow);
+    // Append the row to the table
+    tableBody.appendChild(newRow);
   }
 
   calculateTotalPoints(); // Calculate total points after populating individual points
@@ -1281,11 +1333,11 @@ function updateTableWithData(memberTotalPoints) {
 function calculateTotalPoints() {
   const rows = document.querySelectorAll("#all_people tr");
   rows.forEach((row) => {
-      let totalPoints = 0;
-      for (let i = 2; i < row.cells.length - 1; i++) {
-          totalPoints += parseInt(row.cells[i].textContent) || 0;
-      }
-      row.cells[row.cells.length - 1].textContent = totalPoints;
+    let totalPoints = 0;
+    for (let i = 2; i < row.cells.length - 1; i++) {
+      totalPoints += parseInt(row.cells[i].textContent) || 0;
+    }
+    row.cells[row.cells.length - 1].textContent = totalPoints;
   });
 }
 function getCurrentSemester() {
@@ -1295,9 +1347,9 @@ function getCurrentSemester() {
   // Determine the semester based on the current month
   let currentSemester;
   if (currentMonth >= 0 && currentMonth <= 5) {
-      currentSemester = "Spring " + currentDate.getFullYear();
+    currentSemester = "Spring " + currentDate.getFullYear();
   } else {
-      currentSemester = "Fall " + currentDate.getFullYear();
+    currentSemester = "Fall " + currentDate.getFullYear();
   }
 
   return currentSemester;
@@ -1307,26 +1359,26 @@ function defineEditFunctions() {
   console.log("Defining edit functions");
 
   function showsavecancel() {
-      console.log("Executing showsavecancel");
-      editpointsmode(true);
-      document.getElementById("savecancelbtn").classList.remove("is-hidden");
-      document.getElementById("savecancelbtn").classList.add("is-active");
-      document.getElementById("editbtn").classList.add("is-hidden");
+    console.log("Executing showsavecancel");
+    editpointsmode(true);
+    document.getElementById("savecancelbtn").classList.remove("is-hidden");
+    document.getElementById("savecancelbtn").classList.add("is-active");
+    document.getElementById("editbtn").classList.add("is-hidden");
   }
 
   function canceledit() {
-      console.log("Executing canceledit");
-      document.getElementById("savecancelbtn").classList.add("is-hidden");
-      document.getElementById("savecancelbtn").classList.remove("is-active");
-      document.getElementById("editbtn").classList.remove("is-hidden");
-      editpointsmode(false);
+    console.log("Executing canceledit");
+    document.getElementById("savecancelbtn").classList.add("is-hidden");
+    document.getElementById("savecancelbtn").classList.remove("is-active");
+    document.getElementById("editbtn").classList.remove("is-hidden");
+    editpointsmode(false);
   }
 
   function saveedit() {
-      console.log("Executing saveedit");
-      document.getElementById("savecancelbtn").classList.add("is-hidden");
-      document.getElementById("editbtn").classList.remove("is-hidden");
-      editpointsmode(false);
+    console.log("Executing saveedit");
+    document.getElementById("savecancelbtn").classList.add("is-hidden");
+    document.getElementById("editbtn").classList.remove("is-hidden");
+    editpointsmode(false);
   }
 
   // Define these functions in the global scope if they need to be accessible elsewhere
@@ -1343,102 +1395,120 @@ function defineEditFunctions() {
   attachEventListeners();
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-  defineEditFunctions();  // This now also handles attaching event listeners
+document.addEventListener("DOMContentLoaded", function () {
+  defineEditFunctions(); // This now also handles attaching event listeners
 });
 
 function applyFilters() {
-  const nameSearchValue = document.getElementById("nameSearch").value.trim().toLowerCase();
-  const semesterFilterValue = document.getElementById("semesterFilter").value.toLowerCase();
+  const nameSearchValue = document
+    .getElementById("nameSearch")
+    .value.trim()
+    .toLowerCase();
+  const semesterFilterValue = document
+    .getElementById("semesterFilter")
+    .value.toLowerCase();
 
   const tableRows = document.querySelectorAll("tbody tr");
 
   tableRows.forEach((row) => {
-      const name = row.cells[0].textContent.toLowerCase();
-      const semester = row.cells[1].textContent.toLowerCase();
+    const name = row.cells[0].textContent.toLowerCase();
+    const semester = row.cells[1].textContent.toLowerCase();
 
-      const nameMatches = name.includes(nameSearchValue);
-      const semesterMatches = semesterFilterValue === "" || semester === semesterFilterValue || semesterFilterValue === "all";
+    const nameMatches = name.includes(nameSearchValue);
+    const semesterMatches =
+      semesterFilterValue === "" ||
+      semester === semesterFilterValue ||
+      semesterFilterValue === "all";
 
-      if (nameMatches && semesterMatches) {
-          row.style.display = "";
-      } else {
-          row.style.display = "none";
-      }
+    if (nameMatches && semesterMatches) {
+      row.style.display = "";
+    } else {
+      row.style.display = "none";
+    }
   });
 }
 function attachEventListeners() {
-  document.getElementById("applyFilters").addEventListener("click", applyFilters);
+  document
+    .getElementById("applyFilters")
+    .addEventListener("click", applyFilters);
   document.getElementById("editbtn").addEventListener("click", showsavecancel);
   document.getElementById("editsave").addEventListener("click", saveedit);
   document.getElementById("editcancel").addEventListener("click", canceledit);
 }
 
 function PopulatePoints() {
-  db.collection("ama_users").get().then((userSnapshot) => {
+  db.collection("ama_users")
+    .get()
+    .then((userSnapshot) => {
       // Initialize an object to store total points per user, by event type
       const memberTotalPoints = {};
 
       // Iterate over each user document
       userSnapshot.forEach((userDoc) => {
-          const fullName = userDoc.data().full_name;
-          memberTotalPoints[fullName] = {
-              philanthropy: 0,
-              professional_development: 0,
-              social: 0,
-              speaker: 0,
-              total: 0
-          };
+        const fullName = userDoc.data().full_name;
+        memberTotalPoints[fullName] = {
+          philanthropy: 0,
+          professional_development: 0,
+          social: 0,
+          speaker: 0,
+          total: 0,
+        };
       });
 
       // Fetch member points
-      db.collection("member_points").get().then((snapshot) => {
+      db.collection("member_points")
+        .get()
+        .then((snapshot) => {
           // Process each point document
           snapshot.forEach((doc) => {
-              const data = doc.data();
-              const fullName = auth.currentUser.full_name; // Assuming member name stored here
-              const eventType = data.eventType.toLowerCase().replace(/\s+/g, '_'); // Format to match key names in the object
-              const eventPoints = parseInt(data.points) || 0;
+            const data = doc.data();
+            const fullName = auth.currentUser.full_name; // Assuming member name stored here
+            const eventType = data.eventType.toLowerCase().replace(/\s+/g, "_"); // Format to match key names in the object
+            const eventPoints = parseInt(data.points) || 0;
 
-              // Accumulate points if user is found
-              if (memberTotalPoints[fullName] && memberTotalPoints[fullName][eventType] !== undefined) {
-                  memberTotalPoints[fullName][eventType] += eventPoints;
-              }
+            // Accumulate points if user is found
+            if (
+              memberTotalPoints[fullName] &&
+              memberTotalPoints[fullName][eventType] !== undefined
+            ) {
+              memberTotalPoints[fullName][eventType] += eventPoints;
+            }
           });
 
           updateCardsWithPoints(memberTotalPoints);
-      }).catch((error) => {
+        })
+        .catch((error) => {
           console.error("Error getting member points documents: ", error);
-      });
-  }).catch((error) => {
+        });
+    })
+    .catch((error) => {
       console.error("Error getting users documents: ", error);
-  });
+    });
 }
 
 function updateCardsWithPoints(memberTotalPoints) {
-  console.log("Updating cards with the following points data:", memberTotalPoints);
+  console.log(
+    "Updating cards with the following points data:",
+    memberTotalPoints
+  );
 
-  Object.keys(memberTotalPoints).forEach(fullName => {
-      const points = memberTotalPoints[fullName];
-      for (const eventType in points) {
-          const selector = `.card[event-type="${eventType}"] .content`;
-          const contentDiv = document.querySelector(selector);
-          if (contentDiv) {
-              contentDiv.textContent = `${points[eventType]}`; // Ensure string format
-              console.log(`Updated ${eventType} points to ${points[eventType]}`);
-          } else {
-              console.log(`No element found for selector: ${selector}`);
-          }
+  Object.keys(memberTotalPoints).forEach((fullName) => {
+    const points = memberTotalPoints[fullName];
+    for (const eventType in points) {
+      const selector = `.card[event-type="${eventType}"] .content`;
+      const contentDiv = document.querySelector(selector);
+      if (contentDiv) {
+        contentDiv.textContent = `${points[eventType]}`; // Ensure string format
+        console.log(`Updated ${eventType} points to ${points[eventType]}`);
+      } else {
+        console.log(`No element found for selector: ${selector}`);
       }
+    }
   });
 }
 
 // Start fetching and populating points
 fetchAndPopulatePoints();
-
-
-
-
 
 // contact page content
 let contact_content = `<div id="contactSectionTop" class="contactSection-box contactTopFormat">
