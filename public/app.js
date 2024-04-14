@@ -1116,7 +1116,7 @@ r_e("pointbtn").addEventListener("click", () => {
 function displayContentBasedOnEmail(email) {
   const adminEmail = "amauwmadison@gmail.com";
 
-  if (email !== adminEmail) {
+  if (email === adminEmail) {
     addContent(true);
   } else {
     addContent(false);
