@@ -61,9 +61,8 @@ body {
 }
 .mainbackground {
   background-color: #f3f2ee;
-}x
-
-.title {
+}
+x .title {
   font-family: var(--titleFontFamily);
   font-size: var(--titleFontSize);
   color: var(--primarywhite);
@@ -124,45 +123,59 @@ body {
   background-color: #b22b25;
 }
 /* home page modal styling */
-.modal-h {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-}
-.modal-content-h {
+/* submit and cancel button formats for the signup/login modals */
+.submitmodalbtn {
   background-color: #1f304f;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-}
-
-.modal-close-h {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  align-content: center;
-}
-
-.modal-close-h:hover,
-.modal-close-h:focus {
-  color: #000;
-  text-decoration: none;
+  border-color: #dbdbdb;
+  border-width: 1px;
+  color: #fff;
   cursor: pointer;
+  justify-content: center;
+  padding-bottom: calc(0.5em - 1px);
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: calc(0.5em - 1px);
+  text-align: center;
+  white-space: nowrap;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  box-shadow: none;
+  display: inline-flex;
+  font-size: 1rem;
+  height: 2.5em;
+  line-height: 1.5;
+  position: relative;
+  vertical-align: top;
 }
-.modal-margin-h {
-  width: 20%;
-  height: 20%;
-  margin: auto;
+
+.cancelmodalbtn {
+  background-color: #b22b25;
+  border-color: #dbdbdb;
+  border-width: 1px;
+  color: #fff;
+  cursor: pointer;
+  justify-content: center;
+  padding-bottom: calc(0.5em - 1px);
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: calc(0.5em - 1px);
+  text-align: center;
+  white-space: nowrap;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  box-shadow: none;
+  display: inline-flex;
+  font-size: 1rem;
+  height: 2.5em;
+  line-height: 1.5;
+  position: relative;
+  vertical-align: top;
+}
+
+.haveaccount {
+  color: #1f304f;
 }
 
 /* Calendar Page */
@@ -400,6 +413,7 @@ body {
   color: #fafbfc;
   font-family: var(--bodyFontFamily);
   font-size: 20px;
+  border-radius: var(--radius-8);
 }
 .involvementButton2 {
   background-color: #b22b25;
@@ -409,6 +423,7 @@ body {
   color: #fafbfc;
   font-family: var(--bodyFontFamily);
   font-size: 20px;
+  border-radius: var(--radius-8);
 }
 
 .titleContainers {
@@ -766,6 +781,14 @@ nav {
   text-align: center;
   margin-bottom: 10%;
 }
+#footerName {
+  width: 90%;
+  height: 120%;
+}
+#footerEmail {
+  width: 90%;
+  height: 100%;
+}
 
 #logo-text {
   vertical-align: top;
@@ -972,13 +995,6 @@ footer {
   color: gray;
 }
 
-input[type="text"] {
-  margin-top: 10px;
-  height: 35px;
-  width: calc(100% - 20px);
-  border: 1px solid black;
-}
-
 button {
   margin-top: 10px;
   border: none;
@@ -995,6 +1011,9 @@ button {
   width: calc(100% - 20px);
   background-color: #b22b25;
   width: 50%;
+  font-size: 15px;
+  color: white;
+  font-weight: 400;
 }
 
 button p {
@@ -1142,6 +1161,7 @@ button p {
   margin: auto;
   display: block;
 }
+
 #modal-password {
   background-color: F3F2EE;
   margin: auto;
@@ -1211,7 +1231,8 @@ tr:hover {
   flex-wrap: wrap;
 }
 
-.filter-container .filtername, .filter-container .filtersem {
+.filter-container .filtername,
+.filter-container .filtersem {
   display: flex;
   flex-grow: 1;
   align-items: center;
@@ -1224,7 +1245,8 @@ tr:hover {
   font-size: 16px;
 }
 
-.filter-container select, .filter-container input[type="text"] {
+.filter-container select,
+.filter-container input[type="text"] {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -1237,7 +1259,7 @@ tr:hover {
 }
 
 /* filter button */
-.redbtn{
+.redbtn {
   font: var(--titleFontFamily);
   background-color: #b22b25;
   color: white;
@@ -1245,7 +1267,7 @@ tr:hover {
 .redbtn:active {
   background-color: #1f304f;
 }
-.bluebtn{
+.bluebtn {
   font: var(--titleFontFamily);
   background-color: #1f304f;
   color: white;
@@ -1253,7 +1275,7 @@ tr:hover {
 .bluebtn:active {
   background-color: #b22b25;
 }
-.pointbtn{
+.pointbtn {
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -1267,12 +1289,11 @@ tr:hover {
 
 .editsavecancel {
   display: flex; /* This makes the container a flex container */
-  flex-direction:row; /* Aligns children (buttons) in a column */
+  flex-direction: row; /* Aligns children (buttons) in a column */
   align-items: center; /* Centers the buttons horizontally in the container */
   justify-content: center; /* Centers the buttons vertically in the container */
   margin: 2rem;
 }
-
 
 /* CONTACT PAGE */
 
@@ -1308,6 +1329,7 @@ tr:hover {
 }
 #contactFormSection {
   display: flex;
+  /* Move left by 15% of the page width */
 }
 
 .contactFormText {
@@ -1317,10 +1339,11 @@ tr:hover {
 }
 
 .contactForm-flex {
-  flex: 1;
+  display: flex;
+  align-items: flex-start;
   margin-right: 5%;
   margin-bottom: 3rem;
-  margin-left: 10%;
+  margin-left: 5%;
   text-align: center;
 }
 .contactForm-flex .field {
@@ -1364,24 +1387,21 @@ textarea.input-field {
   max-height: 240px;
   resize: vertical;
 }
+.contactForm-flex img {
+  margin-left: 20px; /* Add some margin to the left of the image */
+}
 .contactForm-flex #name {
   width: calc(100%);
 }
 
 .contactForm-flex #email {
   width: calc(100%);
-  margin-right: 5px;
 }
 .contactForm-flex input[type="text"],
 .contactForm-flex input[type="email"] {
-  height: 40px;
-  width: 310px;
-  margin-right: 5px;
+  width: 100%;
 }
-.contactForm-flex input[type="email"] {
-  margin-top: 10px;
-  margin-left: 63px;
-}
+
 .contactForm-flex .input-field,
 .contactForm-flex textarea,
 .contactForm-flex button {
@@ -1463,7 +1483,7 @@ textarea.input-field {
 .margin-class {
   margin-top: 35px;
 }
-* about page */ .aboutContainer {
+.aboutContainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -1534,13 +1554,25 @@ textarea.input-field {
   color: var(--primarynavy);
 }
 .aboutHeader {
+  margin-top: 60px;
   text-align: center;
   font-size: 38px;
   font-family: var(--bodyFontFamily);
   color: var(--primarynavy);
   font-weight: bold;
 }
-
+.aboutHeader2 {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 38px;
+  font-family: var(--bodyFontFamily);
+  color: var(--primarynavy);
+  font-weight: bold;
+}
+.aboutCardImg {
+  color: var(--secondaryred);
+  font-size: 2rem;
+}
 #aboutHeaderSection {
   display: flex;
   padding: 30px;
@@ -1551,13 +1583,35 @@ textarea.input-field {
   padding: 30px;
   padding-top: 40px;
 }
-
+.membership-info {
+  flex: 1; /* Let the membership information take up the remaining space */
+}
+.membership-info2 {
+  flex: 1; /* Let the membership information take up the remaining space */
+  text-align: left;
+}
 .membershipRequirementsSection {
   background-color: white;
-  padding-left: 15%;
-  padding-right: 40%;
   padding-top: 15px;
   padding-bottom: 30px;
+  /* text-align: left; */
+}
+.requirements-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.requirements-column {
+  flex: 0 0 48%; /* Two columns, each taking up 48% of the container */
+}
+#speakerEventImg {
+  width: 45%;
+  margin-right: 180px;
+  margin-top: 20px;
+}
+#execImage {
+  margin-left: 180px;
+  margin-top: 60px;
 }
 
 .grid-list {
@@ -1567,11 +1621,13 @@ textarea.input-field {
 }
 
 .grid-list li {
-  width: calc(35% - 0.2px); /* Two items per row with some spacing */
+  width: calc(30% - 0.2px); /* Two items per row with some spacing */
   background-color: var(--lightGray);
-
+  border-left: 30px solid var(--primarywhite);
+  border-right: 30px solid var(--primarywhite);
   border-top: 30px solid var(--primarywhite); /* Add a white border */
   border-bottom: 30px solid var(--primarywhite); /* Add a white border */
+  border-radius: 45px;
 }
 
 /* For smaller screens, make each item full width */

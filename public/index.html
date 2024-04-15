@@ -31,7 +31,7 @@
                     class="input"
                     type="email"
                     id="email"
-                    placeholder="knono@gmail.com"
+                    placeholder="bbadger@wisc.edu"
                   />
                 </div>
               </div>
@@ -42,15 +42,20 @@
                   <input class="input" type="password" id="password" />
                 </div>
               </div>
-  
-              <div class="field is-grouped">
+
+              <div class="field is-justify-content-center is-grouped">
                 <div class="control" action ="#">
-                    <button class="button is-link" type="submit" id="submit">Submit</button>
+                    <button class="submitmodalbtn" type="submit" id="submit">Submit</button>
                   </div>
                   <div class="control">
-                    <a class="button is-link" id="log_cancel">Cancel</a>
+                    <a class="cancelmodalbtn" id="log_cancel">Cancel</a>
                   </div>
                 </div>
+                <a class="haveaccount" id="user_notfound">
+                  Don't Have an Account? Sign Up
+                </a> 
+              </div> 
+
               <div id="log_error" class="has-text-danger"></div>
             </form>
           </div>
@@ -63,11 +68,12 @@
             <label class="label title is-4">Sign Up</label>
             <form id="sign_form">
               <div class="field">
+                <label class="label">Full Name</label>
                 <div class="control">
                   <input
                     class="input"
                     type="text"
-                    placeholder="Full Name"
+                    placeholder="Bucky Badger"
                     id="signup_name"
                     required
                   />
@@ -81,7 +87,7 @@
                     class="input"
                     type="email"
                     id="email_"
-                    placeholder="knono@gmail.com"
+                    placeholder="bbadger@wisc.edu"
                   />
                 </div>
               </div>
@@ -93,17 +99,20 @@
                 </div>
               </div>
     
-              <div class="field is-grouped">
+              <div class="field is-justify-content-center is-grouped">
                 <div class="control">
-                    <button class="button is-link" type="submit">Submit</button>
+                    <button class="submitmodalbtn" type="submit">Submit</button>
                   </div>
                   <div class="control">
-                    <a class="button is-link" id="signup_cancel">Cancel</a>
+                    <a class="cancelmodalbtn" id="signup_cancel">Cancel</a>
                   </div>
-              </div>
-              <a class="is-link" id="user_found">
-                Already Have An Account? Sign In Here
+                </div>  
+                <a class="haveaccount" id="user_found">
+                Already Have An Account? Log In
               </a>
+              </div>
+
+
               <div id="signup_error" class="has-text-danger"></div>
             </form>
           </div>
@@ -277,7 +286,7 @@
             </div>
             <div id="adress">
               <p>975 University Ave, Madison, WI 53706</p>
-              <p id="phone">+00 000 000 000</p>
+              <p id="phone">amauwmadison@gmail.com</p>
             </div>
           </div>
           <div class="footer-section" id="footer-link-padding">
@@ -306,9 +315,22 @@
           <div class="footer-section">
             <h2 id="foot_right">JOIN OUR EMAIL LIST</h2>
             <p>Want to become an official member of the Badger American Marketing Association or just be added to the email list? Fill out our member form to stay up to date on upcoming events!</p>
-            <input type="text" placeholder=" Enter your email here">
-            <button id="submit_btn">
-              <p><b>SUBMIT</b></p>
+            <form action="https://api.web3forms.com/submit" method="POST">
+
+              <!-- Replace with your Access Key -->
+              <input type="hidden" name="access_key" value="a4172b4c-7ec1-4f25-824e-9653e33b2437">
+          
+              <!-- Form Inputs. Each input must have a name="" attribute -->
+              <input type="text" id="footerName" name="name" placeholder="Name *" required>
+              <input type="email" id="footerEmail" name="email" placeholder="Email *" required>
+          
+             
+          
+              <button id="submit_btn" type="submit">Submit</button>
+          
+          </form>
+          <script src="https://web3forms.com/client/script.js" async defer></script>
+            
             </button>
           </div>
         </div>
