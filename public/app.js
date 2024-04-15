@@ -445,7 +445,7 @@ let abt_content = `      <div id="contactSectionTop" class="contactSection-box c
   </div>
   <img
             id="execImage"
-            src="/public/images/Exec_board.png"
+            src="images/Exec_board.png"
             alt="Membership Image"
           />
         </div>
@@ -455,7 +455,7 @@ let abt_content = `      <div id="contactSectionTop" class="contactSection-box c
         <div class="contactForm-flex">
           <img
             id="speakerEventImg"
-            src="/public/images/Speaker_event.png"
+            src="images/Speaker_event.png"
             alt="Membership Image"
           />
   <div class="membership-info2">
