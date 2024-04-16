@@ -1102,13 +1102,21 @@ document.querySelector(".eventsfooter").addEventListener("click", () => {
   r_e("calendarbtn").click();
 });
 
-// let attd_but = r_e("submit_points");
-// attd_but.addEventListener("click", () => {
-//   const modalId = this.closest(".modal").id;
-//   document.getElementById(modalId).classList.add("is-hidden");
-//   r_e("attd_mod").classList.remove("is-hidden");
-//   r_e("attd_mod").classList.add("is-active");
-// });
+function logAllEvents() {
+  db.collection("events")
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        console.log(doc.id, " => ", doc.data());
+      });
+    })
+    .catch((error) => {
+      console.error("Error getting events: ", error);
+    });
+}
+
+// Call the function to log all events
+logAllEvents();
 
 // points page content
 r_e("pointbtn").addEventListener("click", () => {
