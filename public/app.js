@@ -523,8 +523,18 @@ const monthNames = [
 const dayNames = ["Sun", "Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];
 
 let currentDate = new Date();
+function openEventModal(eventId) {
+  // Find the corresponding link element
+  const link = document.querySelector(
+    `.view-event-link[data-event-id="${eventId}"]`
+  );
+  // If the link exists, trigger a click event on it
+  if (link) {
+    link.click();
+  }
+}
 
-function generateCalendarHTML(date) {
+function generateCalendarHTML(date, events) {
   const totalDays = 42;
   let currentYear = date.getFullYear();
   let currentMonth = date.getMonth();
@@ -534,6 +544,7 @@ function generateCalendarHTML(date) {
   let emptyCellsCount = 0;
 
   let calendarHtml = "<div class='weekdayview'>";
+  const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   for (let title = 0; title <= 6; title++) {
     calendarHtml += `<div class='dayofweek'>${dayNames[title]}</div>`;
   }
@@ -545,8 +556,35 @@ function generateCalendarHTML(date) {
     emptyCellsCount++;
   }
   for (let day = 1; day <= daysInMonth; day++) {
-    calendarHtml += `<div class="dayview">${day}</div>`;
+    const eventOnThisDay = events.filter((event) => {
+      const eventDate = new Date(event.data.time);
+      return (
+        eventDate.getFullYear() === currentYear &&
+        eventDate.getMonth() === currentMonth &&
+        eventDate.getDate() === day
+      );
+    });
+
+    let dayHtml = `<div class="dayview"><div>${day}</div>`; // Date number above button name
+    eventOnThisDay.forEach((event) => {
+      const eventDate = new Date(event.data.time);
+      const formattedDate = eventDate.toLocaleString("en-US", {
+        month: "2-digit",
+        day: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+      });
+
+      // dayHtml += `<button class="event" data-event-id="${event.id}" onclick="alert('${formattedDate}')">${event.data.name}</button>`;
+      dayHtml += `<button class="event evtbutton" data-event-id="${event.id}" onclick="openEventModal('${event.id}')">${event.data.name}</button>`;
+    });
+    dayHtml += `</div>`;
+
+    calendarHtml += dayHtml;
     dayCellsGenerated++;
+
     if (dayCellsGenerated % 7 === 0 && dayCellsGenerated !== totalDays) {
       calendarHtml += '</div><div class="weekview">';
       emptyCellsCount = 0; // Reset empty cells count at the start of a new week
@@ -574,6 +612,46 @@ function generateCalendarHTML(date) {
   calendarHtml += "</div>"; // Close the last weekview or monthview div properly
   return calendarHtml; // Return the calendar HTML string
 }
+
+function fetchEventsAndGenerateCalendarHTML(date) {
+  db.collection("events")
+    .get()
+    .then((querySnapshot) => {
+      const events = []; // Array to store events data
+      querySnapshot.forEach((doc) => {
+        // Extract event data and push it to the events array
+        const eventData = {
+          id: doc.id,
+          data: doc.data(),
+        };
+        events.push(eventData);
+      });
+
+      // Once events are fetched, generate calendar HTML
+      const calendarHtml = generateCalendarHTML(date, events);
+
+      // Update the calendar view with the generated HTML
+      document.querySelector(".calview").innerHTML = calendarHtml;
+    })
+    .catch((error) => {
+      console.error("Error getting events: ", error);
+    });
+}
+function logAllEvents() {
+  db.collection("events")
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        console.log(doc.id, " => ", doc.data());
+      });
+    })
+    .catch((error) => {
+      console.error("Error getting events: ", error);
+    });
+}
+
+// Call the function to log all events
+logAllEvents();
 
 // Function to generate a random code
 // function generateRandomCode(length) {
@@ -658,7 +736,7 @@ r_e("calendarbtn").addEventListener("click", () => {
       </div>
         <div class="calview">
           <!-- Calendar view will be populated here -->
-          ${generateCalendarHTML(currentDate)}
+          ${fetchEventsAndGenerateCalendarHTML(currentDate)}
         </div>
       </div>
       ${rightMarginHTML(auth.currentUser.email == "amauwmadison@gmail.com")}
@@ -676,10 +754,8 @@ r_e("calendarbtn").addEventListener("click", () => {
       const currentMonth = currentDate.getMonth(); // Get the current month index
       const currentYear = currentDate.getFullYear(); // Get the current year
       const firstDayOfMonth = new Date(currentYear, currentMonth, 1); // Get the first day of the current month
-      document.querySelector(".calview").innerHTML = generateCalendarHTML(
-        firstDayOfMonth,
-        currentMonth
-      );
+      document.querySelector(".calview").innerHTML =
+        fetchEventsAndGenerateCalendarHTML(firstDayOfMonth, currentMonth);
 
       // Update the month select dropdown value to the current month
       const monthSelect = document.getElementById("month-select");
@@ -697,9 +773,8 @@ r_e("calendarbtn").addEventListener("click", () => {
           selectedMonthIndex,
           1
         );
-        document.querySelector(".calview").innerHTML = generateCalendarHTML(
-          firstDayOfSelectedMonth
-        );
+        document.querySelector(".calview").innerHTML =
+          fetchEventsAndGenerateCalendarHTML(firstDayOfSelectedMonth);
       });
 
     document.querySelector(".action_left").addEventListener("click", () => {
@@ -707,10 +782,8 @@ r_e("calendarbtn").addEventListener("click", () => {
       const currentMonth = currentDate.getMonth(); // Get the updated month index
       const currentYear = currentDate.getFullYear(); // Get the updated year
       const firstDayOfMonth = new Date(currentYear, currentMonth, 1); // Get the first day of the updated month
-      document.querySelector(".calview").innerHTML = generateCalendarHTML(
-        firstDayOfMonth,
-        currentMonth
-      );
+      document.querySelector(".calview").innerHTML =
+        fetchEventsAndGenerateCalendarHTML(firstDayOfMonth, currentMonth);
 
       // Update the month select dropdown value to the updated month
       monthSelect.selectedIndex = currentMonth;
@@ -721,10 +794,8 @@ r_e("calendarbtn").addEventListener("click", () => {
       const currentMonth = currentDate.getMonth(); // Get the updated month index
       const currentYear = currentDate.getFullYear(); // Get the updated year
       const firstDayOfMonth = new Date(currentYear, currentMonth, 1); // Get the first day of the updated month
-      document.querySelector(".calview").innerHTML = generateCalendarHTML(
-        firstDayOfMonth,
-        currentMonth
-      );
+      document.querySelector(".calview").innerHTML =
+        fetchEventsAndGenerateCalendarHTML(firstDayOfMonth, currentMonth);
 
       // Update the month select dropdown value to the updated month
       monthSelect.selectedIndex = currentMonth;
@@ -932,6 +1003,20 @@ r_e("calendarbtn").addEventListener("click", () => {
           querySnapshot.forEach((doc) => {
             const event = doc.data();
             const eventId = doc.id;
+
+            // Extracting date and time from the event
+            const eventDate = new Date(event.time);
+            const eventDateFormat = eventDate.toLocaleDateString("en-US", {
+              month: "2-digit",
+              day: "2-digit",
+              year: "numeric",
+            });
+            const eventTimeFormat = eventDate.toLocaleTimeString("en-US", {
+              hour: "2-digit",
+              minute: "2-digit",
+              hour12: true,
+            });
+
             html += `
               <div class="box margin-event">
                 <h2>${event.name}</h2>
@@ -944,39 +1029,40 @@ r_e("calendarbtn").addEventListener("click", () => {
                 <div class="modal-content">
                   <div class="box">
                     <h2>${event.name}</h2>
-                    <p>Date: ${event.time}</p>
+                    <p>Date: ${eventDateFormat}</p>
+                    <p>Time: ${eventTimeFormat}</p>
                     <p>Description: ${event.desc}</p>
                     <p>Type: ${event.type}</p>
-                    <p><button class="button" id=submit_points"> Submit Points </button>
+                    <!-- Add other details here -->
+                    <button class="button" id="submit_points">Submit Points</button>
                     <div class="modal is-hidden" id="attd_mod">
-      <div class="modal-background"></div>
-      <div class="modal-content section has-background-white">
-        <h2 class="title">Member Attendance Form</h2>
-        <form id="member_attend">
-          <div class="field">
-            <label class="label">Name of AMA Member</label>
-            <div class="control">
-              <input type="text" id="evtattd" placeholder="Bucky Badger" />
-            </div>
-          </div>
-          <div class="field">
-            <label class="label">Code Provided in Event</label>
-            <div class="control">
-              <input type="text" id="genevtcode" placeholder="877hs3" />
-            </div>
-          </div>
-          <div class="field is-grouped">
-            <div class="control">
-              <button class="button" id="addevtsbt">Submit</button>
-            </div>
-            <div class="control">
-              <button class="button" id="addEventcncl">Cancel</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-    </p>
+                      <div class="modal-background"></div>
+                      <div class="modal-content section has-background-white">
+                        <h2 class="title">Member Attendance Form</h2>
+                        <form id="member_attend">
+                          <div class="field">
+                            <label class="label">Name of AMA Member</label>
+                            <div class="control">
+                              <input type="text" id="evtattd" placeholder="Bucky Badger" />
+                            </div>
+                          </div>
+                          <div class="field">
+                            <label class="label">Code Provided in Event</label>
+                            <div class="control">
+                              <input type="text" id="genevtcode" placeholder="877hs3" />
+                            </div>
+                          </div>
+                          <div class="field is-grouped">
+                            <div class="control">
+                              <button class="button" id="addevtsbt">Submit</button>
+                            </div>
+                            <div class="control">
+                              <button class="button" id="addEventcncl">Cancel</button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
                   </div>
                   <button class="modal-close" aria-label="close"></button>
                 </div>
@@ -1104,17 +1190,14 @@ r_e("calendarbtn").addEventListener("click", () => {
   }
 });
 
+// Function to fetch events from Firestore and generate calendar HTML
+
+// Call the function to fetch events from Firestore and generate calendar HTML
+fetchEventsAndGenerateCalendarHTML(currentDate);
+
 document.querySelector(".eventsfooter").addEventListener("click", () => {
   r_e("calendarbtn").click();
 });
-
-// let attd_but = r_e("submit_points");
-// attd_but.addEventListener("click", () => {
-//   const modalId = this.closest(".modal").id;
-//   document.getElementById(modalId).classList.add("is-hidden");
-//   r_e("attd_mod").classList.remove("is-hidden");
-//   r_e("attd_mod").classList.add("is-active");
-// });
 
 // points page content
 r_e("pointbtn").addEventListener("click", () => {
@@ -1592,7 +1675,7 @@ function updateCardsWithPoints(memberTotalPoints) {
       const contentDiv = document.querySelector(selector);
       if (contentDiv) {
         contentDiv.textContent = `${points[eventType]}`; // Ensure string format
-        console.log(`Updated ${eventType} points to ${points[eventType]}`);
+        // console.log(`Updated ${eventType} points to ${points[eventType]}`);
       } else {
         console.log(`No element found for selector: ${selector}`);
       }

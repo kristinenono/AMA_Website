@@ -109,6 +109,14 @@ x .title {
 }
 
 /* button */
+
+.evtbutton {
+  background-color: var(--primarynavy);
+  color: var(--primarywhite);
+  text-decoration: none;
+  font: var(--titleFontFamily);
+  padding: 2%;
+}
 .add-btn {
   font: var(--titleFontFamily);
   background-color: #1f304f;
@@ -1662,3 +1670,5 @@ textarea.input-field {
 .grid-list li:nth-child(2n) {
   margin-right: 0;
 }
+
+/* events button */
