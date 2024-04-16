@@ -188,6 +188,9 @@ let home_page_content = `<div class="titleContainers">
 </div>
 </div>`;
 
+document.querySelector("#learnbuttonhome").addEventListener("click", () => {
+  r_e("abt-link").click();
+});
 // main functions to use
 // console.log(firebase);
 // const mainContent = document.getElementById("main-content");
