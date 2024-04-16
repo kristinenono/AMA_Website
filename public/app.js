@@ -131,6 +131,7 @@ let signup_cancel = document.querySelector("#signup_cancel");
 signup_cancel.addEventListener("click", () => {
   r_e("signmodal").classList.remove("is-active");
   r_e("home-link").click();
+  window.location.reload();
 });
 let log_cancel = document.querySelector("#log_cancel");
 log_cancel.addEventListener("click", () => {
@@ -282,6 +283,7 @@ r_e("home-link").addEventListener("click", () => {
   if (check_auth != null) {
     r_e("joinbuttonhome").classList.add("is-hidden");
   }
+  window.location.reload();
 });
 
 let abt_content = `      <div id="contactSectionTop" class="contactSection-box contactTopFormat">
