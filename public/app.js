@@ -491,6 +491,10 @@ r_e("abt-link").addEventListener("click", () => {
   appendContent(abt_content);
 });
 
+document.querySelector(".aboutfooter").addEventListener("click", () => {
+  r_e("abt-link").click();
+});
+
 const calendarView = document.querySelector(".calview");
 const monthSelect = r_e("month-select");
 const prevMonthBtn = document.querySelector(".action_left");
@@ -1696,6 +1700,9 @@ r_e("contact-link").addEventListener("click", () => {
 });
 
 document.querySelector(".contactfooter").addEventListener("click", () => {
+  r_e("contact-link").click();
+});
+document.querySelector(".sponsorfooter").addEventListener("click", () => {
   r_e("contact-link").click();
 });
 
