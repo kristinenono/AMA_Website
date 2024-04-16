@@ -517,6 +517,16 @@ const monthNames = [
 const dayNames = ["Sun", "Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];
 
 let currentDate = new Date();
+function openEventModal(eventId) {
+  // Find the corresponding link element
+  const link = document.querySelector(
+    `.view-event-link[data-event-id="${eventId}"]`
+  );
+  // If the link exists, trigger a click event on it
+  if (link) {
+    link.click();
+  }
+}
 
 function generateCalendarHTML(date, events) {
   const totalDays = 42;
@@ -561,7 +571,8 @@ function generateCalendarHTML(date, events) {
         hour12: true,
       });
 
-      dayHtml += `<button class="event" data-event-id="${event.id}" onclick="alert('${formattedDate}')">${event.data.name}</button>`;
+      // dayHtml += `<button class="event" data-event-id="${event.id}" onclick="alert('${formattedDate}')">${event.data.name}</button>`;
+      dayHtml += `<button class="event evtbutton" data-event-id="${event.id}" onclick="openEventModal('${event.id}')">${event.data.name}</button>`;
     });
     dayHtml += `</div>`;
 
@@ -986,6 +997,20 @@ r_e("calendarbtn").addEventListener("click", () => {
           querySnapshot.forEach((doc) => {
             const event = doc.data();
             const eventId = doc.id;
+
+            // Extracting date and time from the event
+            const eventDate = new Date(event.time);
+            const eventDateFormat = eventDate.toLocaleDateString("en-US", {
+              month: "2-digit",
+              day: "2-digit",
+              year: "numeric",
+            });
+            const eventTimeFormat = eventDate.toLocaleTimeString("en-US", {
+              hour: "2-digit",
+              minute: "2-digit",
+              hour12: true,
+            });
+
             html += `
               <div class="box margin-event">
                 <h2>${event.name}</h2>
@@ -998,39 +1023,40 @@ r_e("calendarbtn").addEventListener("click", () => {
                 <div class="modal-content">
                   <div class="box">
                     <h2>${event.name}</h2>
-                    <p>Date: ${event.time}</p>
+                    <p>Date: ${eventDateFormat}</p>
+                    <p>Time: ${eventTimeFormat}</p>
                     <p>Description: ${event.desc}</p>
                     <p>Type: ${event.type}</p>
-                    <p><button class="button" id=submit_points"> Submit Points </button>
+                    <!-- Add other details here -->
+                    <button class="button" id="submit_points">Submit Points</button>
                     <div class="modal is-hidden" id="attd_mod">
-      <div class="modal-background"></div>
-      <div class="modal-content section has-background-white">
-        <h2 class="title">Member Attendance Form</h2>
-        <form id="member_attend">
-          <div class="field">
-            <label class="label">Name of AMA Member</label>
-            <div class="control">
-              <input type="text" id="evtattd" placeholder="Bucky Badger" />
-            </div>
-          </div>
-          <div class="field">
-            <label class="label">Code Provided in Event</label>
-            <div class="control">
-              <input type="text" id="genevtcode" placeholder="877hs3" />
-            </div>
-          </div>
-          <div class="field is-grouped">
-            <div class="control">
-              <button class="button" id="addevtsbt">Submit</button>
-            </div>
-            <div class="control">
-              <button class="button" id="addEventcncl">Cancel</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-    </p>
+                      <div class="modal-background"></div>
+                      <div class="modal-content section has-background-white">
+                        <h2 class="title">Member Attendance Form</h2>
+                        <form id="member_attend">
+                          <div class="field">
+                            <label class="label">Name of AMA Member</label>
+                            <div class="control">
+                              <input type="text" id="evtattd" placeholder="Bucky Badger" />
+                            </div>
+                          </div>
+                          <div class="field">
+                            <label class="label">Code Provided in Event</label>
+                            <div class="control">
+                              <input type="text" id="genevtcode" placeholder="877hs3" />
+                            </div>
+                          </div>
+                          <div class="field is-grouped">
+                            <div class="control">
+                              <button class="button" id="addevtsbt">Submit</button>
+                            </div>
+                            <div class="control">
+                              <button class="button" id="addEventcncl">Cancel</button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
                   </div>
                   <button class="modal-close" aria-label="close"></button>
                 </div>
