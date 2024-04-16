@@ -1093,6 +1093,11 @@ r_e("calendarbtn").addEventListener("click", () => {
     });
   }
 });
+
+document.querySelector(".eventsfooter").addEventListener("click", () => {
+  r_e("calendarbtn").click();
+});
+
 // let attd_but = r_e("submit_points");
 // attd_but.addEventListener("click", () => {
 //   const modalId = this.closest(".modal").id;
@@ -1585,6 +1590,10 @@ function updateCardsWithPoints(memberTotalPoints) {
   });
 }
 
+document.querySelector(".pointfooter").addEventListener("click", () => {
+  r_e("pointbtn").click();
+});
+
 // contact page content
 let contact_content = `<div id="contactSectionTop" class="contactSection-box contactTopFormat">
 <h2 class="primaryheader">Let's get in touch.</h2>
@@ -1685,6 +1694,11 @@ r_e("contact-link").addEventListener("click", () => {
     appendContent(contact_content);
   }
 });
+
+document.querySelector(".contactfooter").addEventListener("click", () => {
+  r_e("contact-link").click();
+});
+
 //join button
 r_e("joinbuttonhome").addEventListener("click", () => {
   appendContent(contact_content);
@@ -1751,7 +1765,13 @@ let blog_content = ` <main>
   </div>
 </div>
 </main>`;
+
 // Blog page content
+
+document.querySelector(".blogfooter").addEventListener("click", () => {
+  r_e("blog-link").click();
+});
+
 // Blog page content
 r_e("blog-link").addEventListener("click", () => {
   appendContent(blog_content);
@@ -2160,6 +2180,7 @@ function saveEdit(postId) {
     });
 }
 
+//
 // Call the function to display existing posts when the page loads
 show_posts();
 
