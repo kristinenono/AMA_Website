@@ -190,7 +190,7 @@ let home_page_content = `<div class="titleContainers">
 </div>
 </div>`;
 document.querySelector("#joinbuttonhome").addEventListener("click", () => {
-  r_e("signupbtn").click();
+  r_e("contact-link").click();
 });
 document.querySelector("#learnbuttonhome").addEventListener("click", () => {
   r_e("abt-link").click();
