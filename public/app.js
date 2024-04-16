@@ -130,6 +130,7 @@ document
 let signup_cancel = document.querySelector("#signup_cancel");
 signup_cancel.addEventListener("click", () => {
   r_e("signmodal").classList.remove("is-active");
+  r_e("home-link").click();
 });
 let log_cancel = document.querySelector("#log_cancel");
 log_cancel.addEventListener("click", () => {
@@ -187,7 +188,9 @@ let home_page_content = `<div class="titleContainers">
     <img src="images/Bucks_event.png" alt="AMA Event" width="100%" height="Auto" />
 </div>
 </div>`;
-
+document.querySelector("#joinbuttonhome").addEventListener("click", () => {
+  r_e("signupbtn").click();
+});
 document.querySelector("#learnbuttonhome").addEventListener("click", () => {
   r_e("abt-link").click();
 });
