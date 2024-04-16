@@ -549,9 +549,10 @@ function generateCalendarHTML(date, events) {
       );
     });
 
-    let dayHtml = `<div class="dayview">${day}`;
+    let dayHtml = `<div class="dayview"><div>${day}</div>`; // Date number above button name
     eventOnThisDay.forEach((event) => {
-      dayHtml += `<div class="event">${event.data.name}</div>`;
+      // Change the text to a button with the event name
+      dayHtml += `<button class="event" data-event-id="${event.id}">${event.data.name}</button>`;
     });
     dayHtml += `</div>`;
 
