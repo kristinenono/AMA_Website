@@ -804,9 +804,8 @@ r_e("calendarbtn").addEventListener("click", () => {
     });
 
     // Set the content of yearblock to the current year
-    document.getElementById(
-      "yearblock"
-    ).textContent = `${currentDate.getFullYear()}`;
+    document.getElementById("yearblock").textContent =
+      `${currentDate.getFullYear()}`;
     let addEventForm = r_e("popupmodal");
 
     function rightMarginHTML(is_admin) {
@@ -2085,7 +2084,7 @@ r_e("blog-link").addEventListener("click", () => {
       console.log("User email:", user.email);
 
       // Check if the user's email matches
-      if (user.email === "gracevanzeeland@gmail.com") {
+      if (user.email === "amauwmadison@gmail.com") {
         r_e("addPostButton").classList.remove("is-hidden");
       } else {
       }
