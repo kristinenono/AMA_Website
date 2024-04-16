@@ -551,8 +551,17 @@ function generateCalendarHTML(date, events) {
 
     let dayHtml = `<div class="dayview"><div>${day}</div>`; // Date number above button name
     eventOnThisDay.forEach((event) => {
-      // NAMING THE EVENT
-      dayHtml += `<button class="event" data-event-id="${event.id}">${event.data.name}</button>`;
+      const eventDate = new Date(event.data.time);
+      const formattedDate = eventDate.toLocaleString("en-US", {
+        month: "2-digit",
+        day: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+      });
+
+      dayHtml += `<button class="event" data-event-id="${event.id}" onclick="alert('${formattedDate}')">${event.data.name}</button>`;
     });
     dayHtml += `</div>`;
 
