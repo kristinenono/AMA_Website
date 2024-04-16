@@ -841,10 +841,11 @@ r_e("calendarbtn").addEventListener("click", () => {
             <div class="select">
               <select name="" id="evttype">
                 <option>--select--</option>
-                <option value="Philanthropy">Philanthropy</option>
+                <option value="Volunteer">Volunteer</option>
                 <option value="Professional Development">Professional Development</option>
                 <option value="Speaker Event">Speaker Event</option>
                 <option value="Social Event">Social Event</option>
+                <option value="DEI Event">DEI Event</option>
               </select>
             </div>
           </div>
@@ -1244,10 +1245,11 @@ function addContent(isAdmin) {
       <!-- <label for="eventFilter">Filter by Event:</label>
       <select id="eventFilter">
           <option data-event="Total Points">All</option>
-          <option data-event="Philanthropy Points">Philanthropy Points</option>
-          <option data-event="Developement Points">Developement Points</option>
+          <option data-event="Volunteer Points">Volunteer Points</option>
+          <option data-event="Development Points">Development Points</option>
           <option data-event="Social Points">Social Points</option>
           <option data-event="Speaker Points">Speaker Points</option>
+          <option data-event="DEI Points">DEI Points</option>
       </select> -->
     </div>
       <button id="applyFilters" class="redbtn pointbtn">Apply Filters</button>
@@ -1262,10 +1264,11 @@ function addContent(isAdmin) {
         <tr>
           <th class="has-text-white">Member</th>
           <th class="has-text-white">Semester</th>
-          <th class="has-text-white">Philanthropy Points</th>
+          <th class="has-text-white">Volunteer Points</th>
           <th class="has-text-white">Development Points</th>
           <th class="has-text-white">Social Points</th>
           <th class="has-text-white">Speaker Points</th>
+          <th class="has-text-white">DEI Points</th>
           <th class="has-text-white">Total Points</th>
       </tr>
       </thead>
@@ -1295,10 +1298,11 @@ function addContent(isAdmin) {
           userSnapshot.forEach((userDoc) => {
             const fullName = userDoc.data().full_name;
             memberTotalPoints[fullName] = {
-              philanthropy: 0,
+              volunteer: 0,
               professional_development: 0,
               social: 0,
               speaker: 0,
+              DEI: 0,
             };
           });
 
@@ -1370,9 +1374,9 @@ function addContent(isAdmin) {
   } else {
     let points_content = `<div class="columns is-centered mt-4">
     <div class="column pr-outer">
-        <div class="card px-4 py-3 has-text-centered" event-type="philanthropy">
+        <div class="card px-4 py-3 has-text-centered" event-type="Volunteer">
             <header class="card-header has-background-link-dark">
-                <p class="card-header-title has-text-white is-centered">Philanthropy</p>
+                <p class="card-header-title has-text-white is-centered">Volunteer</p>
             </header>
             <div class="card-content">
                 <div class="content">
@@ -1385,6 +1389,18 @@ function addContent(isAdmin) {
         <div class="card px-4 py-3 has-text-centered" event-type="professional_development">
             <header class="card-header has-background-link-dark">
                 <p class="card-header-title has-text-white is-centered">Professional Development</p>
+            </header>
+            <div class="card-content">
+                <div class="content">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <div class="card px-4 py-3 has-text-centered" event-type="DEI">
+            <header class="card-header has-background-link-dark">
+                <p class="card-header-title has-text-white is-centered">DEI</p>
             </header>
             <div class="card-content">
                 <div class="content">
@@ -1471,15 +1487,17 @@ function updateTableWithData(memberTotalPoints, selectedSemester, searchQuery) {
     newRow.innerHTML = `
       <td>${fullName}</td>
       <td>${selectedSemester}</td>
-      <td>${totalPoints.philanthropy}</td>
+      <td>${totalPoints.volunteer}</td>
       <td>${totalPoints.professional_development}</td>
       <td>${totalPoints.social}</td>
       <td>${totalPoints.speaker}</td>
+      <td>${totalPoints.DEI}</td>
       <td>${
-        totalPoints.philanthropy +
+        totalPoints.volunteer +
         totalPoints.professional_development +
         totalPoints.social +
-        totalPoints.speaker
+        totalPoints.speaker +
+        totalPoints.DEI
       }</td>
   `;
 
@@ -1628,10 +1646,11 @@ function PopulatePoints() {
       userSnapshot.forEach((userDoc) => {
         const fullName = userDoc.data().full_name;
         memberTotalPoints[fullName] = {
-          philanthropy: 0,
+          volunteer: 0,
           professional_development: 0,
           social: 0,
           speaker: 0,
+          DEI: 0,
           total: 0,
         };
       });
