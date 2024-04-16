@@ -551,7 +551,7 @@ function generateCalendarHTML(date, events) {
 
     let dayHtml = `<div class="dayview"><div>${day}</div>`; // Date number above button name
     eventOnThisDay.forEach((event) => {
-      // Change the text to a button with the event name
+      // NAMING THE EVENT
       dayHtml += `<button class="event" data-event-id="${event.id}">${event.data.name}</button>`;
     });
     dayHtml += `</div>`;
