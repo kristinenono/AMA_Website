@@ -1037,6 +1037,7 @@ r_e("calendarbtn").addEventListener("click", () => {
                     <p>Type: ${event.type}</p>
                     <!-- Add other details here -->
                     <button class="button" id="submit_points">Submit Points</button>
+                    <button class="button" id="evtmodalcancel">Cancel</button>
                     <div class="modal is-hidden" id="attd_mod">
                       <div class="modal-background"></div>
                       <div class="modal-content section has-background-white">
@@ -1089,13 +1090,15 @@ r_e("calendarbtn").addEventListener("click", () => {
           });
 
           // Add event listeners to close modals
-          document.querySelectorAll(".modal-close").forEach((element) => {
-            element.addEventListener("click", function () {
-              // Hide the modal when the close button is clicked
-              const modalId = this.closest(".modal").id;
-              document.getElementById(modalId).classList.add("is-hidden");
+          document
+            .querySelectorAll(".modal-close, #evtmodalcancel")
+            .forEach((element) => {
+              element.addEventListener("click", function () {
+                // Hide the modal when the close button is clicked
+                const modalId = this.closest(".modal").id;
+                document.getElementById(modalId).classList.add("is-hidden");
+              });
             });
-          });
         })
         .catch((error) => {
           console.error("Error getting events: ", error);
