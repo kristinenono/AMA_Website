@@ -525,15 +525,74 @@ const monthNames = [
 const dayNames = ["Sun", "Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];
 
 let currentDate = new Date();
-function openEventModal(eventId) {
-  // Find the corresponding link element
-  const link = document.querySelector(
-    `.view-event-link[data-event-id="${eventId}"]`
-  );
-  // If the link exists, trigger a click event on it
-  if (link) {
-    link.click();
-  }
+
+function openEventModal(eventId, dayHTML) {
+  db.collection("events")
+    .doc(eventId)
+    .get()
+    .then((doc) => {
+      if (doc.exists) {
+        const event = doc.data();
+
+        // Extract and format date and time
+        const eventDate = new Date(event.time);
+        const formattedDate = eventDate.toLocaleDateString("en-US", {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        });
+        const formattedTime = eventDate.toLocaleTimeString("en-US", {
+          hour: "numeric",
+          minute: "numeric",
+        });
+
+        // Generate modal HTML
+        const modalHtml = `
+          <div class="modal is-active" id="eventModal_${event.id}">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+              <div class="box">
+                <h2>${event.name}</h2>
+                <p>Date: ${formattedDate}</p>
+                <p>Time: ${formattedTime}</p>
+                <p>Description: ${event.desc}</p>
+                <p>Type: ${event.type}</p>
+                <button class="button" id="submit_points">Submit Points</button>
+                <button class="button" id="evtmodalcancel">Cancel</button>
+              </div>
+              <button class="modal-close" aria-label="close"></button>
+            </div>
+          </div>
+        `;
+
+        // Append the modal HTML to the dayHTML
+        dayHTML += modalHtml;
+
+        // Insert the dayHTML into the calendar view
+        document.querySelector(".calview").innerHTML = dayHTML;
+
+        // Show the modal
+        const modalId = `#eventModal_${event.id}`;
+        const modal = document.querySelector(modalId);
+        modal.classList.add("is-active");
+
+        // Attach event listener to the cancel button
+        document
+          .getElementById("evtmodalcancel")
+          .addEventListener("click", function () {
+            // Close the modal when cancel button is clicked
+            modal.classList.remove("is-active");
+
+            // Re-render the calendar view
+            fetchEventsAndGenerateCalendarHTML(currentDate);
+          });
+      } else {
+        console.error("No such event found!");
+      }
+    })
+    .catch((error) => {
+      console.error("Error getting event details: ", error);
+    });
 }
 
 function generateCalendarHTML(date, events) {
@@ -804,8 +863,9 @@ r_e("calendarbtn").addEventListener("click", () => {
     });
 
     // Set the content of yearblock to the current year
-    document.getElementById("yearblock").textContent =
-      `${currentDate.getFullYear()}`;
+    document.getElementById(
+      "yearblock"
+    ).textContent = `${currentDate.getFullYear()}`;
     let addEventForm = r_e("popupmodal");
 
     function rightMarginHTML(is_admin) {
@@ -994,11 +1054,10 @@ r_e("calendarbtn").addEventListener("click", () => {
         }
       });
     }
-
     function show_event_cards() {
       db.collection("events")
-        .orderBy("time")
-        .limit(4) // Limit to the first 4 closest events
+        .orderBy("time", "desc") // Order events by time in descending order
+        .limit(4) // Limit to the first 4 most recent events
         .get()
         .then((querySnapshot) => {
           let html = "";
@@ -1013,62 +1072,12 @@ r_e("calendarbtn").addEventListener("click", () => {
               day: "2-digit",
               year: "numeric",
             });
-            const eventTimeFormat = eventDate.toLocaleTimeString("en-US", {
-              hour: "2-digit",
-              minute: "2-digit",
-              hour12: true,
-            });
 
             html += `
               <div class="box margin-event">
                 <h2>${event.name}</h2>
                 <!-- "View Event Here" link -->
                 <a href="#" class="view-event-link" data-event-id="${eventId}">View Event Here!</a>
-              </div>
-              <!-- Hidden modal for event details -->
-              <div class="modal is-hidden" id="eventModal_${eventId}">
-                <div class="modal-background"></div>
-                <div class="modal-content">
-                  <div class="box">
-                    <h2>${event.name}</h2>
-                    <p>Date: ${eventDateFormat}</p>
-                    <p>Time: ${eventTimeFormat}</p>
-                    <p>Description: ${event.desc}</p>
-                    <p>Type: ${event.type}</p>
-                    <!-- Add other details here -->
-                    <button class="button" id="submit_points">Submit Points</button>
-                    <button class="button" id="evtmodalcancel">Cancel</button>
-                    <div class="modal is-hidden" id="attd_mod">
-                      <div class="modal-background"></div>
-                      <div class="modal-content section has-background-white">
-                        <h2 class="title">Member Attendance Form</h2>
-                        <form id="member_attend">
-                          <div class="field">
-                            <label class="label">Name of AMA Member</label>
-                            <div class="control">
-                              <input type="text" id="evtattd" placeholder="Bucky Badger" />
-                            </div>
-                          </div>
-                          <div class="field">
-                            <label class="label">Code Provided in Event</label>
-                            <div class="control">
-                              <input type="text" id="genevtcode" placeholder="877hs3" />
-                            </div>
-                          </div>
-                          <div class="field is-grouped">
-                            <div class="control">
-                              <button class="button" id="addevtsbt">Submit</button>
-                            </div>
-                            <div class="control">
-                              <button class="button" id="addEventcncl">Cancel</button>
-                            </div>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                  <button class="modal-close" aria-label="close"></button>
-                </div>
               </div>
             `;
           });
@@ -1079,26 +1088,14 @@ r_e("calendarbtn").addEventListener("click", () => {
             link.addEventListener("click", function (event) {
               event.preventDefault(); // Prevent default link behavior
               const eventId = this.getAttribute("data-event-id");
-              // Show the corresponding hidden modal
-              document
-                .getElementById(`eventModal_${eventId}`)
-                .classList.remove("is-hidden");
-              document
-                .getElementById(`eventModal_${eventId}`)
-                .classList.add("is-active");
+              const button = document.querySelector(
+                `.event[data-event-id="${eventId}"]`
+              );
+              if (button) {
+                button.click(); // Trigger click event of the corresponding button
+              }
             });
           });
-
-          // Add event listeners to close modals
-          document
-            .querySelectorAll(".modal-close, #evtmodalcancel")
-            .forEach((element) => {
-              element.addEventListener("click", function () {
-                // Hide the modal when the close button is clicked
-                const modalId = this.closest(".modal").id;
-                document.getElementById(modalId).classList.add("is-hidden");
-              });
-            });
         })
         .catch((error) => {
           console.error("Error getting events: ", error);
