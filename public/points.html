@@ -101,10 +101,9 @@
                   <th class="has-text-white">Action</th>
                 </tr>
               </thead>
-              <tbody id="memberPointsList">
-              </tbody>
+              <tbody id="memberPointsList"></tbody>
             </table>
-            <button id="showclose" class="button is-danger">Close</button>
+            <button id="showclose" class="button">Close</button>
           </div>
         </div>
         <button id="showeditclose" class="modal-close is-large" aria-label="close"></button>
@@ -126,15 +125,6 @@
                   <option value="SPRING 2025">SPRING 2025</option>
                   <option value="FALL 2025">FALL 2025</option>
               </select>
-          <!-- <label for="eventFilter">Filter by Event:</label>
-          <select id="eventFilter">
-              <option data-event="Total Points">All</option>
-              <option data-event="Volunteer Points">Volunteer Points</option>
-              <option data-event="Development Points">Development Points</option>
-              <option data-event="Social Points">Social Points</option>
-              <option data-event="Speaker Points">Speaker Points</option>
-              <option data-event="DEI Points">DEI Points</option>
-          </select> -->
         </div>
           <button id="applyFilters" class="redbtn pointbtn">Apply Filters</button>
           <button id="editbtn" class="bluebtn pointbtn">Edit Points</button>
@@ -437,7 +427,7 @@ function fetchMemberPoints(memberId) {
           <td>${data.eventType}</td>
           <td>${data.points}</td>
           <td>${data.pointSemester}</td>
-          <td><button class="delete-point button is-small is-danger" data-id="${doc.id}">Delete</button></td>
+          <td><button class="delete-point button is-small" data-id="${doc.id}">Delete</button></td>
         `;
         tbody.appendChild(row);
       });
