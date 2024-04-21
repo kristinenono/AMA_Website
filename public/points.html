@@ -340,6 +340,23 @@ addedit.addEventListener('click', () => {
   editmodal.classList.add('is-active');
 });
 
+
+function populateMemberDropdown() {
+  const select = document.getElementById('memberSelect');
+  select.innerHTML = ''; // Clear existing options
+  db.collection('ama_users').get().then((snapshot) => {
+    snapshot.forEach((doc) => {
+      const fullName = doc.data().full_name;
+      const option = document.createElement('option');
+      option.value = doc.id; // Use user's document ID as value
+      option.textContent = fullName;
+      select.appendChild(option);
+    });
+  }).catch((error) => {
+    console.error("Error fetching members: ", error);
+  });
+}
+
 // Populate Member Dropdown
 function populateShowMemberDropdown() {
   const select = document.getElementById('showMemberSelect');
