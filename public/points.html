@@ -17,6 +17,66 @@
   </head>
   <body>
     <main>
+      <div id="editmodal" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+          <div class="box">
+            <div class="field">
+              <label class="label">Member:</label>
+              <div class="control">
+                <div class="select">
+                  <select id="memberSelect">
+                    <!-- Member options will be populated dynamically -->
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Semester:</label>
+              <div class="control">
+                <div class="select">
+                  <select id="editSemester">
+                    <option value="SPRING 2024">SPRING 2024</option>
+                    <option value="FALL 2024">FALL 2024</option>
+                    <option value="SPRING 2025">SPRING 2025</option>
+                    <option value="FALL 2025">FALL 2025</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Code:</label>
+              <div class="control">
+                <input class="input" type="text" id="editCode" placeholder="Enter code">
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Points:</label>
+              <div class="control">
+                <input class="input" type="number" id="editPoints" placeholder="Enter points">
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Event Type:</label>
+              <div class="control">
+                <div class="select">
+                  <select id="editEventType">
+                    <option value="volunteer">Volunteer</option>
+                    <option value="professional_development">Professional Development</option>
+                    <option value="social">Social</option>
+                    <option value="speaker">Speaker</option>
+                    <option value="dei">DEI</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <button class="button is-link" onclick="saveEditChanges()">Save</button>
+            <button id="editclear" class="button is-link">Clear</button>
+          </div>
+        </div>
+        <button id="editclose" class="modal-close is-large" aria-label="close"></button>
+      </div>
+
       <div class="filter-container">
         <div class="filtername">
           <label for="nameSearch">Search by Name:</label>
@@ -119,14 +179,13 @@
         return currentSemester.toUpperCase();;
     }
 
+    // function to show points on the table for a member
 function fetchAndPopulatePoints(selectedSemester, searchQuery) {
-    selectedSemester = selectedSemester || getCurrentSemester(); // Default to current semester if not provided
+    selectedSemester = selectedSemester || getCurrentSemester();
 
     // Fetch all users from the ama_users collection
     db.collection("ama_users").get().then((userSnapshot) => {
-        const memberTotalPoints = {}; // Object to store total points for each member
-
-        // This will hold all the promises from accessing each member's points sub-collection
+        const memberTotalPoints = {};
         const memberPointsPromises = [];
 
         // Iterate over each user document
@@ -139,18 +198,15 @@ function fetchAndPopulatePoints(selectedSemester, searchQuery) {
                 speaker: 0,
                 dei: 0
             };
-
-            // Query the member_points sub-collection for each user
             const pointsPromise = db.collection("ama_users").doc(userDoc.id).collection("member_points")
             .where("pointSemester", "==", selectedSemester)
             .get()
             .then((pointsSnapshot) => {
                 pointsSnapshot.forEach((doc) => {
                     const data = doc.data();
-                    const eventType = data.eventType.toLowerCase().replace(" ", "_"); // Normalize event type to match keys in memberTotalPoints object
+                    const eventType = data.eventType.toLowerCase().replace(" ", "_");
                     const eventPoints = data.points; // Get the number of points
 
-                    // Aggregate points based on event type and ensure the points are for the selected semester
                     if (memberTotalPoints[fullName] && eventType in memberTotalPoints[fullName]) {
                         memberTotalPoints[fullName][eventType] += eventPoints;
                     }
@@ -162,7 +218,6 @@ function fetchAndPopulatePoints(selectedSemester, searchQuery) {
             memberPointsPromises.push(pointsPromise);
         });
 
-        // Wait for all member points promises to resolve before updating the UI
         Promise.all(memberPointsPromises).then(() => {
             updateTableWithData(memberTotalPoints, selectedSemester, searchQuery);
         }).catch((error) => {
@@ -175,9 +230,8 @@ function fetchAndPopulatePoints(selectedSemester, searchQuery) {
 
 function updateTableWithData(memberTotalPoints, selectedSemester, searchQuery) {
     const tableBody = document.getElementById("all_people");
-    tableBody.innerHTML = ""; // Clear existing table rows
+    tableBody.innerHTML = "";
 
-    // Iterate over each member and populate the table
     Object.entries(memberTotalPoints).forEach(([fullName, points]) => {
         if (!searchQuery || fullName.toLowerCase().includes(searchQuery.toLowerCase())) {
             const row = document.createElement("tr");
@@ -210,76 +264,87 @@ function updateTableWithData(memberTotalPoints, selectedSemester, searchQuery) {
   fetchAndPopulatePoints(semesterFilterValue, nameSearchValue);
 });
 
-
-    // EDIT BUTTON
 let editbutton = document.getElementById("editbtn");
-let savecancelbtn = document.getElementById("savecancelbtn");
-
-// for the original points to be saved
-let originalvalues = [];
+let editmodal = document.getElementById("editmodal");
+let editclose = document.getElementById("editclose");
 
 
-// function to allow the points to be edited
-function editpointsmode(editMode) {
-    const pointsCells = document.querySelectorAll("tbody tr td:nth-child(n+3):nth-child(-n+7)");
-    
-    if (editMode) {
-        originalValues = []; // Reset original values
-        pointsCells.forEach(cell => {
-            // Store the original text
-            originalValues.push(cell.innerText);
-            // Replace cell content with an input element
-            cell.innerHTML = `<input class="input" type="number" value="${cell.innerText}" placeholder="${cell.innerText}" style="width: 100%;">`;
-        });
-    } else {
-        // If not edit mode, we revert back to the original text or save new values
-        pointsCells.forEach((cell, index) => {
-            const input = cell.querySelector("input");
-            // If input exists, use its value; otherwise, use the original text
-            cell.innerText = input ? input.value : originalValues[index];
-        });
-    }
+editbutton.addEventListener("click", () => {
+  editmodal.classList.add("is-active");
+});
+
+editclose.addEventListener("click", () => {
+  editmodal.classList.remove("is-active");
+});
+
+  function populateMemberDropdown() {
+  const select = document.getElementById('memberSelect');
+  select.innerHTML = ''; // Clear existing options
+  db.collection('ama_users').get().then((snapshot) => {
+    snapshot.forEach((doc) => {
+      const fullName = doc.data().full_name;
+      const option = document.createElement('option');
+      option.value = doc.id; // Use user's document ID as value
+      option.textContent = fullName;
+      select.appendChild(option);
+    });
+  }).catch((error) => {
+    console.error("Error fetching members: ", error);
+  });
 }
 
+function saveEditChanges() {
+  const memberId = document.getElementById('memberSelect').value;
+  const code = document.getElementById('editCode').value;
+  const semester = document.getElementById('editSemester').value;
+  const eventType = document.getElementById('editEventType').value;
+  const points = parseInt(document.getElementById('editPoints').value); // Get the points from the input
 
+  if (!points || points < 0) {
+    alert('Please enter a valid number of points.');
+    return;
+  }
 
-
-
-// open save and cancel when edit button is clicked
-function showsavecancel() {
-  editpointsmode(true);
-  savecancelbtn.classList.remove("is-hidden")
-  savecancelbtn.classList.add("is-active");
-  editbutton.classList.add("is-hidden")
+  // Assuming you will update or set data in member_points collection
+  db.collection('ama_users').doc(memberId).collection('member_points').add({
+    code: code,
+    eventType: eventType,
+    pointSemester: semester,
+    points: points // Use the dynamically provided points
+  }).then(() => {
+    console.log("Points updated successfully");
+    fetchAndPopulatePoints(semester, ''); // Refresh the points table
+    editmodal.classList.remove('is-active');
+  }).catch((error) => {
+    console.error("Error updating points: ", error);
+  });
 }
-editbutton.addEventListener("click", showsavecancel);
 
-// SAVE CANCEL BUTTON
-let editsave = document.getElementById("editsave");
-let editcancel =document.getElementById("editcancel");
+editbutton.addEventListener('click', () => {
+  populateMemberDropdown(); // Populate dropdown when modal is activated
+  editmodal.classList.add('is-active');
+});
 
-// when the cancel button is clicked it will hide and bring back the edit button
-function canceledit() {
-  savecancelbtn.classList.add("is-hidden")
-  savecancelbtn.classList.remove("is-active");
-  editbutton.classList.remove("is-hidden");
-  editpointsmode(false);
-  fetchAndPopulatePoints();
-  
-}
-editcancel.addEventListener("click", canceledit);
+editclose.addEventListener('click', () => {
+  editmodal.classList.remove('is-active');
+});
 
-// when the save button is clicked it will save all the values from the edit and update the database
-function saveedit() {
-    // Code to reset UI after save
-    savecancelbtn.classList.add("is-hidden");
-    editbutton.classList.remove("is-hidden");
-    // Disable edit mode
-    editpointsmode(false);
-    // Optionally, refresh the table data
-    fetchAndPopulatePoints();
-}
-editsave.addEventListener("click", saveedit);
+document
+  .querySelectorAll(".modal-background, .modal-close")
+  .forEach(function (el) {
+    el.addEventListener("click", function () {
+      editmodal.classList.remove("is-active");
+    });
+  });
+
+  let editclear = document.getElementById("editclear");
+  document.getElementById('editclear').addEventListener('click', function() {
+    document.getElementById('editCode').value = '';
+    document.getElementById('editSemester').selectedIndex = 0;
+    document.getElementById('editEventType').selectedIndex = 0;
+    document.getElementById('memberSelect').selectedIndex = 0;
+  });
+
     </script>
   </body>
 </html>
