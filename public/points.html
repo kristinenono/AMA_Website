@@ -35,7 +35,7 @@
               <label class="label">Semester:</label>
               <div class="control">
                 <div class="select">
-                  <select id="editSemester">
+                  <select id="editSemester" disabled>
                     <option value="SPRING 2024">SPRING 2024</option>
                     <option value="FALL 2024">FALL 2024</option>
                     <option value="SPRING 2025">SPRING 2025</option>
@@ -53,14 +53,14 @@
             <div class="field">
               <label class="label">Points:</label>
               <div class="control">
-                <input class="input" type="number" id="editPoints" placeholder="Enter points">
+                <input class="input" type="number" id="editPoints" placeholder="Enter points" disabled>
               </div>
             </div>
             <div class="field">
               <label class="label">Event Type:</label>
               <div class="control">
                 <div class="select">
-                  <select id="editEventType">
+                  <select id="editEventType" disabled>
                     <option value="volunteer">Volunteer</option>
                     <option value="professional_development">Professional Development</option>
                     <option value="social">Social</option>
@@ -69,6 +69,18 @@
                   </select>
                 </div>
               </div>
+            </div>
+            <div class="field">
+              <label class="label">Event Name:</label>
+              <input class="input" type="text" id="eventName" placeholder="Event Name" disabled>
+            </div>
+            <div class="field">
+              <label class="label">Event Description:</label>
+              <input class="input" type="text" id="eventDesc" placeholder="Description" disabled>
+            </div>
+            <div class="field">
+              <label class="label">Event Time:</label>
+              <input class="input" type="text" id="eventTime" placeholder="Time" disabled>
             </div>
             <button class="button is-link" onclick="saveEditChanges()">Save</button>
             <button id="editclear" class="button is-link">Clear</button>
@@ -303,6 +315,16 @@ function updateTableWithData(memberTotalPoints, selectedSemester, searchQuery) {
 });
 
 
+// Function to disable the dropdown
+function disableEventTypeDropdown() {
+  document.getElementById('editEventType').disabled = true;
+}
+
+// Function to enable the dropdown
+function enableEventTypeDropdown() {
+  document.getElementById('editEventType').disabled = false;
+}
+
 
 
 
@@ -362,6 +384,35 @@ function populateMemberDropdown() {
   }).catch((error) => {
     console.error("Error fetching members: ", error);
   });
+}
+
+document.getElementById('editCode').addEventListener('input', function() {
+  const code = this.value;
+  // Assuming event codes are at least some minimum length before checking
+  if (code.length >= 8) {
+    fetchEventDetails(code);
+  }
+});
+
+function fetchEventDetails(code) {
+  db.collection('events').where('code', '==', code).get()
+    .then(querySnapshot => {
+      if (!querySnapshot.empty) {
+        const eventData = querySnapshot.docs[0].data(); // Assuming the code is unique and only one document will be found
+        document.getElementById('eventName').value = eventData.name || '';
+        document.getElementById('eventDesc').value = eventData.desc || '';
+        document.getElementById('eventTime').value = eventData.time || '';
+        document.getElementById('editPoints').value = eventData.pts || '';
+        document.getElementById('editEventType').value = eventData.type || '';
+        document.getElementById('editSemester').value = eventData.semester || '';
+      } else {
+        console.log("No event found with that code.");
+        // Optionally clear fields or alert the user
+      }
+    })
+    .catch(error => {
+      console.error("Error fetching event details: ", error);
+    });
 }
 
 function populateShowMemberDropdown() {
