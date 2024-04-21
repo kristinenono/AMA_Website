@@ -1207,7 +1207,8 @@ r_e("pointbtn").addEventListener("click", () => {
   console.log("btn clicked");
   if (check_auth == null) {
     // User is not signed in
-    alert("You must sign in to view the points page");
+    signupModal.classList.remove("is-active");
+    loginModal.classList.add("is-active");
   } else {
     displayContentBasedOnEmail(check_auth.email);
   }
