@@ -82,7 +82,7 @@
               <label class="label">Event Time:</label>
               <input class="input" type="text" id="eventTime" placeholder="Time" disabled>
             </div>
-            <button class="button is-link" onclick="saveEditChanges()">Save</button>
+            <button id="saveaddpoints" class="button is-link">Save</button>
             <button id="editclear" class="button is-link">Clear</button>
           </div>
         </div>
@@ -464,6 +464,7 @@ function populateShowMemberDropdown() {
   });
 }
 
+
 function saveEditChanges() {
   const memberId = document.getElementById('memberSelect').value;
   const code = document.getElementById('editCode').value;
@@ -503,6 +504,9 @@ function listenForMemberPointsUpdates() {
     });
 }
 
+let editclear = document.getElementById("editclear");
+  document.getElementById('editclear').addEventListener('click',clearaddpoints);
+
   function clearaddpoints() {
     document.getElementById('editCode').value = '';
     document.getElementById('editSemester').selectedIndex = 0;
@@ -511,8 +515,8 @@ function listenForMemberPointsUpdates() {
     document.getElementById('editPoints').value = '';
 }
 
-  let editclear = document.getElementById("editclear");
-  document.getElementById('editclear').addEventListener('click',clearaddpoints);
+  let saveaddpoints = document.getElementById("saveaddpoints");
+  saveaddpoints.addEventListener('click',saveEditChanges);
 
 
 // Fetch and Display Member Points
