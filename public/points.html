@@ -77,6 +77,42 @@
         <button id="editclose" class="modal-close is-large" aria-label="close"></button>
       </div>
 
+
+
+      <div id="showmodal" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+          <div class="box">
+            <div class="field">
+              <label class="label">Select Member:</label>
+              <div class="control">
+                <div class="select is-fullwidth">
+                  <select id="showMemberSelect"></select>
+                </div>
+              </div>
+            </div>
+            <table class="table is-striped is-narrow is-hoverable is-fullwidth">
+              <thead>
+                <tr>
+                  <th class="has-text-white">Code</th>
+                  <th class="has-text-white">Event Type</th>
+                  <th class="has-text-white">Points</th>
+                  <th class="has-text-white">Semester</th>
+                  <th class="has-text-white">Action</th>
+                </tr>
+              </thead>
+              <tbody id="memberPointsList">
+              </tbody>
+            </table>
+            <button id="showclose" class="button is-danger">Close</button>
+          </div>
+        </div>
+        <button id="showeditclose" class="modal-close is-large" aria-label="close"></button>
+      </div>
+
+
+
+
       <div class="filter-container">
         <div class="filtername">
           <label for="nameSearch">Search by Name:</label>
@@ -102,10 +138,11 @@
         </div>
           <button id="applyFilters" class="redbtn pointbtn">Apply Filters</button>
           <button id="editbtn" class="bluebtn pointbtn">Edit Points</button>
+          <button id="canceledit" class="bluebtn pointbtn is-hidden">Cancel Edit</button>
       </div>   
-      <div id="savecancelbtn" class="container editsavecancel is-hidden">
-        <button id="editsave" class="bluebtn pointbtn">Save</button>
-        <button id="editcancel" class="redbtn pointbtn">Cancel</button>
+      <div id="addshowbtn" class="container editsavecancel is-hidden">
+        <button id="addedit" class="bluebtn pointbtn">Add Points</button>
+        <button id="showedit" class="redbtn pointbtn">Show Points</button>
       </div>              
       <table class="table is-bordered">
           <thead>
@@ -264,32 +301,67 @@ function updateTableWithData(memberTotalPoints, selectedSemester, searchQuery) {
   fetchAndPopulatePoints(semesterFilterValue, nameSearchValue);
 });
 
-let editbutton = document.getElementById("editbtn");
-let editmodal = document.getElementById("editmodal");
-let editclose = document.getElementById("editclose");
+
+// when edit button is clicked it shows the add points, show points and cancel edit buttons
+function addshowedit() {
+    document.getElementById("canceledit").classList.remove("is-hidden");
+    document.getElementById("addshowbtn").classList.remove("is-hidden");
+    document.getElementById("addshowbtn").classList.add("is-active");
+    document.getElementById("editbtn").classList.add("is-hidden");
+  }
+
+  function canceledit() {
+    document.getElementById("canceledit").classList.add("is-hidden");
+    document.getElementById("addshowbtn").classList.add("is-hidden");
+    document.getElementById("addshowbtn").classList.remove("is-active");
+    document.getElementById("editbtn").classList.remove("is-hidden");
+  }
+
+  document.getElementById("editbtn").addEventListener("click", addshowedit);
+  document.getElementById("canceledit").addEventListener("click", canceledit);
 
 
-editbutton.addEventListener("click", () => {
-  editmodal.classList.add("is-active");
+  editclose.addEventListener('click', () => {
+  editmodal.classList.remove('is-active');
 });
 
-editclose.addEventListener("click", () => {
-  editmodal.classList.remove("is-active");
+document
+  .querySelectorAll(".modal-background, .modal-close")
+  .forEach(function (el) {
+    el.addEventListener("click", function () {
+      editmodal.classList.remove("is-active");
+      showmodal.classList.remove('is-active');
+    });
+  });
+
+
+addedit.addEventListener('click', () => {
+  populateMemberDropdown(); // Populate dropdown when modal is activated
+  editmodal.classList.add('is-active');
 });
 
-  function populateMemberDropdown() {
-  const select = document.getElementById('memberSelect');
-  select.innerHTML = ''; // Clear existing options
+// Populate Member Dropdown
+function populateShowMemberDropdown() {
+  const select = document.getElementById('showMemberSelect');
+  select.innerHTML = '';
   db.collection('ama_users').get().then((snapshot) => {
     snapshot.forEach((doc) => {
       const fullName = doc.data().full_name;
       const option = document.createElement('option');
-      option.value = doc.id; // Use user's document ID as value
+      option.value = doc.id;
       option.textContent = fullName;
       select.appendChild(option);
     });
+  }).then(() => {
+    // Fetch the first member's points initially
+    fetchMemberPoints(select.value);
   }).catch((error) => {
     console.error("Error fetching members: ", error);
+  });
+
+  // Fetch and display points when a member is selected
+  select.addEventListener('change', () => {
+    fetchMemberPoints(select.value);
   });
 }
 
@@ -315,35 +387,82 @@ function saveEditChanges() {
     console.log("Points updated successfully");
     fetchAndPopulatePoints(semester, ''); // Refresh the points table
     editmodal.classList.remove('is-active');
+    clearaddpoints();
   }).catch((error) => {
     console.error("Error updating points: ", error);
   });
 }
 
-editbutton.addEventListener('click', () => {
-  populateMemberDropdown(); // Populate dropdown when modal is activated
-  editmodal.classList.add('is-active');
-});
-
-editclose.addEventListener('click', () => {
-  editmodal.classList.remove('is-active');
-});
-
-document
-  .querySelectorAll(".modal-background, .modal-close")
-  .forEach(function (el) {
-    el.addEventListener("click", function () {
-      editmodal.classList.remove("is-active");
-    });
-  });
-
-  let editclear = document.getElementById("editclear");
-  document.getElementById('editclear').addEventListener('click', function() {
+  function clearaddpoints() {
     document.getElementById('editCode').value = '';
     document.getElementById('editSemester').selectedIndex = 0;
     document.getElementById('editEventType').selectedIndex = 0;
     document.getElementById('memberSelect').selectedIndex = 0;
-  });
+    document.getElementById('editPoints').value = '';
+}
+
+  let editclear = document.getElementById("editclear");
+  document.getElementById('editclear').addEventListener('click',clearaddpoints);
+
+
+// Fetch and Display Member Points
+function fetchMemberPoints(memberId) {
+  const tbody = document.getElementById('memberPointsList');
+  tbody.innerHTML = '';
+  db.collection('ama_users').doc(memberId).collection('member_points')
+    .get()
+    .then((snapshot) => {
+      snapshot.forEach((doc) => {
+        const data = doc.data();
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${data.code}</td>
+          <td>${data.eventType}</td>
+          <td>${data.points}</td>
+          <td>${data.pointSemester}</td>
+          <td><button class="delete-point button is-small is-danger" data-id="${doc.id}">Delete</button></td>
+        `;
+        tbody.appendChild(row);
+      });
+      // Attach delete event handlers
+      document.querySelectorAll('.delete-point').forEach(button => {
+        button.addEventListener('click', () => {
+          deletePoint(memberId, button.getAttribute('data-id'));
+        });
+      });
+    });
+}
+
+// Delete a Point Entry
+function deletePoint(memberId, pointId) {
+  db.collection('ama_users').doc(memberId).collection('member_points').doc(pointId).delete()
+    .then(() => {
+      console.log('Point deleted successfully');
+      fetchMemberPoints(memberId); // Refresh the list after deletion
+    }).catch((error) => {
+      console.error("Error deleting points: ", error);
+    });
+}
+
+// Initialize and populate the dropdown when the modal is activated
+document.getElementById('showedit').addEventListener('click', () => {
+  populateShowMemberDropdown();
+  document.getElementById('showmodal').classList.add('is-active');
+});
+
+let showclose = document.getElementById("showclose");
+let showmodal = document.getElementById("showmodal");
+let showeditclose = document.getElementById("showeditclose");
+
+// Close the modal
+showclose.addEventListener('click', () => {
+  showmodal.classList.remove('is-active');
+});
+
+showeditclose.addEventListener('click', () => {
+  showmodal.classList.remove('is-active');
+});
+
 
     </script>
   </body>
