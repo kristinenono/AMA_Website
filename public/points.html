@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Single Page Layout</title>
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/bcae03608a.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+  />
+  </head>
+  <body>
+    <main>
+      <div class="filter-container">
+        <div class="filtername">
+          <label for="nameSearch">Search by Name:</label>
+          <input type="text" id="nameSearch" placeholder="Search name...">
+        </div>
+        <div class="filtersem">
+          <label for="semesterFilter">Filter by Semester:</label>
+          <select id="semesterFilter">
+                  <option value="SPRING 2024">SPRING 2024</option>
+                  <option value="FALL 2024">FALL 2024</option>
+                  <option value="SPRING 2025">SPRING 2025</option>
+                  <option value="FALL 2025">FALL 2025</option>
+              </select>
+          <!-- <label for="eventFilter">Filter by Event:</label>
+          <select id="eventFilter">
+              <option data-event="Total Points">All</option>
+              <option data-event="Volunteer Points">Volunteer Points</option>
+              <option data-event="Development Points">Development Points</option>
+              <option data-event="Social Points">Social Points</option>
+              <option data-event="Speaker Points">Speaker Points</option>
+              <option data-event="DEI Points">DEI Points</option>
+          </select> -->
+        </div>
+          <button id="applyFilters" class="redbtn pointbtn">Apply Filters</button>
+          <button id="editbtn" class="bluebtn pointbtn">Edit Points</button>
+      </div>   
+      <div id="savecancelbtn" class="container editsavecancel is-hidden">
+        <button id="editsave" class="bluebtn pointbtn">Save</button>
+        <button id="editcancel" class="redbtn pointbtn">Cancel</button>
+      </div>              
+      <table class="table is-bordered">
+          <thead>
+            <tr>
+              <th class="has-text-white">Member</th>
+              <th class="has-text-white">Semester</th>
+              <th class="has-text-white">Volunteer Points</th>
+              <th class="has-text-white">Development Points</th>
+              <th class="has-text-white">Social Points</th>
+              <th class="has-text-white">Speaker Points</th>
+              <th class="has-text-white">DEI Points</th>
+              <th class="has-text-white">Total Points</th>
+          </tr>
+          </thead>
+          <tbody
+      id="all_people"
+      class="p-4 m-3"
+    >
+      <!-- Table rows will be dynamically added here -->
+    </tbody>
+    </table>
+    </main>
+    <!-- <script src="app.js"></script> -->
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-storage.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+
+    <script>
+      // TODO
+      // Copy **only** your firebaseConfig from Google Firebae and add it below
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyBEZAtfgyF88HPoBR94OxTJe0Io7lyKbjA",
+        authDomain: "amabadgers.firebaseapp.com",
+        projectId: "amabadgers",
+        storageBucket: "amabadgers.appspot.com",
+        messagingSenderId: "131147849099",
+        appId: "1:131147849099:web:a969b845dd736bbc2de38e",
+        measurementId: "G-907H1EJYVP",
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      // define authentication variable
+      let auth = firebase.auth();
+      let db = firebase.firestore();
+
+      // define a storage reference
+      let ref = firebase.storage().ref();
+
+    function getCurrentSemester() {
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth(); // Month is zero-based
+
+        // Determine the semester based on the current month
+        let currentSemester;
+        if (currentMonth >= 0 && currentMonth <= 5) {
+            currentSemester = "SPRING " + currentDate.getFullYear();
+        } else {
+            currentSemester = "FALL " + currentDate.getFullYear();
+        }
+
+        return currentSemester.toUpperCase();;
+    }
+
+function fetchAndPopulatePoints(selectedSemester, searchQuery) {
+    selectedSemester = selectedSemester || getCurrentSemester(); // Default to current semester if not provided
+
+    // Fetch all users from the ama_users collection
+    db.collection("ama_users").get().then((userSnapshot) => {
+        const memberTotalPoints = {}; // Object to store total points for each member
+
+        // This will hold all the promises from accessing each member's points sub-collection
+        const memberPointsPromises = [];
+
+        // Iterate over each user document
+        userSnapshot.forEach((userDoc) => {
+            const fullName = userDoc.data().full_name;
+            memberTotalPoints[fullName] = {
+                volunteer: 0,
+                professional_development: 0,
+                social: 0,
+                speaker: 0,
+                dei: 0
+            };
+
+            // Query the member_points sub-collection for each user
+            const pointsPromise = db.collection("ama_users").doc(userDoc.id).collection("member_points")
+            .where("pointSemester", "==", selectedSemester)
+            .get()
+            .then((pointsSnapshot) => {
+                pointsSnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const eventType = data.eventType.toLowerCase().replace(" ", "_"); // Normalize event type to match keys in memberTotalPoints object
+                    const eventPoints = data.points; // Get the number of points
+
+                    // Aggregate points based on event type and ensure the points are for the selected semester
+                    if (memberTotalPoints[fullName] && eventType in memberTotalPoints[fullName]) {
+                        memberTotalPoints[fullName][eventType] += eventPoints;
+                    }
+                });
+            }).catch((error) => {
+                console.error(`Error getting points for user ${fullName}: `, error);
+            });
+
+            memberPointsPromises.push(pointsPromise);
+        });
+
+        // Wait for all member points promises to resolve before updating the UI
+        Promise.all(memberPointsPromises).then(() => {
+            updateTableWithData(memberTotalPoints, selectedSemester, searchQuery);
+        }).catch((error) => {
+            console.error("Error processing member points data: ", error);
+        });
+    }).catch((error) => {
+        console.error("Error getting users documents: ", error);
+    });
+}
+
+function updateTableWithData(memberTotalPoints, selectedSemester, searchQuery) {
+    const tableBody = document.getElementById("all_people");
+    tableBody.innerHTML = ""; // Clear existing table rows
+
+    // Iterate over each member and populate the table
+    Object.entries(memberTotalPoints).forEach(([fullName, points]) => {
+        if (!searchQuery || fullName.toLowerCase().includes(searchQuery.toLowerCase())) {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${fullName}</td>
+                <td>${selectedSemester}</td>
+                <td>${points.volunteer}</td>
+                <td>${points.professional_development}</td>
+                <td>${points.social}</td>
+                <td>${points.speaker}</td>
+                <td>${points.dei}</td>
+                <td>${points.volunteer + points.professional_development + points.social + points.speaker + points.dei}</td>
+            `;
+            tableBody.appendChild(row);
+        }
+    });
+}
+
+    // Call the function to fetch and populate points when the page loads
+    window.onload = function () {
+        fetchAndPopulatePoints();
+    };
+
+    document.getElementById("applyFilters").addEventListener("click", function () {
+  // Get the filter values
+  const nameSearchValue = document.getElementById("nameSearch").value.trim().toLowerCase();
+  const semesterFilterValue = document.getElementById("semesterFilter").value.toUpperCase();
+
+  // Call fetchAndPopulatePoints with the selected semester and search query
+  fetchAndPopulatePoints(semesterFilterValue, nameSearchValue);
+});
+
+
+    // EDIT BUTTON
+let editbutton = document.getElementById("editbtn");
+let savecancelbtn = document.getElementById("savecancelbtn");
+
+// for the original points to be saved
+let originalvalues = [];
+
+
+// function to allow the points to be edited
+function editpointsmode(editMode) {
+    const pointsCells = document.querySelectorAll("tbody tr td:nth-child(n+3):nth-child(-n+7)");
+    
+    if (editMode) {
+        originalValues = []; // Reset original values
+        pointsCells.forEach(cell => {
+            // Store the original text
+            originalValues.push(cell.innerText);
+            // Replace cell content with an input element
+            cell.innerHTML = `<input class="input" type="number" value="${cell.innerText}" placeholder="${cell.innerText}" style="width: 100%;">`;
+        });
+    } else {
+        // If not edit mode, we revert back to the original text or save new values
+        pointsCells.forEach((cell, index) => {
+            const input = cell.querySelector("input");
+            // If input exists, use its value; otherwise, use the original text
+            cell.innerText = input ? input.value : originalValues[index];
+        });
+    }
+}
+
+
+
+
+
+// open save and cancel when edit button is clicked
+function showsavecancel() {
+  editpointsmode(true);
+  savecancelbtn.classList.remove("is-hidden")
+  savecancelbtn.classList.add("is-active");
+  editbutton.classList.add("is-hidden")
+}
+editbutton.addEventListener("click", showsavecancel);
+
+// SAVE CANCEL BUTTON
+let editsave = document.getElementById("editsave");
+let editcancel =document.getElementById("editcancel");
+
+// when the cancel button is clicked it will hide and bring back the edit button
+function canceledit() {
+  savecancelbtn.classList.add("is-hidden")
+  savecancelbtn.classList.remove("is-active");
+  editbutton.classList.remove("is-hidden");
+  editpointsmode(false);
+  fetchAndPopulatePoints();
+  
+}
+editcancel.addEventListener("click", canceledit);
+
+// when the save button is clicked it will save all the values from the edit and update the database
+function saveedit() {
+    // Code to reset UI after save
+    savecancelbtn.classList.add("is-hidden");
+    editbutton.classList.remove("is-hidden");
+    // Disable edit mode
+    editpointsmode(false);
+    // Optionally, refresh the table data
+    fetchAndPopulatePoints();
+}
+editsave.addEventListener("click", saveedit);
+    </script>
+  </body>
+</html>
