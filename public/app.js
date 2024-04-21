@@ -60,10 +60,7 @@ r_e("signout_button").addEventListener("click", () => {
     .signOut()
     .then(() => {
       configure_message_bar("Signed Out Successfully!");
-      if (r_e("cal_page") != null) {
-        loadHomePage;
-        r_e("joinbuttonhome").addEventListener("click", openSignupModal);
-      }
+      window.location.href = "index.html";
     })
     .catch((error) => {
       console.log(error);
