@@ -347,10 +347,9 @@ function populateMemberDropdown() {
   });
 }
 
-// Populate Member Dropdown
 function populateShowMemberDropdown() {
   const select = document.getElementById('showMemberSelect');
-  select.innerHTML = '';
+  select.innerHTML = ''; // Clear existing options
   db.collection('ama_users').get().then((snapshot) => {
     snapshot.forEach((doc) => {
       const fullName = doc.data().full_name;
@@ -359,16 +358,18 @@ function populateShowMemberDropdown() {
       option.textContent = fullName;
       select.appendChild(option);
     });
-  }).then(() => {
-    // Fetch the first member's points initially
-    fetchMemberPoints(select.value);
+    if (select.options.length > 0) {
+      fetchMemberPoints(select.options[select.selectedIndex].value);
+    }
   }).catch((error) => {
     console.error("Error fetching members: ", error);
   });
 
   // Fetch and display points when a member is selected
   select.addEventListener('change', () => {
-    fetchMemberPoints(select.value);
+    if(select.selectedIndex >= 0) {
+      fetchMemberPoints(select.value);
+    }
   });
 }
 
@@ -415,7 +416,7 @@ function saveEditChanges() {
 // Fetch and Display Member Points
 function fetchMemberPoints(memberId) {
   const tbody = document.getElementById('memberPointsList');
-  tbody.innerHTML = '';
+  tbody.innerHTML = '';  // Clear the table body each time to prevent duplication
   db.collection('ama_users').doc(memberId).collection('member_points')
     .get()
     .then((snapshot) => {
@@ -427,7 +428,7 @@ function fetchMemberPoints(memberId) {
           <td>${data.eventType}</td>
           <td>${data.points}</td>
           <td>${data.pointSemester}</td>
-          <td><button class="delete-point button is-small" data-id="${doc.id}">Delete</button></td>
+          <td><button class="delete-point button is-small is-danger" data-id="${doc.id}">Delete</button></td>
         `;
         tbody.appendChild(row);
       });
@@ -437,6 +438,9 @@ function fetchMemberPoints(memberId) {
           deletePoint(memberId, button.getAttribute('data-id'));
         });
       });
+    }).catch((error) => {
+      console.error("Error loading points: ", error);
+      tbody.innerHTML = `<tr><td colspan="5">Error loading points</td></tr>`;
     });
 }
 
@@ -453,7 +457,10 @@ function deletePoint(memberId, pointId) {
 
 // Initialize and populate the dropdown when the modal is activated
 document.getElementById('showedit').addEventListener('click', () => {
-  populateShowMemberDropdown();
+  const select = document.getElementById('showMemberSelect');
+  if (select.options.length === 0) { // Only populate if dropdown is empty
+    populateShowMemberDropdown();
+  }
   document.getElementById('showmodal').classList.add('is-active');
 });
 
