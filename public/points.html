@@ -191,31 +191,21 @@
       // define a storage reference
       let ref = firebase.storage().ref();
 
-    function getCurrentSemester() {
-        const currentDate = new Date();
-        const currentMonth = currentDate.getMonth(); // Month is zero-based
 
-        // Determine the semester based on the current month
-        let currentSemester;
-        if (currentMonth >= 0 && currentMonth <= 5) {
-            currentSemester = "SPRING " + currentDate.getFullYear();
-        } else {
-            currentSemester = "FALL " + currentDate.getFullYear();
-        }
 
-        return currentSemester.toUpperCase();;
-    }
 
-    // function to show points on the table for a member
-function fetchAndPopulatePoints(selectedSemester, searchQuery) {
+
+
+
+    // functions for the table 
+    function fetchAndPopulatePoints(selectedSemester, searchQuery) {
     selectedSemester = selectedSemester || getCurrentSemester();
 
-    // Fetch all users from the ama_users collection
+    // fetch all users from the ama_users collection
     db.collection("ama_users").get().then((userSnapshot) => {
         const memberTotalPoints = {};
         const memberPointsPromises = [];
 
-        // Iterate over each user document
         userSnapshot.forEach((userDoc) => {
             const fullName = userDoc.data().full_name;
             memberTotalPoints[fullName] = {
@@ -282,6 +272,27 @@ function updateTableWithData(memberTotalPoints, selectedSemester, searchQuery) {
         fetchAndPopulatePoints();
     };
 
+
+
+
+
+
+      // filtering table functions
+    function getCurrentSemester() {
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth(); // Month is zero-based
+
+        // Determine the semester based on the current month
+        let currentSemester;
+        if (currentMonth >= 0 && currentMonth <= 5) {
+            currentSemester = "SPRING " + currentDate.getFullYear();
+        } else {
+            currentSemester = "FALL " + currentDate.getFullYear();
+        }
+
+        return currentSemester.toUpperCase();;
+    }
+
     document.getElementById("applyFilters").addEventListener("click", function () {
   // Get the filter values
   const nameSearchValue = document.getElementById("nameSearch").value.trim().toLowerCase();
@@ -290,6 +301,9 @@ function updateTableWithData(memberTotalPoints, selectedSemester, searchQuery) {
   // Call fetchAndPopulatePoints with the selected semester and search query
   fetchAndPopulatePoints(semesterFilterValue, nameSearchValue);
 });
+
+
+
 
 
 // when edit button is clicked it shows the add points, show points and cancel edit buttons
@@ -329,6 +343,9 @@ addedit.addEventListener('click', () => {
   populateMemberDropdown(); // Populate dropdown when modal is activated
   editmodal.classList.add('is-active');
 });
+
+
+
 
 
 function populateMemberDropdown() {
