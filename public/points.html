@@ -556,6 +556,7 @@ function deletePoint(memberId, pointId) {
     .then(() => {
       console.log('Point deleted successfully');
       fetchMemberPoints(memberId); // Refresh the list after deletion
+      fetchAndPopulatePoints();
     }).catch((error) => {
       console.error("Error deleting points: ", error);
     });
