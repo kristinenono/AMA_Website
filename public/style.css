@@ -1317,67 +1317,66 @@ tr:hover {
   margin: 2rem;
 }
 
-.closeshowpnt{
+.closeshowpnt {
   background-color: #b22b25;
-    border-color: #dbdbdb;
-    border-width: 1px;
-    color: white;
-    cursor: pointer;
-    justify-content: center;
-    padding-bottom: calc(.5em - 1px);
-    padding-left: 1em;
-    padding-right: 1em;
-    padding-top: calc(.5em - 1px);
-    text-align: center;
-    white-space: nowrap;
-    position: relative;
-    vertical-align: top;
-    align-items: center;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    box-shadow: none;
-    display: inline-flex;
-    font-size: 1rem;
-    height: 2.5em;
+  border-color: #dbdbdb;
+  border-width: 1px;
+  color: white;
+  cursor: pointer;
+  justify-content: center;
+  padding-bottom: calc(0.5em - 1px);
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: calc(0.5em - 1px);
+  text-align: center;
+  white-space: nowrap;
+  position: relative;
+  vertical-align: top;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  box-shadow: none;
+  display: inline-flex;
+  font-size: 1rem;
+  height: 2.5em;
 }
 
-.saveaddpnt{
+.saveaddpnt {
   background-color: #1f304f;
-    border-color: #dbdbdb;
-    border-width: 1px;
-    color: white;
-    cursor: pointer;
-    justify-content: center;
-    padding-bottom: calc(.5em - 1px);
-    padding-left: 1em;
-    padding-right: 1em;
-    padding-top: calc(.5em - 1px);
-    text-align: center;
-    white-space: nowrap;
-    position: relative;
-    vertical-align: top;
-    align-items: center;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    box-shadow: none;
-    display: inline-flex;
-    font-size: 1rem;
-    height: 2.5em;
+  border-color: #dbdbdb;
+  border-width: 1px;
+  color: white;
+  cursor: pointer;
+  justify-content: center;
+  padding-bottom: calc(0.5em - 1px);
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: calc(0.5em - 1px);
+  text-align: center;
+  white-space: nowrap;
+  position: relative;
+  vertical-align: top;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  box-shadow: none;
+  display: inline-flex;
+  font-size: 1rem;
+  height: 2.5em;
 }
 
-
-.deletedbpoint{
+.deletedbpoint {
   border-radius: 2px;
-  font-size: .75rem;
+  font-size: 0.75rem;
   background-color: #b22b25;
   border-color: transparent;
   color: #fff;
   cursor: pointer;
   justify-content: center;
-  padding-bottom: calc(.5em - 1px);
+  padding-bottom: calc(0.5em - 1px);
   padding-left: 1em;
   padding-right: 1em;
-  padding-top: calc(.5em - 1px);
+  padding-top: calc(0.5em - 1px);
   text-align: center;
   white-space: nowrap;
   border-width: 1px;
@@ -1734,6 +1733,7 @@ textarea.input-field {
   line-height: 1.4;
   justify-content: center;
   text-align: center;
+  background-color: var(--primarynavy);
 }
 .service-card .card-content .aboutCardContent {
   order: -1; /* Move the image to the top */
@@ -1752,3 +1752,14 @@ textarea.input-field {
 }
 
 /* events button */
+
+.add-cardcolor {
+  font: var(--titleFontFamily);
+  background-color: #1f304f;
+  color: white;
+  padding: 1rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  text-decoration: none;
+}
