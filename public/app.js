@@ -496,6 +496,8 @@ function openEventModal(eventId, dayHTML) {
                 <p>Description: ${event.desc}</p>
                 <p>Type: ${event.type}</p>
                 <button class="button" id="submit_points">Submit Points</button>
+                <button class ="button is-hidden" id=edit_curr_evt"> Edit </button>
+                <button class ="button is-hidden" id=del_curr_evt"> Delete </button>
                 <button class="button" id="evtmodalcancel">Cancel</button>
               </div>
             </div>
@@ -550,6 +552,15 @@ function openEventModal(eventId, dayHTML) {
             pnts_mod.classList.remove("is-hidden");
             pnts_mod.classList.add("is-active");
           });
+        document
+          .getElementById("evtmodalcancel")
+          .addEventListener("click", function () {
+            // Close the modal when cancel button is clicked
+            modal.classList.remove("is-active");
+
+            // Re-render the calendar view
+            fetchEventsAndGenerateCalendarHTML(currentDate);
+          });
 
         // putting points into db
         const pnts_sbt_frm = r_e("pnts_sbt");
@@ -582,15 +593,7 @@ function openEventModal(eventId, dayHTML) {
           .catch((error) => console.error("Error Submitting Points ", error));
 
         // Attach event listener to the cancel button
-        document
-          .getElementById("evtmodalcancel")
-          .addEventListener("click", function () {
-            // Close the modal when cancel button is clicked
-            modal.classList.remove("is-active");
 
-            // Re-render the calendar view
-            fetchEventsAndGenerateCalendarHTML(currentDate);
-          });
         document
           .getElementById("pnts_cncl")
           .addEventListener("click", function () {
