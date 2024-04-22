@@ -10,329 +10,581 @@
       src="https://kit.fontawesome.com/bcae03608a.js"
       crossorigin="anonymous"
     ></script>
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+  />
   </head>
   <body>
-    <header>
-        <div class="navbar-menu">
-          <div>
-            <a href="index.html" id="home-link"><strong id="home-nav">HOME</strong></a>
-            <a id="format-link1"><strong id="format-nav">ABOUT</strong></a>
-            <div class="dropdown">
-              <button class="bttn1"><strong id="format-nav">MEMBERS</strong></button>
-              <div class="dropdown-content">
-                <a href="calendar.html" id="calendarbtn">CALENDAR</a>
-                <a href="points.html" id="pointbtn">POINT SYSTEM</a>
-              </div>
-            </div>          
-            <a href="blog.html" id="blog-link"><strong id="format-nav">BLOG</strong></a>
-            <a id="format-link"><strong id="format-nav">CONTACT</strong></a>
-            <!-- hiding the modal burger since its interfering with the index page -->
-          <!-- <div class="login-signup-burger">
-            <a id="login">
-              <button id="logbtn" class="add-btn button">
-                <strong id="bttn-font">LOGIN</strong>
-              </button>
-            </a>
-            &nbsp; &nbsp;
-            <a id="signin">
-              <button id="signbtn" class="add-btn button">
-                <strong id="bttn-font">SIGN UP</strong>
-              </button>
-            </a>
-          </div> -->
-        </div>
-        </div>
-      </nav>
-    </header>
-    <main>  
-        <div class="filter-container">
-            <label for="nameSearch">Search by Name:</label>
-            <input type="text" id="nameSearch" placeholder="Search name...">
-            <label for="semesterFilter">Filter by Semester:</label>
-            <select id="semesterFilter">
-                <option value="">All</option>
-                <option value="Fall 2023">Fall 2023</option>
-                <option value="Spring 2024">Spring 2024</option>
-                <option value="Fall 2024">Fall 2024</option>
-                <option value="Spring 2025">Spring 2025</option>
-                <!-- Add more options as needed -->
-            </select>
-            <!-- <label for="eventFilter">Filter by Event:</label>
-            <select id="eventFilter">
-                <option data-event="Total Points">All</option>
-                <option data-event="Philanthropy Points">Philanthropy Points</option>
-                <option data-event="Developement Points">Developement Points</option>
-                <option data-event="Social Points">Social Points</option>
-                <option data-event="Speaker Points">Speaker Points</option>
-            </select> -->
-            <button id="applyFilters">Apply Filters</button>
-        </div>                 
-        <table>
-            <thead>
-                <tr>
-                    <th>Member</th>
-                    <th>Semester</th>
-                    <th>Philanthropy Points</th>
-                    <th>Developement Points</th>
-                    <th>Social Points</th>
-                    <th>Speaker Points</th>
-                    <th>Total Points</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>John Doe</td>
-                    <td>Spring 2024</td>
-                    <td>3</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>1</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Jane Smith</td>
-                    <td>Spring 2024</td>
-                    <td>2</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>1</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Michael Johnson</td>
-                    <td>Spring 2025</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>1</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Emma Lee</td>
-                    <td>Spring 2024</td>
-                    <td>3</td>
-                    <td>12</td>
-                    <td>2</td>
-                    <td>1</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Emma Lee</td>
-                    <td>Fall 2024</td>
-                    <td>3</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>1</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>X</td>
-                    <td>Fall 2023</td>
-                    <td>3</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>1</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>X</td>
-                    <td>Spring 2024</td>
-                    <td>3</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>2</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>X</td>
-                    <td>Spring 2024</td>
-                    <td>3</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>1</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>X</td>
-                    <td>Spring 2024</td>
-                    <td>3</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>0</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>X</td>
-                    <td>Spring 2024</td>
-                    <td>3</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>1</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>X</td>
-                    <td>Fall 2024</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>2</td>
-                    <td>1</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>X</td>
-                    <td>Fall 2024</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>2</td>
-                    <td>1</td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-    </main>
-    <footer>
-        <div class="footer-box">
-          <div class="footer-section">
-            <div class="navbar-items">
-              <img src="images/AMA_Logo_Footer.png" alt="" id="img_logo">
-              <div id="uw-wisc">
-                <strong id="footer-uw-logo" class="text-logo">University of Wisconsin </br> Madison</strong>
+    <main>
+      <div id="editmodal" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+          <div class="box">
+            <div class="field">
+              <label class="label">Member:</label>
+              <div class="control">
+                <div class="select">
+                  <select id="memberSelect">
+                    <!-- Member options will be populated dynamically -->
+                  </select>
+                </div>
               </div>
             </div>
-            <div class="social-icons" id="icons">
-                <a href="https://www.linkedin.com/in/ama-badgers-5247a9252/" id="social-icon">
-                  <i class="fab fa-linkedin fa-2x"></i>
-                </a>
-                <a href="https://www.instagram.com/amabadgers/" id="social-icon">
-                  <i class="fab fa-instagram fa-2x"></i>
-                </a>
-                <a href="https://www.facebook.com/AMAUWMadison/" id="social-icon">
-                  <i class="fab fa-facebook fa-2x"></i>
-                </a>
-                <a href="https://twitter.com/amauwmadison?lang=en">
-                  <i class="fab fa-twitter fa-2x"></i>
-                </a>
-            </div>
-            <div id="adress">
-              <p>975 University Ave, Madison, WI 53706</p>
-              <p id="phone">+00 000 000 000</p>
-            </div>
-          </div>
-          <div class="footer-section" id="footer-link-padding">
-            <div>
-              <div id="footer-padding">
-                <a href="#" ><b>About Us</b></a>
-              </div>
-              <div id="footer-padding">
-                <a href="#"><b>Blog</b></a>
-              </div>
-              <div id="footer-padding">
-                <a href="#"><b>Point System</b></a>
-              </div>
-              <div id="footer-padding">
-                <a href="#"><b>Contact Us</b></a>
-              </div>
-              <div id="footer-padding">
-                <a href="calendar.html"><b>Events</b></a>
-              </div>
-              <div id="footer-padding">
-                <a href="#"><b>Become a Sponsor</b></a>
+            <div class="field">
+              <label class="label">Semester:</label>
+              <div class="control">
+                <div class="select">
+                  <select id="editSemester" disabled>
+                    <option value="SPRING 2024">SPRING 2024</option>
+                    <option value="FALL 2024">FALL 2024</option>
+                    <option value="SPRING 2025">SPRING 2025</option>
+                    <option value="FALL 2025">FALL 2025</option>
+                  </select>
+                </div>
               </div>
             </div>
-          </div>
-          <div id="line"></div>
-          <div class="footer-section">
-            <h2>JOIN OUR EMAIL LIST</h2>
-            <p>Want to become an official member of the Badger American Marketing Association or just be added to the email list? Fill out our member form to stay up to date on upcoming events!</p>
-            <input type="text" placeholder="Enter your email here">
-            <button id="submit_btn">
-              <p>SUBMIT</p>
-            </button>
+            <div class="field">
+              <label class="label">Code:</label>
+              <div class="control">
+                <input class="input" type="text" id="editCode" placeholder="Enter code">
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Points:</label>
+              <div class="control">
+                <input class="input" type="number" id="editPoints" placeholder="Enter points" disabled>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Event Type:</label>
+              <div class="control">
+                <div class="select">
+                  <select id="editEventType" disabled>
+                    <option value="Volunteer">Volunteer</option>
+                    <option value="Professional Development">Professional Development</option>
+                    <option value="Speaker Event">Speaker</option>
+                    <option value="Social Event">Social</option>
+                    <option value="DEI Event">DEI</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Event Name:</label>
+              <input class="input" type="text" id="eventName" placeholder="Event Name" disabled>
+            </div>
+            <div class="field">
+              <label class="label">Event Description:</label>
+              <input class="input" type="text" id="eventDesc" placeholder="Description" disabled>
+            </div>
+            <div class="field">
+              <label class="label">Event Time:</label>
+              <input class="input" type="text" id="eventTime" placeholder="Time" disabled>
+            </div>
+            <button id="saveaddpoints" class="saveaddpnt">Save</button>
+            <button id="editclear" class="closeshowpnt">Clear</button>
           </div>
         </div>
-      </footer>
-    <script src="app.js"></script>
-    <script> //Still working on this, I'll move it to app.js when I'm done!
-    // Filter members & semester for points table
-    
-   // Function to calculate total points for each row initially and after filters are applied
-function calculateTotalPoints() {
-    // Get all table rows
-    const tableRows = document.querySelectorAll("tbody tr");
+        <button id="editclose" class="modal-close is-large" aria-label="close"></button>
+      </div>
 
-    // Loop through each table row
-    tableRows.forEach((row) => {
-        const eventColumns = row.cells.length;
-        let totalPoints = 0;
-        // Loop through columns containing points (columns 2 to 5)
-        for (let i = 2; i < 6; i++) {
-            totalPoints += parseInt(row.cells[i].textContent) || 0; // Parse the text content to integer
-        }
-        // Display the total points in the last cell of the row
-        row.cells[eventColumns - 1].textContent = totalPoints;
+
+
+      <div id="showmodal" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+          <div class="box">
+            <div class="field">
+              <label class="label">Select Member:</label>
+              <div class="control">
+                <div class="select is-fullwidth">
+                  <select id="showMemberSelect"></select>
+                </div>
+              </div>
+            </div>
+            <table class="table is-striped is-narrow is-hoverable is-fullwidth">
+              <thead>
+                <tr>
+                  <th class="has-text-white">Code</th>
+                  <th class="has-text-white">Event Type</th>
+                  <th class="has-text-white">Points</th>
+                  <th class="has-text-white">Semester</th>
+                  <th class="has-text-white">Action</th>
+                </tr>
+              </thead>
+              <tbody id="memberPointsList"></tbody>
+            </table>
+            <button id="showclose" class="closeshowpnt">Close</button>
+          </div>
+        </div>
+        <button id="showeditclose" class="modal-close is-large" aria-label="close"></button>
+      </div>
+
+
+
+
+      <div class="filter-container">
+        <div class="filtername">
+          <label for="nameSearch">Search by Name:</label>
+          <input type="text" id="nameSearch" placeholder="Search name...">
+        </div>
+        <div class="filtersem">
+          <label for="semesterFilter">Filter by Semester:</label>
+          <select id="semesterFilter">
+                  <option value="SPRING 2024">SPRING 2024</option>
+                  <option value="FALL 2024">FALL 2024</option>
+                  <option value="SPRING 2025">SPRING 2025</option>
+                  <option value="FALL 2025">FALL 2025</option>
+              </select>
+        </div>
+          <button id="applyFilters" class="redbtn pointbtn">Apply Filters</button>
+          <button id="editbtn" class="bluebtn pointbtn">Edit Points</button>
+          <button id="canceledit" class="bluebtn pointbtn is-hidden">Cancel Edit</button>
+      </div>   
+      <div id="addshowbtn" class="container editsavecancel is-hidden">
+        <button id="addedit" class="bluebtn pointbtn">Add Points</button>
+        <button id="showedit" class="redbtn pointbtn">Show Points</button>
+      </div>              
+      <table class="table is-bordered">
+          <thead>
+            <tr>
+              <th class="has-text-white">Member</th>
+              <th class="has-text-white">Semester</th>
+              <th class="has-text-white">Volunteer Points</th>
+              <th class="has-text-white">Development Points</th>
+              <th class="has-text-white">Social Points</th>
+              <th class="has-text-white">Speaker Points</th>
+              <th class="has-text-white">DEI Points</th>
+              <th class="has-text-white">Total Points</th>
+          </tr>
+          </thead>
+          <tbody
+      id="all_people"
+      class="p-4 m-3"
+    >
+      <!-- Table rows will be dynamically added here -->
+    </tbody>
+    </table>
+    </main>
+    <!-- <script src="app.js"></script> -->
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-storage.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+
+    <script>
+      // TODO
+      // Copy **only** your firebaseConfig from Google Firebae and add it below
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyBEZAtfgyF88HPoBR94OxTJe0Io7lyKbjA",
+        authDomain: "amabadgers.firebaseapp.com",
+        projectId: "amabadgers",
+        storageBucket: "amabadgers.appspot.com",
+        messagingSenderId: "131147849099",
+        appId: "1:131147849099:web:a969b845dd736bbc2de38e",
+        measurementId: "G-907H1EJYVP",
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      // define authentication variable
+      let auth = firebase.auth();
+      let db = firebase.firestore();
+
+      // define a storage reference
+      let ref = firebase.storage().ref();
+
+
+
+
+
+
+
+    // functions for the table 
+    function fetchAndPopulatePoints(selectedSemester, searchQuery) {
+    selectedSemester = selectedSemester || getCurrentSemester();
+
+    // fetch all users from the ama_users collection
+    db.collection("ama_users").get().then((userSnapshot) => {
+        const memberTotalPoints = {};
+        const memberPointsPromises = [];
+
+        userSnapshot.forEach((userDoc) => {
+            const fullName = userDoc.data().full_name;
+            memberTotalPoints[fullName] = {
+                volunteer: 0,
+                professional_development: 0,
+                social: 0,
+                speaker: 0,
+                dei: 0
+            };
+            const pointsPromise = db.collection("ama_users").doc(userDoc.id).collection("member_points")
+    .where("pointSemester", "==", selectedSemester)
+    .get()
+    .then((pointsSnapshot) => {
+        pointsSnapshot.forEach((doc) => {
+            const data = doc.data();
+            const eventType = normalizeEventType(data.eventType); // Use the normalized event type
+            const eventPoints = parseInt(data.points); // Ensure the points are treated as numbers
+
+            if (memberTotalPoints[fullName] && eventType in memberTotalPoints[fullName]) {
+                memberTotalPoints[fullName][eventType] += eventPoints;
+            }
+        });
+    }).catch((error) => {
+        console.error(`Error getting points for user ${fullName}: `, error);
+    });
+
+            memberPointsPromises.push(pointsPromise);
+        });
+
+        Promise.all(memberPointsPromises).then(() => {
+            updateTableWithData(memberTotalPoints, selectedSemester, searchQuery);
+        }).catch((error) => {
+            console.error("Error processing member points data: ", error);
+        });
+    }).catch((error) => {
+        console.error("Error getting users documents: ", error);
     });
 }
-// Function to get the current semester based on the current date
-function getCurrentSemester() {
-    const currentDate = new Date();
-    const currentMonth = currentDate.getMonth(); // Month is zero-based
 
-    // Determine the semester based on the current month
-    let currentSemester;
-    if (currentMonth >= 0 && currentMonth <= 5) {
-        currentSemester = "Spring " + currentDate.getFullYear();
-    } else {
-        currentSemester = "Fall " + currentDate.getFullYear();
+function updateTableWithData(memberTotalPoints, selectedSemester, searchQuery) {
+    const tableBody = document.getElementById("all_people");
+    tableBody.innerHTML = "";
+
+    Object.entries(memberTotalPoints).forEach(([fullName, points]) => {
+        if (!searchQuery || fullName.toLowerCase().includes(searchQuery.toLowerCase())) {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${fullName}</td>
+                <td>${selectedSemester}</td>
+                <td>${points.volunteer}</td>
+                <td>${points.professional_development}</td>
+                <td>${points.social}</td>
+                <td>${points.speaker}</td>
+                <td>${points.dei}</td>
+                <td>${points.volunteer + points.professional_development + points.social + points.speaker + points.dei}</td>
+            `;
+            tableBody.appendChild(row);
+        }
+    });
+}
+
+    // Call the function to fetch and populate points when the page loads
+    window.onload = function () {
+  fetchAndPopulatePoints();
+  listenForMemberPointsUpdates(); // Start listening for real-time updates
+};
+
+
+
+
+
+
+      // filtering table functions
+    function getCurrentSemester() {
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth(); // Month is zero-based
+
+        // Determine the semester based on the current month
+        let currentSemester;
+        if (currentMonth >= 0 && currentMonth <= 5) {
+            currentSemester = "SPRING " + currentDate.getFullYear();
+        } else {
+            currentSemester = "FALL " + currentDate.getFullYear();
+        }
+
+        return currentSemester.toUpperCase();;
     }
 
-    return currentSemester;
+    document.getElementById("applyFilters").addEventListener("click", function () {
+  // Get the filter values
+  const nameSearchValue = document.getElementById("nameSearch").value.trim().toLowerCase();
+  const semesterFilterValue = document.getElementById("semesterFilter").value.toUpperCase();
+
+  // Call fetchAndPopulatePoints with the selected semester and search query
+  fetchAndPopulatePoints(semesterFilterValue, nameSearchValue);
+});
+
+
+// Function to disable the dropdown
+function disableEventTypeDropdown() {
+  document.getElementById('editEventType').disabled = true;
 }
 
-// Set the current semester text when the page loads
-window.addEventListener("load", function () {
-    document.getElementById("semesterFilter").value = getCurrentSemester();
-    document.getElementById("applyFilters").click();
+// Function to enable the dropdown
+function enableEventTypeDropdown() {
+  document.getElementById('editEventType').disabled = false;
+}
 
+
+function normalizeEventType(eventType) {
+    const typeMapping = {
+        "Volunteer": "volunteer",
+        "Professional Development": "professional_development",
+        "Speaker Event": "speaker",
+        "Social Event": "social",
+        "DEI Event": "dei"
+    };
+    return typeMapping[eventType] || eventType.toLowerCase().replace(/ /g, "_");
+}
+
+
+
+// when edit button is clicked it shows the add points, show points and cancel edit buttons
+function addshowedit() {
+    document.getElementById("canceledit").classList.remove("is-hidden");
+    document.getElementById("addshowbtn").classList.remove("is-hidden");
+    document.getElementById("addshowbtn").classList.add("is-active");
+    document.getElementById("editbtn").classList.add("is-hidden");
+  }
+
+  function canceledit() {
+    document.getElementById("canceledit").classList.add("is-hidden");
+    document.getElementById("addshowbtn").classList.add("is-hidden");
+    document.getElementById("addshowbtn").classList.remove("is-active");
+    document.getElementById("editbtn").classList.remove("is-hidden");
+  }
+
+  document.getElementById("editbtn").addEventListener("click", addshowedit);
+  document.getElementById("canceledit").addEventListener("click", canceledit);
+
+
+  editclose.addEventListener('click', () => {
+  editmodal.classList.remove('is-active');
 });
 
-// Calculate total points when the page loads
-window.addEventListener("load", calculateTotalPoints);
-
-document.getElementById("applyFilters").addEventListener("click", function () {
-    // Get the filter values
-    const nameSearchValue = document.getElementById("nameSearch").value.trim().toLowerCase();
-    const semesterFilterValue = document.getElementById("semesterFilter").value.toLowerCase();
-
-    // Get all table rows
-    const tableRows = document.querySelectorAll("tbody tr");
-
-    // Loop through each table row
-    tableRows.forEach((row) => {
-        // Get the values of the cells in the current row
-        const name = row.cells[0].textContent.toLowerCase();
-        const semester = row.cells[1].textContent.toLowerCase();
-
-        // Check if the row matches the filters
-        const nameMatches = name.includes(nameSearchValue);
-        const semesterMatches = semesterFilterValue === "" || semester === semesterFilterValue || semesterFilterValue === "all";
-
-        // If the row matches the filters, display it; otherwise, hide it
-        if (nameMatches && semesterMatches) {
-            row.style.display = "";
-        } else {
-            row.style.display = "none";
-        }
-
-        // Calculate total points for each row
-        let totalPoints = 0;
-        for (let i = 2; i < row.cells.length - 1; i++) {
-            totalPoints += parseInt(row.cells[i].textContent); // Parse the text content to integer
-        }
-        // Display the total points in the last cell of the row
-        row.cells[row.cells.length - 1].textContent = totalPoints;
+document
+  .querySelectorAll(".modal-background, .modal-close")
+  .forEach(function (el) {
+    el.addEventListener("click", function () {
+      editmodal.classList.remove("is-active");
+      showmodal.classList.remove('is-active');
     });
+  });
+
+
+addedit.addEventListener('click', () => {
+  populateMemberDropdown(); // Populate dropdown when modal is activated
+  editmodal.classList.add('is-active');
 });
-        </script>
+
+
+
+
+
+function populateMemberDropdown() {
+  const select = document.getElementById('memberSelect');
+  select.innerHTML = ''; // Clear existing options
+  db.collection('ama_users').get().then((snapshot) => {
+    snapshot.forEach((doc) => {
+      const fullName = doc.data().full_name;
+      const option = document.createElement('option');
+      option.value = doc.id; // Use user's document ID as value
+      option.textContent = fullName;
+      select.appendChild(option);
+    });
+  }).catch((error) => {
+    console.error("Error fetching members: ", error);
+  });
+}
+
+document.getElementById('editCode').addEventListener('input', function() {
+  const code = this.value;
+  // Assuming event codes are at least some minimum length before checking
+  if (code.length >= 8) {
+    fetchEventDetails(code);
+  }
+});
+
+function fetchEventDetails(code) {
+    db.collection('events').where('code', '==', code).get()
+    .then(querySnapshot => {
+        if (!querySnapshot.empty) {
+            const eventData = querySnapshot.docs[0].data(); // Assuming the code is unique
+            document.getElementById('eventName').value = eventData.name || '';
+            document.getElementById('eventDesc').value = eventData.desc || '';
+            document.getElementById('eventTime').value = eventData.time || '';
+            document.getElementById('editPoints').value = eventData.pts || '';
+            document.getElementById('editEventType').value = eventData.type || '';
+            document.getElementById('editSemester').value = eventData.semester || '';
+            enableInputs(); // Enable inputs after fetching data
+        } else {
+            console.log("No event found with that code.");
+            // Optionally clear fields or alert the user
+            clearEventFields(); // Clear fields if no data is found
+        }
+    })
+    .catch(error => {
+        console.error("Error fetching event details: ", error);
+    });
+}
+
+function clearEventFields() {
+    document.getElementById('eventName').value = '';
+    document.getElementById('eventDesc').value = '';
+    document.getElementById('eventTime').value = '';
+    document.getElementById('editPoints').value = '';
+    document.getElementById('editEventType').selectedIndex = 0;
+    document.getElementById('editSemester').selectedIndex = 0;
+}
+
+function populateShowMemberDropdown() {
+  const select = document.getElementById('showMemberSelect');
+  select.innerHTML = ''; // Clear existing options
+  db.collection('ama_users').get().then((snapshot) => {
+    snapshot.forEach((doc) => {
+      const fullName = doc.data().full_name;
+      const option = document.createElement('option');
+      option.value = doc.id;
+      option.textContent = fullName;
+      select.appendChild(option);
+    });
+    if (select.options.length > 0) {
+      fetchMemberPoints(select.options[select.selectedIndex].value);
+    }
+  }).catch((error) => {
+    console.error("Error fetching members: ", error);
+  });
+
+  // Fetch and display points when a member is selected
+  select.addEventListener('change', () => {
+    if(select.selectedIndex >= 0) {
+      fetchMemberPoints(select.value);
+    }
+  });
+}
+
+
+function saveEditChanges() {
+  const memberId = document.getElementById('memberSelect').value;
+  const code = document.getElementById('editCode').value;
+  const semester = document.getElementById('editSemester').value;
+  const eventType = document.getElementById('editEventType').value;
+  const points = parseInt(document.getElementById('editPoints').value);
+
+  if (!points || points < 0) {
+    alert('Please enter a valid number of points.');
+    return;
+  }
+
+  // Assuming you will update or set data in member_points collection
+  db.collection('ama_users').doc(memberId).collection('member_points').add({
+    code: code,
+    eventType: eventType,
+    pointSemester: semester,
+    points: points
+  }).then(() => {
+    console.log("Points updated successfully");
+    fetchAndPopulatePoints(); // Refresh the points table globally or just for the affected semester
+    editmodal.classList.remove('is-active');
+    clearaddpoints();
+  }).catch((error) => {
+    console.error("Error updating points: ", error);
+  });
+}
+
+function listenForMemberPointsUpdates() {
+    db.collection('ama_users').onSnapshot(snapshot => {
+        snapshot.docChanges().forEach(change => {
+            if (change.type === 'added' || change.type === 'modified' || change.type === 'removed') {
+                console.log("Detected changes in member points data, refreshing table...");
+                fetchAndPopulatePoints();
+            }
+        });
+    });
+}
+
+let editclear = document.getElementById("editclear");
+  document.getElementById('editclear').addEventListener('click',clearaddpoints);
+
+  function clearaddpoints() {
+    document.getElementById('editCode').value = '';
+    document.getElementById('editSemester').selectedIndex = 0;
+    document.getElementById('editEventType').selectedIndex = 0;
+    document.getElementById('memberSelect').selectedIndex = 0;
+    document.getElementById('editPoints').value = '';
+}
+
+  let saveaddpoints = document.getElementById("saveaddpoints");
+  saveaddpoints.addEventListener('click',saveEditChanges);
+
+
+// Fetch and Display Member Points
+function fetchMemberPoints(memberId) {
+  const tbody = document.getElementById('memberPointsList');
+  tbody.innerHTML = '';  // Clear the table body each time to prevent duplication
+  db.collection('ama_users').doc(memberId).collection('member_points')
+    .get()
+    .then((snapshot) => {
+      snapshot.forEach((doc) => {
+        const data = doc.data();
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${data.code}</td>
+          <td>${data.eventType}</td>
+          <td>${data.points}</td>
+          <td>${data.pointSemester}</td>
+          <td><button class="delete-point deletedbpoint" data-id="${doc.id}">Delete</button></td>
+        `;
+        tbody.appendChild(row);
+      });
+      // Attach delete event handlers
+      document.querySelectorAll('.delete-point').forEach(button => {
+        button.addEventListener('click', () => {
+          deletePoint(memberId, button.getAttribute('data-id'));
+        });
+      });
+    }).catch((error) => {
+      console.error("Error loading points: ", error);
+      tbody.innerHTML = `<tr><td colspan="5">Error loading points</td></tr>`;
+    });
+}
+
+// Delete a Point Entry
+function deletePoint(memberId, pointId) {
+  db.collection('ama_users').doc(memberId).collection('member_points').doc(pointId).delete()
+    .then(() => {
+      console.log('Point deleted successfully');
+      fetchMemberPoints(memberId); // Refresh the list after deletion
+      fetchAndPopulatePoints();
+    }).catch((error) => {
+      console.error("Error deleting points: ", error);
+    });
+}
+
+// Initialize and populate the dropdown when the modal is activated
+document.getElementById('showedit').addEventListener('click', () => {
+  const select = document.getElementById('showMemberSelect');
+  if (select.options.length === 0) { // Only populate if dropdown is empty
+    populateShowMemberDropdown();
+  }
+  document.getElementById('showmodal').classList.add('is-active');
+});
+
+let showclose = document.getElementById("showclose");
+let showmodal = document.getElementById("showmodal");
+let showeditclose = document.getElementById("showeditclose");
+
+// Close the modal
+showclose.addEventListener('click', () => {
+  showmodal.classList.remove('is-active');
+});
+
+showeditclose.addEventListener('click', () => {
+  showmodal.classList.remove('is-active');
+});
+
+
+    </script>
   </body>
 </html>

@@ -62,14 +62,16 @@ body {
 .mainbackground {
   background-color: #f3f2ee;
 }
-
-.title {
+x .title {
   font-family: var(--titleFontFamily);
   font-size: var(--titleFontSize);
-  text-align: left;
   color: var(--primarywhite);
   font-size: 5vw;
   margin-left: 5rem;
+}
+
+#title_uw {
+  padding-left: 10%;
 }
 
 .primaryheader {
@@ -107,10 +109,18 @@ body {
 }
 
 /* button */
+
+.evtbutton {
+  background-color: var(--primarynavy);
+  color: var(--primarywhite);
+  text-decoration: none;
+  font: var(--titleFontFamily);
+  padding: 2%;
+}
 .add-btn {
   font: var(--titleFontFamily);
   background-color: #1f304f;
-  color: #f3f2ee;
+  color: white;
   padding: 1rem;
   border: none;
   border-radius: 5px;
@@ -118,48 +128,76 @@ body {
   text-decoration: none;
 }
 .add-btn:hover {
+  background-color: #456ab0;
+}
+
+.sadd-btn {
+  font: var(--titleFontFamily);
   background-color: #b22b25;
+  color: #f3f2ee;
+  padding: 1rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 24px;
+  text-decoration: none;
+}
+.sadd-btn:hover {
+  background-color: #da5049;
 }
 /* home page modal styling */
-.modal-h {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-}
-.modal-content-h {
+/* submit and cancel button formats for the signup/login modals */
+.submitmodalbtn {
   background-color: #1f304f;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-}
-
-.modal-close-h {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  align-content: center;
-}
-
-.modal-close-h:hover,
-.modal-close-h:focus {
-  color: #000;
-  text-decoration: none;
+  border-color: #dbdbdb;
+  border-width: 1px;
+  color: #fff;
   cursor: pointer;
+  justify-content: center;
+  padding-bottom: calc(0.5em - 1px);
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: calc(0.5em - 1px);
+  text-align: center;
+  white-space: nowrap;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  box-shadow: none;
+  display: inline-flex;
+  font-size: 1rem;
+  height: 2.5em;
+  line-height: 1.5;
+  position: relative;
+  vertical-align: top;
 }
-.modal-margin-h {
-  width: 20%;
-  height: 20%;
-  margin: auto;
+
+.cancelmodalbtn {
+  background-color: #b22b25;
+  border-color: #dbdbdb;
+  border-width: 1px;
+  color: #fff;
+  cursor: pointer;
+  justify-content: center;
+  padding-bottom: calc(0.5em - 1px);
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: calc(0.5em - 1px);
+  text-align: center;
+  white-space: nowrap;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  box-shadow: none;
+  display: inline-flex;
+  font-size: 1rem;
+  height: 2.5em;
+  line-height: 1.5;
+  position: relative;
+  vertical-align: top;
+}
+
+.haveaccount {
+  color: #1f304f;
 }
 
 /* Calendar Page */
@@ -397,6 +435,7 @@ body {
   color: #fafbfc;
   font-family: var(--bodyFontFamily);
   font-size: 20px;
+  border-radius: var(--radius-8);
 }
 .involvementButton2 {
   background-color: #b22b25;
@@ -406,6 +445,7 @@ body {
   color: #fafbfc;
   font-family: var(--bodyFontFamily);
   font-size: 20px;
+  border-radius: var(--radius-8);
 }
 
 .titleContainers {
@@ -567,21 +607,20 @@ input[type="submit"] {
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #1f304f;
-  color: var(--bodyTextColorWhite);
+  bottom: -200px;
   min-width: 160px;
   z-index: 1;
 }
 
 .dropdown-content a {
-  color: #f3f2ee;
-  padding: 12px 16px;
+  color: #1f304f;
   display: block;
   text-decoration: none;
 }
 
 .dropdown-content a:hover {
   background-color: #b22b25;
+  color: var(--bodyTextColorWhite);
 }
 /* Display
   the
@@ -636,8 +675,8 @@ input[type="submit"] {
   font-size: 25px;
   padding-left: 20px;
   margin: 0;
-  padding-top: 10px;
-  padding-bottom: 100px;
+  margin-top: 1%;
+  padding-bottom: 110px;
 }
 
 footer {
@@ -676,6 +715,7 @@ nav {
   display: inline-block;
   padding-right: 100px;
   padding-left: 50px;
+  padding-top: 0;
 }
 #home-nav {
   color: #f3f2ee;
@@ -709,10 +749,22 @@ nav {
   display: inline-block;
   padding-right: 100px;
   padding-left: 100px;
+  padding-top: 0;
 }
 #contact-link {
   display: inline-block;
   padding-right: 100px;
+  padding-top: 0;
+}
+#abt-link {
+  display: inline-block;
+  padding-right: 100px;
+  padding-top: 0;
+}
+#members-link {
+  display: inline-block;
+  padding-right: 25px;
+  padding-top: 18%;
 }
 #footer-box {
   width: 100%;
@@ -751,6 +803,14 @@ nav {
   text-align: center;
   margin-bottom: 10%;
 }
+#footerName {
+  width: 90%;
+  height: 120%;
+}
+#footerEmail {
+  width: 90%;
+  height: 100%;
+}
 
 #logo-text {
   vertical-align: top;
@@ -769,6 +829,7 @@ nav {
 .navbar-menu {
   background-color: #1f304f;
   text-align: center;
+  max-height: 60px;
 }
 .navbar-menu a {
   color: #f3f2ee;
@@ -956,13 +1017,6 @@ footer {
   color: gray;
 }
 
-input[type="text"] {
-  margin-top: 10px;
-  height: 35px;
-  width: calc(100% - 20px);
-  border: 1px solid black;
-}
-
 button {
   margin-top: 10px;
   border: none;
@@ -979,6 +1033,9 @@ button {
   width: calc(100% - 20px);
   background-color: #b22b25;
   width: 50%;
+  font-size: 15px;
+  color: white;
+  font-weight: 400;
 }
 
 button p {
@@ -1050,7 +1107,7 @@ button p {
   display: flex;
   text-align: center;
   margin-bottom: 5%;
-  padding-top: 10%;
+  padding-top: 5%;
 }
 #line {
   border-left: 3px solid darkgray;
@@ -1126,6 +1183,7 @@ button p {
   margin: auto;
   display: block;
 }
+
 #modal-password {
   background-color: F3F2EE;
   margin: auto;
@@ -1155,6 +1213,7 @@ button p {
   padding-top: 5%;
 }
 
+/* POINTS PAGE */
 /* table */
 table {
   width: 80%;
@@ -1168,7 +1227,7 @@ table {
 th,
 td {
   padding: 15px;
-  text-align: left;
+  text-align: center;
   border-bottom: 1px solid #dddddd;
 }
 th {
@@ -1184,48 +1243,146 @@ tr:hover {
 }
 
 .filter-container {
-  align-items: left;
+  align-items: center;
   width: 75%;
-  margin: 50px auto;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.filter-container .filtername,
+.filter-container .filtersem {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
 }
 
 .filter-container label {
-  font-size: 16px;
   margin-right: 10px;
+  font-size: 16px;
 }
 
-.filter-container select {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-}
+.filter-container select,
 .filter-container input[type="text"] {
-  width: 20%;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
+  flex-grow: 1;
+}
+
+.filter-container input[type="text"] {
+  max-width: 100%;
 }
 
 /* filter button */
-#applyFilters {
+.redbtn {
+  font: var(--titleFontFamily);
   background-color: #b22b25;
-  border: none;
   color: white;
+}
+.redbtn:active {
+  background-color: #1f304f;
+}
+.bluebtn {
+  font: var(--titleFontFamily);
+  background-color: #1f304f;
+  color: white;
+}
+.bluebtn:active {
+  background-color: #b22b25;
+}
+.pointbtn {
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 4px 2px;
+  margin: 5px 10px;
   cursor: pointer;
   border-radius: 10px;
+  font-weight: bolder;
 }
 
-#applyFilters:active {
-  background-color: #1f304f;
+.editsavecancel {
+  display: flex; /* This makes the container a flex container */
+  flex-direction: row; /* Aligns children (buttons) in a column */
+  align-items: center; /* Centers the buttons horizontally in the container */
+  justify-content: center; /* Centers the buttons vertically in the container */
+  margin: 2rem;
 }
+
+.closeshowpnt{
+  background-color: #b22b25;
+    border-color: #dbdbdb;
+    border-width: 1px;
+    color: white;
+    cursor: pointer;
+    justify-content: center;
+    padding-bottom: calc(.5em - 1px);
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: calc(.5em - 1px);
+    text-align: center;
+    white-space: nowrap;
+    position: relative;
+    vertical-align: top;
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    box-shadow: none;
+    display: inline-flex;
+    font-size: 1rem;
+    height: 2.5em;
+}
+
+.saveaddpnt{
+  background-color: #1f304f;
+    border-color: #dbdbdb;
+    border-width: 1px;
+    color: white;
+    cursor: pointer;
+    justify-content: center;
+    padding-bottom: calc(.5em - 1px);
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: calc(.5em - 1px);
+    text-align: center;
+    white-space: nowrap;
+    position: relative;
+    vertical-align: top;
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    box-shadow: none;
+    display: inline-flex;
+    font-size: 1rem;
+    height: 2.5em;
+}
+
+
+.deletedbpoint{
+  border-radius: 2px;
+  font-size: .75rem;
+  background-color: #b22b25;
+  border-color: transparent;
+  color: #fff;
+  cursor: pointer;
+  justify-content: center;
+  padding-bottom: calc(.5em - 1px);
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: calc(.5em - 1px);
+  text-align: center;
+  white-space: nowrap;
+  border-width: 1px;
+}
+
 /* CONTACT PAGE */
 
 .contactTopFormat {
@@ -1260,6 +1417,7 @@ tr:hover {
 }
 #contactFormSection {
   display: flex;
+  /* Move left by 15% of the page width */
 }
 
 .contactFormText {
@@ -1269,10 +1427,11 @@ tr:hover {
 }
 
 .contactForm-flex {
-  flex: 1;
+  display: flex;
+  align-items: flex-start;
   margin-right: 5%;
   margin-bottom: 3rem;
-  margin-left: 10%;
+  margin-left: 5%;
   text-align: center;
 }
 .contactForm-flex .field {
@@ -1316,24 +1475,21 @@ textarea.input-field {
   max-height: 240px;
   resize: vertical;
 }
+.contactForm-flex img {
+  margin-left: 20px; /* Add some margin to the left of the image */
+}
 .contactForm-flex #name {
   width: calc(100%);
 }
 
 .contactForm-flex #email {
   width: calc(100%);
-  margin-right: 5px;
 }
 .contactForm-flex input[type="text"],
 .contactForm-flex input[type="email"] {
-  height: 40px;
-  width: 310px;
-  margin-right: 5px;
+  width: 100%;
 }
-.contactForm-flex input[type="email"] {
-  margin-top: 10px;
-  margin-left: 63px;
-}
+
 .contactForm-flex .input-field,
 .contactForm-flex textarea,
 .contactForm-flex button {
@@ -1408,3 +1564,191 @@ textarea.input-field {
   font-size: 18px;
   border-radius: var(--radius-8);
 }
+
+#foot_right {
+  padding-top: 5%;
+}
+.margin-class {
+  margin-top: 35px;
+}
+.aboutContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+.aboutText {
+  flex: 0 0 45%;
+  margin-bottom: 20px;
+}
+.aboutImage {
+  flex: 0 0 45%;
+}
+.aboutImage img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+.aboutContainer:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+.aboutPrimaryHeader {
+  margin: 0 auto;
+  font-family: var(--titleFontFamily);
+  font-size: 50px;
+  color: var(--primaryblack);
+  font-weight: bolder;
+  text-align: center;
+  color: var(--primarynavy);
+}
+
+.contactTopFormat .primaryheader {
+  color: var(--bodyTextColorWhite);
+}
+.aboutCardContent {
+  flex: 1;
+  text-align: center;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Center the text within the card */
+
+.aboutCardTxt-flex {
+  flex: 1;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+.aboutCardImg {
+  text-align: center;
+}
+.aboutCardHeader {
+  font: var(--bodyFontFamily);
+  font-size: 23px;
+  font-weight: 500;
+  margin-bottom: 3px;
+  margin-top: 3px;
+  color: var(--primarynavy);
+}
+.aboutCardHeader2 {
+  font: var(--bodyFontFamily);
+  font-size: 23px;
+  font-weight: 500;
+  color: var(--primarynavy);
+}
+.aboutHeader {
+  margin-top: 60px;
+  text-align: center;
+  font-size: 38px;
+  font-family: var(--bodyFontFamily);
+  color: var(--primarynavy);
+  font-weight: bold;
+}
+.aboutHeader2 {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 38px;
+  font-family: var(--bodyFontFamily);
+  color: var(--primarynavy);
+  font-weight: bold;
+}
+.aboutCardImg {
+  color: var(--secondaryred);
+  font-size: 2rem;
+}
+#aboutHeaderSection {
+  display: flex;
+  padding: 30px;
+  background-color: white;
+}
+#aboutHeaderSection2 {
+  display: flex;
+  padding: 30px;
+  padding-top: 40px;
+}
+.membership-info {
+  flex: 1; /* Let the membership information take up the remaining space */
+}
+.membership-info2 {
+  flex: 1; /* Let the membership information take up the remaining space */
+  text-align: left;
+}
+.membershipRequirementsSection {
+  background-color: white;
+  padding-top: 15px;
+  padding-bottom: 30px;
+  /* text-align: left; */
+}
+.requirements-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.requirements-column {
+  flex: 0 0 48%; /* Two columns, each taking up 48% of the container */
+}
+#speakerEventImg {
+  width: 45%;
+  margin-right: 180px;
+  margin-top: 20px;
+}
+#execImage {
+  margin-left: 180px;
+  margin-top: 60px;
+}
+
+.grid-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.grid-list li {
+  width: calc(30% - 0.2px); /* Two items per row with some spacing */
+  background-color: var(--lightGray);
+  border-left: 30px solid var(--primarywhite);
+  border-right: 30px solid var(--primarywhite);
+  border-top: 30px solid var(--primarywhite); /* Add a white border */
+  border-bottom: 30px solid var(--primarywhite); /* Add a white border */
+  border-radius: 45px;
+}
+
+/* For smaller screens, make each item full width */
+@media screen and (max-width: 768px) {
+  .grid-list li {
+    width: 100%;
+  }
+}
+/* Adjust the padding and margin of the service-card and its content */
+
+/* Reduce the font size and spacing of the card content */
+.service-card .card-content {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  line-height: 1.4;
+  justify-content: center;
+  text-align: center;
+}
+.service-card .card-content .aboutCardContent {
+  order: -1; /* Move the image to the top */
+  text-align: center;
+}
+
+/* Make adjustments for smaller screens */
+@media screen and (max-width: 768px) {
+  .service-card {
+    width: calc(50% - 20px); /* Two items per row with some spacing */
+  }
+}
+/* For the last item in each row, remove the right margin to prevent overflow */
+.grid-list li:nth-child(2n) {
+  margin-right: 0;
+}
+
+/* events button */

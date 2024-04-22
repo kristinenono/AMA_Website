@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calendar</title>
+    <script
+      src="https://kit.fontawesome.com/bcae03608a.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+  </head>
+  <body>
+    <main>
+      <div id="cal_page" class="wrapper">
+        <!-- LEFT MARGIN -->
+        <div class="colormargins margin-left">
+          <h2 class="heading-tag-upcoming-event">Upcoming Events</h2>
+          <div class="flex-container">
+            <div class="box margin-event">
+              <h2>Philathropy event</h2>
+    
+              <a href="#" class="events-button">View Event Here! </a>
+    
+              <div id="eventCard" class="event-card hidden">
+                <!-- Content of the event card goes here -->
+                <h2 class="secondaryheader">Event Title</h2>
+                <p class="primaryBody">Date: [Event Date]</p>
+                <p class="primaryBody">Location: [Event Location]</p>
+                <!-- Add more details as needed -->
+                <button id="editEventCard">Edit</button>
+                <button id="deleteEventCard">Delete</button>
+                <button id="closeEventCard">Close</button>
+              </div>
+            </div>
+            <div class="box margin-event">
+              <h2>Professional Development Event</h2>
+    
+              <a href="#" class="events-button">View Event Here! </a>
+            </div>
+            <div class="box margin-event">
+              <h2>Speaker Event</h2>
+    
+              <a href="#" class="events-button">View Event Here! </a>
+            </div>
+            <div class="box margin-event">
+              <h2>Social Event</h2>
+    
+              <a href="#" class="events-button">View Event Here! </a>
+            </div>
+          </div>
+        </div>
+        <div class="calview">
+    </div>
+    <div class="colormargins margin-right">
+      <a href="#" class="add-btn2" id="eventbtn">View Points</a>
+      </main>
+  </body>
+</html>
