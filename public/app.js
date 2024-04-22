@@ -547,7 +547,7 @@ function openEventModal(eventId, dayHTML) {
         const modalHtml = `
           <div class="modal is-active" id="eventModal_${event.id}">
             <div class="modal-background"></div>
-            <div class="modal-content">
+            <div class="modal-content" id="modal_evt">
               <div class="box">
                 <h2>${event.name}</h2>
                 <p>Date: ${formattedDate}</p>
@@ -557,10 +557,37 @@ function openEventModal(eventId, dayHTML) {
                 <button class="button" id="submit_points">Submit Points</button>
                 <button class="button" id="evtmodalcancel">Cancel</button>
               </div>
-              <button class="modal-close" aria-label="close"></button>
             </div>
           </div>
-        `;
+          </div><div class="modal is-hidden" id="pnts_mod">
+          <div class="modal-background"></div>
+          <div class="modal-content section has-background-white">
+            <h2 class="title">Member Attendance Form</h2>
+            <form id="member_attend">
+              <div class="field">
+                <label class="label">Name of AMA Member</label>
+                <div class="control">
+                  <input type="text" id="evtattd" placeholder="Bucky Badger" />
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Code Provided in Event</label>
+                <div class="control">
+                  <input type="text" id="genevtcode" placeholder="877hs3" />
+                </div>
+              </div>
+              <div class="field is-grouped">
+                <div class="control">
+                  <button class="button" id="pnts_sbt">Submit</button>
+                </div>
+                <div class="control">
+                  <button class="button" id="pnts_cncl">Cancel</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+          `;
 
         // Append the modal HTML to the dayHTML
         dayHTML += modalHtml;
@@ -571,7 +598,17 @@ function openEventModal(eventId, dayHTML) {
         // Show the modal
         const modalId = `#eventModal_${event.id}`;
         const modal = document.querySelector(modalId);
-        modal.classList.add("is-active");
+        const pnts_mod = document.getElementById("pnts_mod");
+        // pnts_mod.classList.add("is-active");
+
+        // modal.classList.add("is-active");
+        document
+          .getElementById("submit_points")
+          .addEventListener("click", function () {
+            modal.classList.remove("is-active");
+            pnts_mod.classList.remove("is-hidden");
+            pnts_mod.classList.add("is-active");
+          });
 
         // Attach event listener to the cancel button
         document
@@ -583,6 +620,17 @@ function openEventModal(eventId, dayHTML) {
             // Re-render the calendar view
             fetchEventsAndGenerateCalendarHTML(currentDate);
           });
+        document
+          .getElementById("pnts_cncl")
+          .addEventListener("click", function () {
+            // Close the modal when cancel button is clicked
+            pnts_mod.classList.remove("is-active");
+
+            // Re-render the calendar view
+            fetchEventsAndGenerateCalendarHTML(currentDate);
+          });
+
+        modal.classList.add("is-active");
       } else {
         console.error("No such event found!");
       }
