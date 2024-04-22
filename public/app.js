@@ -1735,8 +1735,8 @@ function addContent(isAdmin) {
     let points_content = `<div class="columns is-centered mt-4">
     <div class="column pr-outer">
         <div class="card px-4 py-3 has-text-centered" event-type="Volunteer">
-            <header class="card-header has-background-link-dark">
-                <p class="card-header-title has-text-white is-centered">Volunteer</p>
+            <header class="card-header">
+                <p class="card-header-title has-text-white is-centered add-cardcolor">Volunteer</p>
             </header>
             <div class="card-content">
                 <div class="content">
@@ -1747,8 +1747,8 @@ function addContent(isAdmin) {
     </div>
     <div class="column">
         <div class="card px-4 py-3 has-text-centered" event-type="professional_development">
-            <header class="card-header has-background-link-dark">
-                <p class="card-header-title has-text-white is-centered">Professional Development</p>
+            <header class="card-header">
+                <p class="card-header-title has-text-white is-centered add-cardcolor">Professional Development</p>
             </header>
             <div class="card-content">
                 <div class="content">
@@ -1759,8 +1759,8 @@ function addContent(isAdmin) {
     </div>
     <div class="column">
         <div class="card px-4 py-3 has-text-centered" event-type="DEI">
-            <header class="card-header has-background-link-dark">
-                <p class="card-header-title has-text-white is-centered">DEI</p>
+            <header class="card-header">
+                <p class="card-header-title has-text-white is-centered add-cardcolor">DEI</p>
             </header>
             <div class="card-content">
                 <div class="content">
@@ -1771,8 +1771,8 @@ function addContent(isAdmin) {
     </div>
     <div class="column">
         <div class="card px-4 py-3 has-text-centered" event-type="social">
-            <header class="card-header has-background-link-dark">
-                <p class="card-header-title has-text-white is-centered">Social</p>
+            <header class="card-header">
+                <p class="card-header-title has-text-white is-centered add-cardcolor">Social</p>
             </header>
             <div class="card-content">
                 <div class="content">
@@ -1783,8 +1783,8 @@ function addContent(isAdmin) {
     </div>
     <div class="column pl-outer">
         <div class="card px-4 py-3 has-text-centered" event-type="speaker">
-            <header class="card-header has-background-link-dark">
-                <p class="card-header-title has-text-white is-centered">Speaker</p>
+            <header class="card-header">
+                <p class="card-header-title has-text-white is-centered add-cardcolor">Speaker</p>
             </header>
             <div class="card-content">
                 <div class="content">
@@ -1797,8 +1797,8 @@ function addContent(isAdmin) {
 <div class="columns is-centered mt-4">
     <div class="column is-half">
         <div class="card px-4 py-3 has-text-centered" event-type="total">
-            <header class="card-header has-background-link-dark">
-                <p class="card-header-title has-text-white is-centered">Total Points</p>
+            <header class="card-header">
+                <p class="card-header-title has-text-white is-centered add-cardcolor">Total Points</p>
             </header>
             <div class="card-content">
                 <div class="content">
