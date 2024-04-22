@@ -120,7 +120,7 @@ x .title {
 .add-btn {
   font: var(--titleFontFamily);
   background-color: #1f304f;
-  color: #f3f2ee;
+  color: white;
   padding: 1rem;
   border: none;
   border-radius: 5px;
@@ -128,7 +128,21 @@ x .title {
   text-decoration: none;
 }
 .add-btn:hover {
+  background-color: #456ab0;
+}
+
+.sadd-btn {
+  font: var(--titleFontFamily);
   background-color: #b22b25;
+  color: #f3f2ee;
+  padding: 1rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 24px;
+  text-decoration: none;
+}
+.sadd-btn:hover {
+  background-color: #da5049;
 }
 /* home page modal styling */
 /* submit and cancel button formats for the signup/login modals */
