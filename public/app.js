@@ -463,6 +463,9 @@ const monthNames = [
 const dayNames = ["Sun", "Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];
 
 let currentDate = new Date();
+function reloadCalendarPage() {
+  document.getElementById("calendarbtn").click();
+}
 
 function openEventModal(eventId, dayHTML, currentAuth) {
   db.collection("events")
@@ -499,7 +502,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
                 <p>Type: ${event.type}</p>
                 <button class ="button" id=edit_curr_evt"> Edit </button>
                 <button class ="button" id=del_curr_evt"> Delete </button>
-                <button class="button" id="evtmodalcancel">Cancel</button>
+                <button class="button" id="evtmodalcancel" onclick="reloadCalendarPage()">Cancel</button>
               </div>
             </div>
           </div>
