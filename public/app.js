@@ -192,65 +192,6 @@ document.querySelector("#joinbuttonhome").addEventListener("click", () => {
 document.querySelector("#learnbuttonhome").addEventListener("click", () => {
   r_e("abt-link").click();
 });
-// main functions to use
-// console.log(firebase);
-// const mainContent = document.getElementById("main-content");
-// const homeLink = document.getElementById("home-link");
-
-// document.addEventListener("DOMContentLoaded", function () {
-//   // Function to load the home page content
-//   function loadHomePage(event) {
-//     event.preventDefault();
-//     mainContent.innerHTML = `<div class="titleContainers">
-//       <div class="column column1">
-//           <h1 class="title is-1 has-text-light">Welcome to <br />AMA UW-Madison</h1>
-//       </div>
-//       <div class="column column2">
-//           <img src="images/capitalPlaceholder.png" alt="MadisonCapital" width="100%" height="100%" />
-//       </div>
-//     </div>
-//     <div id="aboutSection" class="aboutSection-box">
-//       <h2 class="primaryheader">About us</h2>
-//       <p class="primaryBody">
-//           Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum at magni
-//           porro voluptatibus, quasi doloribus provident officiis, illo hic laborum
-//           distinctio mollitia quis minima ducimus.
-//       </p>
-//     </div>
-//     <div id="involvementSection" class="involvementSection">
-//       <div class="involvementText">
-//           <h3 class="secondaryheader">Get involved</h3>
-//           <h4 class="tertiaryHeader">Our primary events include:</h4>
-//           <ul class="primaryBody">
-//               <li>Member meetings</li>
-//               <li>Professional developments</li>
-//               <li>Social events</li>
-//               <li>Community outreach</li>
-//               <li>And more!</li>
-//           </ul>
-//           <div>
-//               <p>
-//                   <button class="involvementButton1"><b>LEARN MORE</b></button>&nbsp;&nbsp;
-//                   <button class="involvementButton2" id="joinbuttonhome"><b>JOIN</b></button>
-//               </p>
-//           </div>
-//       </div>
-//       <div class="involvementImage-flex">
-//           <img src="images/Bucks_event.png" alt="AMA Event" width="100%" height="Auto" />
-//       </div>
-//     </div>`;
-//   }
-
-//   // Call the loadHomePage function
-//   loadHomePage(new Event("click"));
-
-//   // Get the home link element
-//   const homeLink = document.getElementById("home-link");
-
-//   // Add an event listener to load the home page when the home link is clicked
-//   homeLink.addEventListener("click", loadHomePage);
-// });
-
 // main functions for innerHTML
 function r_e(id) {
   return document.querySelector(`#${id}`);
@@ -609,6 +550,36 @@ function openEventModal(eventId, dayHTML) {
             pnts_mod.classList.remove("is-hidden");
             pnts_mod.classList.add("is-active");
           });
+
+        // putting points into db
+        const pnts_sbt_frm = r_e("pnts_sbt");
+        let ppl_attend = r_e("evtattd");
+        let gen_evtcode = r_e("genevtcode");
+
+        pnts_sbt_frm
+          .addEventListener("click", (e) => {
+            console.log("submit_points");
+            e.preventDefault();
+            let name = ppl_attend.value;
+            let code = gen_evtcode.value;
+            let user_email = auth.currentUser.email;
+            let event_id = eventId;
+
+            let form_submit = {
+              name: name,
+              code: code,
+              user_email: user_email,
+              event_id: event_id,
+            };
+
+            db.collection("form_responses")
+              .add(form_submit)
+              .then(() => {
+                fetchEventsAndGenerateCalendarHTML(currentDate);
+              });
+            pnts_mod.classList.remove("is-active");
+          })
+          .catch((error) => console.error("Error Submitting Points ", error));
 
         // Attach event listener to the cancel button
         document
@@ -1049,7 +1020,6 @@ r_e("calendarbtn").addEventListener("click", () => {
           document.getElementById("codeInput").value = randomCode;
         });
       addevtsbt.addEventListener("click", (e) => {
-        console.log("eventsbtnclicked");
         e.preventDefault();
         let name = evtname.value;
         let time = evttime.value;
@@ -2280,27 +2250,6 @@ function expand_burger() {
   contact_burger.classList.toggle("has-text-light");
 }
 burger_stack.addEventListener("click", expand_burger);
-
-// console.log(firebase);
-// let r1 = {
-//   ID: "a123",
-//   name: "nonna kitchen",
-//   loc_code: 13,
-//   style: ["american", "chinese", "italian"],
-// };
-
-// r2 is a document in the restaurants collection
-// let r2 = {
-//   ID: "b789",
-//   name: "johns burger",
-//   loc_code: 20,
-//   style: ["italian"],
-//   noise_level: "low",
-// };
-
-// db.collection("restaurants").add(r2);
-
-// db.collection("restaurants").doc("abc1234").set(r2);
 
 // store info from form into db
 
