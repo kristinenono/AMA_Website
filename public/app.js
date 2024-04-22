@@ -1156,10 +1156,109 @@ function displayContentBasedOnEmail(email) {
     addContent(false);
   }
 }
-
 function addContent(isAdmin) {
   if (isAdmin) {
-    let points_content = `<div class="filter-container">
+    let points_content = `<div id="editmodal" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <div class="box">
+        <div class="field">
+          <label class="label">Member:</label>
+          <div class="control">
+            <div class="select">
+              <select id="memberSelect">
+                <!-- Member options will be populated dynamically -->
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Semester:</label>
+          <div class="control">
+            <div class="select">
+              <select id="editSemester" disabled>
+                <option value="SPRING 2024">SPRING 2024</option>
+                <option value="FALL 2024">FALL 2024</option>
+                <option value="SPRING 2025">SPRING 2025</option>
+                <option value="FALL 2025">FALL 2025</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Code:</label>
+          <div class="control">
+            <input class="input" type="text" id="editCode" placeholder="Enter code">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Points:</label>
+          <div class="control">
+            <input class="input" type="number" id="editPoints" placeholder="Enter points" disabled>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Event Type:</label>
+          <div class="control">
+            <div class="select">
+              <select id="editEventType" disabled>
+                <option value="Volunteer">Volunteer</option>
+                <option value="Professional Development">Professional Development</option>
+                <option value="Speaker Event">Speaker</option>
+                <option value="Social Event">Social</option>
+                <option value="DEI Event">DEI</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Event Name:</label>
+          <input class="input" type="text" id="eventName" placeholder="Event Name" disabled>
+        </div>
+        <div class="field">
+          <label class="label">Event Description:</label>
+          <input class="input" type="text" id="eventDesc" placeholder="Description" disabled>
+        </div>
+        <div class="field">
+          <label class="label">Event Time:</label>
+          <input class="input" type="text" id="eventTime" placeholder="Time" disabled>
+        </div>
+        <button id="saveaddpoints" class="saveaddpnt">Save</button>
+        <button id="editclear" class="closeshowpnt">Clear</button>
+      </div>
+    </div>
+    <button id="editclose" class="modal-close is-large" aria-label="close"></button>
+  </div>
+  <div id="showmodal" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <div class="box">
+        <div class="field">
+          <label class="label">Select Member:</label>
+          <div class="control">
+            <div class="select is-fullwidth">
+              <select id="showMemberSelect"></select>
+            </div>
+          </div>
+        </div>
+        <table class="table is-striped is-narrow is-hoverable is-fullwidth">
+          <thead>
+            <tr>
+              <th class="has-text-white">Code</th>
+              <th class="has-text-white">Event Type</th>
+              <th class="has-text-white">Points</th>
+              <th class="has-text-white">Semester</th>
+              <th class="has-text-white">Action</th>
+            </tr>
+          </thead>
+          <tbody id="memberPointsList"></tbody>
+        </table>
+        <button id="showclose" class="closeshowpnt">Close</button>
+      </div>
+    </div>
+    <button id="showeditclose" class="modal-close is-large" aria-label="close"></button>
+  </div>
+  <div class="filter-container">
     <div class="filtername">
       <label for="nameSearch">Search by Name:</label>
       <input type="text" id="nameSearch" placeholder="Search name...">
@@ -1172,24 +1271,16 @@ function addContent(isAdmin) {
               <option value="SPRING 2025">SPRING 2025</option>
               <option value="FALL 2025">FALL 2025</option>
           </select>
-      <!-- <label for="eventFilter">Filter by Event:</label>
-      <select id="eventFilter">
-          <option data-event="Total Points">All</option>
-          <option data-event="Volunteer Points">Volunteer Points</option>
-          <option data-event="Development Points">Development Points</option>
-          <option data-event="Social Points">Social Points</option>
-          <option data-event="Speaker Points">Speaker Points</option>
-          <option data-event="DEI Points">DEI Points</option>
-      </select> -->
     </div>
       <button id="applyFilters" class="redbtn pointbtn">Apply Filters</button>
       <button id="editbtn" class="bluebtn pointbtn">Edit Points</button>
+      <button id="canceledit" class="bluebtn pointbtn is-hidden">Cancel Edit</button>
   </div>   
-  <div id="savecancelbtn" class="container editsavecancel is-hidden">
-    <button id="editsave" class="bluebtn pointbtn">Save</button>
-    <button id="editcancel" class="redbtn pointbtn">Cancel</button>
+  <div id="addshowbtn" class="container editsavecancel is-hidden">
+    <button id="addedit" class="bluebtn pointbtn">Add Points</button>
+    <button id="showedit" class="redbtn pointbtn">Show Points</button>
   </div>              
-  <table class="table is-bordered is-striped is-hoverable">
+  <table class="table is-bordered">
       <thead>
         <tr>
           <th class="has-text-white">Member</th>
@@ -1204,27 +1295,24 @@ function addContent(isAdmin) {
       </thead>
       <tbody
   id="all_people"
-  class="has-background-lightgray p-4 m-3 has-background-grey-lighter"
->
+  class="p-4 m-3">
   <!-- Table rows will be dynamically added here -->
 </tbody>
 </table>`;
     appendContent(points_content);
-    defineEditFunctions();
-    attachEventListeners();
-    fetchAndPopulatePoints();
+    listenForMemberPointsUpdates();
 
+    // functions for the table
     function fetchAndPopulatePoints(selectedSemester, searchQuery) {
-      selectedSemester = selectedSemester || getCurrentSemester(); // Default to current semester if not provided
+      selectedSemester = selectedSemester || getCurrentSemester();
+
+      // fetch all users from the ama_users collection
       db.collection("ama_users")
         .get()
         .then((userSnapshot) => {
-          const rows = document.querySelectorAll("#all_people tr");
-
-          // Create an object to store total points for each member
           const memberTotalPoints = {};
+          const memberPointsPromises = [];
 
-          // Iterate over each document in the user snapshot
           userSnapshot.forEach((userDoc) => {
             const fullName = userDoc.data().full_name;
             memberTotalPoints[fullName] = {
@@ -1232,40 +1320,39 @@ function addContent(isAdmin) {
               professional_development: 0,
               social: 0,
               speaker: 0,
-              DEI: 0,
+              dei: 0,
             };
-          });
-
-          // Get member points from member_points collection
-          db.collection("member_points")
-            .get()
-            .then((snapshot) => {
-              // Iterate over each document in the member points snapshot
-              snapshot.forEach((doc) => {
-                const data = doc.data();
-                const fullName = data.member;
-                const eventType = data.eventType.toLowerCase();
-                const eventPoints = parseInt(data.points) || 0;
-                const pointSemester = data.pointSemester.toUpperCase();
-
-                // Check if the member exists in the object and the points are for the selected semester
-                if (
-                  memberTotalPoints[fullName] &&
-                  (selectedSemester === pointSemester ||
-                    (selectedSemester === getCurrentSemester() &&
-                      pointSemester === getCurrentSemester())) &&
-                  // Check if the search query matches the member's name
-                  (searchQuery
-                    ? fullName.toLowerCase().includes(searchQuery)
-                    : true)
-                ) {
-                  // Add points to the respective event type
-                  memberTotalPoints[fullName][eventType] += eventPoints;
-                }
+            const pointsPromise = db
+              .collection("ama_users")
+              .doc(userDoc.id)
+              .collection("member_points")
+              .where("pointSemester", "==", selectedSemester)
+              .get()
+              .then((pointsSnapshot) => {
+                pointsSnapshot.forEach((doc) => {
+                  const data = doc.data();
+                  const eventType = normalizeEventType(data.eventType); // Use the normalized event type
+                  const eventPoints = parseInt(data.points); // Ensure the points are treated as numbers
+                  if (
+                    memberTotalPoints[fullName] &&
+                    eventType in memberTotalPoints[fullName]
+                  ) {
+                    memberTotalPoints[fullName][eventType] += eventPoints;
+                  }
+                });
+              })
+              .catch((error) => {
+                console.error(
+                  `Error getting points for user ${fullName}: `,
+                  error
+                );
               });
 
-              // Pass selected semester to updateTableWithData function
-              // Pass the searchQuery to the updateTableWithData function
+            memberPointsPromises.push(pointsPromise);
+          });
+
+          Promise.all(memberPointsPromises)
+            .then(() => {
               updateTableWithData(
                 memberTotalPoints,
                 selectedSemester,
@@ -1273,7 +1360,7 @@ function addContent(isAdmin) {
               );
             })
             .catch((error) => {
-              console.error("Error getting member points documents: ", error);
+              console.error("Error processing member points data: ", error);
             });
         })
         .catch((error) => {
@@ -1281,10 +1368,62 @@ function addContent(isAdmin) {
         });
     }
 
+    function updateTableWithData(
+      memberTotalPoints,
+      selectedSemester,
+      searchQuery
+    ) {
+      const tableBody = document.getElementById("all_people");
+      tableBody.innerHTML = "";
+
+      Object.entries(memberTotalPoints).forEach(([fullName, points]) => {
+        if (
+          !searchQuery ||
+          fullName.toLowerCase().includes(searchQuery.toLowerCase())
+        ) {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+                  <td>${fullName}</td>
+                  <td>${selectedSemester}</td>
+                  <td>${points.volunteer}</td>
+                  <td>${points.professional_development}</td>
+                  <td>${points.social}</td>
+                  <td>${points.speaker}</td>
+                  <td>${points.dei}</td>
+                  <td>${
+                    points.volunteer +
+                    points.professional_development +
+                    points.social +
+                    points.speaker +
+                    points.dei
+                  }</td>
+              `;
+          tableBody.appendChild(row);
+        }
+      });
+    }
+
     // Call the function to fetch and populate points when the page loads
     window.onload = function () {
       fetchAndPopulatePoints();
+      listenForMemberPointsUpdates(); // Start listening for real-time updates
     };
+
+    // filtering table functions
+    function getCurrentSemester() {
+      const currentDate = new Date();
+      const currentMonth = currentDate.getMonth(); // Month is zero-based
+
+      // Determine the semester based on the current month
+      let currentSemester;
+      if (currentMonth >= 0 && currentMonth <= 5) {
+        currentSemester = "SPRING " + currentDate.getFullYear();
+      } else {
+        currentSemester = "FALL " + currentDate.getFullYear();
+      }
+
+      return currentSemester.toUpperCase();
+    }
 
     document
       .getElementById("applyFilters")
@@ -1301,6 +1440,297 @@ function addContent(isAdmin) {
         // Call fetchAndPopulatePoints with the selected semester and search query
         fetchAndPopulatePoints(semesterFilterValue, nameSearchValue);
       });
+
+    // Function to disable the dropdown
+    function disableEventTypeDropdown() {
+      document.getElementById("editEventType").disabled = true;
+    }
+
+    // Function to enable the dropdown
+    function enableEventTypeDropdown() {
+      document.getElementById("editEventType").disabled = false;
+    }
+
+    function normalizeEventType(eventType) {
+      const typeMapping = {
+        Volunteer: "volunteer",
+        "Professional Development": "professional_development",
+        "Speaker Event": "speaker",
+        "Social Event": "social",
+        "DEI Event": "dei",
+      };
+      return (
+        typeMapping[eventType] || eventType.toLowerCase().replace(/ /g, "_")
+      );
+    }
+
+    // when edit button is clicked it shows the add points, show points and cancel edit buttons
+    function addshowedit() {
+      document.getElementById("canceledit").classList.remove("is-hidden");
+      document.getElementById("addshowbtn").classList.remove("is-hidden");
+      document.getElementById("addshowbtn").classList.add("is-active");
+      document.getElementById("editbtn").classList.add("is-hidden");
+    }
+
+    function canceledit() {
+      document.getElementById("canceledit").classList.add("is-hidden");
+      document.getElementById("addshowbtn").classList.add("is-hidden");
+      document.getElementById("addshowbtn").classList.remove("is-active");
+      document.getElementById("editbtn").classList.remove("is-hidden");
+    }
+
+    document.getElementById("editbtn").addEventListener("click", addshowedit);
+    document.getElementById("canceledit").addEventListener("click", canceledit);
+
+    editclose.addEventListener("click", () => {
+      editmodal.classList.remove("is-active");
+    });
+
+    document
+      .querySelectorAll(".modal-background, .modal-close")
+      .forEach(function (el) {
+        el.addEventListener("click", function () {
+          editmodal.classList.remove("is-active");
+          showmodal.classList.remove("is-active");
+        });
+      });
+
+    addedit.addEventListener("click", () => {
+      populateMemberDropdown(); // Populate dropdown when modal is activated
+      editmodal.classList.add("is-active");
+    });
+
+    function populateMemberDropdown() {
+      const select = document.getElementById("memberSelect");
+      select.innerHTML = ""; // Clear existing options
+      db.collection("ama_users")
+        .get()
+        .then((snapshot) => {
+          snapshot.forEach((doc) => {
+            const fullName = doc.data().full_name;
+            const option = document.createElement("option");
+            option.value = doc.id; // Use user's document ID as value
+            option.textContent = fullName;
+            select.appendChild(option);
+          });
+        })
+        .catch((error) => {
+          console.error("Error fetching members: ", error);
+        });
+    }
+
+    document.getElementById("editCode").addEventListener("input", function () {
+      const code = this.value;
+      // Assuming event codes are at least some minimum length before checking
+      if (code.length >= 8) {
+        fetchEventDetails(code);
+      }
+    });
+
+    function fetchEventDetails(code) {
+      db.collection("events")
+        .where("code", "==", code)
+        .get()
+        .then((querySnapshot) => {
+          if (!querySnapshot.empty) {
+            const eventData = querySnapshot.docs[0].data(); // Assuming the code is unique
+            document.getElementById("eventName").value = eventData.name || "";
+            document.getElementById("eventDesc").value = eventData.desc || "";
+            document.getElementById("eventTime").value = eventData.time || "";
+            document.getElementById("editPoints").value = eventData.pts || "";
+            document.getElementById("editEventType").value =
+              eventData.type || "";
+            document.getElementById("editSemester").value =
+              eventData.semester || "";
+            enableInputs(); // Enable inputs after fetching data
+          } else {
+            console.log("No event found with that code.");
+            // Optionally clear fields or alert the user
+            clearEventFields(); // Clear fields if no data is found
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching event details: ", error);
+        });
+    }
+
+    function clearEventFields() {
+      document.getElementById("eventName").value = "";
+      document.getElementById("eventDesc").value = "";
+      document.getElementById("eventTime").value = "";
+      document.getElementById("editPoints").value = "";
+      document.getElementById("editEventType").selectedIndex = 0;
+      document.getElementById("editSemester").selectedIndex = 0;
+    }
+
+    function populateShowMemberDropdown() {
+      const select = document.getElementById("showMemberSelect");
+      select.innerHTML = ""; // Clear existing options
+      db.collection("ama_users")
+        .get()
+        .then((snapshot) => {
+          snapshot.forEach((doc) => {
+            const fullName = doc.data().full_name;
+            const option = document.createElement("option");
+            option.value = doc.id;
+            option.textContent = fullName;
+            select.appendChild(option);
+          });
+          if (select.options.length > 0) {
+            fetchMemberPoints(select.options[select.selectedIndex].value);
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching members: ", error);
+        });
+
+      // Fetch and display points when a member is selected
+      select.addEventListener("change", () => {
+        if (select.selectedIndex >= 0) {
+          fetchMemberPoints(select.value);
+        }
+      });
+    }
+
+    function saveEditChanges() {
+      const memberId = document.getElementById("memberSelect").value;
+      const code = document.getElementById("editCode").value;
+      const semester = document.getElementById("editSemester").value;
+      const eventType = document.getElementById("editEventType").value;
+      const points = parseInt(document.getElementById("editPoints").value);
+
+      if (!points || points < 0) {
+        alert("Please enter a valid number of points.");
+        return;
+      }
+
+      // Assuming you will update or set data in member_points collection
+      db.collection("ama_users")
+        .doc(memberId)
+        .collection("member_points")
+        .add({
+          code: code,
+          eventType: eventType,
+          pointSemester: semester,
+          points: points,
+        })
+        .then(() => {
+          console.log("Points updated successfully");
+          fetchAndPopulatePoints(); // Refresh the points table globally or just for the affected semester
+          editmodal.classList.remove("is-active");
+          clearaddpoints();
+        })
+        .catch((error) => {
+          console.error("Error updating points: ", error);
+        });
+    }
+
+    function listenForMemberPointsUpdates() {
+      db.collection("ama_users").onSnapshot((snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+          if (
+            change.type === "added" ||
+            change.type === "modified" ||
+            change.type === "removed"
+          ) {
+            console.log(
+              "Detected changes in member points data, refreshing table..."
+            );
+            fetchAndPopulatePoints();
+          }
+        });
+      });
+    }
+
+    let editclear = document.getElementById("editclear");
+    document
+      .getElementById("editclear")
+      .addEventListener("click", clearaddpoints);
+
+    function clearaddpoints() {
+      document.getElementById("editCode").value = "";
+      document.getElementById("editSemester").selectedIndex = 0;
+      document.getElementById("editEventType").selectedIndex = 0;
+      document.getElementById("memberSelect").selectedIndex = 0;
+      document.getElementById("editPoints").value = "";
+    }
+
+    let saveaddpoints = document.getElementById("saveaddpoints");
+    saveaddpoints.addEventListener("click", saveEditChanges);
+
+    // Fetch and Display Member Points
+    function fetchMemberPoints(memberId) {
+      const tbody = document.getElementById("memberPointsList");
+      tbody.innerHTML = ""; // Clear the table body each time to prevent duplication
+      db.collection("ama_users")
+        .doc(memberId)
+        .collection("member_points")
+        .get()
+        .then((snapshot) => {
+          snapshot.forEach((doc) => {
+            const data = doc.data();
+            const row = document.createElement("tr");
+            row.innerHTML = `
+            <td>${data.code}</td>
+            <td>${data.eventType}</td>
+            <td>${data.points}</td>
+            <td>${data.pointSemester}</td>
+            <td><button class="delete-point deletedbpoint" data-id="${doc.id}">Delete</button></td>
+          `;
+            tbody.appendChild(row);
+          });
+          // Attach delete event handlers
+          document.querySelectorAll(".delete-point").forEach((button) => {
+            button.addEventListener("click", () => {
+              deletePoint(memberId, button.getAttribute("data-id"));
+            });
+          });
+        })
+        .catch((error) => {
+          console.error("Error loading points: ", error);
+          tbody.innerHTML = `<tr><td colspan="5">Error loading points</td></tr>`;
+        });
+    }
+
+    // Delete a Point Entry
+    function deletePoint(memberId, pointId) {
+      db.collection("ama_users")
+        .doc(memberId)
+        .collection("member_points")
+        .doc(pointId)
+        .delete()
+        .then(() => {
+          console.log("Point deleted successfully");
+          fetchMemberPoints(memberId); // Refresh the list after deletion
+          fetchAndPopulatePoints();
+        })
+        .catch((error) => {
+          console.error("Error deleting points: ", error);
+        });
+    }
+
+    // Initialize and populate the dropdown when the modal is activated
+    document.getElementById("showedit").addEventListener("click", () => {
+      const select = document.getElementById("showMemberSelect");
+      if (select.options.length === 0) {
+        // Only populate if dropdown is empty
+        populateShowMemberDropdown();
+      }
+      document.getElementById("showmodal").classList.add("is-active");
+    });
+
+    let showclose = document.getElementById("showclose");
+    let showmodal = document.getElementById("showmodal");
+    let showeditclose = document.getElementById("showeditclose");
+
+    // Close the modal
+    showclose.addEventListener("click", () => {
+      showmodal.classList.remove("is-active");
+    });
+
+    showeditclose.addEventListener("click", () => {
+      showmodal.classList.remove("is-active");
+    });
   } else {
     let points_content = `<div class="columns is-centered mt-4">
     <div class="column pr-outer">
@@ -1384,237 +1814,6 @@ function addContent(isAdmin) {
     updateCardsWithPoints(memberTotalPoints);
   }
 }
-function getCurrentSemester() {
-  const currentDate = new Date();
-  const currentMonth = currentDate.getMonth(); // Month is zero-based
-
-  // Determine the semester based on the current month
-  let currentSemester;
-  if (currentMonth >= 0 && currentMonth <= 5) {
-    currentSemester = "SPRING " + currentDate.getFullYear();
-  } else {
-    currentSemester = "FALL " + currentDate.getFullYear();
-  }
-
-  return currentSemester.toUpperCase();
-}
-
-function updateTableWithData(memberTotalPoints, selectedSemester, searchQuery) {
-  const tableBody = document.getElementById("all_people");
-  tableBody.innerHTML = ""; // Clear existing table rows
-
-  // Iterate over each member and populate the table
-  for (const fullName in memberTotalPoints) {
-    const totalPoints = memberTotalPoints[fullName];
-
-    // Check if the member's name matches the search query
-    if (searchQuery && !fullName.toLowerCase().includes(searchQuery)) {
-      continue; // Skip this member if it doesn't match the search query
-    }
-
-    // Create a new row for the member
-    const newRow = document.createElement("tr");
-    newRow.innerHTML = `
-      <td>${fullName}</td>
-      <td>${selectedSemester}</td>
-      <td>${totalPoints.volunteer}</td>
-      <td>${totalPoints.professional_development}</td>
-      <td>${totalPoints.social}</td>
-      <td>${totalPoints.speaker}</td>
-      <td>${totalPoints.DEI}</td>
-      <td>${
-        totalPoints.volunteer +
-        totalPoints.professional_development +
-        totalPoints.social +
-        totalPoints.speaker +
-        totalPoints.DEI
-      }</td>
-  `;
-
-    // Append the row to the table
-    tableBody.appendChild(newRow);
-  }
-  function calculateTotalPoints() {
-    const rows = document.querySelectorAll("#all_people tr");
-    rows.forEach((row) => {
-      let totalPoints = 0;
-      for (let i = 2; i < row.cells.length - 1; i++) {
-        totalPoints += parseInt(row.cells[i].textContent) || 0;
-      }
-      row.cells[row.cells.length - 1].textContent = totalPoints;
-    });
-  }
-  calculateTotalPoints(); // Calculate total points after populating individual points
-}
-
-function defineEditFunctions() {
-  console.log("Defining edit functions");
-
-  function showsavecancel() {
-    console.log("Executing showsavecancel");
-    editpointsmode(true);
-    document.getElementById("savecancelbtn").classList.remove("is-hidden");
-    document.getElementById("savecancelbtn").classList.add("is-active");
-    document.getElementById("editbtn").classList.add("is-hidden");
-  }
-
-  function canceledit() {
-    console.log("Executing canceledit");
-    document.getElementById("savecancelbtn").classList.add("is-hidden");
-    document.getElementById("savecancelbtn").classList.remove("is-active");
-    document.getElementById("editbtn").classList.remove("is-hidden");
-    editpointsmode(false);
-  }
-
-  function saveedit() {
-    console.log("Executing saveedit");
-    document.getElementById("savecancelbtn").classList.add("is-hidden");
-    document.getElementById("editbtn").classList.remove("is-hidden");
-    editpointsmode(false);
-  }
-
-  // Define these functions in the global scope if they need to be accessible elsewhere
-  window.showsavecancel = showsavecancel;
-  window.canceledit = canceledit;
-  window.saveedit = saveedit;
-
-  // Move the attachment of event listeners here to ensure they are defined first
-  document.getElementById("editbtn").addEventListener("click", showsavecancel);
-  document.getElementById("editsave").addEventListener("click", saveedit);
-  document.getElementById("editcancel").addEventListener("click", canceledit);
-
-  // Call attachEventListeners here if it needs to use these functions
-  attachEventListeners();
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-  defineEditFunctions(); // This now also handles attaching event listeners
-});
-
-function attachEventListeners() {
-  document.getElementById("editbtn").addEventListener("click", showsavecancel);
-  document.getElementById("editsave").addEventListener("click", saveedit);
-  document.getElementById("editcancel").addEventListener("click", canceledit);
-}
-
-const eventsCollectionRef = db.collection("events"); // Replace "events" with the actual name of your events collection
-const formResponsesCollectionRef = db.collection("form_responses"); // Replace "form_responses" with the actual name of your form responses collection
-const mergedCollectionRef = db.collection("member_points"); // Replace "merged_data" with the actual name of your merged data collection
-
-//Need to fix so that the function can take form_responses.attended_members as an array
-
-async function mergeDataAndDeleteDuplicates() {
-  try {
-    const eventsSnapshot = await eventsCollectionRef.get();
-    const formResponsesSnapshot = await formResponsesCollectionRef.get();
-    const mergedDocsSnapshot = await mergedCollectionRef.get();
-
-    const formResponsesData = {};
-    formResponsesSnapshot.forEach((doc) => {
-      const formData = doc.data();
-      formResponsesData[formData.code] = formData;
-    });
-
-    const existingKeys = new Set();
-    const batch = firebase.firestore().batch();
-
-    eventsSnapshot.forEach((eventsDoc) => {
-      const eventData = eventsDoc.data();
-      const eventCode = eventData.code;
-
-      if (formResponsesData[eventCode]) {
-        const formResponseData = formResponsesData[eventCode];
-        const key = `${eventCode}_${formResponseData.attended_members}`;
-
-        if (!existingKeys.has(key)) {
-          existingKeys.add(key);
-          const mergedData = {
-            code: eventCode,
-            eventType: eventData.type,
-            points: eventData.pts,
-            pointSemester: eventData.semester,
-            member: formResponseData.attended_members,
-            key: key,
-          };
-          batch.set(mergedCollectionRef.doc(key), mergedData);
-        }
-      }
-    });
-
-    await batch.commit();
-
-    const uniqueKeys = new Set();
-    const deleteBatch = firebase.firestore().batch();
-
-    mergedDocsSnapshot.forEach((doc) => {
-      const key = doc.data().key;
-      if (uniqueKeys.has(key)) {
-        deleteBatch.delete(doc.ref);
-      } else {
-        uniqueKeys.add(key);
-      }
-    });
-
-    await deleteBatch.commit();
-
-    console.log("Operation completed successfully.");
-  } catch (error) {
-    console.error("Operation failed: ", error);
-  }
-}
-
-// Execute the function to merge data and delete duplicates
-mergeDataAndDeleteDuplicates();
-function PopulatePoints() {
-  db.collection("ama_users")
-    .get()
-    .then((userSnapshot) => {
-      // Initialize an object to store total points per user, by event type
-      const memberTotalPoints = {};
-
-      // Iterate over each user document
-      userSnapshot.forEach((userDoc) => {
-        const fullName = userDoc.data().full_name;
-        memberTotalPoints[fullName] = {
-          volunteer: 0,
-          professional_development: 0,
-          social: 0,
-          speaker: 0,
-          DEI: 0,
-          total: 0,
-        };
-      });
-
-      // Fetch member points
-      db.collection("member_points")
-        .get()
-        .then((snapshot) => {
-          // Process each point document
-          snapshot.forEach((doc) => {
-            const data = doc.data();
-            const fullName = auth.currentUser.full_name; // Assuming member name stored here
-            const eventType = data.eventType.toLowerCase().replace(/\s+/g, "_"); // Format to match key names in the object
-            const eventPoints = parseInt(data.points) || 0;
-
-            // Accumulate points if user is found
-            if (
-              memberTotalPoints[fullName] &&
-              memberTotalPoints[fullName][eventType] !== undefined
-            ) {
-              memberTotalPoints[fullName][eventType] += eventPoints;
-            }
-          });
-
-          updateCardsWithPoints(memberTotalPoints);
-        })
-        .catch((error) => {
-          console.error("Error getting member points documents: ", error);
-        });
-    })
-    .catch((error) => {
-      console.error("Error getting users documents: ", error);
-    });
-}
 
 function updateCardsWithPoints(memberTotalPoints) {
   console.log(
@@ -1636,10 +1835,6 @@ function updateCardsWithPoints(memberTotalPoints) {
     }
   });
 }
-
-document.querySelector(".pointfooter").addEventListener("click", () => {
-  r_e("pointbtn").click();
-});
 
 // contact page content
 let contact_content = `<div id="contactSectionTop" class="contactSection-box contactTopFormat">
