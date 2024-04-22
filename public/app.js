@@ -523,7 +523,7 @@ const dayNames = ["Sun", "Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];
 
 let currentDate = new Date();
 
-function openEventModal(eventId, dayHTML) {
+function openEventModal(eventId, dayHTML, currentAuth) {
   db.collection("events")
     .doc(eventId)
     .get()
@@ -543,51 +543,42 @@ function openEventModal(eventId, dayHTML) {
           minute: "numeric",
         });
 
-        // Generate modal HTML
-        const modalHtml = `
-          <div class="modal is-active" id="eventModal_${event.id}">
-            <div class="modal-background"></div>
-            <div class="modal-content" id="modal_evt">
-              <div class="box">
-                <h2>${event.name}</h2>
-                <p>Date: ${formattedDate}</p>
-                <p>Time: ${formattedTime}</p>
-                <p>Description: ${event.desc}</p>
-                <p>Type: ${event.type}</p>
-                <button class="button" id="submit_points">Submit Points</button>
-                <button class="button" id="evtmodalcancel">Cancel</button>
-              </div>
-            </div>
-          </div>
-          </div><div class="modal is-hidden" id="pnts_mod">
-          <div class="modal-background"></div>
-          <div class="modal-content section has-background-white">
-            <h2 class="title">Member Attendance Form</h2>
-            <form id="member_attend">
-              <div class="field">
-                <label class="label">Name of AMA Member</label>
-                <div class="control">
-                  <input type="text" id="evtattd" placeholder="Bucky Badger" />
+        // Generate modal HTML based on user authentication
+        let modalHtml;
+        if (auth.currentUser.email == "amauwmadison@gmail.com") {
+          modalHtml = `
+            <div class="modal is-active" id="eventModal_${event.id}">
+              <div class="modal-background"></div>
+              <div class="modal-content" id="modal_evt">
+                <div class="box">
+                  <h2>${event.name}</h2>
+                  <p>Date: ${formattedDate}</p>
+                  <p>Time: ${formattedTime}</p>
+                  <p>Description: ${event.desc}</p>
+                  <p>Type: ${event.type}</p>
+                  <button class="button" id="delete_event">Delete</button>
+                  <button class="button" id="edit_event">Edit</button>
+                  <button class="button" id="evtmodalcancel">Cancel</button>
                 </div>
               </div>
-              <div class="field">
-                <label class="label">Code Provided in Event</label>
-                <div class="control">
-                  <input type="text" id="genevtcode" placeholder="877hs3" />
+            </div>`;
+        } else {
+          modalHtml = `
+            <div class="modal is-active" id="eventModal_${event.id}">
+              <div class="modal-background"></div>
+              <div class="modal-content" id="modal_evt">
+                <div class="box">
+                  <h2>${event.name}</h2>
+                  <p>Date: ${formattedDate}</p>
+                  <p>Time: ${formattedTime}</p>
+                  <p>Description: ${event.desc}</p>
+                  <p>Type: ${event.type}</p>
+                  <button class="button" id="submit_points">Submit Points</button>
+                  <button class="button" id="evtmodalcancel">Cancel</button>
                 </div>
               </div>
-              <div class="field is-grouped">
-                <div class="control">
-                  <button class="button" id="pnts_sbt">Submit</button>
-                </div>
-                <div class="control">
-                  <button class="button" id="pnts_cncl">Cancel</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-          `;
+            </div>`;
+        }
 
         // Append the modal HTML to the dayHTML
         dayHTML += modalHtml;
@@ -598,17 +589,7 @@ function openEventModal(eventId, dayHTML) {
         // Show the modal
         const modalId = `#eventModal_${event.id}`;
         const modal = document.querySelector(modalId);
-        const pnts_mod = document.getElementById("pnts_mod");
-        // pnts_mod.classList.add("is-active");
-
-        // modal.classList.add("is-active");
-        document
-          .getElementById("submit_points")
-          .addEventListener("click", function () {
-            modal.classList.remove("is-active");
-            pnts_mod.classList.remove("is-hidden");
-            pnts_mod.classList.add("is-active");
-          });
+        modal.classList.add("is-active");
 
         // Attach event listener to the cancel button
         document
@@ -620,17 +601,25 @@ function openEventModal(eventId, dayHTML) {
             // Re-render the calendar view
             fetchEventsAndGenerateCalendarHTML(currentDate);
           });
-        document
-          .getElementById("pnts_cncl")
-          .addEventListener("click", function () {
-            // Close the modal when cancel button is clicked
-            pnts_mod.classList.remove("is-active");
 
-            // Re-render the calendar view
-            fetchEventsAndGenerateCalendarHTML(currentDate);
-          });
-
-        modal.classList.add("is-active");
+        // Attach event listener to the delete or submit points button based on user authentication
+        if (currentAuth.email === "amabadgers@uwmadison@gmail.com") {
+          // Delete event listener for "Delete" button
+          document
+            .getElementById("delete_event")
+            .addEventListener("click", function () {
+              // Call a function to handle event deletion
+              deleteEvent(eventId);
+            });
+        } else {
+          // Submit points event listener for "Submit Points" button
+          document
+            .getElementById("submit_points")
+            .addEventListener("click", function () {
+              // Call a function to handle points submission
+              submitPoints(eventId);
+            });
+        }
       } else {
         console.error("No such event found!");
       }
@@ -1101,7 +1090,7 @@ r_e("calendarbtn").addEventListener("click", () => {
     }
     function show_event_cards() {
       db.collection("events")
-        .orderBy("time", "desc") // Order events by time in descending order
+        .orderBy("time", "asc") // Order events by time in descending order
         .limit(4) // Limit to the first 4 most recent events
         .get()
         .then((querySnapshot) => {
