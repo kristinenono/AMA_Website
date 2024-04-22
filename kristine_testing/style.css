@@ -1,39 +1,137 @@
-/* Default styles - applying to smaller screens */
+/* Primary Color Scheme and Typography*/
+:root {
+    /*Fonts*/
+    --titleFontFamily: "Arial Rounded MT Bold", "Helvetica Rounded", Arial,
+      sans-serif;
+    --bodyFontFamily: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    /*Colors*/
+    --primarynavy: #1f304f;
+    --primarywhite: #f3f2ee;
+    --primaryblack: #201c0f;
+    --secondaryred: #b22b25;
+    --headerColor: #201c0f;
+    --bodyTextColor: #434343;
+    --lightGray: #d3d3d3;
+    --bodyTextColorWhite: #fafbfc;
+    --linkColor: #0071a5;
+    /*Font Sizes*/
+    --titleFontSize: 65px;
+    --headerFontSize: 38px;
+    --secondaryHeaderFontSize: 33px;
+    --tertiaryHeaderFontSize: 25px;
+    --bodyFontSize: 25px;
+    
+    .navbar {
+        background-color: var(--primarynavy);
+        color: white;
+        width: 100%;
+    }
+    .header-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 20px;
+        background-color: var(--primarywhite); /* Ensuring background is consistent */
+    }
+
+    .header-logo {
+        width: auto; /* Let it scale based on the viewport */
+        max-width:25%; /* Limits how large the logo can get */
+        height: auto; /* Maintain aspect ratio */
+        flex: 0 1 150px; /* Flex-grow, Flex-shrink, Flex-basis */
+    }
+
+    .header-text {
+        display: flex;
+        align-items: center;
+        font-size: calc(1rem + 1vw); /* Starts at 1rem and increases with viewport width */
+        font-family: var(--bodyFontFamily);
+        flex: 1 1 auto;
+        margin-left: 20px;
+    }
+
+    .login-signup-container {
+        display: flex;
+        gap: 10px;
+    }
+
+    .navbar-item{
+        line-height: 1.5;
+        padding: 0.5rem 0.75rem; /* Adjust padding for better spacing */
+        cursor: pointer;
+        font-family: var(--bodyFontFamily);
+        font-size: 20px;
+        width: 100%; /* Ensures full width for better touch targets on mobile */
+        font-weight: bold;
+        color: black;
+    }
+    .navbar-link {
+        line-height: 1.5;
+        cursor: pointer;
+        font-family: var(--bodyFontFamily);
+        font-size: 20px;
+        width: 100%; /* Ensures full width for better touch targets on mobile */
+        font-weight: bold;
+        color: black;
+    }
+    .navbar-item:hover, .navbar-link:hover {
+        color: var(--primarynavy); /* Maintain the color on hover */
+        background-color: transparent; /* Ensure no background change on hover */
+    }
+
+    .navbar-content {
+        display: flex;
+        flex-direction: column; /* Stack items vertically on smaller screens */
+        justify-content: center;
+        width: 100%;
+        flex-wrap: wrap;
+        align-items: center;
+        color: white;
+    }
+    /* Default styles - applying to smaller screens */
 .navbar-menu {
     width: 100%;
     justify-content: center;
 }
 
-.navbar-content {
-    display: flex;
-    flex-direction: column; /* Stack items vertically on smaller screens */
-    justify-content: center;
-    width: 100%;
-    flex-wrap: wrap;
-    align-items: center;
-    color: white;
-}
-
-.navbar-item, .navbar-link {
-    display: flex;
-    line-height: 1.5;
-    padding: 0.5rem 0.75rem; /* Adjust padding for better spacing */
-    cursor: pointer;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
-    width: 100%; /* Ensures full width for better touch targets on mobile */
-    font-weight: bold;
-    color: black;
-}
-
-/* Styles for larger screens */
-@media (min-width: 1024px) {
-    .navbar-content {
-        flex-direction: row; /* Switch to horizontal layout */
+    /* Styles for larger screens */
+    @media (min-width: 1024px) {
+        .navbar-content {
+            flex-direction: row;
+        }
+        .navbar-item {
+            color: white;
+            width: auto;
+            margin-right: 50px; /* Adds spacing between items */
+        }
+        .navbar-link {
+            color: white;
+            width: auto;
+        }
+        .navbar-item:last-child, .navbar-link:last-child {
+            margin-right: 0; /* Removes margin from the last item */
+        }
+        .navbar-dropdown {
+            background-color: var(--linkColor); /* Sets the dropdown background color */
+        }
+        .navbar-item:hover, .navbar-link:hover {
+            color: white; /* Maintain the color on hover */
+            background-color: transparent; /* Ensure no background change on hover */
+        }
     }
-    .navbar-item, .navbar-link {
-        color: white; /* Text color changes to white on larger screens */
-        width: auto; /* Allow natural width on larger screens */
-        color: white; /* Default text color for smaller screens */
+
+    @media (max-width: 1024px) { /* Adjust the max-width to match your navbar burger appearance breakpoint */
+        .login-signup-container {
+            display: none; /* Hide the login/signup buttons on smaller screens */
+        }
     }
-}
+
+    .navbar-burger {
+        color: #f3f2ee;
+    }
+    .float-img{
+        float: left;
+    }
+
+  }
+
