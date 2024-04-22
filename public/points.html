@@ -82,8 +82,8 @@
               <label class="label">Event Time:</label>
               <input class="input" type="text" id="eventTime" placeholder="Time" disabled>
             </div>
-            <button id="saveaddpoints" class="button is-link">Save</button>
-            <button id="editclear" class="button is-link">Clear</button>
+            <button id="saveaddpoints" class="saveaddpnt">Save</button>
+            <button id="editclear" class="closeshowpnt">Clear</button>
           </div>
         </div>
         <button id="editclose" class="modal-close is-large" aria-label="close"></button>
@@ -115,7 +115,7 @@
               </thead>
               <tbody id="memberPointsList"></tbody>
             </table>
-            <button id="showclose" class="button">Close</button>
+            <button id="showclose" class="closeshowpnt">Close</button>
           </div>
         </div>
         <button id="showeditclose" class="modal-close is-large" aria-label="close"></button>
@@ -534,7 +534,7 @@ function fetchMemberPoints(memberId) {
           <td>${data.eventType}</td>
           <td>${data.points}</td>
           <td>${data.pointSemester}</td>
-          <td><button class="delete-point button is-small is-danger" data-id="${doc.id}">Delete</button></td>
+          <td><button class="delete-point deletedbpoint" data-id="${doc.id}">Delete</button></td>
         `;
         tbody.appendChild(row);
       });
