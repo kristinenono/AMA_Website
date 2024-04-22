@@ -746,7 +746,7 @@ function logAllEvents() {
 }
 
 // Call the function to log all events
-logAllEvents();
+// logAllEvents();
 
 // Function to generate a random code
 // function generateRandomCode(length) {
