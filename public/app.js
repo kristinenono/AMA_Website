@@ -1,3 +1,23 @@
+function r_e(id) {
+  if (!id) {
+    console.error("Invalid ID provided:", id);
+    return null; // Return null to prevent further execution and clearer debugging
+  }
+  const element = document.querySelector(`#${id}`);
+  if (!element) {
+    console.error("No element found with ID:", id);
+  }
+  return element;
+}
+
+// function r_e(id) {
+//   return document.querySelector(`#${id}`);
+// }
+
+function appendContent(html) {
+  r_e("main-content").innerHTML = html;
+}
+
 function configure_message_bar(message) {
   r_e("message_bar").classList.remove("is-hidden");
   r_e("message_bar").innerHTML = message;
@@ -192,13 +212,6 @@ document.querySelector("#joinbuttonhome").addEventListener("click", () => {
 document.querySelector("#learnbuttonhome").addEventListener("click", () => {
   r_e("abt-link").click();
 });
-// main functions for innerHTML
-function r_e(id) {
-  return document.querySelector(`#${id}`);
-}
-function appendContent(html) {
-  r_e("main-content").innerHTML = html;
-}
 
 // Member drop down button
 var dropdownButton = r_e("members-link");
@@ -441,6 +454,10 @@ document.querySelector(".aboutfooter").addEventListener("click", () => {
   r_e("abt-link").click();
 });
 
+
+
+
+
 const calendarView = document.querySelector(".calview");
 const monthSelect = r_e("month-select");
 const prevMonthBtn = document.querySelector(".action_left");
@@ -631,12 +648,12 @@ function openEventModal(eventId, dayHTML, currentAuth) {
           <div class="modal-content section has-background-white">
             <h2 class="title">Member Attendance Form</h2>
             <form id="member_attend">
-              <div class="field">
+              <!-- <div class="field">
                 <label class="label">Name of AMA Member</label>
                 <div class="control">
                   <input type="text" id="evtattd" placeholder="Bucky Badger" />
                 </div>
-              </div>
+              </div> -->
               <div class="field">
                 <label class="label">Code Provided in Event</label>
                 <div class="control">
@@ -726,6 +743,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
           })
           .catch((error) => console.error("Error Submitting Points ", error));
 
+          
         // Attach event listener to the cancel button
 
         document
@@ -1295,9 +1313,13 @@ document.querySelector(".eventsfooter").addEventListener("click", () => {
   r_e("calendarbtn").click();
 });
 
-document.querySelector(".pointfooter").addEventListener("click", () => {
-  r_e("pointbtn").click();
-});
+
+
+
+
+
+
+
 
 // points page content
 r_e("pointbtn").addEventListener("click", () => {
@@ -1899,7 +1921,7 @@ function addContent(isAdmin) {
   } else {
     let points_content = `<div class="columns is-centered mt-4">
     <div class="column pr-outer">
-        <div class="card px-4 py-3 has-text-centered" event-type="Volunteer">
+        <div class="card px-4 py-3 has-text-centered" event-type="volunteer">
             <header class="card-header">
                 <p class="card-header-title has-text-white is-centered add-cardcolor">Volunteer</p>
             </header>
@@ -1923,7 +1945,7 @@ function addContent(isAdmin) {
         </div>
     </div>
     <div class="column">
-        <div class="card px-4 py-3 has-text-centered" event-type="DEI">
+        <div class="card px-4 py-3 has-text-centered" event-type="dei">
             <header class="card-header">
                 <p class="card-header-title has-text-white is-centered add-cardcolor">DEI</p>
             </header>
@@ -1959,7 +1981,7 @@ function addContent(isAdmin) {
         </div>
     </div>
 </div>
-<div class="columns is-centered mt-4">
+<div class="columns is-centered mt-4 mb-4">
     <div class="column is-half">
         <div class="card px-4 py-3 has-text-centered" event-type="total">
             <header class="card-header">
@@ -1978,28 +2000,87 @@ function addContent(isAdmin) {
     PopulatePoints();
     updateCardsWithPoints(memberTotalPoints);
   }
-}
-
-function updateCardsWithPoints(memberTotalPoints) {
-  console.log(
-    "Updating cards with the following points data:",
-    memberTotalPoints
-  );
-
-  Object.keys(memberTotalPoints).forEach((fullName) => {
-    const points = memberTotalPoints[fullName];
-    for (const eventType in points) {
+  function PopulatePoints() {
+    let memberTotalPoints = {
+      volunteer: 0,
+      professional_development: 0,
+      dei: 0,
+      social: 0,
+      speaker: 0
+    };
+  
+    // Assume 'currentUser' is the currently signed-in user's email
+    let currentUser = auth.currentUser.email;
+  
+    // Fetch points for the current user from the member_points subcollection
+    db.collection("ama_users").where("email", "==", currentUser).get().then((usersSnapshot) => {
+      if (!usersSnapshot.empty) {
+        // Assuming each user has a unique email, we take the first document
+        let userDoc = usersSnapshot.docs[0];
+  
+        userDoc.ref.collection("member_points").get().then((pointsSnapshot) => {
+          pointsSnapshot.forEach((pointDoc) => {
+            const data = pointDoc.data();
+            const eventType = normalizeEventType(data.eventType);
+            const points = parseInt(data.points);
+            if (memberTotalPoints.hasOwnProperty(eventType)) {
+              memberTotalPoints[eventType] += points;
+            }
+          });
+  
+          // After all data is aggregated, update the UI
+          updateCardsWithPoints(memberTotalPoints);
+        }).catch((error) => {
+          console.error("Error fetching points data for user:", error);
+        });
+      } else {
+        console.error("No user found with the email:", currentUser);
+      }
+    }).catch((error) => {
+      console.error("Error fetching user document:", error);
+    });
+  }
+  
+  function updateCardsWithPoints(memberTotalPoints) {
+    console.log("Updating cards with the following points data:", memberTotalPoints);
+  
+    let totalPoints = 0;
+  
+    Object.keys(memberTotalPoints).forEach((eventType) => {
+      const points = memberTotalPoints[eventType];
       const selector = `.card[event-type="${eventType}"] .content`;
       const contentDiv = document.querySelector(selector);
       if (contentDiv) {
-        contentDiv.textContent = `${points[eventType]}`; // Ensure string format
-        // console.log(`Updated ${eventType} points to ${points[eventType]}`);
+        contentDiv.textContent = `${points}`;
+        totalPoints += points;
       } else {
-        console.log(`No element found for selector: ${selector}`);
+        console.error(`No element found for selector: ${selector}`);
       }
+    });
+  
+    // Update total points card
+    const totalPointsDiv = document.querySelector('.card[event-type="total"] .content');
+    if (totalPointsDiv) {
+      totalPointsDiv.textContent = `${totalPoints}`;
     }
-  });
-}
+  }
+  
+  function normalizeEventType(eventType) {
+    const eventTypeMapping = {
+      "Volunteer": "volunteer",
+      "Professional Development": "professional_development",
+      "Speaker Event": "speaker",
+      "Social Event": "social",
+      "DEI Event": "dei"
+    };
+    return eventTypeMapping[eventType] || eventType.toLowerCase().replace(/ /g, "_");
+  }
+} 
+
+
+
+
+
 
 // contact page content
 let contact_content = `<div id="contactSectionTop" class="contactSection-box contactTopFormat">
@@ -2108,6 +2189,11 @@ document.querySelector(".contactfooter").addEventListener("click", () => {
 document.querySelector(".sponsorfooter").addEventListener("click", () => {
   r_e("contact-link").click();
 });
+
+
+
+
+
 
 //join button
 r_e("joinbuttonhome").addEventListener("click", () => {
