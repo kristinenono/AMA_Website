@@ -2048,6 +2048,7 @@ function addContent(isAdmin) {
     PopulatePoints();
     updateCardsWithPoints(memberTotalPoints);
   }
+  // function to show points for the non-member view
   function PopulatePoints() {
     let memberTotalPoints = {
       volunteer: 0,
@@ -2124,6 +2125,8 @@ function addContent(isAdmin) {
     return eventTypeMapping[eventType] || eventType.toLowerCase().replace(/ /g, "_");
   }
 }
+
+
 
 // contact page content
 let contact_content = `<div id="contactSectionTop" class="contactSection-box contactTopFormat">
