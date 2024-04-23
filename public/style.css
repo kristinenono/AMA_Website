@@ -267,8 +267,8 @@ x .title {
 }
 
 .event.speaker-event {
-  border: 0.2rem solid orangered;
-  color: orangered;
+  border: 0.2rem solid #ffa756;
+  color: #ffa756;
   display: inline-block;
   padding: 0.12rem;
   font: var(--bodyFontFamily);

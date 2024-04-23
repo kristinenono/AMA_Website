@@ -1230,7 +1230,7 @@ r_e("calendarbtn").addEventListener("click", () => {
                 break;
               case "Speaker Event":
                 eventTypeStyle =
-                  "background-color:orangered ;color: var(--primarywhite);";
+                  "background-color:#ffa756 ;color: var(--primarywhite);";
                 break;
               case "Social Event":
                 eventTypeStyle =
