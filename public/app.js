@@ -529,7 +529,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
                 <p>Type: ${event.type}</p>
                 <button class ="button" id=edit_curr_evt"> Edit </button>
                 <button class="button" id="del_curr_evt" onclick="deleteEvent('${eventId}')">Delete</button>
-                <button class="button" id="evtmodalcancel" onclick="r_e('${eventId}')">Cancel</button>
+                <button class="button" id="evtmodalcancel" onclick="reloadCalendarPage()">Cancel</button>
               </div>
             </div>
           </div>
