@@ -1,3 +1,23 @@
+function r_e(id) {
+  if (!id) {
+    console.error("Invalid ID provided:", id);
+    return null; // Return null to prevent further execution and clearer debugging
+  }
+  const element = document.querySelector(`#${id}`);
+  if (!element) {
+    console.error("No element found with ID:", id);
+  }
+  return element;
+}
+
+// function r_e(id) {
+//   return document.querySelector(`#${id}`);
+// }
+
+function appendContent(html) {
+  r_e("main-content").innerHTML = html;
+}
+
 function configure_message_bar(message) {
   r_e("message_bar").classList.remove("is-hidden");
   r_e("message_bar").innerHTML = message;
@@ -192,13 +212,6 @@ document.querySelector("#joinbuttonhome").addEventListener("click", () => {
 document.querySelector("#learnbuttonhome").addEventListener("click", () => {
   r_e("abt-link").click();
 });
-// main functions for innerHTML
-function r_e(id) {
-  return document.querySelector(`#${id}`);
-}
-function appendContent(html) {
-  r_e("main-content").innerHTML = html;
-}
 
 // Member drop down button
 var dropdownButton = r_e("members-link");
