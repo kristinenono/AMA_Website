@@ -93,8 +93,6 @@ auth.onAuthStateChanged((user) => {
     r_e("indicator").innerHTML = `Signed In As ${user.email}`;
     r_e("signout_button").classList.remove("is-hidden");
     r_e("indicator").classList.remove("is-hidden");
-    r_e("indicator").classList.add("margin-class");
-    r_e("signout_button").classList.add("margin-class");
     r_e("signupbtn").classList.add("is-hidden");
     r_e("loginbtn").classList.add("is-hidden");
     if (r_e("joinbuttonhome") != null) {
@@ -104,8 +102,6 @@ auth.onAuthStateChanged((user) => {
     r_e("indicator").innerHTML = "";
     r_e("signout_button").classList.add("is-hidden");
     r_e("indicator").classList.add("is-hidden");
-    r_e("indicator").classList.remove("margin-class");
-    r_e("signout_button").classList.remove("margin-class");
     r_e("signupbtn").classList.remove("is-hidden");
     r_e("loginbtn").classList.remove("is-hidden");
     if (r_e("joinbuttonhome") != null) {
