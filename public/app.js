@@ -1750,7 +1750,7 @@ function addContent(isAdmin) {
       document.getElementById("editSemester").selectedIndex = 0;
     }
 
-    function populateShowMemberDropdown() {
+    function populateShowMemberDropdown(callback) {
       const select = document.getElementById("showMemberSelect");
       select.innerHTML = ""; // Clear existing options
       db.collection("ama_users")
@@ -1763,21 +1763,54 @@ function addContent(isAdmin) {
             option.textContent = fullName;
             select.appendChild(option);
           });
-          if (select.options.length > 0) {
-            fetchMemberPoints(select.options[select.selectedIndex].value);
-          }
+          callback(); // Execute callback after options are populated
         })
         .catch((error) => {
           console.error("Error fetching members: ", error);
         });
-
-      // Fetch and display points when a member is selected
-      select.addEventListener("change", () => {
-        if (select.selectedIndex >= 0) {
-          fetchMemberPoints(select.value);
-        }
+  
+      // Update listener setup when the selected option changes
+      select.addEventListener('change', () => {
+          if (select.selectedIndex >= 0) {
+              setupRealTimePointsListener(select.value); // Setup real-time listener for the new user
+          }
       });
-    }
+  }
+
+  function setupRealTimePointsListener(memberId) {
+    const tbody = document.getElementById("memberPointsList");
+    // Assume db.collection().doc().collection() structure; adjust as needed
+    db.collection("ama_users")
+      .doc(memberId)
+      .collection("member_points")
+      .onSnapshot(snapshot => {
+          tbody.innerHTML = ""; // Clear the table before adding new rows
+          snapshot.forEach(doc => {
+              const data = doc.data();
+              const row = document.createElement("tr");
+              row.innerHTML = `
+                <td>${data.code}</td>
+                <td>${data.eventType}</td>
+                <td>${data.points}</td>
+                <td>${data.pointSemester}</td>
+                <td><button class="delete-point deletedbpoint" data-id="${doc.id}">Delete</button></td>
+              `;
+              tbody.appendChild(row);
+          });
+          attachDeleteHandlers(); // Reattach delete handlers after update
+      }, error => {
+          console.error("Error fetching real-time points updates: ", error);
+      });
+}
+
+function attachDeleteHandlers() {
+  document.querySelectorAll(".delete-point").forEach(button => {
+      button.addEventListener("click", function () {
+          const memberId = document.getElementById("showMemberSelect").value;
+          deletePoint(memberId, this.getAttribute("data-id"));
+      });
+  });
+}
 
     function saveEditChanges() {
       const memberId = document.getElementById("memberSelect").value;
@@ -1899,12 +1932,15 @@ function addContent(isAdmin) {
     // Initialize and populate the dropdown when the modal is activated
     document.getElementById("showedit").addEventListener("click", () => {
       const select = document.getElementById("showMemberSelect");
-      if (select.options.length === 0) {
-        // Only populate if dropdown is empty
-        populateShowMemberDropdown();
-      }
+      // Ensure the dropdown is populated and setup real-time updates for selected member
+      populateShowMemberDropdown(() => {
+          if (select.options.length > 0) {
+              select.selectedIndex = 0; // Always reset to the first option
+              setupRealTimePointsListener(select.options[0].value); // Setup real-time listener for the first user
+          }
+      });
       document.getElementById("showmodal").classList.add("is-active");
-    });
+  });
 
     let showclose = document.getElementById("showclose");
     let showmodal = document.getElementById("showmodal");
