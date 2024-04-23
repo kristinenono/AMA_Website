@@ -601,7 +601,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
         </div>
         <div class="field is-grouped">
         <div class="control">
-          <button class="button" id = "editevtsbt" onclick="EditEvent('${EventId}')">Save</button>
+          <button class="button" id = "editevtsbt"onclick="EditEvent('${eventId}')">Save</button>
         </div>
         <div class="control">
           <button class="button" id="editevtcncl">Cancel</button>
@@ -670,11 +670,11 @@ function openEventModal(eventId, dayHTML, currentAuth) {
         const editevt = document.getElementById("edit_curr_evt");
         const edit_mod = document.getElementById("edit_evt");
 
-        // editevt.addEventListener("click", function () {
-        //   console.log("editclick");
-        //   edit_mod.classList.remove("is-hidden");
-        //   edit_mod.classList.add("is-active");
-        // });
+        editevt.addEventListener("click", function () {
+          console.log("editclick");
+          edit_mod.classList.remove("is-hidden");
+          edit_mod.classList.add("is-active");
+        });
         // pnts_mod.classList.add("is-active");
         function EditEvent(EventId) {
           const editedevent = {
@@ -718,66 +718,74 @@ function openEventModal(eventId, dayHTML, currentAuth) {
             fetchEventsAndGenerateCalendarHTML(currentDate);
           });
 
-          document.getElementById("pnts_sbt").addEventListener("click", function(e) {
+        document
+          .getElementById("pnts_sbt")
+          .addEventListener("click", function (e) {
             e.preventDefault(); // Prevent default form submission behavior
-        
+
             let eventCodeInput = document.getElementById("genevtcode").value; // Retrieve the event code input by the user
             let user_email = auth.currentUser.email; // Retrieve the currently signed in user's email
-        
+
             // First, find the user document based on the email
             db.collection("ama_users")
               .where("email", "==", user_email)
               .get()
-              .then(userSnapshot => {
+              .then((userSnapshot) => {
                 if (!userSnapshot.empty) {
-                    // Get the user's document reference
-                    let userDocRef = userSnapshot.docs[0].ref;
-        
-                    // Now, query the events collection to find a matching event code
-                    db.collection("events")
-                      .where("code", "==", eventCodeInput)
-                      .get()
-                      .then(querySnapshot => {
-                        if (!querySnapshot.empty) {
-                            let eventDetails = querySnapshot.docs[0].data(); // Assuming event codes are unique, take the first result
-        
-                            // Prepare the data to be added to the 'member_points' subcollection
-                            let memberPointsData = {
-                                code: eventDetails.code,
-                                eventType: eventDetails.type,
-                                pointSemester: eventDetails.semester,
-                                points: parseInt(eventDetails.pts, 10) // Ensure points are stored as integers
-                            };
-        
-                            // Add the member points data to the 'member_points' subcollection for the current user
-                            userDocRef.collection("member_points")
-                              .add(memberPointsData)
-                              .then(() => {
-                                  console.log("Points successfully added for the event.");
-                                  alert("Points successfully submitted!");
-                                  pnts_mod.classList.remove("is-active"); // Close the modal on successful submission
-                                  reloadCalendarPage(); // Optionally, refresh the calendar page to show updates
-                              })
-                              .catch(error => {
-                                  console.error("Error adding points: ", error);
-                                  alert("Failed to submit points. Please try again.");
-                              });
-                        } else {
-                            alert("Invalid event code. Please check and try again.");
-                        }
-                      })
-                      .catch(error => {
-                          console.error("Error verifying event code: ", error);
-                      });
+                  // Get the user's document reference
+                  let userDocRef = userSnapshot.docs[0].ref;
+
+                  // Now, query the events collection to find a matching event code
+                  db.collection("events")
+                    .where("code", "==", eventCodeInput)
+                    .get()
+                    .then((querySnapshot) => {
+                      if (!querySnapshot.empty) {
+                        let eventDetails = querySnapshot.docs[0].data(); // Assuming event codes are unique, take the first result
+
+                        // Prepare the data to be added to the 'member_points' subcollection
+                        let memberPointsData = {
+                          code: eventDetails.code,
+                          eventType: eventDetails.type,
+                          pointSemester: eventDetails.semester,
+                          points: parseInt(eventDetails.pts, 10), // Ensure points are stored as integers
+                        };
+
+                        // Add the member points data to the 'member_points' subcollection for the current user
+                        userDocRef
+                          .collection("member_points")
+                          .add(memberPointsData)
+                          .then(() => {
+                            console.log(
+                              "Points successfully added for the event."
+                            );
+                            alert("Points successfully submitted!");
+                            pnts_mod.classList.remove("is-active"); // Close the modal on successful submission
+                            reloadCalendarPage(); // Optionally, refresh the calendar page to show updates
+                          })
+                          .catch((error) => {
+                            console.error("Error adding points: ", error);
+                            alert("Failed to submit points. Please try again.");
+                          });
+                      } else {
+                        alert(
+                          "Invalid event code. Please check and try again."
+                        );
+                      }
+                    })
+                    .catch((error) => {
+                      console.error("Error verifying event code: ", error);
+                    });
                 } else {
-                    alert("No user found with the provided email. Please check and try again.");
+                  alert(
+                    "No user found with the provided email. Please check and try again."
+                  );
                 }
               })
-              .catch(error => {
-                  console.error("Error fetching user by email: ", error);
+              .catch((error) => {
+                console.error("Error fetching user by email: ", error);
               });
-        });
-
+          });
 
         document
           .getElementById("pnts_cncl")
@@ -2046,46 +2054,38 @@ function addContent(isAdmin) {
       professional_development: 0,
       dei: 0,
       social: 0,
-      speaker: 0
+      speaker: 0,
     };
-  
-    // Assume 'currentUser' is the currently signed-in user's email
+
     let currentUser = auth.currentUser.email;
-  
-    // Fetch points for the current user from the member_points subcollection
-    db.collection("ama_users").where("email", "==", currentUser).get().then((usersSnapshot) => {
-      if (!usersSnapshot.empty) {
-        // Assuming each user has a unique email, we take the first document
-        let userDoc = usersSnapshot.docs[0];
-  
-        userDoc.ref.collection("member_points").get().then((pointsSnapshot) => {
-          pointsSnapshot.forEach((pointDoc) => {
-            const data = pointDoc.data();
-            const eventType = normalizeEventType(data.eventType);
-            const points = parseInt(data.points);
-            if (memberTotalPoints.hasOwnProperty(eventType)) {
-              memberTotalPoints[eventType] += points;
-            }
-          });
-  
-          // After all data is aggregated, update the UI
-          updateCardsWithPoints(memberTotalPoints);
-        }).catch((error) => {
-          console.error("Error fetching points data for user:", error);
+
+    // Fetch user points from Firestore
+    db.collection("ama_users")
+      .doc(currentUser)
+      .collection("member_points")
+      .get()
+      .then((pointsSnapshot) => {
+        pointsSnapshot.forEach((pointDoc) => {
+          const data = pointDoc.data();
+          const normalizedEventType = normalizeEventType(data.eventType);
+          memberTotalPoints[normalizedEventType] += data.points;
         });
-      } else {
-        console.error("No user found with the email:", currentUser);
-      }
-    }).catch((error) => {
-      console.error("Error fetching user document:", error);
-    });
+
+        updateCardsWithPoints(memberTotalPoints); // Ensure this is called here
+      })
+      .catch((error) => {
+        console.error("Error fetching points data for user:", error);
+      });
   }
-  
+
   function updateCardsWithPoints(memberTotalPoints) {
-    console.log("Updating cards with the following points data:", memberTotalPoints);
-  
+    console.log(
+      "Updating cards with the following points data:",
+      memberTotalPoints
+    );
+
     let totalPoints = 0;
-  
+
     Object.keys(memberTotalPoints).forEach((eventType) => {
       const points = memberTotalPoints[eventType];
       const selector = `.card[event-type="${eventType}"] .content`;
@@ -2097,23 +2097,27 @@ function addContent(isAdmin) {
         console.error(`No element found for selector: ${selector}`);
       }
     });
-  
+
     // Update total points card
-    const totalPointsDiv = document.querySelector('.card[event-type="total"] .content');
+    const totalPointsDiv = document.querySelector(
+      '.card[event-type="total"] .content'
+    );
     if (totalPointsDiv) {
       totalPointsDiv.textContent = `${totalPoints}`;
     }
   }
-  
+
   function normalizeEventType(eventType) {
     const eventTypeMapping = {
-      "Volunteer": "volunteer",
+      Volunteer: "volunteer",
       "Professional Development": "professional_development",
       "Speaker Event": "speaker",
       "Social Event": "social",
-      "DEI Event": "dei"
+      "DEI Event": "dei",
     };
-    return eventTypeMapping[eventType] || eventType.toLowerCase().replace(/ /g, "_");
+    return (
+      eventTypeMapping[eventType] || eventType.toLowerCase().replace(/ /g, "_")
+    );
   }
 }
 
