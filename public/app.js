@@ -441,6 +441,10 @@ document.querySelector(".aboutfooter").addEventListener("click", () => {
   r_e("abt-link").click();
 });
 
+
+
+
+
 const calendarView = document.querySelector(".calview");
 const monthSelect = r_e("month-select");
 const prevMonthBtn = document.querySelector(".action_left");
@@ -558,12 +562,12 @@ function openEventModal(eventId, dayHTML, currentAuth) {
           <div class="modal-content section has-background-white">
             <h2 class="title">Member Attendance Form</h2>
             <form id="member_attend">
-              <div class="field">
+              <!-- <div class="field">
                 <label class="label">Name of AMA Member</label>
                 <div class="control">
                   <input type="text" id="evtattd" placeholder="Bucky Badger" />
                 </div>
-              </div>
+              </div> -->
               <div class="field">
                 <label class="label">Code Provided in Event</label>
                 <div class="control">
@@ -619,6 +623,9 @@ function openEventModal(eventId, dayHTML, currentAuth) {
         let ppl_attend = r_e("evtattd");
         let gen_evtcode = r_e("genevtcode");
 
+        
+
+
         pnts_sbt_frm
           .addEventListener("click", (e) => {
             console.log("submit_points");
@@ -644,6 +651,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
           })
           .catch((error) => console.error("Error Submitting Points ", error));
 
+          
         // Attach event listener to the cancel button
 
         document
@@ -1186,6 +1194,11 @@ fetchEventsAndGenerateCalendarHTML(currentDate);
 document.querySelector(".eventsfooter").addEventListener("click", () => {
   r_e("calendarbtn").click();
 });
+
+
+
+
+
 
 
 
@@ -1878,10 +1891,15 @@ function addContent(isAdmin) {
       speaker: 0
     };
   
-    // Fetch all users from ama_users collection
-    db.collection("ama_users").get().then((usersSnapshot) => {
-      usersSnapshot.forEach((userDoc) => {
-        // Fetch points for each user from member_points subcollection
+    // Assume 'currentUser' is the currently signed-in user's email
+    let currentUser = auth.currentUser.email;
+  
+    // Fetch points for the current user from the member_points subcollection
+    db.collection("ama_users").where("email", "==", currentUser).get().then((usersSnapshot) => {
+      if (!usersSnapshot.empty) {
+        // Assuming each user has a unique email, we take the first document
+        let userDoc = usersSnapshot.docs[0];
+  
         userDoc.ref.collection("member_points").get().then((pointsSnapshot) => {
           pointsSnapshot.forEach((pointDoc) => {
             const data = pointDoc.data();
@@ -1891,12 +1909,17 @@ function addContent(isAdmin) {
               memberTotalPoints[eventType] += points;
             }
           });
-          // After all data is aggregated, update the cards
+  
+          // After all data is aggregated, update the UI
           updateCardsWithPoints(memberTotalPoints);
+        }).catch((error) => {
+          console.error("Error fetching points data for user:", error);
         });
-      });
+      } else {
+        console.error("No user found with the email:", currentUser);
+      }
     }).catch((error) => {
-      console.error("Error fetching member points:", error);
+      console.error("Error fetching user document:", error);
     });
   }
   
@@ -1934,7 +1957,7 @@ function addContent(isAdmin) {
     };
     return eventTypeMapping[eventType] || eventType.toLowerCase().replace(/ /g, "_");
   }
-}
+} 
 
 
 
@@ -2048,6 +2071,11 @@ document.querySelector(".contactfooter").addEventListener("click", () => {
 document.querySelector(".sponsorfooter").addEventListener("click", () => {
   r_e("contact-link").click();
 });
+
+
+
+
+
 
 //join button
 r_e("joinbuttonhome").addEventListener("click", () => {
