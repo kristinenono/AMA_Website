@@ -2040,16 +2040,33 @@ function attachDeleteHandlers() {
   }
   function PopulatePoints() {
     let memberTotalPoints = {
-      volunteer: 0,
-      professional_development: 0,
-      dei: 0,
-      social: 0,
-      speaker: 0,
+        volunteer: 0,
+        professional_development: 0,
+        dei: 0,
+        social: 0,
+        speaker: 0,
     };
 
-    // Assume 'currentUser' is the currently signed-in user's email
     let currentUser = auth.currentUser.email;
 
+    // Fetch user points from Firestore
+    db.collection("ama_users")
+        .doc(currentUser)
+        .collection("member_points")
+        .get()
+        .then((pointsSnapshot) => {
+            pointsSnapshot.forEach((pointDoc) => {
+                const data = pointDoc.data();
+                const normalizedEventType = normalizeEventType(data.eventType);
+                memberTotalPoints[normalizedEventType] += data.points;
+            });
+
+            updateCardsWithPoints(memberTotalPoints); // Ensure this is called here
+        })
+        .catch((error) => {
+            console.error("Error fetching points data for user:", error);
+        });
+}
 
   function updateCardsWithPoints(memberTotalPoints) {
     console.log(
@@ -2708,190 +2725,3 @@ function expand_burger() {
 burger_stack.addEventListener("click", expand_burger);
 
 // store info from form into db
-
-// create a click event hander on the submit button
-
-document.querySelector("#submit").addEventListener("click", () => {
-  // store the selected hobbies in an array
-
-  let user_hobbies = [];
-  let hobbies = document.querySelectorAll(".hobbies");
-  // console.log(hobbies);
-
-  hobbies.forEach((h) => {
-    if (h.checked == true) {
-      user_hobbies.push(h.value);
-    }
-  });
-
-  // console.log(user_hobbies);
-
-  // construct the person object
-  let person = {
-    name: document.querySelector("#name").value,
-    age: parseInt(document.querySelector("#age").value),
-    color: document.querySelector("#favcolor").value,
-    hobbies: user_hobbies,
-  };
-
-  //   store the person obj into the people collection
-
-  db.collection("people")
-    .add(person)
-    .then(() => alert("person added"));
-});
-
-// update sally's age and fav color and add madison as her fav city
-// db.collection("people").doc("0ZysVBXcqVY9LFCB2ETx").update({
-//   age: 24,
-//   color: "white",
-//   city: "madison",
-// });
-
-// add pete and jackie as sally's siblings
-// db.collection("people")
-//   .doc("0ZysVBXcqVY9LFCB2ETx")
-//   .update({
-//     siblings: ["pete", "jackie"],
-//   });
-
-// add tom as a new sibling for sally
-
-// db.collection("people")
-//   .doc("0ZysVBXcqVY9LFCB2ETx")
-//   .update({
-//     siblings: firebase.firestore.FieldValue.arrayUnion("tom"),
-//   });
-
-// remove pete from sally's siblings
-
-// db.collection("people")
-//   .doc("0ZysVBXcqVY9LFCB2ETx")
-//   .update({
-//     siblings: firebase.firestore.FieldValue.arrayRemove("pete"),
-//   });
-
-// show the list of all people stored in the db
-
-function show_people() {
-  db.collection("people")
-    .get()
-    .then((res) => {
-      let data = res.docs;
-
-      let html = ``;
-      data.forEach((d) => {
-        html += `<p>${d.data().name}</p>`;
-      });
-
-      // append the html variable to the document
-      document.querySelector("#all_people").innerHTML += html;
-    });
-}
-// call the show_people function
-
-// show_people();
-
-// show all people whose age is greater than 25 and less than 43
-
-// db.collection("people")
-//   .where("age", ">", 25)
-//   .where("age", "<", 43)
-//   .get()
-//   .then((res) => {
-//     let data = res.docs;
-
-//     let html = ``;
-//     data.forEach((d) => {
-//       html += `<p>${d.data().name}</p>`;
-//     });
-
-//     // append the html variable to the document
-//     document.querySelector("#all_people").innerHTML += html;
-//   });
-
-// show all people who have the name sally
-
-// db.collection("people")
-//   .where("name", "==", "sally")
-//   .get()
-//   .then((res) => {
-//     let data = res.docs;
-
-//     let html = ``;
-//     data.forEach((d) => {
-//       html += `<p>${d.data().name}</p>`;
-//     });
-
-//     // append the html variable to the document
-//     document.querySelector("#all_people").innerHTML += html;
-//   });
-
-// show all people who have the name sally or pete
-
-// db.collection("people")
-//   .where("name", "in", ["sally", "Sally", "Pete", "pete"])
-//   .get()
-//   .then((res) => {
-//     let data = res.docs;
-
-//     let html = ``;
-//     data.forEach((d) => {
-//       html += `<p>${d.data().name}</p>`;
-//     });
-
-//     // append the html variable to the document
-//     document.querySelector("#all_people").innerHTML += html;
-//   });
-
-// show all people who have swimming as a hobby
-// db.collection("people")
-//   .where("hobbies", "array-contains", "swimming")
-//   .get()
-//   .then((res) => {
-//     let data = res.docs;
-
-//     let html = ``;
-//     data.forEach((d) => {
-//       html += `<p>${d.data().name}</p>`;
-//     });
-
-//     // append the html variable to the document
-//     document.querySelector("#all_people").innerHTML += html;
-//   });
-
-//  show all people who have swimming or reading as a hobby
-
-// db.collection("people")
-//   .where("hobbies", "array-contains-any", ["swimming", "reading"])
-//   .get()
-//   .then((res) => {
-//     let data = res.docs;
-
-//     let html = ``;
-//     data.forEach((d) => {
-//       html += `<p>${d.data().name}</p>`;
-//     });
-
-//     // append the html variable to the document
-//     document.querySelector("#all_people").innerHTML += html;
-//   });
-
-// show all people with a name sally and age greater than 35
-
-db.collection("people")
-  .where("name", "==", "sally")
-  .where("age", ">", 35)
-  .get()
-  .then((res) => {
-    let data = res.docs;
-
-    let html = ``;
-    data.forEach((d) => {
-      html += `<p>${d.data().name}</p>`;
-    });
-
-    // append the html variable to the document
-    document.querySelector("#all_people").innerHTML += html;
-  });
-}
