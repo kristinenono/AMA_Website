@@ -533,34 +533,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
               </div>
             </div>
           </div>
-          </div><div class="modal is-hidden" id="pnts_mod">
-          <div class="modal-background"></div>
-          <div class="modal-content section has-background-white">
-            <h2 class="title">Member Attendance Form</h2>
-            <form id="member_attend">
-              <div class="field">
-                <label class="label">Name of AMA Member</label>
-                <div class="control">
-                  <input type="text" id="evtattd" placeholder="Bucky Badger" />
-                </div>
-              </div>
-              <div class="field">
-                <label class="label">Code Provided in Event</label>
-                <div class="control">
-                  <input type="text" id="genevtcode" placeholder="877hs3" />
-                </div>
-              </div>
-              <div class="field is-grouped">
-                <div class="control">
-                  <button class="button" id="pnts_sbt">Submit</button>
-                </div>
-                <div class="control">
-                  <button class="button" id="pnts_cncl">Cancel</button>
-                </div>
-              </div>
-            </form>
           </div>
-        </div>
         <div class="modal is-hidden" id="edit_evt">
         <div class = "modal-background"></div>
         <div class="modal-content section has-background-white">
@@ -723,38 +696,66 @@ function openEventModal(eventId, dayHTML, currentAuth) {
             fetchEventsAndGenerateCalendarHTML(currentDate);
           });
 
-        // putting points into db
-        const pnts_sbt_frm = r_e("pnts_sbt");
-        let ppl_attend = r_e("evtattd");
-        let gen_evtcode = r_e("genevtcode");
-
-        pnts_sbt_frm
-          .addEventListener("click", (e) => {
-            console.log("submit_points");
-            e.preventDefault();
-            let name = ppl_attend.value;
-            let code = gen_evtcode.value;
-            let user_email = auth.currentUser.email;
-            let event_id = eventId;
-
-            let form_submit = {
-              name: name,
-              code: code,
-              user_email: user_email,
-              event_id: event_id,
-            };
-
-            db.collection("form_responses")
-              .add(form_submit)
-              .then(() => {
-                fetchEventsAndGenerateCalendarHTML(currentDate);
+          document.getElementById("pnts_sbt").addEventListener("click", function(e) {
+            e.preventDefault(); // Prevent default form submission behavior
+        
+            let eventCodeInput = document.getElementById("genevtcode").value; // Retrieve the event code input by the user
+            let user_email = auth.currentUser.email; // Retrieve the currently signed in user's email
+        
+            // First, find the user document based on the email
+            db.collection("ama_users")
+              .where("email", "==", user_email)
+              .get()
+              .then(userSnapshot => {
+                if (!userSnapshot.empty) {
+                    // Get the user's document reference
+                    let userDocRef = userSnapshot.docs[0].ref;
+        
+                    // Now, query the events collection to find a matching event code
+                    db.collection("events")
+                      .where("code", "==", eventCodeInput)
+                      .get()
+                      .then(querySnapshot => {
+                        if (!querySnapshot.empty) {
+                            let eventDetails = querySnapshot.docs[0].data(); // Assuming event codes are unique, take the first result
+        
+                            // Prepare the data to be added to the 'member_points' subcollection
+                            let memberPointsData = {
+                                code: eventDetails.code,
+                                eventType: eventDetails.type,
+                                pointSemester: eventDetails.semester,
+                                points: parseInt(eventDetails.pts, 10) // Ensure points are stored as integers
+                            };
+        
+                            // Add the member points data to the 'member_points' subcollection for the current user
+                            userDocRef.collection("member_points")
+                              .add(memberPointsData)
+                              .then(() => {
+                                  console.log("Points successfully added for the event.");
+                                  alert("Points successfully submitted!");
+                                  pnts_mod.classList.remove("is-active"); // Close the modal on successful submission
+                                  reloadCalendarPage(); // Optionally, refresh the calendar page to show updates
+                              })
+                              .catch(error => {
+                                  console.error("Error adding points: ", error);
+                                  alert("Failed to submit points. Please try again.");
+                              });
+                        } else {
+                            alert("Invalid event code. Please check and try again.");
+                        }
+                      })
+                      .catch(error => {
+                          console.error("Error verifying event code: ", error);
+                      });
+                } else {
+                    alert("No user found with the provided email. Please check and try again.");
+                }
+              })
+              .catch(error => {
+                  console.error("Error fetching user by email: ", error);
               });
-            // pnts_mod.classList.remove("is-active");
-            reloadCalendarPage();
-          })
-          .catch((error) => console.error("Error Submitting Points ", error));
+        });
 
-        // Attach event listener to the cancel button
 
         document
           .getElementById("pnts_cncl")
@@ -2049,42 +2050,6 @@ function attachDeleteHandlers() {
     // Assume 'currentUser' is the currently signed-in user's email
     let currentUser = auth.currentUser.email;
 
-    // Fetch points for the current user from the member_points subcollection
-    db.collection("ama_users")
-      .where("email", "==", currentUser)
-      .get()
-      .then((usersSnapshot) => {
-        if (!usersSnapshot.empty) {
-          // Assuming each user has a unique email, we take the first document
-          let userDoc = usersSnapshot.docs[0];
-
-          userDoc.ref
-            .collection("member_points")
-            .get()
-            .then((pointsSnapshot) => {
-              pointsSnapshot.forEach((pointDoc) => {
-                const data = pointDoc.data();
-                const eventType = normalizeEventType(data.eventType);
-                const points = parseInt(data.points);
-                if (memberTotalPoints.hasOwnProperty(eventType)) {
-                  memberTotalPoints[eventType] += points;
-                }
-              });
-
-              // After all data is aggregated, update the UI
-              updateCardsWithPoints(memberTotalPoints);
-            })
-            .catch((error) => {
-              console.error("Error fetching points data for user:", error);
-            });
-        } else {
-          console.error("No user found with the email:", currentUser);
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching user document:", error);
-      });
-  }
 
   function updateCardsWithPoints(memberTotalPoints) {
     console.log(
@@ -2929,3 +2894,4 @@ db.collection("people")
     // append the html variable to the document
     document.querySelector("#all_people").innerHTML += html;
   });
+}
