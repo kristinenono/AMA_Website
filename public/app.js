@@ -1850,7 +1850,7 @@ function addContent(isAdmin) {
         </div>
     </div>
 </div>
-<div class="columns is-centered mt-4">
+<div class="columns is-centered mt-4 mb-4">
     <div class="column is-half">
         <div class="card px-4 py-3 has-text-centered" event-type="total">
             <header class="card-header">
