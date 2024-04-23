@@ -1187,6 +1187,9 @@ document.querySelector(".eventsfooter").addEventListener("click", () => {
   r_e("calendarbtn").click();
 });
 
+
+
+
 // points page content
 r_e("pointbtn").addEventListener("click", () => {
   let check_auth = auth.currentUser;
@@ -1787,7 +1790,7 @@ function addContent(isAdmin) {
   } else {
     let points_content = `<div class="columns is-centered mt-4">
     <div class="column pr-outer">
-        <div class="card px-4 py-3 has-text-centered" event-type="Volunteer">
+        <div class="card px-4 py-3 has-text-centered" event-type="volunteer">
             <header class="card-header">
                 <p class="card-header-title has-text-white is-centered add-cardcolor">Volunteer</p>
             </header>
@@ -1811,7 +1814,7 @@ function addContent(isAdmin) {
         </div>
     </div>
     <div class="column">
-        <div class="card px-4 py-3 has-text-centered" event-type="DEI">
+        <div class="card px-4 py-3 has-text-centered" event-type="dei">
             <header class="card-header">
                 <p class="card-header-title has-text-white is-centered add-cardcolor">DEI</p>
             </header>
@@ -1866,28 +1869,77 @@ function addContent(isAdmin) {
     PopulatePoints();
     updateCardsWithPoints(memberTotalPoints);
   }
-}
-
-function updateCardsWithPoints(memberTotalPoints) {
-  console.log(
-    "Updating cards with the following points data:",
-    memberTotalPoints
-  );
-
-  Object.keys(memberTotalPoints).forEach((fullName) => {
-    const points = memberTotalPoints[fullName];
-    for (const eventType in points) {
+  function PopulatePoints() {
+    let memberTotalPoints = {
+      volunteer: 0,
+      professional_development: 0,
+      dei: 0,
+      social: 0,
+      speaker: 0
+    };
+  
+    // Fetch all users from ama_users collection
+    db.collection("ama_users").get().then((usersSnapshot) => {
+      usersSnapshot.forEach((userDoc) => {
+        // Fetch points for each user from member_points subcollection
+        userDoc.ref.collection("member_points").get().then((pointsSnapshot) => {
+          pointsSnapshot.forEach((pointDoc) => {
+            const data = pointDoc.data();
+            const eventType = normalizeEventType(data.eventType);
+            const points = parseInt(data.points);
+            if (memberTotalPoints.hasOwnProperty(eventType)) {
+              memberTotalPoints[eventType] += points;
+            }
+          });
+          // After all data is aggregated, update the cards
+          updateCardsWithPoints(memberTotalPoints);
+        });
+      });
+    }).catch((error) => {
+      console.error("Error fetching member points:", error);
+    });
+  }
+  
+  function updateCardsWithPoints(memberTotalPoints) {
+    console.log("Updating cards with the following points data:", memberTotalPoints);
+  
+    let totalPoints = 0;
+  
+    Object.keys(memberTotalPoints).forEach((eventType) => {
+      const points = memberTotalPoints[eventType];
       const selector = `.card[event-type="${eventType}"] .content`;
       const contentDiv = document.querySelector(selector);
       if (contentDiv) {
-        contentDiv.textContent = `${points[eventType]}`; // Ensure string format
-        // console.log(`Updated ${eventType} points to ${points[eventType]}`);
+        contentDiv.textContent = `${points}`;
+        totalPoints += points;
       } else {
-        console.log(`No element found for selector: ${selector}`);
+        console.error(`No element found for selector: ${selector}`);
       }
+    });
+  
+    // Update total points card
+    const totalPointsDiv = document.querySelector('.card[event-type="total"] .content');
+    if (totalPointsDiv) {
+      totalPointsDiv.textContent = `${totalPoints}`;
     }
-  });
+  }
+  
+  function normalizeEventType(eventType) {
+    const eventTypeMapping = {
+      "Volunteer": "volunteer",
+      "Professional Development": "professional_development",
+      "Speaker Event": "speaker",
+      "Social Event": "social",
+      "DEI Event": "dei"
+    };
+    return eventTypeMapping[eventType] || eventType.toLowerCase().replace(/ /g, "_");
+  }
 }
+
+
+
+
+
 
 // contact page content
 let contact_content = `<div id="contactSectionTop" class="contactSection-box contactTopFormat">
