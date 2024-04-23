@@ -2042,42 +2042,50 @@ function addContent(isAdmin) {
   }
   function PopulatePoints() {
     let memberTotalPoints = {
-        volunteer: 0,
-        professional_development: 0,
-        dei: 0,
-        social: 0,
-        speaker: 0,
+      volunteer: 0,
+      professional_development: 0,
+      dei: 0,
+      social: 0,
+      speaker: 0
     };
-
+  
+    // Assume 'currentUser' is the currently signed-in user's email
     let currentUser = auth.currentUser.email;
-
-    // Fetch user points from Firestore
-    db.collection("ama_users")
-        .doc(currentUser)
-        .collection("member_points")
-        .get()
-        .then((pointsSnapshot) => {
-            pointsSnapshot.forEach((pointDoc) => {
-                const data = pointDoc.data();
-                const normalizedEventType = normalizeEventType(data.eventType);
-                memberTotalPoints[normalizedEventType] += data.points;
-            });
-
-            updateCardsWithPoints(memberTotalPoints); // Ensure this is called here
-        })
-        .catch((error) => {
-            console.error("Error fetching points data for user:", error);
+  
+    // Fetch points for the current user from the member_points subcollection
+    db.collection("ama_users").where("email", "==", currentUser).get().then((usersSnapshot) => {
+      if (!usersSnapshot.empty) {
+        // Assuming each user has a unique email, we take the first document
+        let userDoc = usersSnapshot.docs[0];
+  
+        userDoc.ref.collection("member_points").get().then((pointsSnapshot) => {
+          pointsSnapshot.forEach((pointDoc) => {
+            const data = pointDoc.data();
+            const eventType = normalizeEventType(data.eventType);
+            const points = parseInt(data.points);
+            if (memberTotalPoints.hasOwnProperty(eventType)) {
+              memberTotalPoints[eventType] += points;
+            }
+          });
+  
+          // After all data is aggregated, update the UI
+          updateCardsWithPoints(memberTotalPoints);
+        }).catch((error) => {
+          console.error("Error fetching points data for user:", error);
         });
-}
-
+      } else {
+        console.error("No user found with the email:", currentUser);
+      }
+    }).catch((error) => {
+      console.error("Error fetching user document:", error);
+    });
+  }
+  
   function updateCardsWithPoints(memberTotalPoints) {
-    console.log(
-      "Updating cards with the following points data:",
-      memberTotalPoints
-    );
-
+    console.log("Updating cards with the following points data:", memberTotalPoints);
+  
     let totalPoints = 0;
-
+  
     Object.keys(memberTotalPoints).forEach((eventType) => {
       const points = memberTotalPoints[eventType];
       const selector = `.card[event-type="${eventType}"] .content`;
@@ -2089,27 +2097,23 @@ function addContent(isAdmin) {
         console.error(`No element found for selector: ${selector}`);
       }
     });
-
+  
     // Update total points card
-    const totalPointsDiv = document.querySelector(
-      '.card[event-type="total"] .content'
-    );
+    const totalPointsDiv = document.querySelector('.card[event-type="total"] .content');
     if (totalPointsDiv) {
       totalPointsDiv.textContent = `${totalPoints}`;
     }
   }
-
+  
   function normalizeEventType(eventType) {
     const eventTypeMapping = {
-      Volunteer: "volunteer",
+      "Volunteer": "volunteer",
       "Professional Development": "professional_development",
       "Speaker Event": "speaker",
       "Social Event": "social",
-      "DEI Event": "dei",
+      "DEI Event": "dei"
     };
-    return (
-      eventTypeMapping[eventType] || eventType.toLowerCase().replace(/ /g, "_")
-    );
+    return eventTypeMapping[eventType] || eventType.toLowerCase().replace(/ /g, "_");
   }
 }
 
