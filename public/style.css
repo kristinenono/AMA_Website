@@ -290,26 +290,6 @@ x .title {
   font: var(--bodyFontFamily);
 }
 
-.volunteer-card {
-  background-color: green;
-}
-
-.professional-development-card {
-  background-color: blue;
-}
-
-.speaker-event-card {
-  background-color: orangered;
-}
-
-.social-event-card {
-  background-color: purple;
-}
-
-.dei-event-card {
-  background-color: palevioletred;
-}
-
 .events-button {
   display: inline-block;
   color: var(--primarynavy);

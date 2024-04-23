@@ -1184,6 +1184,7 @@ r_e("calendarbtn").addEventListener("click", () => {
           .add(event)
           .then(() => {
             alert("Event added to database");
+            reloadCalendarPage();
             // Clear form fields after successful submission
             evtname.value = "";
             evttime.value = "";
@@ -1217,6 +1218,31 @@ r_e("calendarbtn").addEventListener("click", () => {
           querySnapshot.forEach((doc) => {
             const event = doc.data();
             const eventId = doc.id;
+            let eventTypeStyle = "";
+            switch (event.type) {
+              case "Volunteer":
+                eventTypeStyle =
+                  "background-color: green;color: var(--primarywhite);";
+                break;
+              case "Professional Development":
+                eventTypeStyle =
+                  "background-color: blue;color: var(--primarywhite);";
+                break;
+              case "Speaker Event":
+                eventTypeStyle =
+                  "background-color:orangered ;color: var(--primarywhite);";
+                break;
+              case "Social Event":
+                eventTypeStyle =
+                  "background-color: purple; color: var(--primarywhite);";
+                break;
+              case "DEI Event":
+                eventTypeStyle =
+                  "background-color: palevioletred;color: var(--primarywhite);";
+                break;
+              default:
+                eventTypeStyle = ""; // Default style if no type matches
+            }
 
             // Extracting date and time from the event
             const eventDate = new Date(event.time);
@@ -1227,10 +1253,10 @@ r_e("calendarbtn").addEventListener("click", () => {
             });
 
             html += `
-              <div class="box margin-event">
+              <div class="box margin-event" style="${eventTypeStyle}">
                 <h2>${event.name}</h2>
                 <!-- "View Event Here" link -->
-                <a href="#" class="view-event-link" data-event-id="${eventId}">View Event Here!</a>
+                <a href="#" class="view-event-link" style = "color: var(--primarywhite);text-decoration: underline;" data-event-id="${eventId}">View Event Here!</a>
               </div>
             `;
           });
