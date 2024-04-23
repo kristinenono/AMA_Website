@@ -561,7 +561,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
             </form>
           </div>
         </div>
-        <div class="modal is-hidden" id="edit_evt">
+        <div class="modal is-active" id="edit_evt">
         <div class = "modal-background"></div>
         <div class="modal-content section has-background-white">
         <h2 class="title">Edit Event</h2>
@@ -569,7 +569,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
         <div class="field">
         <label class="label" >Name of Event</label>
         <div class="control">
-          <input class="input" id = "evtname" type="text" placeholder="LinkedIn Workshop" value= "${event.name}"/> 
+          <input class="input" id = "editname" type="text" placeholder="LinkedIn Workshop" value= "${event.name}"/> 
         </div>
         </div>
         <div class="field">
@@ -577,7 +577,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
         <div class="control">
           <input
             class="input"
-            id = "datetime"
+            id = "editdatetime"
             type="datetime-local"
             placeholder="12-01-22 01:22"
             value="${formattedDate}${formattedTime}"
@@ -588,7 +588,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
         <label class="label">Choose Event Category</label>
         <div class="control">
           <div class="select">
-            <select name="" id="evttype" >
+            <select name="" id="editevttype" >
               <option value="${event.type}">${event.type}</option>
               <option value="Volunteer">Volunteer</option>
               <option value="Professional Development">Professional Development</option>
@@ -602,7 +602,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
         <div class="field">
         <label class="label">Points Assigned</label>
         <div class="control">
-          <input class="input" id = "ptsassigned" type="number" placeholder="5" value=${event.pts}/> <h2> Current Value: ${event.pts} </h2>
+          <input class="input" id = "editpts" type="number" placeholder="5" value=${event.pts}/> <h2> Current Value: ${event.pts} </h2>
         </div>
         </div>
         <div class="field">
@@ -611,7 +611,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
           <textarea
             cols="20"
             rows="12"
-            id = "descriptionevt"
+            id = "editdescr"
             placeholder="Dress Code: Business Casual
         Location: Grainger"
         value = "${event.desc}"
@@ -620,7 +620,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
         </div>
         <div class="field has-addons">
         <div class="control">
-          <input id="codeInput" class="input" type="text" placeholder="Generate Code" value = "${event.code}"/> 
+          <input id="editcode" class="input" type="text" placeholder="Generate Code" value = "${event.code}"/> 
         </div>
         <div class="control">
           <a id="generateButton" class="button btncolor">Go</a>
@@ -628,7 +628,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
         </div>
         <div class="field is-grouped">
         <div class="control">
-          <button class="button" id = "editevtsbt">Submit</button>
+          <button class="button" id = "editevtsbt" onclick="EditEvent('${EventId}')">Save</button>
         </div>
         <div class="control">
           <button class="button" id="editevtcncl">Cancel</button>
@@ -703,6 +703,28 @@ function openEventModal(eventId, dayHTML, currentAuth) {
         //   edit_mod.classList.add("is-active");
         // });
         // pnts_mod.classList.add("is-active");
+        function EditEvent(EventId) {
+          const editedevent = {
+            name: document.querySelector("#editname").value,
+            datetime: document.querySelector("#editdatetime").value,
+            // how do I make the date and time like it looked before
+            pts: document.querySelector("#editpts").value,
+            desc: document.querySelector("#editdescr").value,
+            code: document.querySelector("#editcode").value,
+          };
+
+          //   // Update the post in Firestore
+          db.collection("events")
+            .doc(eventId)
+            .update(editedevent)
+            .then(() => {
+              alert("Event successfully edited!");
+              // Reload the posts after updatin
+            })
+            .catch((error) => {
+              console.error("Error updating event:", error);
+            });
+        }
 
         // modal.classList.add("is-active");
         document
