@@ -248,6 +248,7 @@ x .title {
   background-color: var(--primarynavy);
   color: var(--primarywhite);
   font-family: var(--titleFontFamily);
+  padding-bottom: 25%;
 }
 /* Add border with color for each event type */
 .event.volunteer {
