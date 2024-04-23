@@ -718,9 +718,6 @@ function openEventModal(eventId, dayHTML, currentAuth) {
         let ppl_attend = r_e("evtattd");
         let gen_evtcode = r_e("genevtcode");
 
-        
-
-
         pnts_sbt_frm
           .addEventListener("click", (e) => {
             console.log("submit_points");
