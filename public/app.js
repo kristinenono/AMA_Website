@@ -454,10 +454,6 @@ document.querySelector(".aboutfooter").addEventListener("click", () => {
   r_e("abt-link").click();
 });
 
-
-
-
-
 const calendarView = document.querySelector(".calview");
 const monthSelect = r_e("month-select");
 const prevMonthBtn = document.querySelector(".action_left");
@@ -482,6 +478,20 @@ const dayNames = ["Sun", "Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];
 let currentDate = new Date();
 function reloadCalendarPage() {
   document.getElementById("calendarbtn").click();
+}
+function deleteEvent(eventId) {
+  if (confirm("Are you sure you want to delete this event?")) {
+    db.collection("events")
+      .doc(eventId)
+      .delete()
+      .then(() => {
+        console.log("Event successfully deleted!");
+        reloadCalendarPage();
+      })
+      .catch((error) => {
+        console.error("Error removing event: ", error);
+      });
+  }
 }
 
 function openEventModal(eventId, dayHTML, currentAuth) {
@@ -518,8 +528,8 @@ function openEventModal(eventId, dayHTML, currentAuth) {
                 <p>Description: ${event.desc}</p>
                 <p>Type: ${event.type}</p>
                 <button class ="button" id=edit_curr_evt"> Edit </button>
-                <button class ="button" id=del_curr_evt"> Delete </button>
-                <button class="button" id="evtmodalcancel" onclick="reloadCalendarPage()">Cancel</button>
+                <button class="button" id="del_curr_evt" onclick="deleteEvent('${eventId}')">Delete</button>
+                <button class="button" id="evtmodalcancel" onclick="r_e('${eventId}')">Cancel</button>
               </div>
             </div>
           </div>
@@ -665,7 +675,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
                   <button class="button" id="pnts_sbt">Submit</button>
                 </div>
                 <div class="control">
-                  <button class="button" id="pnts_cncl">Cancel</button>
+                  <button class="button" id="pnts_cncl" onclick = "reloadCalendarPage()">Cancel</button>
                 </div>
               </div>
             </form>
@@ -739,11 +749,11 @@ function openEventModal(eventId, dayHTML, currentAuth) {
               .then(() => {
                 fetchEventsAndGenerateCalendarHTML(currentDate);
               });
-            pnts_mod.classList.remove("is-active");
+            // pnts_mod.classList.remove("is-active");
+            reloadCalendarPage();
           })
           .catch((error) => console.error("Error Submitting Points ", error));
 
-          
         // Attach event listener to the cancel button
 
         document
@@ -753,7 +763,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
             pnts_mod.classList.remove("is-active");
 
             // Re-render the calendar view
-            fetchEventsAndGenerateCalendarHTML(currentDate);
+            // fetchEventsAndGenerateCalendarHTML(currentDate);
           });
 
         modal.classList.add("is-active");
@@ -1312,14 +1322,6 @@ fetchEventsAndGenerateCalendarHTML(currentDate);
 document.querySelector(".eventsfooter").addEventListener("click", () => {
   r_e("calendarbtn").click();
 });
-
-
-
-
-
-
-
-
 
 // points page content
 r_e("pointbtn").addEventListener("click", () => {
@@ -2041,46 +2043,57 @@ function attachDeleteHandlers() {
       professional_development: 0,
       dei: 0,
       social: 0,
-      speaker: 0
+      speaker: 0,
     };
-  
+
     // Assume 'currentUser' is the currently signed-in user's email
     let currentUser = auth.currentUser.email;
-  
+
     // Fetch points for the current user from the member_points subcollection
-    db.collection("ama_users").where("email", "==", currentUser).get().then((usersSnapshot) => {
-      if (!usersSnapshot.empty) {
-        // Assuming each user has a unique email, we take the first document
-        let userDoc = usersSnapshot.docs[0];
-  
-        userDoc.ref.collection("member_points").get().then((pointsSnapshot) => {
-          pointsSnapshot.forEach((pointDoc) => {
-            const data = pointDoc.data();
-            const eventType = normalizeEventType(data.eventType);
-            const points = parseInt(data.points);
-            if (memberTotalPoints.hasOwnProperty(eventType)) {
-              memberTotalPoints[eventType] += points;
-            }
-          });
-  
-          // After all data is aggregated, update the UI
-          updateCardsWithPoints(memberTotalPoints);
-        }).catch((error) => {
-          console.error("Error fetching points data for user:", error);
-        });
-      } else {
-        console.error("No user found with the email:", currentUser);
-      }
-    }).catch((error) => {
-      console.error("Error fetching user document:", error);
-    });
+    db.collection("ama_users")
+      .where("email", "==", currentUser)
+      .get()
+      .then((usersSnapshot) => {
+        if (!usersSnapshot.empty) {
+          // Assuming each user has a unique email, we take the first document
+          let userDoc = usersSnapshot.docs[0];
+
+          userDoc.ref
+            .collection("member_points")
+            .get()
+            .then((pointsSnapshot) => {
+              pointsSnapshot.forEach((pointDoc) => {
+                const data = pointDoc.data();
+                const eventType = normalizeEventType(data.eventType);
+                const points = parseInt(data.points);
+                if (memberTotalPoints.hasOwnProperty(eventType)) {
+                  memberTotalPoints[eventType] += points;
+                }
+              });
+
+              // After all data is aggregated, update the UI
+              updateCardsWithPoints(memberTotalPoints);
+            })
+            .catch((error) => {
+              console.error("Error fetching points data for user:", error);
+            });
+        } else {
+          console.error("No user found with the email:", currentUser);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching user document:", error);
+      });
   }
-  
+
   function updateCardsWithPoints(memberTotalPoints) {
-    console.log("Updating cards with the following points data:", memberTotalPoints);
-  
+    console.log(
+      "Updating cards with the following points data:",
+      memberTotalPoints
+    );
+
     let totalPoints = 0;
-  
+
     Object.keys(memberTotalPoints).forEach((eventType) => {
       const points = memberTotalPoints[eventType];
       const selector = `.card[event-type="${eventType}"] .content`;
@@ -2092,30 +2105,29 @@ function attachDeleteHandlers() {
         console.error(`No element found for selector: ${selector}`);
       }
     });
-  
+
     // Update total points card
-    const totalPointsDiv = document.querySelector('.card[event-type="total"] .content');
+    const totalPointsDiv = document.querySelector(
+      '.card[event-type="total"] .content'
+    );
     if (totalPointsDiv) {
       totalPointsDiv.textContent = `${totalPoints}`;
     }
   }
-  
+
   function normalizeEventType(eventType) {
     const eventTypeMapping = {
-      "Volunteer": "volunteer",
+      Volunteer: "volunteer",
       "Professional Development": "professional_development",
       "Speaker Event": "speaker",
       "Social Event": "social",
-      "DEI Event": "dei"
+      "DEI Event": "dei",
     };
-    return eventTypeMapping[eventType] || eventType.toLowerCase().replace(/ /g, "_");
+    return (
+      eventTypeMapping[eventType] || eventType.toLowerCase().replace(/ /g, "_")
+    );
   }
-} 
-
-
-
-
-
+}
 
 // contact page content
 let contact_content = `<div id="contactSectionTop" class="contactSection-box contactTopFormat">
@@ -2224,11 +2236,6 @@ document.querySelector(".contactfooter").addEventListener("click", () => {
 document.querySelector(".sponsorfooter").addEventListener("click", () => {
   r_e("contact-link").click();
 });
-
-
-
-
-
 
 //join button
 r_e("joinbuttonhome").addEventListener("click", () => {

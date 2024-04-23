@@ -255,40 +255,45 @@ x .title {
   border: 0.2rem solid green;
   color: green;
   display: inline-block;
-  padding: 0.12rem;
+  padding: 0.1rem;
   font: var(--bodyFontFamily);
+  font-weight: bold;
 }
 
 .event.professional-development {
   border: 0.2rem solid blue;
   color: blue;
   display: inline-block;
-  padding: 0.12rem;
+  padding: 0.1rem;
   font: var(--bodyFontFamily);
+  font-weight: bold;
 }
 
 .event.speaker-event {
   border: 0.2rem solid #ffa756;
   color: #ffa756;
   display: inline-block;
-  padding: 0.12rem;
+  padding: 0.1rem;
   font: var(--bodyFontFamily);
+  font-weight: bold;
 }
 
 .event.social-event {
   border: 0.2rem solid purple;
   color: purple;
   display: inline-block;
-  padding: 0.12rem;
+  padding: 0.1rem;
   font: var(--bodyFontFamily);
+  font-weight: bold;
 }
 
 .event.dei-event {
   border: 0.2rem solid palevioletred;
   color: palevioletred;
   display: inline-block;
-  padding: 0.12rem;
+  padding: 0.1rem;
   font: var(--bodyFontFamily);
+  font-weight: bold;
 }
 
 .events-button {
