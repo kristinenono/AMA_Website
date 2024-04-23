@@ -249,29 +249,65 @@ x .title {
   color: var(--primarywhite);
   font-family: var(--titleFontFamily);
 }
-.philanthropy-event {
-  background-color: #e87531;
-  color: #fafbfc;
-  font-family: var(--titleFontFamily);
-  /* padding: 1rem; */
+/* Add border with color for each event type */
+.event.volunteer {
+  border: 0.2rem solid green;
+  color: green;
+  display: inline-block;
+  padding: 0.12rem;
+  font: var(--bodyFontFamily);
 }
 
-.prof-dev-event {
-  background-color: #e8a32a;
-  color: #fafbfc;
-  font-family: var(--titleFontFamily);
+.event.professional-development {
+  border: 0.2rem solid blue;
+  color: blue;
+  display: inline-block;
+  padding: 0.12rem;
+  font: var(--bodyFontFamily);
 }
 
-.speaker-event {
-  background-color: #476d3d;
-  color: #fafbfc;
-  font-family: var(--titleFontFamily);
+.event.speaker-event {
+  border: 0.2rem solid orangered;
+  color: orangered;
+  display: inline-block;
+  padding: 0.12rem;
+  font: var(--bodyFontFamily);
 }
 
-.social-event {
-  background-color: #0071a5;
-  color: #fafbfc;
-  font-family: var(--titleFontFamily);
+.event.social-event {
+  border: 0.2rem solid purple;
+  color: purple;
+  display: inline-block;
+  padding: 0.12rem;
+  font: var(--bodyFontFamily);
+}
+
+.event.dei-event {
+  border: 0.2rem solid palevioletred;
+  color: palevioletred;
+  display: inline-block;
+  padding: 0.12rem;
+  font: var(--bodyFontFamily);
+}
+
+.volunteer-card {
+  background-color: green;
+}
+
+.professional-development-card {
+  background-color: blue;
+}
+
+.speaker-event-card {
+  background-color: orangered;
+}
+
+.social-event-card {
+  background-color: purple;
+}
+
+.dei-event-card {
+  background-color: palevioletred;
 }
 
 .events-button {

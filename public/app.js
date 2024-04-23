@@ -708,9 +708,10 @@ function generateCalendarHTML(date, events) {
         minute: "2-digit",
         hour12: true,
       });
+      const eventTypeClass = event.data.type.toLowerCase().replace(/\s+/g, "-");
 
-      // dayHtml += `<button class="event" data-event-id="${event.id}" onclick="alert('${formattedDate}')">${event.data.name}</button>`;
-      dayHtml += `<button class="event evtbutton" data-event-id="${event.id}" onclick="openEventModal('${event.id}')">${event.data.name}</button>`;
+      // Add the class name to the button
+      dayHtml += `<button class="event ${eventTypeClass}" data-event-id="${event.id}" onclick="openEventModal('${event.id}')">${event.data.name}</button>`;
     });
     dayHtml += `</div>`;
 
