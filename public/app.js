@@ -1237,9 +1237,10 @@ r_e("calendarbtn").addEventListener("click", () => {
       });
     }
     function show_event_cards() {
+      const today = new Date(); // Get current date
+
       db.collection("events")
-        .orderBy("time", "asc") // Order events by time in descending order
-        .limit(4) // Limit to the first 4 most recent events
+        .orderBy("time", "asc") // Order events by time in ascending order
         .get()
         .then((querySnapshot) => {
           let html = "";
@@ -1272,21 +1273,25 @@ r_e("calendarbtn").addEventListener("click", () => {
                 eventTypeStyle = ""; // Default style if no type matches
             }
 
-            // Extracting date and time from the event
+            // Convert event date string to JavaScript Date object
             const eventDate = new Date(event.time);
-            const eventDateFormat = eventDate.toLocaleDateString("en-US", {
-              month: "2-digit",
-              day: "2-digit",
-              year: "numeric",
-            });
 
-            html += `
-              <div class="box margin-event" style="${eventTypeStyle}">
-                <h2>${event.name}</h2>
-                <!-- "View Event Here" link -->
-                <a href="#" class="view-event-link" style = "color: var(--primarywhite);text-decoration: underline;" data-event-id="${eventId}">View Event Here!</a>
-              </div>
-            `;
+            // Compare event date with today's date
+            if (eventDate > today) {
+              const eventDateFormat = eventDate.toLocaleDateString("en-US", {
+                month: "2-digit",
+                day: "2-digit",
+                year: "numeric",
+              });
+
+              html += `
+                <div class="box margin-event" style="${eventTypeStyle}">
+                  <h2>${event.name}</h2>
+                  <!-- "View Event Here" link -->
+                  <a href="#" class="view-event-link" style="color: var(--primarywhite);text-decoration: underline;" data-event-id="${eventId}">View Event Here!</a>
+                </div>
+              `;
+            }
           });
           document.querySelector("#all_events").innerHTML = html;
 
@@ -1769,24 +1774,25 @@ function addContent(isAdmin) {
         .catch((error) => {
           console.error("Error fetching members: ", error);
         });
-  
-      // Update listener setup when the selected option changes
-      select.addEventListener('change', () => {
-          if (select.selectedIndex >= 0) {
-              setupRealTimePointsListener(select.value); // Setup real-time listener for the new user
-          }
-      });
-  }
 
-  function setupRealTimePointsListener(memberId) {
-    const tbody = document.getElementById("memberPointsList");
-    // Assume db.collection().doc().collection() structure; adjust as needed
-    db.collection("ama_users")
-      .doc(memberId)
-      .collection("member_points")
-      .onSnapshot(snapshot => {
-          tbody.innerHTML = ""; // Clear the table before adding new rows
-          snapshot.forEach(doc => {
+      // Update listener setup when the selected option changes
+      select.addEventListener("change", () => {
+        if (select.selectedIndex >= 0) {
+          setupRealTimePointsListener(select.value); // Setup real-time listener for the new user
+        }
+      });
+    }
+
+    function setupRealTimePointsListener(memberId) {
+      const tbody = document.getElementById("memberPointsList");
+      // Assume db.collection().doc().collection() structure; adjust as needed
+      db.collection("ama_users")
+        .doc(memberId)
+        .collection("member_points")
+        .onSnapshot(
+          (snapshot) => {
+            tbody.innerHTML = ""; // Clear the table before adding new rows
+            snapshot.forEach((doc) => {
               const data = doc.data();
               const row = document.createElement("tr");
               row.innerHTML = `
@@ -1797,21 +1803,23 @@ function addContent(isAdmin) {
                 <td><button class="delete-point deletedbpoint" data-id="${doc.id}">Delete</button></td>
               `;
               tbody.appendChild(row);
-          });
-          attachDeleteHandlers(); // Reattach delete handlers after update
-      }, error => {
-          console.error("Error fetching real-time points updates: ", error);
-      });
-}
+            });
+            attachDeleteHandlers(); // Reattach delete handlers after update
+          },
+          (error) => {
+            console.error("Error fetching real-time points updates: ", error);
+          }
+        );
+    }
 
-function attachDeleteHandlers() {
-  document.querySelectorAll(".delete-point").forEach(button => {
-      button.addEventListener("click", function () {
+    function attachDeleteHandlers() {
+      document.querySelectorAll(".delete-point").forEach((button) => {
+        button.addEventListener("click", function () {
           const memberId = document.getElementById("showMemberSelect").value;
           deletePoint(memberId, this.getAttribute("data-id"));
+        });
       });
-  });
-}
+    }
 
     function saveEditChanges() {
       const memberId = document.getElementById("memberSelect").value;
@@ -1935,13 +1943,13 @@ function attachDeleteHandlers() {
       const select = document.getElementById("showMemberSelect");
       // Ensure the dropdown is populated and setup real-time updates for selected member
       populateShowMemberDropdown(() => {
-          if (select.options.length > 0) {
-              select.selectedIndex = 0; // Always reset to the first option
-              setupRealTimePointsListener(select.options[0].value); // Setup real-time listener for the first user
-          }
+        if (select.options.length > 0) {
+          select.selectedIndex = 0; // Always reset to the first option
+          setupRealTimePointsListener(select.options[0].value); // Setup real-time listener for the first user
+        }
       });
       document.getElementById("showmodal").classList.add("is-active");
-  });
+    });
 
     let showclose = document.getElementById("showclose");
     let showmodal = document.getElementById("showmodal");
