@@ -417,7 +417,6 @@ function fetchEventDetails(code) {
             document.getElementById('editPoints').value = eventData.pts || '';
             document.getElementById('editEventType').value = eventData.type || '';
             document.getElementById('editSemester').value = eventData.semester || '';
-            enableInputs(); // Enable inputs after fetching data
         } else {
             console.log("No event found with that code.");
             // Optionally clear fields or alert the user

@@ -1729,7 +1729,6 @@ function addContent(isAdmin) {
               eventData.type || "";
             document.getElementById("editSemester").value =
               eventData.semester || "";
-            enableInputs(); // Enable inputs after fetching data
           } else {
             console.log("No event found with that code.");
             // Optionally clear fields or alert the user
