@@ -200,6 +200,16 @@ x .title {
   color: #1f304f;
 }
 
+.userlogshow{
+  color: var(--linkColor);
+  font-weight: 600;
+  font-size: 20px;
+  align-items: center;
+
+}
+
+
+
 /* Calendar Page */
 .margin-left {
   flex: 1;
@@ -1560,9 +1570,7 @@ textarea.input-field {
 #foot_right {
   padding-top: 5%;
 }
-.margin-class {
-  margin-top: 35px;
-}
+
 .aboutContainer {
   display: flex;
   flex-wrap: wrap;
@@ -1814,6 +1822,7 @@ textarea.input-field {
   .login-signup-container {
       display: flex;
       gap: 10px;
+      align-items: center;
   }
 
   .navbar-item1{
