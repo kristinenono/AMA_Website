@@ -621,7 +621,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
                 <p>Time: ${formattedTime}</p>
                 <p>Description: ${event.desc}</p>
                 <p>Type: ${event.type}</p>
-                <button class="button" id="submit_points">Submit Points</button>
+                <button class="button" id="submit_points" onclick= "alert("btn clicked to submit")">Submit Points</button>
                 <button class="button" id="evtmodalcancel">Cancel</button>
               </div>
             </div>
@@ -670,11 +670,11 @@ function openEventModal(eventId, dayHTML, currentAuth) {
         const editevt = document.getElementById("edit_curr_evt");
         const edit_mod = document.getElementById("edit_evt");
 
-        editevt.addEventListener("click", function () {
-          console.log("editclick");
-          edit_mod.classList.remove("is-hidden");
-          edit_mod.classList.add("is-active");
-        });
+        // editevt.addEventListener("click", function () {
+        //   console.log("editclick");
+        //   edit_mod.classList.remove("is-hidden");
+        //   edit_mod.classList.add("is-active");
+        // });
         // pnts_mod.classList.add("is-active");
 
         // modal.classList.add("is-active");
