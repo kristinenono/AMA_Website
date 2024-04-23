@@ -1269,6 +1269,10 @@ document.querySelector(".eventsfooter").addEventListener("click", () => {
   r_e("calendarbtn").click();
 });
 
+document.querySelector(".pointfooter").addEventListener("click", () => {
+  r_e("pointbtn").click();
+});
+
 // points page content
 r_e("pointbtn").addEventListener("click", () => {
   let check_auth = auth.currentUser;
