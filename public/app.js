@@ -534,7 +534,82 @@ function openEventModal(eventId, dayHTML, currentAuth) {
             </form>
           </div>
         </div>
-          `;
+        <div class="modal is-hidden" id="edit_evt">
+        <div class = "modal-background"></div>
+        <div class="modal-content section has-background-white">
+        <h2 class="title">Edit Event</h2>
+        <form id="cal_form_modal">
+        <div class="field">
+        <label class="label" >Name of Event</label>
+        <div class="control">
+          <input class="input" id = "evtname" type="text" placeholder="LinkedIn Workshop" value= "${event.name}"/> 
+        </div>
+        </div>
+        <div class="field">
+        <label class="label">Date and Time of Event</label>
+        <div class="control">
+          <input
+            class="input"
+            id = "datetime"
+            type="datetime-local"
+            placeholder="12-01-22 01:22"
+            value="${formattedDate}${formattedTime}"
+          /> <h2> Current Value: ${formattedDate} ${formattedTime}</h2>
+        </div>
+        </div>
+        <div class="field">
+        <label class="label">Choose Event Category</label>
+        <div class="control">
+          <div class="select">
+            <select name="" id="evttype" >
+              <option value="${event.type}">${event.type}</option>
+              <option value="Volunteer">Volunteer</option>
+              <option value="Professional Development">Professional Development</option>
+              <option value="Speaker Event">Speaker Event</option>
+              <option value="Social Event">Social Event</option>
+              <option value="DEI Event">DEI Event</option>
+            </select>
+          </div>
+        </div>
+        </div>
+        <div class="field">
+        <label class="label">Points Assigned</label>
+        <div class="control">
+          <input class="input" id = "ptsassigned" type="number" placeholder="5" value=${event.pts}/> <h2> Current Value: ${event.pts} </h2>
+        </div>
+        </div>
+        <div class="field">
+        <label class="label">Description of Event</label>
+        <div class="control">
+          <textarea
+            cols="20"
+            rows="12"
+            id = "descriptionevt"
+            placeholder="Dress Code: Business Casual
+        Location: Grainger"
+        value = "${event.desc}"
+          >${event.desc}</textarea>
+        </div>
+        </div>
+        <div class="field has-addons">
+        <div class="control">
+          <input id="codeInput" class="input" type="text" placeholder="Generate Code" value = "${event.code}"/> 
+        </div>
+        <div class="control">
+          <a id="generateButton" class="button btncolor">Go</a>
+        </div>
+        </div>
+        <div class="field is-grouped">
+        <div class="control">
+          <button class="button" id = "editevtsbt">Submit</button>
+        </div>
+        <div class="control">
+          <button class="button" id="editevtcncl">Cancel</button>
+        </div>
+        </div>
+        </div>
+      </form>
+        </div></div>`;
         } else {
           modalHtml = `
           <div class="modal is-active" id="eventModal_${event.id}">
@@ -547,8 +622,6 @@ function openEventModal(eventId, dayHTML, currentAuth) {
                 <p>Description: ${event.desc}</p>
                 <p>Type: ${event.type}</p>
                 <button class="button" id="submit_points">Submit Points</button>
-                <button class ="button is-hidden" id=edit_curr_evt"> Edit </button>
-                <button class ="button is-hidden" id=del_curr_evt"> Delete </button>
                 <button class="button" id="evtmodalcancel">Cancel</button>
               </div>
             </div>
@@ -594,6 +667,14 @@ function openEventModal(eventId, dayHTML, currentAuth) {
         const modalId = `#eventModal_${event.id}`;
         const modal = document.querySelector(modalId);
         const pnts_mod = document.getElementById("pnts_mod");
+        const editevt = document.getElementById("edit_curr_evt");
+        const edit_mod = document.getElementById("edit_evt");
+
+        editevt.addEventListener("click", function () {
+          console.log("editclick");
+          edit_mod.classList.remove("is-hidden");
+          edit_mod.classList.add("is-active");
+        });
         // pnts_mod.classList.add("is-active");
 
         // modal.classList.add("is-active");
@@ -604,6 +685,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
             pnts_mod.classList.remove("is-hidden");
             pnts_mod.classList.add("is-active");
           });
+
         document
           .getElementById("evtmodalcancel")
           .addEventListener("click", function () {
