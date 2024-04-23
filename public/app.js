@@ -529,7 +529,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
                 <p>Type: ${event.type}</p>
                 <button class ="button" id=edit_curr_evt"> Edit </button>
                 <button class="button" id="del_curr_evt" onclick="deleteEvent('${eventId}')">Delete</button>
-                <button class="button" id="evtmodalcancel" onclick="r_e('${eventId}')">Cancel</button>
+                <button class="button" id="evtmodalcancel" onclick="reloadCalendarPage()">Cancel</button>
               </div>
             </div>
           </div>
@@ -542,7 +542,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
         <div class="field">
         <label class="label" >Name of Event</label>
         <div class="control">
-          <input class="input" id = "evtname" type="text" placeholder="LinkedIn Workshop" value= "${event.name}"/> 
+          <input class="input" id = "editname" type="text" placeholder="LinkedIn Workshop" value= "${event.name}"/> 
         </div>
         </div>
         <div class="field">
@@ -550,7 +550,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
         <div class="control">
           <input
             class="input"
-            id = "datetime"
+            id = "editdatetime"
             type="datetime-local"
             placeholder="12-01-22 01:22"
             value="${formattedDate}${formattedTime}"
@@ -561,7 +561,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
         <label class="label">Choose Event Category</label>
         <div class="control">
           <div class="select">
-            <select name="" id="evttype" >
+            <select name="" id="editevttype" >
               <option value="${event.type}">${event.type}</option>
               <option value="Volunteer">Volunteer</option>
               <option value="Professional Development">Professional Development</option>
@@ -575,7 +575,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
         <div class="field">
         <label class="label">Points Assigned</label>
         <div class="control">
-          <input class="input" id = "ptsassigned" type="number" placeholder="5" value=${event.pts}/> <h2> Current Value: ${event.pts} </h2>
+          <input class="input" id = "editpts" type="number" placeholder="5" value=${event.pts}/> <h2> Current Value: ${event.pts} </h2>
         </div>
         </div>
         <div class="field">
@@ -584,7 +584,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
           <textarea
             cols="20"
             rows="12"
-            id = "descriptionevt"
+            id = "editdescr"
             placeholder="Dress Code: Business Casual
         Location: Grainger"
         value = "${event.desc}"
@@ -593,7 +593,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
         </div>
         <div class="field has-addons">
         <div class="control">
-          <input id="codeInput" class="input" type="text" placeholder="Generate Code" value = "${event.code}"/> 
+          <input id="editcode" class="input" type="text" placeholder="Generate Code" value = "${event.code}"/> 
         </div>
         <div class="control">
           <a id="generateButton" class="button btncolor">Go</a>
@@ -601,7 +601,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
         </div>
         <div class="field is-grouped">
         <div class="control">
-          <button class="button" id = "editevtsbt">Submit</button>
+          <button class="button" id = "editevtsbt" onclick="EditEvent('${EventId}')">Save</button>
         </div>
         <div class="control">
           <button class="button" id="editevtcncl">Cancel</button>
@@ -676,6 +676,28 @@ function openEventModal(eventId, dayHTML, currentAuth) {
         //   edit_mod.classList.add("is-active");
         // });
         // pnts_mod.classList.add("is-active");
+        function EditEvent(EventId) {
+          const editedevent = {
+            name: document.querySelector("#editname").value,
+            datetime: document.querySelector("#editdatetime").value,
+            // how do I make the date and time like it looked before
+            pts: document.querySelector("#editpts").value,
+            desc: document.querySelector("#editdescr").value,
+            code: document.querySelector("#editcode").value,
+          };
+
+          //   // Update the post in Firestore
+          db.collection("events")
+            .doc(eventId)
+            .update(editedevent)
+            .then(() => {
+              alert("Event successfully edited!");
+              // Reload the posts after updatin
+            })
+            .catch((error) => {
+              console.error("Error updating event:", error);
+            });
+        }
 
         // modal.classList.add("is-active");
         document
@@ -881,38 +903,6 @@ function fetchEventsAndGenerateCalendarHTML(date) {
       console.error("Error getting events: ", error);
     });
 }
-function logAllEvents() {
-  db.collection("events")
-    .get()
-    .then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        console.log(doc.id, " => ", doc.data());
-      });
-    })
-    .catch((error) => {
-      console.error("Error getting events: ", error);
-    });
-}
-
-// Call the function to log all events
-logAllEvents();
-
-// Function to generate a random code
-// function generateRandomCode(length) {
-//   const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-//   let code = "";
-//   for (let i = 0; i < length; i++) {
-//     code += characters.charAt(Math.floor(Math.random() * characters.length));
-//   }
-//   return code;
-// }
-
-// // Function to update the input field with the generated code
-// function updateCodeInput() {
-//   const codeInput = document.getElementById("codeInput");
-//   const randomCode = generateRandomCode(8); // Generate a random 8-character code (adjust length as needed)
-//   codeInput.value = randomCode;
-// }
 
 r_e("calendarbtn").addEventListener("click", () => {
   let check_auth = auth.currentUser;
@@ -1238,9 +1228,10 @@ r_e("calendarbtn").addEventListener("click", () => {
       });
     }
     function show_event_cards() {
+      const today = new Date(); // Get current date
+
       db.collection("events")
-        .orderBy("time", "asc") // Order events by time in descending order
-        .limit(4) // Limit to the first 4 most recent events
+        .orderBy("time", "asc") // Order events by time in ascending order
         .get()
         .then((querySnapshot) => {
           let html = "";
@@ -1273,21 +1264,25 @@ r_e("calendarbtn").addEventListener("click", () => {
                 eventTypeStyle = ""; // Default style if no type matches
             }
 
-            // Extracting date and time from the event
+            // Convert event date string to JavaScript Date object
             const eventDate = new Date(event.time);
-            const eventDateFormat = eventDate.toLocaleDateString("en-US", {
-              month: "2-digit",
-              day: "2-digit",
-              year: "numeric",
-            });
 
-            html += `
-              <div class="box margin-event" style="${eventTypeStyle}">
-                <h2>${event.name}</h2>
-                <!-- "View Event Here" link -->
-                <a href="#" class="view-event-link" style = "color: var(--primarywhite);text-decoration: underline;" data-event-id="${eventId}">View Event Here!</a>
-              </div>
-            `;
+            // Compare event date with today's date
+            if (eventDate > today) {
+              const eventDateFormat = eventDate.toLocaleDateString("en-US", {
+                month: "2-digit",
+                day: "2-digit",
+                year: "numeric",
+              });
+
+              html += `
+                <div class="box margin-event" style="${eventTypeStyle}">
+                  <h2>${event.name}</h2>
+                  <!-- "View Event Here" link -->
+                  <a href="#" class="view-event-link" style="color: var(--primarywhite);text-decoration: underline;" data-event-id="${eventId}">View Event Here!</a>
+                </div>
+              `;
+            }
           });
           document.querySelector("#all_events").innerHTML = html;
 
@@ -1322,6 +1317,10 @@ fetchEventsAndGenerateCalendarHTML(currentDate);
 
 document.querySelector(".eventsfooter").addEventListener("click", () => {
   r_e("calendarbtn").click();
+});
+
+document.querySelector(".pointfooter").addEventListener("click", () => {
+  r_e("pointbtn").click();
 });
 
 // points page content
@@ -1770,24 +1769,25 @@ function addContent(isAdmin) {
         .catch((error) => {
           console.error("Error fetching members: ", error);
         });
-  
-      // Update listener setup when the selected option changes
-      select.addEventListener('change', () => {
-          if (select.selectedIndex >= 0) {
-              setupRealTimePointsListener(select.value); // Setup real-time listener for the new user
-          }
-      });
-  }
 
-  function setupRealTimePointsListener(memberId) {
-    const tbody = document.getElementById("memberPointsList");
-    // Assume db.collection().doc().collection() structure; adjust as needed
-    db.collection("ama_users")
-      .doc(memberId)
-      .collection("member_points")
-      .onSnapshot(snapshot => {
-          tbody.innerHTML = ""; // Clear the table before adding new rows
-          snapshot.forEach(doc => {
+      // Update listener setup when the selected option changes
+      select.addEventListener("change", () => {
+        if (select.selectedIndex >= 0) {
+          setupRealTimePointsListener(select.value); // Setup real-time listener for the new user
+        }
+      });
+    }
+
+    function setupRealTimePointsListener(memberId) {
+      const tbody = document.getElementById("memberPointsList");
+      // Assume db.collection().doc().collection() structure; adjust as needed
+      db.collection("ama_users")
+        .doc(memberId)
+        .collection("member_points")
+        .onSnapshot(
+          (snapshot) => {
+            tbody.innerHTML = ""; // Clear the table before adding new rows
+            snapshot.forEach((doc) => {
               const data = doc.data();
               const row = document.createElement("tr");
               row.innerHTML = `
@@ -1798,21 +1798,23 @@ function addContent(isAdmin) {
                 <td><button class="delete-point deletedbpoint" data-id="${doc.id}">Delete</button></td>
               `;
               tbody.appendChild(row);
-          });
-          attachDeleteHandlers(); // Reattach delete handlers after update
-      }, error => {
-          console.error("Error fetching real-time points updates: ", error);
-      });
-}
+            });
+            attachDeleteHandlers(); // Reattach delete handlers after update
+          },
+          (error) => {
+            console.error("Error fetching real-time points updates: ", error);
+          }
+        );
+    }
 
-function attachDeleteHandlers() {
-  document.querySelectorAll(".delete-point").forEach(button => {
-      button.addEventListener("click", function () {
+    function attachDeleteHandlers() {
+      document.querySelectorAll(".delete-point").forEach((button) => {
+        button.addEventListener("click", function () {
           const memberId = document.getElementById("showMemberSelect").value;
           deletePoint(memberId, this.getAttribute("data-id"));
+        });
       });
-  });
-}
+    }
 
     function saveEditChanges() {
       const memberId = document.getElementById("memberSelect").value;
@@ -1936,13 +1938,13 @@ function attachDeleteHandlers() {
       const select = document.getElementById("showMemberSelect");
       // Ensure the dropdown is populated and setup real-time updates for selected member
       populateShowMemberDropdown(() => {
-          if (select.options.length > 0) {
-              select.selectedIndex = 0; // Always reset to the first option
-              setupRealTimePointsListener(select.options[0].value); // Setup real-time listener for the first user
-          }
+        if (select.options.length > 0) {
+          select.selectedIndex = 0; // Always reset to the first option
+          setupRealTimePointsListener(select.options[0].value); // Setup real-time listener for the first user
+        }
       });
       document.getElementById("showmodal").classList.add("is-active");
-  });
+    });
 
     let showclose = document.getElementById("showclose");
     let showmodal = document.getElementById("showmodal");
