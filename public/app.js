@@ -527,7 +527,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
                 <p>Time: ${formattedTime}</p>
                 <p>Description: ${event.desc}</p>
                 <p>Type: ${event.type}</p>
-                <button class ="button" id=edit_curr_evt" onclick="EditEvent('${eventId}')"> Edit </button>
+                <button class ="button" id=edit_curr_evt"> Edit </button>
                 <button class="button" id="del_curr_evt" onclick="deleteEvent('${eventId}')">Delete</button>
                 <button class="button" id="evtmodalcancel" onclick="reloadCalendarPage()">Cancel</button>
               </div>
@@ -601,7 +601,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
         </div>
         <div class="field is-grouped">
         <div class="control">
-          <button class="button" id = "editevtsbt">Save</button>
+          <button class="button" id = "editevtsbt"onclick="EditEvent('${eventId}')">Save</button>
         </div>
         <div class="control">
           <button class="button" id="editevtcncl">Cancel</button>
@@ -670,11 +670,11 @@ function openEventModal(eventId, dayHTML, currentAuth) {
         const editevt = document.getElementById("edit_curr_evt");
         const edit_mod = document.getElementById("edit_evt");
 
-        // editevt.addEventListener("click", function () {
-        //   console.log("editclick");
-        //   edit_mod.classList.remove("is-hidden");
-        //   edit_mod.classList.add("is-active");
-        // });
+        editevt.addEventListener("click", function () {
+          console.log("editclick");
+          edit_mod.classList.remove("is-hidden");
+          edit_mod.classList.add("is-active");
+        });
         // pnts_mod.classList.add("is-active");
         function EditEvent(EventId) {
           const editedevent = {
