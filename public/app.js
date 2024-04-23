@@ -880,38 +880,6 @@ function fetchEventsAndGenerateCalendarHTML(date) {
       console.error("Error getting events: ", error);
     });
 }
-function logAllEvents() {
-  db.collection("events")
-    .get()
-    .then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        console.log(doc.id, " => ", doc.data());
-      });
-    })
-    .catch((error) => {
-      console.error("Error getting events: ", error);
-    });
-}
-
-// Call the function to log all events
-logAllEvents();
-
-// Function to generate a random code
-// function generateRandomCode(length) {
-//   const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-//   let code = "";
-//   for (let i = 0; i < length; i++) {
-//     code += characters.charAt(Math.floor(Math.random() * characters.length));
-//   }
-//   return code;
-// }
-
-// // Function to update the input field with the generated code
-// function updateCodeInput() {
-//   const codeInput = document.getElementById("codeInput");
-//   const randomCode = generateRandomCode(8); // Generate a random 8-character code (adjust length as needed)
-//   codeInput.value = randomCode;
-// }
 
 r_e("calendarbtn").addEventListener("click", () => {
   let check_auth = auth.currentUser;
