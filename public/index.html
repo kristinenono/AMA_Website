@@ -131,60 +131,35 @@
             <a class="navbar-item has-text-light is-hidden button is-link" id="signout_button">Sign Out</a>
           </div>
         </div>
-      </div>
-          <div class="'hero-body">
-      </div>
-<div class="hero-foot">
-  <nav>
-    <div class="navbar is-transparent">
-      <div class="navbar-brand">
-        <a
-          class="navbar-burger"
-         id="burger_stack">
-          <span></span>
-          <span></span>
-          <span></span>
-        </a>
-      </div>
-        <div class="navbar-menu is-justify-content-center" id="burger_menu">
-          <div class="navbar-start mx-0 py-4">
-            <a class="navbar-item" id="home-link"
-              ><strong>HOME</strong></a
-            >
-            <a class="navbar-item" id="abt-link"><strong>ABOUT</strong></a>
-            <div class="navbar-item dropdown" >
-              <a class="has-text-light bttn1" id="members-link" >
-                <strong>MEMBERS</strong>
-              </a>
-              <div class="dropdown-content is-hidden has-background-grey">
-                <div><a id="calendarbtn">CALENDAR</a></div>
-                <div><a id="pointbtn">POINT SYSTEM</a></div>
+        <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
+          <div class="navbar-brand">
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+            </a>
+          </div>
+          <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-content">
+              <a class="navbar-item1" id="home-link"><strong>HOME</strong></a>
+              <a class="navbar-item1" id="abt-link"><strong>ABOUT</strong></a>
+              <div class="navbar-item1 dropdown is-hoverable" >
+                <a class="navbar-link is-arrowless" id="members-link" ><strong>MEMBERS</strong></a>
+                <div class="dropdown-content is-hidden has-background-grey">
+                  <a class="navbar-item1" id="calendarbtn">CALENDAR</a>
+                  <a class="navbar-item1" id="pointbtn1">POINT SYSTEM</a>
+                </div>
+              </div>
+              <a class="navbar-item1" id="blog-link"><strong >BLOG</strong></a>
+              <a class="navbar-item1" id="contact-link"><strong>CONTACT</strong></a>
+            </div>
+            <div class="navbar-item1">
+              <div id="signbtns" class="is-hidden burgerlogsign">
+                <button id="burgerloginbtn" class="add-btn">LOGIN</button>
+                <button id="burgersignupbtn" class="sadd-btn">SIGN UP</button>
               </div>
             </div>
-            <a class="navbar-item" id="blog-link"><strong >BLOG</strong></a>
-            <a class="navbar-item" id="contact-link"><strong>CONTACT</strong></a>
-            <!-- <div class="login-signup-burger">
-              <a id="login-burger">
-                <button id="logbtn-burger" class="add-btn button">
-                  <strong id="bttn-font">LOGIN</strong>
-                </button>
-              </a>
-              <div
-                  class="navbar-item has-text-light is-hidden"
-                  id="indicator"
-                ></div>
-              &nbsp; &nbsp;
-              <a id="signin-burger">
-                <button
-                  id="signbtn-burger"
-                  class="add-btn button"
-                >
-                  <strong id="bttn-font">SIGN UP</strong>
-                </button> -->
-              <!-- </a> -->
-            <!-- </div> -->
           </div>
-        </div>
         </div>
       </nav>
     </div>

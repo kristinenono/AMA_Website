@@ -629,7 +629,6 @@ input[type="submit"] {
 .dropdown-content {
   display: none;
   position: absolute;
-  bottom: -200px;
   min-width: 160px;
   z-index: 1;
 }
@@ -732,13 +731,6 @@ nav {
   font-size: 20px;
   vertical-align: bottom;
 }
-
-#home-link {
-  display: inline-block;
-  padding-right: 100px;
-  padding-left: 50px;
-  padding-top: 0;
-}
 #home-nav {
   color: #f3f2ee;
   font-family: Arial, Helvetica, sans-serif;
@@ -766,27 +758,6 @@ nav {
   color: #f3f2ee;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 20px;
-}
-#blog-link {
-  display: inline-block;
-  padding-right: 100px;
-  padding-left: 100px;
-  padding-top: 0;
-}
-#contact-link {
-  display: inline-block;
-  padding-right: 100px;
-  padding-top: 0;
-}
-#abt-link {
-  display: inline-block;
-  padding-right: 100px;
-  padding-top: 0;
-}
-#members-link {
-  display: inline-block;
-  padding-right: 25px;
-  padding-top: 18%;
 }
 #footer-box {
   width: 100%;
@@ -1845,7 +1816,7 @@ textarea.input-field {
       gap: 10px;
   }
 
-  .navbar-item{
+  .navbar-item1{
       line-height: 1.5;
       padding: 0.5rem 0.75rem; /* Adjust padding for better spacing */
       cursor: pointer;
@@ -1864,7 +1835,7 @@ textarea.input-field {
       font-weight: bold;
       color: black;
   }
-  .navbar-item:hover, .navbar-link:hover {
+  .navbar-item1:hover, .navbar-link:hover {
       color: var(--primarynavy); /* Maintain the color on hover */
       background-color: transparent; /* Ensure no background change on hover */
   }
@@ -1889,7 +1860,7 @@ textarea.input-field {
       .navbar-content {
           flex-direction: row;
       }
-      .navbar-item {
+      .navbar-item1 {
           color: white;
           width: auto;
           margin-right: 50px; /* Adds spacing between items */
@@ -1898,13 +1869,13 @@ textarea.input-field {
           color: white;
           width: auto;
       }
-      .navbar-item:last-child, .navbar-link:last-child {
+      .navbar-item1:last-child, .navbar-link:last-child {
           margin-right: 0; /* Removes margin from the last item */
       }
       .navbar-dropdown {
           background-color: var(--linkColor); /* Sets the dropdown background color */
       }
-      .navbar-item:hover, .navbar-link:hover {
+      .navbar-item1:hover, .navbar-link:hover {
           color: white; /* Maintain the color on hover */
           background-color: transparent; /* Ensure no background change on hover */
       }
