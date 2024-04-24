@@ -1,0 +1,36 @@
+<div class="is-active modal" id="eventModal_${event.id}">
+  <div class="modal-background"></div>
+  <div class="modal-content" id="modal_evt">
+    <div class="box">
+      <h2>${event.name}</h2>
+      <p>Date: ${formattedDate}</p>
+      <p>Time: ${formattedTime}</p>
+      <p>Description: ${event.desc}</p>
+      <p>Type: ${event.type}</p>
+      <button class="button" id="submit_points" onclick= "alert("btn clicked to submit")">Submit Points</button>
+      <button class="button" id="evtmodalcancel" onclick="reloadCalendarPage()>Cancel</button>
+    </div>
+  </div>
+</div><div class="is-hidden modal" id="pnts_mod">
+<div class="modal-background"></div>
+<div class="modal-content section has-background-white">
+  <h2 class="title">Member Attendance Form</h2>
+  <form id="member_attend">
+    <div class="field">
+      <label class="label">Code Provided in Event</label>
+      <div class="control">
+        <input type="text" id="genevtcode" placeholder="877hs3" />
+      </div>
+    </div>
+    <div class="field is-grouped">
+      <div class="control">
+        <button class="button" id="pnts_sbt">Submit</button>
+      </div>
+      <div class="control">
+        <button class="button" id="pnts_cncl" onclick = "reloadCalendarPage()">Cancel</button>
+      </div>
+    </div>
+  </form>
+</div>
+</div>
+`;

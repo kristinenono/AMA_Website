@@ -1,58 +1,81 @@
-const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+const $navbarBurgers = Array.prototype.slice.call(
+  document.querySelectorAll(".navbar-burger"),
+  0
+);
 const signbtns = document.getElementById("signbtns");
+const signoutbtns = document.getElementById("signoutbtns");
 
 // Function to manage visibility of sign-up/login buttons based on menu state and screen width
 function manageButtonVisibility() {
-    if (window.innerWidth <= 1022) { // Assumes 768px is the breakpoint for mobile view
-        if (document.getElementById('navbarBasicExample').classList.contains('is-active')) {
-            signbtns.classList.remove('is-hidden'); // Show buttons when menu is active
-            r_e("burgerloginbtn").addEventListener("click", () => {
-              loginModal.classList.add("is-active");
-            });
-            r_e("burgersignupbtn").addEventListener("click", () => {
-              signupModal.classList.add("is-active");
-            });
-        } else {
-            signbtns.classList.add('is-hidden'); // Hide buttons when menu is not active
-        }
+  let check_auth = auth.currentUser;
+  if (window.innerWidth <= 1022) {
+    // Assumes 768px is the breakpoint for mobile view
+    if (
+      document
+        .getElementById("navbarBasicExample")
+        .classList.contains("is-active")
+    ) {
+      signbtns.classList.remove("is-hidden"); // Show buttons when menu is active
+      r_e("burgerloginbtn").addEventListener("click", () => {
+        loginModal.classList.add("is-active");
+      });
+      r_e("burgersignupbtn").addEventListener("click", () => {
+        signupModal.classList.add("is-active");
+      });
     } else {
-        signbtns.classList.add('is-hidden'); // Always hide buttons on larger screens
+      signbtns.classList.add("is-hidden"); // Hide buttons when menu is not active
     }
+  } else {
+    signbtns.classList.add("is-hidden"); // Always hide buttons on larger screens
+  }
 }
 
-$navbarBurgers.forEach(el => {
-    el.addEventListener('click', () => {
-        const target = el.dataset.target;
-        const $target = document.getElementById(target);
+$navbarBurgers.forEach((el) => {
+  el.addEventListener("click", () => {
+    const target = el.dataset.target;
+    const $target = document.getElementById(target);
 
-        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-        el.classList.toggle('is-active');
-        $target.classList.toggle('is-active');
+    // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+    el.classList.toggle("is-active");
+    $target.classList.toggle("is-active");
 
-        // Manage visibility of sign buttons based on current menu state and screen width
-        manageButtonVisibility();
-    });
-});
-
-// Add event listener for resizing to adjust visibility based on screen width
-window.addEventListener('resize', manageButtonVisibility);
-
-document.querySelectorAll('.navbar-item1').forEach(link => {
-  link.addEventListener('click', () => {
-      const exceptionLinks = ['except',"calendarbtn","pointbtn1"]; // Define exception link IDs
-      const linkId = link.getAttribute('id');
-
-      // Check if the clicked link is not in the exception links
-      if (!exceptionLinks.includes(linkId)) {
-          $navbarBurgers.forEach(burger => {
-              burger.classList.remove('is-active');
-              document.getElementById(burger.dataset.target).classList.remove('is-active');
-          });
-      }
+    // Manage visibility of sign buttons based on current menu state and screen width
+    manageButtonVisibility();
   });
 });
 
+// Add event listener for resizing to adjust visibility based on screen width
+window.addEventListener("resize", manageButtonVisibility);
 
+document.querySelectorAll(".navbar-item1").forEach((link) => {
+  link.addEventListener("click", () => {
+    const exceptionLinks = ["except", "calendarbtn", "pointbtn1"]; // Define exception link IDs
+    const exceptLinks = ["except"];
+    const linkId = link.getAttribute("id");
+    let check_auth = auth.currentUser;
+
+    if (check_auth == null) {
+      if (!exceptionLinks.includes(linkId)) {
+        $navbarBurgers.forEach((burger) => {
+          burger.classList.remove("is-active");
+          document
+            .getElementById(burger.dataset.target)
+            .classList.remove("is-active");
+        });
+      } else {
+      }
+    } else {
+      if (!exceptLinks.includes(linkId)) {
+        $navbarBurgers.forEach((burger) => {
+          burger.classList.remove("is-active");
+          document
+            .getElementById(burger.dataset.target)
+            .classList.remove("is-active");
+        });
+      }
+    }
+  });
+});
 
 function r_e(id) {
   if (!id) {
@@ -545,6 +568,15 @@ function deleteEvent(eventId) {
       });
   }
 }
+function openeditmodal(eventId) {
+  const modalId = `#eventModal_${eventId}`;
+  const modal = document.querySelector(modalId);
+  modal.remove("is-active");
+  const edit_mod = document.getElementById("edit_evt");
+  edit_mod.classList.remove("is-hidden");
+  edit_mod.classList.add("is-active");
+  openeditmodal(eventId);
+}
 
 function openEventModal(eventId, dayHTML, currentAuth) {
   db.collection("events")
@@ -570,7 +602,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
         let modalHtml;
         if (auth.currentUser.email == "amauwmadison@gmail.com") {
           modalHtml = `
-          <div class="modal is-active" id="eventModal_${event.id}">
+          <div class="is-active modal" id="eventModal_${eventId}">
             <div class="modal-background"></div>
             <div class="modal-content" id="modal_evt">
               <div class="box">
@@ -579,22 +611,22 @@ function openEventModal(eventId, dayHTML, currentAuth) {
                 <p>Time: ${formattedTime}</p>
                 <p>Description: ${event.desc}</p>
                 <p>Type: ${event.type}</p>
-                <button class ="button" id=edit_curr_evt"> Edit </button>
+                <button class ="button" id=edit_curr_evt" onclick="openeditmodal('${eventId}')"> Edit </button>
                 <button class="button" id="del_curr_evt" onclick="deleteEvent('${eventId}')">Delete</button>
                 <button class="button" id="evtmodalcancel" onclick="reloadCalendarPage()">Cancel</button>
               </div>
             </div>
-          </div>
-          </div>
+            </div>
+
         <div class="modal is-hidden" id="edit_evt">
         <div class = "modal-background"></div>
         <div class="modal-content section has-background-white">
         <h2 class="title">Edit Event</h2>
-        <form id="cal_form_modal">
+        <form id="edit_form">
         <div class="field">
         <label class="label" >Name of Event</label>
         <div class="control">
-          <input class="input" id = "editname" type="text" placeholder="LinkedIn Workshop" value= "${event.name}"/> 
+          <input class="input" id = "editname" type="text" placeholder="LinkedIn Workshop" value="${event.name}"/> 
         </div>
         </div>
         <div class="field">
@@ -605,7 +637,6 @@ function openEventModal(eventId, dayHTML, currentAuth) {
             id = "editdatetime"
             type="datetime-local"
             placeholder="12-01-22 01:22"
-            value="${formattedDate}${formattedTime}"
           /> <h2> Current Value: ${formattedDate} ${formattedTime}</h2>
         </div>
         </div>
@@ -653,7 +684,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
         </div>
         <div class="field is-grouped">
         <div class="control">
-          <button class="button" id = "editevtsbt"onclick="EditEvent('${eventId}')">Save</button>
+          <button class="button" id = "editevtsbt"onclick="editEvent('${eventId}')">Save</button>
         </div>
         <div class="control">
           <button class="button" id="editevtcncl">Cancel</button>
@@ -661,9 +692,39 @@ function openEventModal(eventId, dayHTML, currentAuth) {
         </div>
         </div>
       </form>
-        </div></div>`;
+        </div>`;
+          dayHTML += modalHtml;
+
+          // Insert the dayHTML into the calendar view
+
+          // Show the modal
+          const modalId = `#eventModal_${eventId}`;
+          const modal = document.querySelector(modalId);
+          const edit_mod = document.getElementById("edit_evt");
+
+          function editEvent(eventId) {
+            const editedevent = {
+              name: document.querySelector("#editname").value,
+              time: document.querySelector("#editdatetime").value,
+              pts: document.querySelector("#editpts").value,
+              desc: document.querySelector("#editdescr").value,
+              code: document.querySelector("#editcode").value,
+            };
+
+            //   // Update the event in Firestore
+            db.collection("events")
+              .doc(eventId)
+              .update(editedevent)
+              .then(() => {
+                alert("Event successfully edited!");
+                // Reload the posts after updatin
+              })
+              .catch((error) => {
+                console.error("Error updating event:", error);
+              });
+          }
         } else {
-          modalHtml = `
+          modalHtml = modalHtml = `
           <div class="modal is-active" id="eventModal_${event.id}">
             <div class="modal-background"></div>
             <div class="modal-content" id="modal_evt">
@@ -719,37 +780,8 @@ function openEventModal(eventId, dayHTML, currentAuth) {
         const modalId = `#eventModal_${event.id}`;
         const modal = document.querySelector(modalId);
         const pnts_mod = document.getElementById("pnts_mod");
-        const editevt = document.getElementById("edit_curr_evt");
-        const edit_mod = document.getElementById("edit_evt");
 
-        editevt.addEventListener("click", function () {
-          console.log("editclick");
-          edit_mod.classList.remove("is-hidden");
-          edit_mod.classList.add("is-active");
-        });
         // pnts_mod.classList.add("is-active");
-        function EditEvent(EventId) {
-          const editedevent = {
-            name: document.querySelector("#editname").value,
-            datetime: document.querySelector("#editdatetime").value,
-            // how do I make the date and time like it looked before
-            pts: document.querySelector("#editpts").value,
-            desc: document.querySelector("#editdescr").value,
-            code: document.querySelector("#editcode").value,
-          };
-
-          //   // Update the post in Firestore
-          db.collection("events")
-            .doc(eventId)
-            .update(editedevent)
-            .then(() => {
-              alert("Event successfully edited!");
-              // Reload the posts after updatin
-            })
-            .catch((error) => {
-              console.error("Error updating event:", error);
-            });
-        }
 
         // modal.classList.add("is-active");
         document
@@ -758,16 +790,6 @@ function openEventModal(eventId, dayHTML, currentAuth) {
             modal.classList.remove("is-active");
             pnts_mod.classList.remove("is-hidden");
             pnts_mod.classList.add("is-active");
-          });
-
-        document
-          .getElementById("evtmodalcancel")
-          .addEventListener("click", function () {
-            // Close the modal when cancel button is clicked
-            modal.classList.remove("is-active");
-
-            // Re-render the calendar view
-            fetchEventsAndGenerateCalendarHTML(currentDate);
           });
 
         document
@@ -966,7 +988,6 @@ function fetchEventsAndGenerateCalendarHTML(date) {
 
 r_e("calendarbtn").addEventListener("click", () => {
   let check_auth = auth.currentUser;
-  console.log("btn clicked");
   if (check_auth == null) {
     // User is not signed in
     signupModal.classList.remove("is-active");
@@ -2107,46 +2128,57 @@ function addContent(isAdmin) {
       professional_development: 0,
       dei: 0,
       social: 0,
-      speaker: 0
+      speaker: 0,
     };
-  
+
     // Assume 'currentUser' is the currently signed-in user's email
     let currentUser = auth.currentUser.email;
-  
+
     // Fetch points for the current user from the member_points subcollection
-    db.collection("ama_users").where("email", "==", currentUser).get().then((usersSnapshot) => {
-      if (!usersSnapshot.empty) {
-        // Assuming each user has a unique email, we take the first document
-        let userDoc = usersSnapshot.docs[0];
-  
-        userDoc.ref.collection("member_points").get().then((pointsSnapshot) => {
-          pointsSnapshot.forEach((pointDoc) => {
-            const data = pointDoc.data();
-            const eventType = normalizeEventType(data.eventType);
-            const points = parseInt(data.points);
-            if (memberTotalPoints.hasOwnProperty(eventType)) {
-              memberTotalPoints[eventType] += points;
-            }
-          });
-  
-          // After all data is aggregated, update the UI
-          updateCardsWithPoints(memberTotalPoints);
-        }).catch((error) => {
-          console.error("Error fetching points data for user:", error);
-        });
-      } else {
-        console.error("No user found with the email:", currentUser);
-      }
-    }).catch((error) => {
-      console.error("Error fetching user document:", error);
-    });
+    db.collection("ama_users")
+      .where("email", "==", currentUser)
+      .get()
+      .then((usersSnapshot) => {
+        if (!usersSnapshot.empty) {
+          // Assuming each user has a unique email, we take the first document
+          let userDoc = usersSnapshot.docs[0];
+
+          userDoc.ref
+            .collection("member_points")
+            .get()
+            .then((pointsSnapshot) => {
+              pointsSnapshot.forEach((pointDoc) => {
+                const data = pointDoc.data();
+                const eventType = normalizeEventType(data.eventType);
+                const points = parseInt(data.points);
+                if (memberTotalPoints.hasOwnProperty(eventType)) {
+                  memberTotalPoints[eventType] += points;
+                }
+              });
+
+              // After all data is aggregated, update the UI
+              updateCardsWithPoints(memberTotalPoints);
+            })
+            .catch((error) => {
+              console.error("Error fetching points data for user:", error);
+            });
+        } else {
+          console.error("No user found with the email:", currentUser);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching user document:", error);
+      });
   }
-  
+
   function updateCardsWithPoints(memberTotalPoints) {
-    console.log("Updating cards with the following points data:", memberTotalPoints);
-  
+    console.log(
+      "Updating cards with the following points data:",
+      memberTotalPoints
+    );
+
     let totalPoints = 0;
-  
+
     Object.keys(memberTotalPoints).forEach((eventType) => {
       const points = memberTotalPoints[eventType];
       const selector = `.card[event-type="${eventType}"] .content`;
@@ -2158,27 +2190,29 @@ function addContent(isAdmin) {
         console.error(`No element found for selector: ${selector}`);
       }
     });
-  
+
     // Update total points card
-    const totalPointsDiv = document.querySelector('.card[event-type="total"] .content');
+    const totalPointsDiv = document.querySelector(
+      '.card[event-type="total"] .content'
+    );
     if (totalPointsDiv) {
       totalPointsDiv.textContent = `${totalPoints}`;
     }
   }
-  
+
   function normalizeEventType(eventType) {
     const eventTypeMapping = {
-      "Volunteer": "volunteer",
+      Volunteer: "volunteer",
       "Professional Development": "professional_development",
       "Speaker Event": "speaker",
       "Social Event": "social",
-      "DEI Event": "dei"
+      "DEI Event": "dei",
     };
-    return eventTypeMapping[eventType] || eventType.toLowerCase().replace(/ /g, "_");
+    return (
+      eventTypeMapping[eventType] || eventType.toLowerCase().replace(/ /g, "_")
+    );
   }
 }
-
-
 
 // contact page content
 let contact_content = `<div id="contactSectionTop" class="contactSection-box contactTopFormat">
