@@ -1,0 +1,15 @@
+<div class="is-active modal" id="eventModal_${eventId}">
+    <div class="modal-background"></div>
+    <div class="modal-content" id="modal_evt">
+      <div class="box">
+        <h2>${event.name}</h2>
+        <p>Date: ${formattedDate}</p>
+        <p>Time: ${formattedTime}</p>
+        <p>Description: ${event.desc}</p>
+        <p>Type: ${event.type}</p>
+        <button class ="button" id=edit_curr_evt" onclick= "openeditmodal('${eventId}')"> Edit </button>
+        <button class="button" id="del_curr_evt" onclick="deleteEvent('${eventId}')">Delete</button>
+        <button class="button" id="evtmodalcancel" onclick="reloadCalendarPage()">Cancel</button>
+      </div>
+    </div>
+    </div>
