@@ -2630,30 +2630,30 @@ r_e("blog-link").addEventListener("click", () => {
   });
 });
 
-// // Get the modal
-// let modal = document.getElementById("#addPostForm");
+// Get the modal
+let modal = document.getElementById("#addPostForm");
 
-// // Get the button that opens the modal
-// let btn = document.getElementById("addPostButton");
-// // When the user clicks the button, open the modal
-// btn.onclick = function () {
-//   modal.classList.add("is-active");
-// };
+// Get the button that opens the modal
+let btn = document.getElementById("addPostButton");
+// When the user clicks the button, open the modal
+btn.onclick = function () {
+  modal.classList.add("is-active");
+};
 
-// // Get the <span> element that closes the modal
-// let span = modal.querySelector(".modal-close");
+// Get the <span> element that closes the modal
+let span = modal.querySelector(".modal-close");
 
-// // When the user clicks on <span> (x), close the modal
-// span.onclick = function () {
-//   modal.classList.remove("is-active");
-// };
+// When the user clicks on <span> (x), close the modal
+span.onclick = function () {
+  modal.classList.remove("is-active");
+};
 
-// // When the user clicks anywhere outside of the modal, close it
-// window.onclick = function (event) {
-//   if (event.target == modal) {
-//     modal.classList.remove("is-active");
-//   }
-// };
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.classList.remove("is-active");
+  }
+};
 
 // Handle form submission
 document.querySelector("#submitPost").addEventListener("click", () => {
