@@ -1076,12 +1076,13 @@ tr:hover {
 .filter-container {
   align-items: center;
   width: 75%;
-  margin: 20px auto;
+  margin: 10px auto;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   gap: 20px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .filter-container .filtername,
@@ -1212,6 +1213,17 @@ tr:hover {
   white-space: nowrap;
   border-width: 1px;
 }
+
+.button-group {
+  display: flex;  /* Aligns children (buttons) in a row */
+  flex-direction: row; /* Default flex direction */
+  flex-wrap: nowrap; /* Prevents wrapping, adjust if needed */
+  justify-content: center; /* Centers buttons in the container */
+  align-items: center; /* Aligns buttons vertically */
+  gap: 10px; /* Provides space between buttons */
+  margin: 20px 0; /* Vertical spacing from other content */
+}
+
 
 /* CONTACT PAGE */
 

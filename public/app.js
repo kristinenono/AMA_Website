@@ -1551,10 +1551,12 @@ function addContent(isAdmin) {
               <option value="FALL 2025">FALL 2025</option>
           </select>
     </div>
+    <div class="button-group">
       <button id="applyFilters" class="redbtn pointbtn">Apply Filters</button>
       <button id="resetFilters" class="redbtn pointbtn">Reset Filters</button>
       <button id="editbtn" class="bluebtn pointbtn">Edit Points</button>
       <button id="canceledit" class="bluebtn pointbtn is-hidden">Cancel Edit</button>
+</div>
   </div>   
   <div id="addshowbtn" class="container editsavecancel is-hidden">
     <button id="addedit" class="bluebtn pointbtn">Add Points</button>
