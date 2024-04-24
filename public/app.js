@@ -1924,9 +1924,6 @@ function addContent(isAdmin) {
           fetchAndPopulatePoints(); // Refresh the points table globally or just for the affected semester
           editmodal.classList.remove("is-active");
           clearaddpoints();
-        })
-        .catch((error) => {
-          console.error("Error updating points: ", error);
         });
     }
 
@@ -1938,9 +1935,6 @@ function addContent(isAdmin) {
             change.type === "modified" ||
             change.type === "removed"
           ) {
-            console.log(
-              "Detected changes in member points data, refreshing table..."
-            );
             fetchAndPopulatePoints();
           }
         });
@@ -1992,7 +1986,6 @@ function addContent(isAdmin) {
           });
         })
         .catch((error) => {
-          console.error("Error loading points: ", error);
           tbody.innerHTML = `<tr><td colspan="5">Error loading points</td></tr>`;
         });
     }
@@ -2008,9 +2001,6 @@ function addContent(isAdmin) {
           console.log("Point deleted successfully");
           fetchMemberPoints(memberId); // Refresh the list after deletion
           fetchAndPopulatePoints();
-        })
-        .catch((error) => {
-          console.error("Error deleting points: ", error);
         });
     }
 
@@ -2131,16 +2121,15 @@ function addContent(isAdmin) {
       speaker: 0,
     };
 
-    // Assume 'currentUser' is the currently signed-in user's email
+    // function to get the email of the current user
     let currentUser = auth.currentUser.email;
 
-    // Fetch points for the current user from the member_points subcollection
+    // fetch points for the current user from the member_points subcollection
     db.collection("ama_users")
       .where("email", "==", currentUser)
       .get()
       .then((usersSnapshot) => {
         if (!usersSnapshot.empty) {
-          // Assuming each user has a unique email, we take the first document
           let userDoc = usersSnapshot.docs[0];
 
           userDoc.ref
@@ -2158,25 +2147,12 @@ function addContent(isAdmin) {
 
               // After all data is aggregated, update the UI
               updateCardsWithPoints(memberTotalPoints);
-            })
-            .catch((error) => {
-              console.error("Error fetching points data for user:", error);
             });
-        } else {
-          console.error("No user found with the email:", currentUser);
         }
-      })
-      .catch((error) => {
-        console.error("Error fetching user document:", error);
       });
   }
 
   function updateCardsWithPoints(memberTotalPoints) {
-    console.log(
-      "Updating cards with the following points data:",
-      memberTotalPoints
-    );
-
     let totalPoints = 0;
 
     Object.keys(memberTotalPoints).forEach((eventType) => {
@@ -2186,8 +2162,6 @@ function addContent(isAdmin) {
       if (contentDiv) {
         contentDiv.textContent = `${points}`;
         totalPoints += points;
-      } else {
-        console.error(`No element found for selector: ${selector}`);
       }
     });
 
@@ -2213,6 +2187,10 @@ function addContent(isAdmin) {
     );
   }
 }
+
+
+
+
 
 // contact page content
 let contact_content = `<div id="contactSectionTop" class="contactSection-box contactTopFormat">
@@ -2617,33 +2595,31 @@ r_e("blog-link").addEventListener("click", () => {
     }
   });
 });
-let test = r_e("");
 
-// Get the modal
-let modal = document.getElementById("#addPostForm");
+// // Get the modal
+// let modal = document.getElementById("#addPostForm");
 
-// Get the button that opens the modal
-let btn = document.getElementById("addPostButton");
+// // Get the button that opens the modal
+// let btn = document.getElementById("addPostButton");
+// // When the user clicks the button, open the modal
+// btn.onclick = function () {
+//   modal.classList.add("is-active");
+// };
 
-// Get the <span> element that closes the modal
-let span = modal.querySelector(".modal-close");
+// // Get the <span> element that closes the modal
+// let span = modal.querySelector(".modal-close");
 
-// When the user clicks the button, open the modal
-btn.onclick = function () {
-  modal.classList.add("is-active");
-};
+// // When the user clicks on <span> (x), close the modal
+// span.onclick = function () {
+//   modal.classList.remove("is-active");
+// };
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function () {
-  modal.classList.remove("is-active");
-};
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function (event) {
-  if (event.target == modal) {
-    modal.classList.remove("is-active");
-  }
-};
+// // When the user clicks anywhere outside of the modal, close it
+// window.onclick = function (event) {
+//   if (event.target == modal) {
+//     modal.classList.remove("is-active");
+//   }
+// };
 
 // Handle form submission
 document.querySelector("#submitPost").addEventListener("click", () => {
