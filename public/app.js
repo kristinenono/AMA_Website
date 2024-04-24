@@ -245,7 +245,7 @@ r_e("user_notfound").addEventListener("click", () => {
 
 let home_page_content = `<div class="titleContainers">
 <div class="column column1">
-    <h1 class="title is-1 has-text-light" id="title_uw">Welcome to <br />AMA UW-Madison</h1>
+    <h1 class="title has-text-light" id="title_uw">Welcome to AMA UW-Madison</h1>
 </div>
 <div class="column column2">
     <img src="images/capitalPlaceholder.png" alt="MadisonCapital" width="100%" height="100%" />
@@ -254,27 +254,27 @@ let home_page_content = `<div class="titleContainers">
 <div id="aboutSection" class="aboutSection-box">
 <h2 class="primaryheader">About us</h2>
 <p class="primaryBody">
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum at magni
-    porro voluptatibus, quasi doloribus provident officiis, illo hic laborum
-    distinctio mollitia quis minima ducimus.
+  AMA is a professional association for students interested in leading the practice, teaching and development of marketing knowledge worldwide.
+  Our meetings are filled with speakers from top companies including P&G, Footlocker, Sargento, and more. These professionals come to discuss the industry and their experiences within the field of marketing.
 </p>
+
 </div>
 <div id="involvementSection" class="involvementSection">
 <div class="involvementText">
     <h3 class="secondaryheader">Get involved</h3>
     <h4 class="tertiaryHeader">Our primary events include:</h4>
     <ul class="primaryBody">
-        <li>Member meetings</li>
-        <li>Professional developments</li>
-        <li>Social events</li>
-        <li>Community outreach</li>
-        <li>And more!</li>
+        <li> - Member meetings</li>
+        <li> - Professional developments</li>
+        <li> - Social events</li>
+        <li> - Community outreach</li>
+        <li> - And more!</li>
     </ul>
     <div>
-        <p>
-            <button class="involvementButton1" id="learnbuttonhome"><b>LEARN MORE</b></button>
-            <button class="involvementButton2" id="joinbuttonhome"><b>JOIN</b></button>
-        </p>
+      <div class="learnjoinbtns">
+        <button class="involvementButton1" id="learnbuttonhome"><b>LEARN MORE</b></button>&nbsp;&nbsp;
+        <button class="involvementButton2" id="joinbuttonhome"><b>JOIN</b></button>
+      </div>
     </div>
 </div>
 <div class="involvementImage-flex">
@@ -315,7 +315,7 @@ r_e("home-link").addEventListener("click", () => {
 let abt_content = `      <div id="contactSectionTop" class="contactSection-box contactTopFormat">
 <h2 class="primaryheader">More About Us</h2>
 <div class="social-icons-container">
-  <a href="#" class="social-icon" title="Email">
+  <a href="#eventboxtype" class="social-icon" title="Email">
     <p>EVENT TYPES</p>
   </a>
   <a href="#aboutHeaderSection" class="social-icon" title="Instagram">
@@ -327,8 +327,8 @@ let abt_content = `      <div id="contactSectionTop" class="contactSection-box c
 </div>
 </div>
 
+<div id="eventboxtype">
 <h3 class="aboutHeader">Event Types</h3>
-
 <div class="gridContainer">
 <ul class="grid-list">
   <li>
@@ -419,6 +419,7 @@ let abt_content = `      <div id="contactSectionTop" class="contactSection-box c
   </li>
   <!-- Repeat for other services -->
 </ul>
+</div>
 </div>
 <div id="aboutHeaderSection">
 <div class="contactForm-flex">
