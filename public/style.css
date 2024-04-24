@@ -465,17 +465,19 @@ x .title {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 40px;
 }
 
 .involvementText {
   flex: 1;
-  margin-left: 20%;
+  margin-left: 15%;
 }
 
 .involvementImage-flex {
   flex: 1;
   margin-right: 5%;
   margin-bottom: 3rem;
+  margin-left: 5%;
 }
 
 .involvementButton1 {
@@ -505,6 +507,12 @@ x .title {
   align-items: center;
   background-color: #1f304f;
 }
+
+.learnjoinbtns{
+  gap: 10px;
+  margin-top: 5%;
+}
+
 .column {
   display: flex;
   align-items: center;
