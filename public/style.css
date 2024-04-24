@@ -20,7 +20,7 @@
   --secondaryHeaderFontSize: 33px;
   --tertiaryHeaderFontSize: 25px;
   --bodyFontSize: 25px;
-  
+
   /**
    * box shadow
    */
@@ -203,21 +203,19 @@ x .title {
   color: #1f304f;
 }
 
-.userlogshow{
+.userlogshow {
   color: var(--linkColor);
   font-weight: 600;
   font-size: 20px;
   align-items: center;
 }
 
-#signout_button{
+#signout_button {
   color: #f3f2ee;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 20px;
   vertical-align: bottom;
 }
-
-
 
 /* Calendar Page */
 .margin-left {
@@ -1112,12 +1110,12 @@ tr:hover {
   background-color: #b22b25;
 }
 .pointbtn {
-  padding: 15px 32px;
+  padding: 15px 16px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 5px 10px;
+  margin: 5px 2px;
   cursor: pointer;
   border-radius: 10px;
   font-weight: bolder;
@@ -1576,7 +1574,6 @@ textarea.input-field {
   text-decoration: none;
 }
 
-
 /* Header CSS */
 /* Primary Color Scheme and Typography*/
 :root {
@@ -1600,119 +1597,128 @@ textarea.input-field {
   --secondaryHeaderFontSize: 33px;
   --tertiaryHeaderFontSize: 25px;
   --bodyFontSize: 25px;
-  
+
   .navbar {
-      background-color: var(--primarynavy);
-      color: white;
-      width: 100%;
+    background-color: var(--primarynavy);
+    color: white;
+    width: 100%;
   }
   .header-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 20px;
-      background-color: var(--primarywhite); /* Ensuring background is consistent */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: var(
+      --primarywhite
+    ); /* Ensuring background is consistent */
   }
 
   .header-logo {
-      width: auto; /* Let it scale based on the viewport */
-      max-width:25%; /* Limits how large the logo can get */
-      height: auto; /* Maintain aspect ratio */
-      flex: 0 1 150px; /* Flex-grow, Flex-shrink, Flex-basis */
+    width: auto; /* Let it scale based on the viewport */
+    max-width: 25%; /* Limits how large the logo can get */
+    height: auto; /* Maintain aspect ratio */
+    flex: 0 1 150px; /* Flex-grow, Flex-shrink, Flex-basis */
   }
 
   .header-text {
-      display: flex;
-      align-items: center;
-      font-size: calc(1rem + 1vw); /* Starts at 1rem and increases with viewport width */
-      font-family: var(--bodyFontFamily);
-      flex: 1 1 auto;
-      margin-left: 20px;
+    display: flex;
+    align-items: center;
+    font-size: calc(
+      1rem + 1vw
+    ); /* Starts at 1rem and increases with viewport width */
+    font-family: var(--bodyFontFamily);
+    flex: 1 1 auto;
+    margin-left: 20px;
   }
 
   .login-signup-container {
-      display: flex;
-      gap: 10px;
-      align-items: center;
+    display: flex;
+    gap: 10px;
+    align-items: center;
   }
 
-  .navbar-item1{
-      line-height: 1.5;
-      padding: 0.5rem 0.75rem; /* Adjust padding for better spacing */
-      cursor: pointer;
-      font-family: var(--bodyFontFamily);
-      font-size: 20px;
-      width: 100%; /* Ensures full width for better touch targets on mobile */
-      font-weight: bold;
-      color: black;
+  .navbar-item1 {
+    line-height: 1.5;
+    padding: 0.5rem 0.75rem; /* Adjust padding for better spacing */
+    cursor: pointer;
+    font-family: var(--bodyFontFamily);
+    font-size: 20px;
+    width: 100%; /* Ensures full width for better touch targets on mobile */
+    font-weight: bold;
+    color: black;
   }
   .navbar-link {
-      line-height: 1.5;
-      cursor: pointer;
-      font-family: var(--bodyFontFamily);
-      font-size: 20px;
-      width: 100%; /* Ensures full width for better touch targets on mobile */
-      font-weight: bold;
-      color: black;
+    line-height: 1.5;
+    cursor: pointer;
+    font-family: var(--bodyFontFamily);
+    font-size: 20px;
+    width: 100%; /* Ensures full width for better touch targets on mobile */
+    font-weight: bold;
+    color: black;
   }
-  .navbar-item1:hover, .navbar-link:hover {
-      color: var(--primarynavy); /* Maintain the color on hover */
-      background-color: transparent; /* Ensure no background change on hover */
+  .navbar-item1:hover,
+  .navbar-link:hover {
+    color: var(--primarynavy); /* Maintain the color on hover */
+    background-color: transparent; /* Ensure no background change on hover */
   }
 
   .navbar-content {
-      display: flex;
-      flex-direction: column; /* Stack items vertically on smaller screens */
-      justify-content: center;
-      width: 100%;
-      flex-wrap: wrap;
-      align-items: center;
-      color: white;
+    display: flex;
+    flex-direction: column; /* Stack items vertically on smaller screens */
+    justify-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+    align-items: center;
+    color: white;
   }
   /* Default styles - applying to smaller screens */
-.navbar-menu {
-  width: 100%;
-  justify-content: center;
-}
+  .navbar-menu {
+    width: 100%;
+    justify-content: center;
+  }
 
   /* Styles for larger screens */
   @media (min-width: 1024px) {
-      .navbar-content {
-          flex-direction: row;
-      }
-      .navbar-item1 {
-          color: white;
-          width: auto;
-          margin-right: 50px; /* Adds spacing between items */
-      }
-      .navbar-link {
-          color: white;
-          width: auto;
-      }
-      .navbar-item1:last-child, .navbar-link:last-child {
-          margin-right: 0; /* Removes margin from the last item */
-      }
-      .navbar-dropdown {
-          background-color: var(--linkColor); /* Sets the dropdown background color */
-      }
-      .navbar-item1:hover, .navbar-link:hover {
-          color: #0071a5; /* Maintain the color on hover */
-          background-color: transparent; /* Ensure no background change on hover */
-      }
+    .navbar-content {
+      flex-direction: row;
+    }
+    .navbar-item1 {
+      color: white;
+      width: auto;
+      margin-right: 50px; /* Adds spacing between items */
+    }
+    .navbar-link {
+      color: white;
+      width: auto;
+    }
+    .navbar-item1:last-child,
+    .navbar-link:last-child {
+      margin-right: 0; /* Removes margin from the last item */
+    }
+    .navbar-dropdown {
+      background-color: var(
+        --linkColor
+      ); /* Sets the dropdown background color */
+    }
+    .navbar-item1:hover,
+    .navbar-link:hover {
+      color: #0071a5; /* Maintain the color on hover */
+      background-color: transparent; /* Ensure no background change on hover */
+    }
   }
 
-  @media (max-width: 1024px) { /* Adjust the max-width to match your navbar burger appearance breakpoint */
-      .login-signup-container {
-          display: none; /* Hide the login/signup buttons on smaller screens */
-      }
+  @media (max-width: 1024px) {
+    /* Adjust the max-width to match your navbar burger appearance breakpoint */
+    .login-signup-container {
+      display: none; /* Hide the login/signup buttons on smaller screens */
+    }
   }
 
   .navbar-burger {
-      color: #f3f2ee;
+    color: #f3f2ee;
   }
-
 }
 
-.burgerlogsign{
+.burgerlogsign {
   gap: 10px;
 }

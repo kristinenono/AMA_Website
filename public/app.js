@@ -1552,6 +1552,7 @@ function addContent(isAdmin) {
           </select>
     </div>
       <button id="applyFilters" class="redbtn pointbtn">Apply Filters</button>
+      <button id="resetFilters" class="redbtn pointbtn">Reset Filters</button>
       <button id="editbtn" class="bluebtn pointbtn">Edit Points</button>
       <button id="canceledit" class="bluebtn pointbtn is-hidden">Cancel Edit</button>
   </div>   
@@ -1718,6 +1719,18 @@ function addContent(isAdmin) {
 
         // Call fetchAndPopulatePoints with the selected semester and search query
         fetchAndPopulatePoints(semesterFilterValue, nameSearchValue);
+      });
+    document
+      .getElementById("resetFilters")
+      .addEventListener("click", function () {
+        // Set each input field value to blank
+        document.getElementById("nameSearch").value = "";
+        const currentSemester = getCurrentSemester();
+        document.getElementById("semesterFilter").value = currentSemester;
+
+        // Call fetchAndPopulatePoints with blank values to reset the filters
+        fetchAndPopulatePoints("", "");
+        get;
       });
 
     // Function to disable the dropdown
