@@ -577,6 +577,33 @@ function openeditmodal(eventId) {
   edit_mod.classList.add("is-active");
   openeditmodal(eventId);
 }
+function editEvent(eventId) {
+  console.log(eventId);
+  let evtyear = new Date(time).getFullYear();
+  let season = month >= 1 && month <= 6 ? "SPRING" : "FALL";
+  const editedevent = {
+    name: document.querySelector("#editname").value,
+    time: document.querySelector("#editdatetime").value,
+    type: document.querySelector("#editevttype").value,
+    pts: document.querySelector("#editpts").value,
+    desc: document.querySelector("#editdescr").value,
+    semester: `${season} ${evtyear}`,
+    code: document.querySelector("#editcode").value,
+  };
+
+  //   // Update the event in Firestore
+  db.collection("events")
+    .doc(eventId)
+    .update(editedevent)
+    .then(() => {
+      alert("Event successfully edited!");
+      // Reload the posts after updatin
+    })
+    .catch((error) => {
+      console.error("Error updating event:", error);
+    });
+  editEvent(eventId);
+}
 
 function openEventModal(eventId, dayHTML, currentAuth) {
   db.collection("events")
@@ -626,7 +653,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
         <div class="field">
         <label class="label" >Name of Event</label>
         <div class="control">
-          <input class="input" id = "editname" type="text" placeholder="LinkedIn Workshop" value="${event.name}"/> 
+          <input class="input" id ="editname" type="text" placeholder="LinkedIn Workshop" value="${event.name}"/> 
         </div>
         </div>
         <div class="field">
@@ -699,30 +726,8 @@ function openEventModal(eventId, dayHTML, currentAuth) {
 
           // Show the modal
           const modalId = `#eventModal_${eventId}`;
-          const modal = document.querySelector(modalId);
-          const edit_mod = document.getElementById("edit_evt");
-
-          function editEvent(eventId) {
-            const editedevent = {
-              name: document.querySelector("#editname").value,
-              time: document.querySelector("#editdatetime").value,
-              pts: document.querySelector("#editpts").value,
-              desc: document.querySelector("#editdescr").value,
-              code: document.querySelector("#editcode").value,
-            };
-
-            //   // Update the event in Firestore
-            db.collection("events")
-              .doc(eventId)
-              .update(editedevent)
-              .then(() => {
-                alert("Event successfully edited!");
-                // Reload the posts after updatin
-              })
-              .catch((error) => {
-                console.error("Error updating event:", error);
-              });
-          }
+          // const modal = document.querySelector(modalId);
+          // const edit_mod = document.getElementById("edit_evt");
         } else {
           modalHtml = modalHtml = `
           <div class="modal is-active" id="eventModal_${event.id}">
