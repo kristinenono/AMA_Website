@@ -74,7 +74,7 @@ x .title {
 #title_uw {
   padding-left: 10%;
   font-family: var(--titleFontFamily);
-  font-size: var(--titleFontSize);
+  font-size: 5vw;
 
 }
 
