@@ -744,7 +744,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
                 <p>Description: ${event.desc}</p>
                 <p>Type: ${event.type}</p>
                 <button class="button" id="submit_points" onclick= "alert("btn clicked to submit")">Submit Points</button>
-                <button class="button" id="evtmodalcancel">Cancel</button>
+                <button class="button" id="evtmodalcancel" onclick="reloadCalendarPage()">Cancel</button>
               </div>
             </div>
           </div>
