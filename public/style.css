@@ -218,6 +218,7 @@ x .title {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 20px;
   vertical-align: bottom;
+  text-align: center;
 }
 
 .burgerbtnformat{
