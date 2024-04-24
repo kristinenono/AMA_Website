@@ -6,6 +6,12 @@ function manageButtonVisibility() {
     if (window.innerWidth <= 1022) { // Assumes 768px is the breakpoint for mobile view
         if (document.getElementById('navbarBasicExample').classList.contains('is-active')) {
             signbtns.classList.remove('is-hidden'); // Show buttons when menu is active
+            r_e("burgerloginbtn").addEventListener("click", () => {
+              loginModal.classList.add("is-active");
+            });
+            r_e("burgersignupbtn").addEventListener("click", () => {
+              signupModal.classList.add("is-active");
+            });
         } else {
             signbtns.classList.add('is-hidden'); // Hide buttons when menu is not active
         }
@@ -30,6 +36,21 @@ $navbarBurgers.forEach(el => {
 
 // Add event listener for resizing to adjust visibility based on screen width
 window.addEventListener('resize', manageButtonVisibility);
+
+document.querySelectorAll('.navbar-item1').forEach(link => {
+  link.addEventListener('click', () => {
+      const exceptionLinks = ['except',"calendarbtn","pointbtn1"]; // Define exception link IDs
+      const linkId = link.getAttribute('id');
+
+      // Check if the clicked link is not in the exception links
+      if (!exceptionLinks.includes(linkId)) {
+          $navbarBurgers.forEach(burger => {
+              burger.classList.remove('is-active');
+              document.getElementById(burger.dataset.target).classList.remove('is-active');
+          });
+      }
+  });
+});
 
 
 
@@ -114,8 +135,8 @@ r_e("signout_button").addEventListener("click", () => {
   auth
     .signOut()
     .then(() => {
-      configure_message_bar("Signed Out Successfully!");
       window.location.href = "index.html";
+      configure_message_bar("Signed Out Successfully!");
     })
     .catch((error) => {
       console.log(error);
