@@ -1,8 +1,10 @@
 const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 const signbtns = document.getElementById("signbtns");
+const signoutbtns = document.getElementById("signoutbtns");
 
 // Function to manage visibility of sign-up/login buttons based on menu state and screen width
 function manageButtonVisibility() {
+  let check_auth = auth.currentUser;
     if (window.innerWidth <= 1022) { // Assumes 768px is the breakpoint for mobile view
         if (document.getElementById('navbarBasicExample').classList.contains('is-active')) {
             signbtns.classList.remove('is-hidden'); // Show buttons when menu is active
@@ -40,14 +42,25 @@ window.addEventListener('resize', manageButtonVisibility);
 document.querySelectorAll('.navbar-item1').forEach(link => {
   link.addEventListener('click', () => {
       const exceptionLinks = ['except',"calendarbtn","pointbtn1"]; // Define exception link IDs
+      const exceptLinks = ['except'];
       const linkId = link.getAttribute('id');
+      let check_auth = auth.currentUser;
 
-      // Check if the clicked link is not in the exception links
-      if (!exceptionLinks.includes(linkId)) {
+      if (check_auth == null) {
+        if (!exceptionLinks.includes(linkId)) {
           $navbarBurgers.forEach(burger => {
               burger.classList.remove('is-active');
               document.getElementById(burger.dataset.target).classList.remove('is-active');
           });
+        } else {
+        }
+      } else {
+        if (!exceptLinks.includes(linkId)) {
+          $navbarBurgers.forEach(burger => {
+              burger.classList.remove('is-active');
+              document.getElementById(burger.dataset.target).classList.remove('is-active');
+          });
+        }
       }
   });
 });
