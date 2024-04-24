@@ -2608,7 +2608,7 @@ r_e("blog-link").addEventListener("click", () => {
 });
 
 
-// NOTE FOR THIS CODE. THERE ARE 2 R_E("BLOG-LINKS") THAT MAY BE THE REASON FOR THE ERRORS. REMOVE ONE OF THEM.
+// NOTE FOR THIS CODE. THERE ARE 2 R_E("BLOG-LINKS")
 r_e("blog-link").addEventListener("click", () => {
   r_e("addPostButton").classList.add("is-hidden");
 
