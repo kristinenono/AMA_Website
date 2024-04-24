@@ -1564,7 +1564,6 @@ textarea.input-field {
   line-height: 1.4;
   justify-content: center;
   text-align: center;
-  background-color: var(--primarynavy);
 }
 .service-card .card-content .aboutCardContent {
   order: -1; /* Move the image to the top */
