@@ -718,7 +718,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
           <button class="button" id = "editevtsbt"onclick="editEvent('${eventId}'), reloadCalendarPage()">Save</button>
         </div>
         <div class="control">
-          <button class="button" id="editevtcncl">Cancel</button>
+          <button class="button" id="editevtcncl" onclick = "reloadCalendarPage()">Cancel</button>
         </div>
         </div>
         </div>
