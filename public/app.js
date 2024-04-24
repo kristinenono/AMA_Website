@@ -579,30 +579,34 @@ function openeditmodal(eventId) {
 }
 function editEvent(eventId) {
   console.log(eventId);
-  let evtyear = new Date(time).getFullYear();
-  let season = month >= 1 && month <= 6 ? "SPRING" : "FALL";
+  // Assuming you want to get the current year and month
+  let currentDate = new Date();
+  let currentYear = currentDate.getFullYear();
+  let currentMonth = currentDate.getMonth() + 1; // Adding 1 because getMonth() returns zero-based index
+
+  let season = currentMonth >= 1 && currentMonth <= 6 ? "SPRING" : "FALL";
   const editedevent = {
     name: document.querySelector("#editname").value,
     time: document.querySelector("#editdatetime").value,
     type: document.querySelector("#editevttype").value,
     pts: document.querySelector("#editpts").value,
     desc: document.querySelector("#editdescr").value,
-    semester: `${season} ${evtyear}`,
+    semester: `${season} ${currentYear}`,
     code: document.querySelector("#editcode").value,
   };
 
-  //   // Update the event in Firestore
+  // Update the event in Firestore
   db.collection("events")
     .doc(eventId)
     .update(editedevent)
     .then(() => {
       alert("Event successfully edited!");
-      // Reload the posts after updatin
+      // Reload the posts after updating
+      reloadCalendarPage();
     })
     .catch((error) => {
       console.error("Error updating event:", error);
     });
-  editEvent(eventId);
 }
 
 function openEventModal(eventId, dayHTML, currentAuth) {
@@ -711,7 +715,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
         </div>
         <div class="field is-grouped">
         <div class="control">
-          <button class="button" id = "editevtsbt"onclick="editEvent('${eventId}')">Save</button>
+          <button class="button" id = "editevtsbt"onclick="editEvent('${eventId}'), reloadCalendarPage()">Save</button>
         </div>
         <div class="control">
           <button class="button" id="editevtcncl">Cancel</button>
