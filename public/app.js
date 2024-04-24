@@ -1,71 +1,81 @@
-const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+const $navbarBurgers = Array.prototype.slice.call(
+  document.querySelectorAll(".navbar-burger"),
+  0
+);
 const signbtns = document.getElementById("signbtns");
 const signoutbtns = document.getElementById("signoutbtns");
 
 // Function to manage visibility of sign-up/login buttons based on menu state and screen width
 function manageButtonVisibility() {
   let check_auth = auth.currentUser;
-    if (window.innerWidth <= 1022) { // Assumes 768px is the breakpoint for mobile view
-        if (document.getElementById('navbarBasicExample').classList.contains('is-active')) {
-            signbtns.classList.remove('is-hidden'); // Show buttons when menu is active
-            r_e("burgerloginbtn").addEventListener("click", () => {
-              loginModal.classList.add("is-active");
-            });
-            r_e("burgersignupbtn").addEventListener("click", () => {
-              signupModal.classList.add("is-active");
-            });
-        } else {
-            signbtns.classList.add('is-hidden'); // Hide buttons when menu is not active
-        }
+  if (window.innerWidth <= 1022) {
+    // Assumes 768px is the breakpoint for mobile view
+    if (
+      document
+        .getElementById("navbarBasicExample")
+        .classList.contains("is-active")
+    ) {
+      signbtns.classList.remove("is-hidden"); // Show buttons when menu is active
+      r_e("burgerloginbtn").addEventListener("click", () => {
+        loginModal.classList.add("is-active");
+      });
+      r_e("burgersignupbtn").addEventListener("click", () => {
+        signupModal.classList.add("is-active");
+      });
     } else {
-        signbtns.classList.add('is-hidden'); // Always hide buttons on larger screens
+      signbtns.classList.add("is-hidden"); // Hide buttons when menu is not active
     }
+  } else {
+    signbtns.classList.add("is-hidden"); // Always hide buttons on larger screens
+  }
 }
 
-$navbarBurgers.forEach(el => {
-    el.addEventListener('click', () => {
-        const target = el.dataset.target;
-        const $target = document.getElementById(target);
+$navbarBurgers.forEach((el) => {
+  el.addEventListener("click", () => {
+    const target = el.dataset.target;
+    const $target = document.getElementById(target);
 
-        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-        el.classList.toggle('is-active');
-        $target.classList.toggle('is-active');
+    // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+    el.classList.toggle("is-active");
+    $target.classList.toggle("is-active");
 
-        // Manage visibility of sign buttons based on current menu state and screen width
-        manageButtonVisibility();
-    });
-});
-
-// Add event listener for resizing to adjust visibility based on screen width
-window.addEventListener('resize', manageButtonVisibility);
-
-document.querySelectorAll('.navbar-item1').forEach(link => {
-  link.addEventListener('click', () => {
-      const exceptionLinks = ['except',"calendarbtn","pointbtn1"]; // Define exception link IDs
-      const exceptLinks = ['except'];
-      const linkId = link.getAttribute('id');
-      let check_auth = auth.currentUser;
-
-      if (check_auth == null) {
-        if (!exceptionLinks.includes(linkId)) {
-          $navbarBurgers.forEach(burger => {
-              burger.classList.remove('is-active');
-              document.getElementById(burger.dataset.target).classList.remove('is-active');
-          });
-        } else {
-        }
-      } else {
-        if (!exceptLinks.includes(linkId)) {
-          $navbarBurgers.forEach(burger => {
-              burger.classList.remove('is-active');
-              document.getElementById(burger.dataset.target).classList.remove('is-active');
-          });
-        }
-      }
+    // Manage visibility of sign buttons based on current menu state and screen width
+    manageButtonVisibility();
   });
 });
 
+// Add event listener for resizing to adjust visibility based on screen width
+window.addEventListener("resize", manageButtonVisibility);
 
+document.querySelectorAll(".navbar-item1").forEach((link) => {
+  link.addEventListener("click", () => {
+    const exceptionLinks = ["except", "calendarbtn", "pointbtn1"]; // Define exception link IDs
+    const exceptLinks = ["except"];
+    const linkId = link.getAttribute("id");
+    let check_auth = auth.currentUser;
+
+    if (check_auth == null) {
+      if (!exceptionLinks.includes(linkId)) {
+        $navbarBurgers.forEach((burger) => {
+          burger.classList.remove("is-active");
+          document
+            .getElementById(burger.dataset.target)
+            .classList.remove("is-active");
+        });
+      } else {
+      }
+    } else {
+      if (!exceptLinks.includes(linkId)) {
+        $navbarBurgers.forEach((burger) => {
+          burger.classList.remove("is-active");
+          document
+            .getElementById(burger.dataset.target)
+            .classList.remove("is-active");
+        });
+      }
+    }
+  });
+});
 
 function r_e(id) {
   if (!id) {
@@ -714,8 +724,8 @@ function openEventModal(eventId, dayHTML, currentAuth) {
               });
           }
         } else {
-          modalHtml = `
-          <div class="is-active modal" id="eventModal_${event.id}">
+          modalHtml = modalHtml = `
+          <div class="modal is-active" id="eventModal_${event.id}">
             <div class="modal-background"></div>
             <div class="modal-content" id="modal_evt">
               <div class="box">
@@ -725,15 +735,21 @@ function openEventModal(eventId, dayHTML, currentAuth) {
                 <p>Description: ${event.desc}</p>
                 <p>Type: ${event.type}</p>
                 <button class="button" id="submit_points" onclick= "alert("btn clicked to submit")">Submit Points</button>
-                <button class="button" id="evtmodalcancel" onclick="reloadCalendarPage()>Cancel</button>
+                <button class="button" id="evtmodalcancel">Cancel</button>
               </div>
             </div>
           </div>
-          </div><div class="is-hidden modal" id="pnts_mod">
+          </div><div class="modal is-hidden" id="pnts_mod">
           <div class="modal-background"></div>
           <div class="modal-content section has-background-white">
             <h2 class="title">Member Attendance Form</h2>
             <form id="member_attend">
+              <!-- <div class="field">
+                <label class="label">Name of AMA Member</label>
+                <div class="control">
+                  <input type="text" id="evtattd" placeholder="Bucky Badger" />
+                </div>
+              </div> -->
               <div class="field">
                 <label class="label">Code Provided in Event</label>
                 <div class="control">
@@ -2112,46 +2128,57 @@ function addContent(isAdmin) {
       professional_development: 0,
       dei: 0,
       social: 0,
-      speaker: 0
+      speaker: 0,
     };
-  
+
     // Assume 'currentUser' is the currently signed-in user's email
     let currentUser = auth.currentUser.email;
-  
+
     // Fetch points for the current user from the member_points subcollection
-    db.collection("ama_users").where("email", "==", currentUser).get().then((usersSnapshot) => {
-      if (!usersSnapshot.empty) {
-        // Assuming each user has a unique email, we take the first document
-        let userDoc = usersSnapshot.docs[0];
-  
-        userDoc.ref.collection("member_points").get().then((pointsSnapshot) => {
-          pointsSnapshot.forEach((pointDoc) => {
-            const data = pointDoc.data();
-            const eventType = normalizeEventType(data.eventType);
-            const points = parseInt(data.points);
-            if (memberTotalPoints.hasOwnProperty(eventType)) {
-              memberTotalPoints[eventType] += points;
-            }
-          });
-  
-          // After all data is aggregated, update the UI
-          updateCardsWithPoints(memberTotalPoints);
-        }).catch((error) => {
-          console.error("Error fetching points data for user:", error);
-        });
-      } else {
-        console.error("No user found with the email:", currentUser);
-      }
-    }).catch((error) => {
-      console.error("Error fetching user document:", error);
-    });
+    db.collection("ama_users")
+      .where("email", "==", currentUser)
+      .get()
+      .then((usersSnapshot) => {
+        if (!usersSnapshot.empty) {
+          // Assuming each user has a unique email, we take the first document
+          let userDoc = usersSnapshot.docs[0];
+
+          userDoc.ref
+            .collection("member_points")
+            .get()
+            .then((pointsSnapshot) => {
+              pointsSnapshot.forEach((pointDoc) => {
+                const data = pointDoc.data();
+                const eventType = normalizeEventType(data.eventType);
+                const points = parseInt(data.points);
+                if (memberTotalPoints.hasOwnProperty(eventType)) {
+                  memberTotalPoints[eventType] += points;
+                }
+              });
+
+              // After all data is aggregated, update the UI
+              updateCardsWithPoints(memberTotalPoints);
+            })
+            .catch((error) => {
+              console.error("Error fetching points data for user:", error);
+            });
+        } else {
+          console.error("No user found with the email:", currentUser);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching user document:", error);
+      });
   }
-  
+
   function updateCardsWithPoints(memberTotalPoints) {
-    console.log("Updating cards with the following points data:", memberTotalPoints);
-  
+    console.log(
+      "Updating cards with the following points data:",
+      memberTotalPoints
+    );
+
     let totalPoints = 0;
-  
+
     Object.keys(memberTotalPoints).forEach((eventType) => {
       const points = memberTotalPoints[eventType];
       const selector = `.card[event-type="${eventType}"] .content`;
@@ -2163,27 +2190,29 @@ function addContent(isAdmin) {
         console.error(`No element found for selector: ${selector}`);
       }
     });
-  
+
     // Update total points card
-    const totalPointsDiv = document.querySelector('.card[event-type="total"] .content');
+    const totalPointsDiv = document.querySelector(
+      '.card[event-type="total"] .content'
+    );
     if (totalPointsDiv) {
       totalPointsDiv.textContent = `${totalPoints}`;
     }
   }
-  
+
   function normalizeEventType(eventType) {
     const eventTypeMapping = {
-      "Volunteer": "volunteer",
+      Volunteer: "volunteer",
       "Professional Development": "professional_development",
       "Speaker Event": "speaker",
       "Social Event": "social",
-      "DEI Event": "dei"
+      "DEI Event": "dei",
     };
-    return eventTypeMapping[eventType] || eventType.toLowerCase().replace(/ /g, "_");
+    return (
+      eventTypeMapping[eventType] || eventType.toLowerCase().replace(/ /g, "_")
+    );
   }
 }
-
-
 
 // contact page content
 let contact_content = `<div id="contactSectionTop" class="contactSection-box contactTopFormat">
