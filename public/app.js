@@ -1312,7 +1312,8 @@ r_e("calendarbtn").addEventListener("click", () => {
         console.log("btn clicked");
         if (check_auth == null) {
           // User is not signed in
-          alert("You must sign in to view the points page");
+          signupModal.classList.remove("is-active");
+          loginModal.classList.add("is-active");
         } else {
           displayContentBasedOnEmail(check_auth.email);
         }
@@ -2132,6 +2133,7 @@ function addContent(isAdmin) {
     </div>
 </div>`;
     appendContent(points_content);
+
     let memberTotalPoints = {};
     PopulatePoints();
     updateCardsWithPoints(memberTotalPoints);
@@ -2327,9 +2329,6 @@ r_e("joinbuttonhome").addEventListener("click", () => {
   appendContent(contact_content);
   console.log("learnbuttonclicked");
 });
-
-
-
 
 // BLOG PAGE
 let blog_content = ` <main>
@@ -2606,7 +2605,6 @@ r_e("blog-link").addEventListener("click", () => {
     appendContent(blog_content);
   }
 });
-
 
 // NOTE FOR THIS CODE. THERE ARE 2 R_E("BLOG-LINKS")
 r_e("blog-link").addEventListener("click", () => {
