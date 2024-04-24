@@ -1,3 +1,72 @@
+const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+const signbtns = document.getElementById("signbtns");
+const signoutbtns = document.getElementById("signoutbtns");
+
+// Function to manage visibility of sign-up/login buttons based on menu state and screen width
+function manageButtonVisibility() {
+  let check_auth = auth.currentUser;
+    if (window.innerWidth <= 1022) { // Assumes 768px is the breakpoint for mobile view
+        if (document.getElementById('navbarBasicExample').classList.contains('is-active')) {
+            signbtns.classList.remove('is-hidden'); // Show buttons when menu is active
+            r_e("burgerloginbtn").addEventListener("click", () => {
+              loginModal.classList.add("is-active");
+            });
+            r_e("burgersignupbtn").addEventListener("click", () => {
+              signupModal.classList.add("is-active");
+            });
+        } else {
+            signbtns.classList.add('is-hidden'); // Hide buttons when menu is not active
+        }
+    } else {
+        signbtns.classList.add('is-hidden'); // Always hide buttons on larger screens
+    }
+}
+
+$navbarBurgers.forEach(el => {
+    el.addEventListener('click', () => {
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+
+        // Manage visibility of sign buttons based on current menu state and screen width
+        manageButtonVisibility();
+    });
+});
+
+// Add event listener for resizing to adjust visibility based on screen width
+window.addEventListener('resize', manageButtonVisibility);
+
+document.querySelectorAll('.navbar-item1').forEach(link => {
+  link.addEventListener('click', () => {
+      const exceptionLinks = ['except',"calendarbtn","pointbtn1"]; // Define exception link IDs
+      const exceptLinks = ['except'];
+      const linkId = link.getAttribute('id');
+      let check_auth = auth.currentUser;
+
+      if (check_auth == null) {
+        if (!exceptionLinks.includes(linkId)) {
+          $navbarBurgers.forEach(burger => {
+              burger.classList.remove('is-active');
+              document.getElementById(burger.dataset.target).classList.remove('is-active');
+          });
+        } else {
+        }
+      } else {
+        if (!exceptLinks.includes(linkId)) {
+          $navbarBurgers.forEach(burger => {
+              burger.classList.remove('is-active');
+              document.getElementById(burger.dataset.target).classList.remove('is-active');
+          });
+        }
+      }
+  });
+});
+
+
+
 function r_e(id) {
   if (!id) {
     console.error("Invalid ID provided:", id);
@@ -79,8 +148,8 @@ r_e("signout_button").addEventListener("click", () => {
   auth
     .signOut()
     .then(() => {
-      configure_message_bar("Signed Out Successfully!");
       window.location.href = "index.html";
+      configure_message_bar("Signed Out Successfully!");
     })
     .catch((error) => {
       console.log(error);
@@ -93,8 +162,6 @@ auth.onAuthStateChanged((user) => {
     r_e("indicator").innerHTML = `Signed In As ${user.email}`;
     r_e("signout_button").classList.remove("is-hidden");
     r_e("indicator").classList.remove("is-hidden");
-    r_e("indicator").classList.add("margin-class");
-    r_e("signout_button").classList.add("margin-class");
     r_e("signupbtn").classList.add("is-hidden");
     r_e("loginbtn").classList.add("is-hidden");
     if (r_e("joinbuttonhome") != null) {
@@ -104,8 +171,6 @@ auth.onAuthStateChanged((user) => {
     r_e("indicator").innerHTML = "";
     r_e("signout_button").classList.add("is-hidden");
     r_e("indicator").classList.add("is-hidden");
-    r_e("indicator").classList.remove("margin-class");
-    r_e("signout_button").classList.remove("margin-class");
     r_e("signupbtn").classList.remove("is-hidden");
     r_e("loginbtn").classList.remove("is-hidden");
     if (r_e("joinbuttonhome") != null) {
@@ -1320,11 +1385,11 @@ document.querySelector(".eventsfooter").addEventListener("click", () => {
 });
 
 document.querySelector(".pointfooter").addEventListener("click", () => {
-  r_e("pointbtn").click();
+  r_e("pointbtn1").click();
 });
 
 // points page content
-r_e("pointbtn").addEventListener("click", () => {
+r_e("pointbtn1").addEventListener("click", () => {
   let check_auth = auth.currentUser;
   console.log("btn clicked");
   if (check_auth == null) {
@@ -2040,44 +2105,53 @@ function addContent(isAdmin) {
     PopulatePoints();
     updateCardsWithPoints(memberTotalPoints);
   }
+  // function to show points for the non-member view
   function PopulatePoints() {
     let memberTotalPoints = {
       volunteer: 0,
       professional_development: 0,
       dei: 0,
       social: 0,
-      speaker: 0,
+      speaker: 0
     };
-
+  
+    // Assume 'currentUser' is the currently signed-in user's email
     let currentUser = auth.currentUser.email;
-
-    // Fetch user points from Firestore
-    db.collection("ama_users")
-      .doc(currentUser)
-      .collection("member_points")
-      .get()
-      .then((pointsSnapshot) => {
-        pointsSnapshot.forEach((pointDoc) => {
-          const data = pointDoc.data();
-          const normalizedEventType = normalizeEventType(data.eventType);
-          memberTotalPoints[normalizedEventType] += data.points;
+  
+    // Fetch points for the current user from the member_points subcollection
+    db.collection("ama_users").where("email", "==", currentUser).get().then((usersSnapshot) => {
+      if (!usersSnapshot.empty) {
+        // Assuming each user has a unique email, we take the first document
+        let userDoc = usersSnapshot.docs[0];
+  
+        userDoc.ref.collection("member_points").get().then((pointsSnapshot) => {
+          pointsSnapshot.forEach((pointDoc) => {
+            const data = pointDoc.data();
+            const eventType = normalizeEventType(data.eventType);
+            const points = parseInt(data.points);
+            if (memberTotalPoints.hasOwnProperty(eventType)) {
+              memberTotalPoints[eventType] += points;
+            }
+          });
+  
+          // After all data is aggregated, update the UI
+          updateCardsWithPoints(memberTotalPoints);
+        }).catch((error) => {
+          console.error("Error fetching points data for user:", error);
         });
-
-        updateCardsWithPoints(memberTotalPoints); // Ensure this is called here
-      })
-      .catch((error) => {
-        console.error("Error fetching points data for user:", error);
-      });
+      } else {
+        console.error("No user found with the email:", currentUser);
+      }
+    }).catch((error) => {
+      console.error("Error fetching user document:", error);
+    });
   }
-
+  
   function updateCardsWithPoints(memberTotalPoints) {
-    console.log(
-      "Updating cards with the following points data:",
-      memberTotalPoints
-    );
-
+    console.log("Updating cards with the following points data:", memberTotalPoints);
+  
     let totalPoints = 0;
-
+  
     Object.keys(memberTotalPoints).forEach((eventType) => {
       const points = memberTotalPoints[eventType];
       const selector = `.card[event-type="${eventType}"] .content`;
@@ -2089,29 +2163,27 @@ function addContent(isAdmin) {
         console.error(`No element found for selector: ${selector}`);
       }
     });
-
+  
     // Update total points card
-    const totalPointsDiv = document.querySelector(
-      '.card[event-type="total"] .content'
-    );
+    const totalPointsDiv = document.querySelector('.card[event-type="total"] .content');
     if (totalPointsDiv) {
       totalPointsDiv.textContent = `${totalPoints}`;
     }
   }
-
+  
   function normalizeEventType(eventType) {
     const eventTypeMapping = {
-      Volunteer: "volunteer",
+      "Volunteer": "volunteer",
       "Professional Development": "professional_development",
       "Speaker Event": "speaker",
       "Social Event": "social",
-      "DEI Event": "dei",
+      "DEI Event": "dei"
     };
-    return (
-      eventTypeMapping[eventType] || eventType.toLowerCase().replace(/ /g, "_")
-    );
+    return eventTypeMapping[eventType] || eventType.toLowerCase().replace(/ /g, "_");
   }
 }
+
+
 
 // contact page content
 let contact_content = `<div id="contactSectionTop" class="contactSection-box contactTopFormat">

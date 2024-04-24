@@ -20,6 +20,7 @@
   --secondaryHeaderFontSize: 33px;
   --tertiaryHeaderFontSize: 25px;
   --bodyFontSize: 25px;
+  
   /**
    * box shadow
    */
@@ -125,6 +126,7 @@ x .title {
   border: none;
   border-radius: 5px;
   font-size: 24px;
+  font-weight: 700;
   text-decoration: none;
 }
 .add-btn:hover {
@@ -140,6 +142,7 @@ x .title {
   border-radius: 5px;
   font-size: 24px;
   text-decoration: none;
+  font-weight: 700;
 }
 .sadd-btn:hover {
   background-color: #da5049;
@@ -199,6 +202,22 @@ x .title {
 .haveaccount {
   color: #1f304f;
 }
+
+.userlogshow{
+  color: var(--linkColor);
+  font-weight: 600;
+  font-size: 20px;
+  align-items: center;
+}
+
+#signout_button{
+  color: #f3f2ee;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  vertical-align: bottom;
+}
+
+
 
 /* Calendar Page */
 .margin-left {
@@ -588,73 +607,27 @@ input[type="submit"] {
   font-size: 20px;
 }
 
-/* #calendarbtn {
-  color: #f3f2ee;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 20px;
-  padding-top: 20px;
-}
-#pointbtn {
-  color: #f3f2ee;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 20px;
-  word-wrap: break-word;
-  padding-top: 20px;
-}
-#calendarbtn:hover,
-#pointbtn:hover {
-  background-color: #b22b25;
-} */
-
-/* .dropdown {
-  position: relative;
-  display: inline-block;
-} */
-
-/* .bttn1 {
-  border: none;
-  cursor: pointer;
-  outline: none;
-  /* background-color: #1f304f; */
-/* color: #f3f2ee; */
-/* font-family: Arial, Helvetica, sans-serif;
-  font-size: 20px;
-  padding: 10px 20px; */
-/* }
-
-/* .bttn1:hover {
-  background-color: #b22b25;
-} */
-
 .dropdown-content {
   display: none;
   position: absolute;
-  bottom: -200px;
-  min-width: 160px;
+  min-width: 220px;
+  margin-top: 55px;
   z-index: 1;
 }
 
 .dropdown-content a {
-  color: #1f304f;
   display: block;
   text-decoration: none;
+  color: var(--primaryblack);
 }
 
 .dropdown-content a:hover {
-  background-color: #b22b25;
   color: var(--bodyTextColorWhite);
 }
-/* Display
-  the
-  dropdown
-  content
-  when
-  hovering
-  over
-  the
-  button */
+
 .dropdown:hover .dropdown-content {
   display: block;
+  color: var(--primaryblack);
 }
 .show {
   display: block;
@@ -732,13 +705,6 @@ nav {
   font-size: 20px;
   vertical-align: bottom;
 }
-
-#home-link {
-  display: inline-block;
-  padding-right: 100px;
-  padding-left: 50px;
-  padding-top: 0;
-}
 #home-nav {
   color: #f3f2ee;
   font-family: Arial, Helvetica, sans-serif;
@@ -766,27 +732,6 @@ nav {
   color: #f3f2ee;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 20px;
-}
-#blog-link {
-  display: inline-block;
-  padding-right: 100px;
-  padding-left: 100px;
-  padding-top: 0;
-}
-#contact-link {
-  display: inline-block;
-  padding-right: 100px;
-  padding-top: 0;
-}
-#abt-link {
-  display: inline-block;
-  padding-right: 100px;
-  padding-top: 0;
-}
-#members-link {
-  display: inline-block;
-  padding-right: 25px;
-  padding-top: 18%;
 }
 #footer-box {
   width: 100%;
@@ -844,143 +789,7 @@ nav {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 20px;
 }
-/* Styles for burger menu */
-.navbar-burger {
-  display: none;
-}
-.navbar-menu {
-  background-color: #1f304f;
-  text-align: center;
-  max-height: 60px;
-}
-.navbar-menu a {
-  color: #f3f2ee;
-  font-size: 20px;
-  padding: 20px;
-  text-decoration: none;
-  text-align: center;
-}
-.login-signup {
-  display: block; /* Initially show login and signup */
-  position: absolute;
-  right: 30px;
-  top: 0;
-}
-.login-signup-burger {
-  display: none; /* Initially hide login and signup in burger menu */
-}
 
-@media screen and (max-width: 1100px) {
-  .navbar-menu {
-    display: none;
-    flex-direction: column;
-    background-color: #1f304f;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-  }
-  .navbar-menu.active {
-    display: flex;
-    flex-direction: column;
-    margin-top: 50px;
-    width: 250px;
-    margin-right: 5%;
-  }
-  .navbar-menu.active > div {
-    text-align: center;
-  }
-  .navbar-menu.active > div {
-    text-align: center;
-  }
-  .navbar-menu.active > div > #format-link {
-    padding-left: 30%;
-  }
-  .navbar-menu.active > div > #format-link1 {
-    padding-left: 34%;
-  }
-  .navbar-menu.active > div > #home-link {
-    padding-left: 37%;
-  }
-  .navbar-menu.active > div > div > button {
-    padding-right: 25px;
-    background-color: none;
-    margin-top: 0;
-  }
-  .navbar-menu.active > div > div > button:hover {
-    width: 110%;
-  }
-  .navbar-menu.active #login {
-    margin-top: 0;
-    padding-top: 0;
-  }
-  .navbar-menu.active .logbtn {
-    margin-top: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    padding-left: 15%;
-  }
-  .navbar-menu.active #signin {
-    margin-top: 0;
-    padding-top: 0;
-  }
-  .navbar-menu.active #signbtn {
-    margin-top: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    padding-left: 6%;
-  }
-  .navbar-menu.active .add-btn:hover {
-    width: 110%;
-  }
-  .navbar-menu.active #signbtn:hover {
-    width: 60%;
-  }
-  .navbar-burger {
-    display: block;
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    cursor: pointer;
-  }
-  .navbar-burger span {
-    background-color: #1f304f;
-    display: block;
-    width: 25px;
-    height: 3px;
-    margin: 5px;
-    transition: all 0.3s ease;
-  }
-  .navbar-burger.active span:nth-child(1) {
-    transform: rotate(-45deg) translate(-5px, 6px);
-  }
-  .navbar-burger.active span:nth-child(2) {
-    opacity: 0;
-  }
-  .navbar-burger.active span:nth-child(3) {
-    transform: rotate(45deg) translate(-5px, -6px);
-  }
-  .login-signup {
-    display: none; /* Hide login and signup when burger menu is active */
-  }
-  .login-signup-burger {
-    display: block; /* Show login and signup in burger menu */
-  }
-  .navbar-item {
-    font-size: calc(
-      20px + 0.5vw
-    ); /* Adjust font size relative to viewport width */
-    display: flex;
-    align-items: center;
-  }
-  .navbar-item img {
-    width: calc(20% + 2vw); /* Adjust image width relative to viewport width */
-  }
-  .navbar-item div {
-    flex: 1;
-    padding-left: 20px;
-  }
-}
 footer {
   height: auto;
   background-color: #1f304f;
@@ -1099,23 +908,6 @@ button p {
 @media only screen and (max-width: 750px) {
   .footer-section:nth-child(1) div {
     margin-right: 3%;
-  }
-}
-
-@media only screen and (max-width: 1000px) {
-  .navbar-items {
-    font-size: calc(
-      20px + 0.5vw
-    ); /* Adjust font size relative to viewport width */
-    display: flex;
-    align-items: center;
-  }
-  .navbar-items img {
-    width: calc(40% + 1vw); /* Adjust image width relative to viewport width */
-  }
-  .navbar-items div {
-    flex: 1;
-    padding-left: 10px;
   }
 }
 #img_logo {
@@ -1589,9 +1381,7 @@ textarea.input-field {
 #foot_right {
   padding-top: 5%;
 }
-.margin-class {
-  margin-top: 35px;
-}
+
 .aboutContainer {
   display: flex;
   flex-wrap: wrap;
@@ -1784,4 +1574,145 @@ textarea.input-field {
   border-radius: 5px;
   font-size: 16px;
   text-decoration: none;
+}
+
+
+/* Header CSS */
+/* Primary Color Scheme and Typography*/
+:root {
+  /*Fonts*/
+  --titleFontFamily: "Arial Rounded MT Bold", "Helvetica Rounded", Arial,
+    sans-serif;
+  --bodyFontFamily: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  /*Colors*/
+  --primarynavy: #1f304f;
+  --primarywhite: #f3f2ee;
+  --primaryblack: #201c0f;
+  --secondaryred: #b22b25;
+  --headerColor: #201c0f;
+  --bodyTextColor: #434343;
+  --lightGray: #d3d3d3;
+  --bodyTextColorWhite: #fafbfc;
+  --linkColor: #0071a5;
+  /*Font Sizes*/
+  --titleFontSize: 65px;
+  --headerFontSize: 38px;
+  --secondaryHeaderFontSize: 33px;
+  --tertiaryHeaderFontSize: 25px;
+  --bodyFontSize: 25px;
+  
+  .navbar {
+      background-color: var(--primarynavy);
+      color: white;
+      width: 100%;
+  }
+  .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      background-color: var(--primarywhite); /* Ensuring background is consistent */
+  }
+
+  .header-logo {
+      width: auto; /* Let it scale based on the viewport */
+      max-width:25%; /* Limits how large the logo can get */
+      height: auto; /* Maintain aspect ratio */
+      flex: 0 1 150px; /* Flex-grow, Flex-shrink, Flex-basis */
+  }
+
+  .header-text {
+      display: flex;
+      align-items: center;
+      font-size: calc(1rem + 1vw); /* Starts at 1rem and increases with viewport width */
+      font-family: var(--bodyFontFamily);
+      flex: 1 1 auto;
+      margin-left: 20px;
+  }
+
+  .login-signup-container {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+  }
+
+  .navbar-item1{
+      line-height: 1.5;
+      padding: 0.5rem 0.75rem; /* Adjust padding for better spacing */
+      cursor: pointer;
+      font-family: var(--bodyFontFamily);
+      font-size: 20px;
+      width: 100%; /* Ensures full width for better touch targets on mobile */
+      font-weight: bold;
+      color: black;
+  }
+  .navbar-link {
+      line-height: 1.5;
+      cursor: pointer;
+      font-family: var(--bodyFontFamily);
+      font-size: 20px;
+      width: 100%; /* Ensures full width for better touch targets on mobile */
+      font-weight: bold;
+      color: black;
+  }
+  .navbar-item1:hover, .navbar-link:hover {
+      color: var(--primarynavy); /* Maintain the color on hover */
+      background-color: transparent; /* Ensure no background change on hover */
+  }
+
+  .navbar-content {
+      display: flex;
+      flex-direction: column; /* Stack items vertically on smaller screens */
+      justify-content: center;
+      width: 100%;
+      flex-wrap: wrap;
+      align-items: center;
+      color: white;
+  }
+  /* Default styles - applying to smaller screens */
+.navbar-menu {
+  width: 100%;
+  justify-content: center;
+}
+
+  /* Styles for larger screens */
+  @media (min-width: 1024px) {
+      .navbar-content {
+          flex-direction: row;
+      }
+      .navbar-item1 {
+          color: white;
+          width: auto;
+          margin-right: 50px; /* Adds spacing between items */
+      }
+      .navbar-link {
+          color: white;
+          width: auto;
+      }
+      .navbar-item1:last-child, .navbar-link:last-child {
+          margin-right: 0; /* Removes margin from the last item */
+      }
+      .navbar-dropdown {
+          background-color: var(--linkColor); /* Sets the dropdown background color */
+      }
+      .navbar-item1:hover, .navbar-link:hover {
+          color: #0071a5; /* Maintain the color on hover */
+          background-color: transparent; /* Ensure no background change on hover */
+      }
+  }
+
+  @media (max-width: 1024px) { /* Adjust the max-width to match your navbar burger appearance breakpoint */
+      .login-signup-container {
+          display: none; /* Hide the login/signup buttons on smaller screens */
+      }
+  }
+
+  .navbar-burger {
+      color: #f3f2ee;
+  }
+
+}
+
+.burgerlogsign{
+  gap: 10px;
 }
