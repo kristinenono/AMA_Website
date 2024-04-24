@@ -2328,6 +2328,9 @@ r_e("joinbuttonhome").addEventListener("click", () => {
   console.log("learnbuttonclicked");
 });
 
+
+
+
 // BLOG PAGE
 let blog_content = ` <main>
 <div class="blogpage">
@@ -2604,6 +2607,8 @@ r_e("blog-link").addEventListener("click", () => {
   }
 });
 
+
+// NOTE FOR THIS CODE. THERE ARE 2 R_E("BLOG-LINKS") THAT MAY BE THE REASON FOR THE ERRORS. REMOVE ONE OF THEM.
 r_e("blog-link").addEventListener("click", () => {
   r_e("addPostButton").classList.add("is-hidden");
 
