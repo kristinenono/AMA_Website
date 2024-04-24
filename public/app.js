@@ -2213,10 +2213,6 @@ function addContent(isAdmin) {
   }
 }
 
-
-
-
-
 // contact page content
 let contact_content = `<div id="contactSectionTop" class="contactSection-box contactTopFormat">
 <h2 class="primaryheader">Let's get in touch.</h2>
@@ -2307,6 +2303,7 @@ Please fill out this contact form or you can reach us us at
   </form>
 </div>
 </div>`;
+
 r_e("contact-link").addEventListener("click", () => {
   appendContent(contact_content);
   let check_auth = auth.currentUser;
@@ -2330,14 +2327,20 @@ r_e("joinbuttonhome").addEventListener("click", () => {
   appendContent(contact_content);
   console.log("learnbuttonclicked");
 });
+
+// BLOG PAGE
 let blog_content = ` <main>
 <div class="blogpage">
   <div id="blogSection" class="blogSection-box">
     <h2 class="primaryheader">Blog</h2>
     <p class="primaryBody">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum at
-      magni porro voluptatibus, quasi doloribus provident officiis, illo
-      hic laborum distinctio mollitia quis minima ducimus.
+    The blog page of the AMA UW-Madison's Community & Culture Committee 
+    offers insightful explorations into local marketing and brand management 
+    strategies in Madison, Wisconsin. It features posts that highlight how various 
+    businesses engage with the community and manage their brands effectively, 
+    focusing on innovative marketing techniques and strong community involvement. 
+    The blog serves as a platform to celebrate local entrepreneurship and provide 
+    valuable marketing insights that resonate with a diverse audience.
     </p>
     <button id="addPostButton" class="addPostBtn">Add a post</button>
   </div>
@@ -2600,6 +2603,7 @@ r_e("blog-link").addEventListener("click", () => {
     appendContent(blog_content);
   }
 });
+
 r_e("blog-link").addEventListener("click", () => {
   r_e("addPostButton").classList.add("is-hidden");
 
