@@ -3,30 +3,55 @@ const $navbarBurgers = Array.prototype.slice.call(
   0
 );
 const signbtns = document.getElementById("signbtns");
-const signoutbtns = document.getElementById("signoutbtns");
+const signoutbtn = document.getElementById("signoutbtn");
 
 // Function to manage visibility of sign-up/login buttons based on menu state and screen width
 function manageButtonVisibility() {
   let check_auth = auth.currentUser;
   if (window.innerWidth <= 1022) {
     // Assumes 768px is the breakpoint for mobile view
-    if (
-      document
-        .getElementById("navbarBasicExample")
-        .classList.contains("is-active")
-    ) {
-      signbtns.classList.remove("is-hidden"); // Show buttons when menu is active
-      r_e("burgerloginbtn").addEventListener("click", () => {
-        loginModal.classList.add("is-active");
-      });
-      r_e("burgersignupbtn").addEventListener("click", () => {
-        signupModal.classList.add("is-active");
-      });
+    if (check_auth == null) {
+      if (
+        document
+          .getElementById("navbarBasicExample")
+          .classList.contains("is-active")
+      ) {
+        signbtns.classList.remove("is-hidden"); // Show buttons when menu is active
+        r_e("burgerloginbtn").addEventListener("click", () => {
+          loginModal.classList.add("is-active");
+        });
+        r_e("burgersignupbtn").addEventListener("click", () => {
+          signupModal.classList.add("is-active");
+        });
+      } else {
+        signbtns.classList.add("is-hidden"); // Hide buttons when menu is not active
+      }
     } else {
-      signbtns.classList.add("is-hidden"); // Hide buttons when menu is not active
-    }
+      if (
+        document
+          .getElementById("navbarBasicExample")
+          .classList.contains("is-active")
+      ) {
+        signoutbtn.classList.remove("is-hidden"); 
+        signbtns.classList.add("is-hidden");
+        r_e("burgeroutbtn").addEventListener("click", () => {
+          auth
+            .signOut()
+            .then(() => {
+              window.location.href = "index.html";
+              configure_message_bar("Signed Out Successfully!");
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        });
+      } else {
+        signoutbtn.classList.add("is-hidden"); // Hide buttons when menu is not active
+      }
+   }
   } else {
     signbtns.classList.add("is-hidden"); // Always hide buttons on larger screens
+    signoutbtn.classList.add("is-hidden");
   }
 }
 
@@ -118,6 +143,20 @@ r_e("sign_form").addEventListener("submit", (e) => {
       db.collection("ama_users").add(dbuser);
       r_e("sign_form").reset();
       r_e("signmodal").classList.remove("is-active");
+      if (window.innerWidth <= 1022) {
+        if (
+          document
+            .getElementById("navbarBasicExample")
+            .classList.contains("is-active")
+        ) {
+          $navbarBurgers.forEach((burger) => {
+            burger.classList.remove("is-active");
+            document
+              .getElementById(burger.dataset.target)
+              .classList.remove("is-active");
+          });
+        }
+      }
       configure_message_bar(
         `Signed Up Successfully - Welcome ${full_name_val}!`
       );
@@ -141,6 +180,20 @@ r_e("log_form").addEventListener("submit", (e) => {
         .where(`email`, `==`, `${email_val}`)
         .get()
         .then((user) => {
+          if (window.innerWidth <= 1022) {
+              if (
+                document
+                  .getElementById("navbarBasicExample")
+                  .classList.contains("is-active")
+              ) {
+                $navbarBurgers.forEach((burger) => {
+                  burger.classList.remove("is-active");
+                  document
+                    .getElementById(burger.dataset.target)
+                    .classList.remove("is-active");
+                });
+              }
+            }
           configure_message_bar(
             `Welcome Back ${user.docs[0].data().full_name}!`
           );
