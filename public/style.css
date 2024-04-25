@@ -297,8 +297,8 @@ x .title {
 }
 
 .event.speaker-event {
-  border: 0.2rem solid #ffa756;
-  color: #ffa756;
+  border: 0.2rem solid #ef9c3b;
+  color: #ef9c3b;
   display: inline-block;
   padding: 0.1rem;
   font: var(--bodyFontFamily);

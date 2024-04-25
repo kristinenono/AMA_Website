@@ -142,9 +142,7 @@ r_e("log_form").addEventListener("submit", (e) => {
         .get()
         .then((user) => {
           configure_message_bar(
-            `Signed In Successfully - Welcome Back ${
-              user.docs[0].data().full_name
-            }!`
+            `Welcome Back ${user.docs[0].data().full_name}!`
           );
         });
       r_e("log_error").innerHTML = "";
@@ -1345,7 +1343,7 @@ r_e("calendarbtn").addEventListener("click", () => {
                 break;
               case "Speaker Event":
                 eventTypeStyle =
-                  "background-color:#ffa756 ;color: var(--primarywhite);";
+                  "background-color:#EF9C3B ;color: var(--primarywhite);";
                 break;
               case "Social Event":
                 eventTypeStyle =
