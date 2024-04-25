@@ -643,6 +643,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
                 <p>Time: ${formattedTime}</p>
                 <p>Description: ${event.desc}</p>
                 <p>Type: ${event.type}</p>
+                <p>Code: ${event.code}</p>
                 <button class ="button" id=edit_curr_evt" onclick="openeditmodal('${eventId}')"> Edit </button>
                 <button class="button" id="del_curr_evt" onclick="deleteEvent('${eventId}')">Delete</button>
                 <button class="button" id="evtmodalcancel" onclick="reloadCalendarPage()">Cancel</button>
@@ -751,19 +752,14 @@ function openEventModal(eventId, dayHTML, currentAuth) {
           </div>
           </div><div class="modal is-hidden" id="pnts_mod">
           <div class="modal-background"></div>
-          <div class="modal-content section has-background-white">
-            <h2 class="title">Member Attendance Form</h2>
+          <div class="modal-content">
+          <div class="box">
+          <h2 class="title">Member Attendance Form</h2>
             <form id="member_attend">
-              <!-- <div class="field">
-                <label class="label">Name of AMA Member</label>
-                <div class="control">
-                  <input type="text" id="evtattd" placeholder="Bucky Badger" />
-                </div>
-              </div> -->
               <div class="field">
                 <label class="label">Code Provided in Event</label>
                 <div class="control">
-                  <input type="text" id="genevtcode" placeholder="877hs3" />
+                  <input class="input" type="text" id="genevtcode" placeholder="877hs3" />
                 </div>
               </div>
               <div class="field is-grouped">
@@ -775,6 +771,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
                 </div>
               </div>
             </form>
+          </div>
           </div>
         </div>
           `;
