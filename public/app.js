@@ -736,7 +736,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
           // const edit_mod = document.getElementById("edit_evt");
         } else {
           modalHtml = modalHtml = `
-          <div class="modal is-active" id="eventModal_${event.id}">
+          <div class="modal is-active" id="eventModal_${eventId}">
             <div class="modal-background"></div>
             <div class="modal-content" id="modal_evt">
               <div class="box">
@@ -745,140 +745,55 @@ function openEventModal(eventId, dayHTML, currentAuth) {
                 <p>Time: ${formattedTime}</p>
                 <p>Description: ${event.desc}</p>
                 <p>Type: ${event.type}</p>
-                <button class="button" id="submit_points" onclick= "alert("btn clicked to submit")">Submit Points</button>
+                <button class="button" id="submit_points_${eventId}" onclick= "alert("btn clicked to submit")">Submit Points</button>
                 <button class="button" id="evtmodalcancel" onclick="reloadCalendarPage()">Cancel</button>
               </div>
             </div>
           </div>
-          </div><div class="modal is-hidden" id="pnts_mod">
+          </div>
+          <div class="modal is-hidden" id="pnts_mod_${eventId}">
           <div class="modal-background"></div>
           <div class="modal-content">
-          <div class="box">
-          <h2 class="title">Member Attendance Form</h2>
-            <form id="member_attend">
-              <div class="field">
-                <label class="label">Code Provided in Event</label>
-                <div class="control">
-                  <input class="input" type="text" id="genevtcode" placeholder="877hs3" />
+            <div class="box">
+              <h2 class="title">Member Attendance Form</h2>
+              <form id="member_attend_${eventId}">
+                <div class="field">
+                  <label class="label">Code Provided in Event</label>
+                  <div class="control">
+                    <input class="input" type="text" id="genevtcode_${eventId}" placeholder="Enter code here" />
+                  </div>
                 </div>
-              </div>
-              <div class="field is-grouped">
-                <div class="control">
-                  <button class="button" id="pnts_sbt">Submit</button>
+                <div class="field is-grouped">
+                  <div class="control">
+                    <button class="button" id="pnts_sbt_${eventId}">Submit</button>
+                  </div>
+                  <div class="control">
+                    <button class="button" id="pnts_cncl_${eventId}" onclick="reloadCalendarPage()">Cancel</button>
+                  </div>
                 </div>
-                <div class="control">
-                  <button class="button" id="pnts_cncl" onclick = "reloadCalendarPage()">Cancel</button>
-                </div>
-              </div>
-            </form>
-          </div>
+              </form>
+            </div>
           </div>
         </div>
           `;
         }
-
-        // Append the modal HTML to the dayHTML
         dayHTML += modalHtml;
-
-        // Insert the dayHTML into the calendar view
         document.querySelector(".calview").innerHTML = dayHTML;
 
-        // Show the modal
-        const modalId = `#eventModal_${event.id}`;
-        const modal = document.querySelector(modalId);
-        const pnts_mod = document.getElementById("pnts_mod");
+        document.getElementById(`submit_points_${eventId}`).addEventListener("click", function () {
+          document.getElementById(`eventModal_${eventId}`).classList.remove("is-active");
+          document.getElementById(`pnts_mod_${eventId}`).classList.remove("is-hidden");
+          document.getElementById(`pnts_mod_${eventId}`).classList.add("is-active");
+        });
 
-        // pnts_mod.classList.add("is-active");
+        document.getElementById(`pnts_sbt_${eventId}`).addEventListener("click", function (e) {
+          e.preventDefault(); // Prevent default form submission behavior
+          submitEventCode(eventId);
+        });
 
-        // modal.classList.add("is-active");
-        document
-          .getElementById("submit_points")
-          .addEventListener("click", function () {
-            modal.classList.remove("is-active");
-            pnts_mod.classList.remove("is-hidden");
-            pnts_mod.classList.add("is-active");
-          });
-
-        document
-          .getElementById("pnts_sbt")
-          .addEventListener("click", function (e) {
-            e.preventDefault(); // Prevent default form submission behavior
-
-            let eventCodeInput = document.getElementById("genevtcode").value; // Retrieve the event code input by the user
-            let user_email = auth.currentUser.email; // Retrieve the currently signed in user's email
-
-            // First, find the user document based on the email
-            db.collection("ama_users")
-              .where("email", "==", user_email)
-              .get()
-              .then((userSnapshot) => {
-                if (!userSnapshot.empty) {
-                  // Get the user's document reference
-                  let userDocRef = userSnapshot.docs[0].ref;
-
-                  // Now, query the events collection to find a matching event code
-                  db.collection("events")
-                    .where("code", "==", eventCodeInput)
-                    .get()
-                    .then((querySnapshot) => {
-                      if (!querySnapshot.empty) {
-                        let eventDetails = querySnapshot.docs[0].data(); // Assuming event codes are unique, take the first result
-
-                        // Prepare the data to be added to the 'member_points' subcollection
-                        let memberPointsData = {
-                          code: eventDetails.code,
-                          eventType: eventDetails.type,
-                          pointSemester: eventDetails.semester,
-                          points: parseInt(eventDetails.pts, 10), // Ensure points are stored as integers
-                        };
-
-                        // Add the member points data to the 'member_points' subcollection for the current user
-                        userDocRef
-                          .collection("member_points")
-                          .add(memberPointsData)
-                          .then(() => {
-                            console.log(
-                              "Points successfully added for the event."
-                            );
-                            alert("Points successfully submitted!");
-                            pnts_mod.classList.remove("is-active"); // Close the modal on successful submission
-                            reloadCalendarPage(); // Optionally, refresh the calendar page to show updates
-                          })
-                          .catch((error) => {
-                            console.error("Error adding points: ", error);
-                            alert("Failed to submit points. Please try again.");
-                          });
-                      } else {
-                        alert(
-                          "Invalid event code. Please check and try again."
-                        );
-                      }
-                    })
-                    .catch((error) => {
-                      console.error("Error verifying event code: ", error);
-                    });
-                } else {
-                  alert(
-                    "No user found with the provided email. Please check and try again."
-                  );
-                }
-              })
-              .catch((error) => {
-                console.error("Error fetching user by email: ", error);
-              });
-          });
-
-        document
-          .getElementById("pnts_cncl")
-          .addEventListener("click", function () {
-            // Close the modal when cancel button is clicked
-            pnts_mod.classList.remove("is-active");
-
-            // Re-render the calendar view
-            // fetchEventsAndGenerateCalendarHTML(currentDate);
-          });
-
-        modal.classList.add("is-active");
+        document.getElementById(`pnts_cncl_${eventId}`).addEventListener("click", function () {
+          document.getElementById(`pnts_mod_${eventId}`).classList.remove("is-active");
+        });
       } else {
         console.error("No such event found!");
       }
@@ -888,6 +803,61 @@ function openEventModal(eventId, dayHTML, currentAuth) {
     });
 }
 
+function submitEventCode(eventId) {
+  const eventCodeInput = document.getElementById(`genevtcode_${eventId}`).value;
+  const user_email = auth.currentUser.email;
+
+  db.collection("events").doc(eventId).get().then((doc) => {
+    if (doc.exists && doc.data().code === eventCodeInput) {
+      const eventDetails = doc.data();
+
+      db.collection("ama_users").where("email", "==", user_email).get().then((userSnapshot) => {
+        if (!userSnapshot.empty) {
+          const userDocRef = userSnapshot.docs[0].ref;
+
+          // Check if points for this event have already been submitted by this user
+          userDocRef.collection("member_points")
+            .where("code", "==", eventDetails.code)
+            .where("eventId", "==", eventId) // Assuming 'eventId' is stored in the document
+            .get()
+            .then((querySnapshot) => {
+              if (querySnapshot.empty) {
+                // No points have been submitted for this event by this user
+                const memberPointsData = {
+                  code: eventDetails.code,
+                  eventId: eventId, // Store eventId to uniquely identify the event in checks
+                  eventType: eventDetails.type,
+                  pointSemester: eventDetails.semester,
+                  points: parseInt(eventDetails.pts, 10),
+                };
+
+                userDocRef.collection("member_points").add(memberPointsData)
+                  .then(() => {
+                    alert("Points successfully submitted!");
+                    document.getElementById(`pnts_mod_${eventId}`).classList.remove("is-active");
+                    reloadCalendarPage();
+                  })
+                  .catch((error) => {
+                    console.error("Error adding points: ", error);
+                    alert("Failed to submit points. Please try again.");
+                  });
+              } else {
+                // Points already submitted for this event by this user
+                alert("You have already submitted points for this event.");
+                document.getElementById(`pnts_mod_${eventId}`).classList.remove("is-active");
+                reloadCalendarPage();
+              }
+            });
+        } else {
+          alert("No user found with the provided email. Please check and try again.");
+        }
+      });
+    } else {
+      alert("Invalid event code. Please check and try again.");
+    }
+  });
+}
+        
 function generateCalendarHTML(date, events) {
   const totalDays = 42;
   let currentYear = date.getFullYear();
