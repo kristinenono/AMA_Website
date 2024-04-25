@@ -75,7 +75,6 @@ x .title {
   padding-left: 10%;
   font-family: var(--titleFontFamily);
   font-size: 5vw;
-
 }
 
 .primaryheader {
@@ -221,7 +220,7 @@ x .title {
   text-align: center;
 }
 
-.burgerbtnformat{
+.burgerbtnformat {
   color: #f3f2ee;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 20px;
@@ -507,7 +506,7 @@ x .title {
   background-color: #1f304f;
 }
 
-.learnjoinbtns{
+.learnjoinbtns {
   gap: 10px;
   margin-top: 5%;
 }
@@ -1215,7 +1214,7 @@ tr:hover {
 }
 
 .button-group {
-  display: flex;  /* Aligns children (buttons) in a row */
+  display: flex; /* Aligns children (buttons) in a row */
   flex-direction: row; /* Default flex direction */
   flex-wrap: nowrap; /* Prevents wrapping, adjust if needed */
   justify-content: center; /* Centers buttons in the container */
@@ -1223,7 +1222,6 @@ tr:hover {
   gap: 10px; /* Provides space between buttons */
   margin: 20px 0; /* Vertical spacing from other content */
 }
-
 
 /* CONTACT PAGE */
 

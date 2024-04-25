@@ -918,7 +918,7 @@ function generateCalendarHTML(date, events) {
       );
     });
 
-    let dayHtml = `<div class="dayview"><div>${day}</div>`; // Date number above button name
+    let dayHtml = `<div class="dayview"><div>${day}</div><div class="event-container">`; // Date number above button name
     eventOnThisDay.forEach((event) => {
       const eventDate = new Date(event.data.time);
       const formattedDate = eventDate.toLocaleString("en-US", {
@@ -931,10 +931,12 @@ function generateCalendarHTML(date, events) {
       });
       const eventTypeClass = event.data.type.toLowerCase().replace(/\s+/g, "-");
 
-      // Add the class name to the button
-      dayHtml += `<button class="event ${eventTypeClass}" data-event-id="${event.id}" onclick="openEventModal('${event.id}')">${event.data.name}</button>`;
+      const buttonWidth =
+        eventOnThisDay.length > 1 ? "calc(50% - 5px)" : "100%";
+
+      dayHtml += `<button class="event ${eventTypeClass}" data-event-id="${event.id}" style="width: ${buttonWidth}; overflow: hidden; text-overflow: ellipsis;" onclick="openEventModal('${event.id}')" title="${event.data.name}">${event.data.name}</button>`;
     });
-    dayHtml += `</div>`;
+    dayHtml += `</div></div>`;
 
     calendarHtml += dayHtml;
     dayCellsGenerated++;
