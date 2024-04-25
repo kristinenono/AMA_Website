@@ -754,6 +754,9 @@ nav {
   height: 100%;
   display: flex;
 }
+.footer-right {
+  padding-top: 5%;
+}
 #footer-back {
   width: 25%;
   background-color: #1f304f;
@@ -779,6 +782,7 @@ nav {
   word-wrap: break-word;
   color: #f3f2ee;
   font-size: calc(10px + 0.5vw);
+  margin-top: 0;
 }
 #footer-align {
   width: 100%;
@@ -816,7 +820,6 @@ footer {
 
 .footer-box {
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
   padding-top: 20px;
   padding-left: 20px;
@@ -856,7 +859,19 @@ footer {
   display: flex;
   flex-wrap: wrap;
   justify-content: center; /* Distribute items evenly */
-  margin-top: 10px;
+  margin-top: 2%;
+}
+
+@media only screen and (max-width: 1000px) {
+  .social-icons {
+    margin-top: 25%;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .social-icons {
+    margin-top: 35%;
+  }
 }
 
 .social-icons a {
@@ -926,12 +941,7 @@ button p {
     margin-right: 3%;
   }
 }
-#img_logo {
-  height: 50px;
-  float: left;
-  margin-right: 3%;
-  margin-left: 6%;
-}
+
 #icons {
   width: 100%;
   display: flex;
@@ -1027,11 +1037,25 @@ button p {
 #social-icon {
   margin-right: 3%;
 }
-#adress {
+#address {
   text-align: center;
+  margin-top: 0.5%;
+}
+@media only screen and (max-width: 1000px) {
+  #address {
+    margin-top: 5%;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  #address {
+    margin-top: 15%;
+  }
 }
 #phone {
   color: gray;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 #footer-padding {
   padding: 8px;
@@ -1648,6 +1672,33 @@ textarea.input-field {
     flex: 0 1 150px; /* Flex-grow, Flex-shrink, Flex-basis */
   }
 
+  .footer-logo1 {
+    max-width: 30%;
+    margin-right: 10px;
+    float: left;
+    margin-right: 3%;
+    margin-left: 6%;
+  }
+
+  @media screen and (max-width: 1220px) {
+    .footer-logo1 {
+      max-width: 50%; /* Increase the maximum width for smaller screens */
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    .footer-logo1 {
+      max-width: 70%; /* Increase the maximum width for smaller screens */
+    }
+  }
+  
+  /* Media query for even smaller screen sizes */
+  @media screen and (max-width: 480px) {
+    .footer-logo1 {
+      max-width: 100%; /* Further increase the maximum width for even smaller screens */
+    }
+  }
+
   .header-text {
     display: flex;
     align-items: center;
@@ -1657,6 +1708,9 @@ textarea.input-field {
     font-family: var(--bodyFontFamily);
     flex: 1 1 auto;
     margin-left: 20px;
+  }
+  .header-text.hidden {
+    display: none; /* Hide the header text when this class is applied */
   }
 
   .login-signup-container {

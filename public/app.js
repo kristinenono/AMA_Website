@@ -102,6 +102,27 @@ document.querySelectorAll(".navbar-item1").forEach((link) => {
   });
 });
 
+function toggleHeaderText() {
+  var screenWidth = window.innerWidth;
+  var footerText = document.getElementById('footerText');
+
+  // Define the screen width threshold
+  var thresholdWidth = 1220; // Adjust this value as needed
+
+  // Check if the screen width is less than or equal to the threshold
+  if (screenWidth <= thresholdWidth) {
+    // If screen is smaller than or equal to threshold, hide the header text
+    footerText.classList.add('hidden');
+  } else {
+    // If screen is larger than threshold, show the header text
+    footerText.classList.remove('hidden');
+  }
+}
+
+// Call the function on page load and resize
+toggleHeaderText();
+window.addEventListener('resize', toggleHeaderText);
+
 function r_e(id) {
   if (!id) {
     console.error("Invalid ID provided:", id);
