@@ -32,7 +32,7 @@ function manageButtonVisibility() {
           .getElementById("navbarBasicExample")
           .classList.contains("is-active")
       ) {
-        signoutbtn.classList.remove("is-hidden"); 
+        signoutbtn.classList.remove("is-hidden");
         signbtns.classList.add("is-hidden");
         r_e("burgeroutbtn").addEventListener("click", () => {
           auth
@@ -48,7 +48,7 @@ function manageButtonVisibility() {
       } else {
         signoutbtn.classList.add("is-hidden"); // Hide buttons when menu is not active
       }
-   }
+    }
   } else {
     signbtns.classList.add("is-hidden"); // Always hide buttons on larger screens
     signoutbtn.classList.add("is-hidden");
@@ -104,7 +104,7 @@ document.querySelectorAll(".navbar-item1").forEach((link) => {
 
 function toggleHeaderText() {
   var screenWidth = window.innerWidth;
-  var footerText = document.getElementById('footerText');
+  var footerText = document.getElementById("footerText");
 
   // Define the screen width threshold
   var thresholdWidth = 1220; // Adjust this value as needed
@@ -112,16 +112,16 @@ function toggleHeaderText() {
   // Check if the screen width is less than or equal to the threshold
   if (screenWidth <= thresholdWidth) {
     // If screen is smaller than or equal to threshold, hide the header text
-    footerText.classList.add('hidden');
+    footerText.classList.add("hidden");
   } else {
     // If screen is larger than threshold, show the header text
-    footerText.classList.remove('hidden');
+    footerText.classList.remove("hidden");
   }
 }
 
 // Call the function on page load and resize
 toggleHeaderText();
-window.addEventListener('resize', toggleHeaderText);
+window.addEventListener("resize", toggleHeaderText);
 
 function r_e(id) {
   if (!id) {
@@ -202,19 +202,19 @@ r_e("log_form").addEventListener("submit", (e) => {
         .get()
         .then((user) => {
           if (window.innerWidth <= 1022) {
-              if (
+            if (
+              document
+                .getElementById("navbarBasicExample")
+                .classList.contains("is-active")
+            ) {
+              $navbarBurgers.forEach((burger) => {
+                burger.classList.remove("is-active");
                 document
-                  .getElementById("navbarBasicExample")
-                  .classList.contains("is-active")
-              ) {
-                $navbarBurgers.forEach((burger) => {
-                  burger.classList.remove("is-active");
-                  document
-                    .getElementById(burger.dataset.target)
-                    .classList.remove("is-active");
-                });
-              }
+                  .getElementById(burger.dataset.target)
+                  .classList.remove("is-active");
+              });
             }
+          }
           configure_message_bar(
             `Welcome Back ${user.docs[0].data().full_name}!`
           );
@@ -412,6 +412,7 @@ let abt_content = `      <div id="contactSectionTop" class="contactSection-box c
               <i class="fa-solid fa-person-chalkboard"></i>
             </h3>
             <h3 class="aboutCardHeader">Speaker/Member Meetings</h3>
+            <p>These are our primary meetings. Every-other Tuesday, we welcome marketers from various industries to share about their companies and professional journies.</p>
           </div>
         </div>
       </div>
@@ -428,6 +429,8 @@ let abt_content = `      <div id="contactSectionTop" class="contactSection-box c
             <h3 class="aboutCardHeader">
               Professional Development Workshops
             </h3>
+            <p>We hold various workshops in professional topics to prepare students for their future careers. Examples of past workshops are Resume Development and Review, Personal Branding on LinkedIn, and Personal Finance.</p>
+
           </div>
         </div>
       </div>
@@ -442,6 +445,7 @@ let abt_content = `      <div id="contactSectionTop" class="contactSection-box c
               <i class="fa-regular fa-comments"></i>
             </h3>
             <h3 class="aboutCardHeader">Social Events</h3>
+            <p>While we are a professionally-oriented club, we ensure our members have many opportunities to have fun and connect with other students! Past social events include bouquet making, bowling, and tote bag painting.</p>
           </div>
         </div>
       </div>
@@ -456,6 +460,7 @@ let abt_content = `      <div id="contactSectionTop" class="contactSection-box c
               <i class="fa-regular fa-heart"></i>
             </h3>
             <h3 class="aboutCardHeader">DEI Workshops</h3>
+            <p>We are dedicated to understanding and reducing discrimination within our club. We ensure our chapter continues to develop this understanding by hosting DEI workshops throughout the semester.</p>
           </div>
         </div>
       </div>
@@ -470,6 +475,8 @@ let abt_content = `      <div id="contactSectionTop" class="contactSection-box c
               <i class="fa-solid fa-handshake-angle"></i>
             </h3>
             <h3 class="aboutCardHeader">Volunteer Events</h3>
+            <p>Giving back is important to AMA. In the past, we have taken action by hosting food drives and volunteering for non-profits within the Madison community.</p>
+
           </div>
         </div>
       </div>
@@ -484,6 +491,8 @@ let abt_content = `      <div id="contactSectionTop" class="contactSection-box c
               <i class="fa-regular fa-circle-check"></i>
             </h3>
             <h3 class="aboutCardHeader">Leadership Opportunities</h3>
+            <p>Gain leadership experience by signing up for an AMA committee, leading a committee, or joining our executive board. These leadership opportunities are open to any age and major!</p>
+
           </div>
         </div>
       </div>
@@ -1369,7 +1378,7 @@ r_e("calendarbtn").addEventListener("click", () => {
         // let month = new Date(evttime).getMonth() + 1;
         // let evtyear = new Date(evttime).getFullYear();
         console.log(evtyear);
-        
+
         if (type === "--select--") {
           alert("Please select an event type.");
           return; // Stop the function execution here
