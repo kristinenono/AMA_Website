@@ -733,48 +733,61 @@ function openEventModal(eventId, dayHTML, currentAuth) {
           // const modal = document.querySelector(modalId);
           // const edit_mod = document.getElementById("edit_evt");
         } else {
-          modalHtml = modalHtml = `
-          <div class="modal is-active" id="eventModal_${eventId}">
-            <div class="modal-background"></div>
-            <div class="modal-content" id="modal_evt">
-              <div class="box">
-                <h2>${event.name}</h2>
-                <p>Date: ${formattedDate}</p>
-                <p>Time: ${formattedTime}</p>
-                <p>Description: ${event.desc}</p>
-                <p>Type: ${event.type}</p>
-                <button class="button" id="submit_points_${eventId}" onclick= "alert("btn clicked to submit")">Submit Points</button>
-                <button class="button" id="evtmodalcancel" onclick="reloadCalendarPage()">Cancel</button>
+          // Calculate the deadline for submitting points (2 days after the event)
+          const submissionDeadline = new Date(eventDate);
+          submissionDeadline.setDate(submissionDeadline.getDate() + 2);
+
+          // Generate modal HTML
+          modalHtml = `
+              <div class="modal is-active" id="eventModal_${eventId}">
+                  <div class="modal-background"></div>
+                  <div class="modal-content" id="modal_evt">
+                      <div class="box">
+                          <h2>${event.name}</h2>
+                          <p>Date: ${formattedDate}</p>
+                          <p>Time: ${formattedTime}</p>
+                          <p>Description: ${event.desc}</p>
+                          <p>Type: ${event.type}</p>`;
+
+          // Check if the current date is before the submission deadline
+          const currentDate = new Date();
+          if (currentDate <= submissionDeadline) {
+            modalHtml += `<button class="button" id="submit_points_${eventId}">Submit Points</button>`;
+          } else {
+            modalHtml += `<p>The point deadline has passed! Let exec know if there is an error.</p>`;
+          }
+
+          modalHtml += `
+                          <button class="button" id="evtmodalcancel" onclick="reloadCalendarPage()">Cancel</button>
+                      </div>
+                  </div>
               </div>
-            </div>
-          </div>
-          </div>
-          <div class="modal is-hidden" id="pnts_mod_${eventId}">
-          <div class="modal-background"></div>
-          <div class="modal-content">
-            <div class="box">
-              <h2 class="title">Member Attendance Form</h2>
-              <form id="member_attend_${eventId}">
-                <div class="field">
-                  <label class="label">Code Provided in Event</label>
-                  <div class="control">
-                    <input class="input" type="text" id="genevtcode_${eventId}" placeholder="Enter code here" />
+              <div class="modal is-hidden" id="pnts_mod_${eventId}">
+                  <div class="modal-background"></div>
+                  <div class="modal-content">
+                      <div class="box">
+                          <h2 class="title">Member Attendance Form</h2>
+                          <form id="member_attend_${eventId}">
+                              <div class="field">
+                                  <label class="label">Code Provided in Event</label>
+                                  <div class="control">
+                                      <input class="input" type="text" id="genevtcode_${eventId}" placeholder="Enter code here" />
+                                  </div>
+                              </div>
+                              <div class="field is-grouped">
+                                  <div class="control">
+                                      <button class="button" id="pnts_sbt_${eventId}">Submit</button>
+                                  </div>
+                                  <div class="control">
+                                      <button class="button" id="pnts_cncl_${eventId}" onclick="reloadCalendarPage()">Cancel</button>
+                                  </div>
+                              </div>
+                          </form>
+                      </div>
                   </div>
-                </div>
-                <div class="field is-grouped">
-                  <div class="control">
-                    <button class="button" id="pnts_sbt_${eventId}">Submit</button>
-                  </div>
-                  <div class="control">
-                    <button class="button" id="pnts_cncl_${eventId}" onclick="reloadCalendarPage()">Cancel</button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-          `;
+              </div>`;
         }
+
         dayHTML += modalHtml;
         document.querySelector(".calview").innerHTML = dayHTML;
 
