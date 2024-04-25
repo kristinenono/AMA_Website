@@ -931,13 +931,18 @@ function generateCalendarHTML(date, events) {
       });
       const eventTypeClass = event.data.type.toLowerCase().replace(/\s+/g, "-");
 
-      const buttonWidth =
-        eventOnThisDay.length > 1 ? "calc(50% - 5px)" : "100%";
+      let buttonWidth;
+      if (eventOnThisDay.length > 1) {
+        buttonWidth = "calc(50% - 5px)";
+      } else {
+        // Set a minimum width for buttons with only one event
+        const minimumWidth = "100px"; // You can adjust this value as needed
+        buttonWidth = `max(calc(50% - 5px), ${minimumWidth})`;
+      }
 
       dayHtml += `<button class="event ${eventTypeClass}" data-event-id="${event.id}" style="width: ${buttonWidth}; overflow: hidden; text-overflow: ellipsis;" onclick="openEventModal('${event.id}')" title="${event.data.name}">${event.data.name}</button>`;
     });
     dayHtml += `</div></div>`;
-
     calendarHtml += dayHtml;
     dayCellsGenerated++;
 
