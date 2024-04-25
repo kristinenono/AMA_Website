@@ -780,20 +780,34 @@ function openEventModal(eventId, dayHTML, currentAuth) {
         dayHTML += modalHtml;
         document.querySelector(".calview").innerHTML = dayHTML;
 
-        document.getElementById(`submit_points_${eventId}`).addEventListener("click", function () {
-          document.getElementById(`eventModal_${eventId}`).classList.remove("is-active");
-          document.getElementById(`pnts_mod_${eventId}`).classList.remove("is-hidden");
-          document.getElementById(`pnts_mod_${eventId}`).classList.add("is-active");
-        });
+        document
+          .getElementById(`submit_points_${eventId}`)
+          .addEventListener("click", function () {
+            document
+              .getElementById(`eventModal_${eventId}`)
+              .classList.remove("is-active");
+            document
+              .getElementById(`pnts_mod_${eventId}`)
+              .classList.remove("is-hidden");
+            document
+              .getElementById(`pnts_mod_${eventId}`)
+              .classList.add("is-active");
+          });
 
-        document.getElementById(`pnts_sbt_${eventId}`).addEventListener("click", function (e) {
-          e.preventDefault(); // Prevent default form submission behavior
-          submitEventCode(eventId);
-        });
+        document
+          .getElementById(`pnts_sbt_${eventId}`)
+          .addEventListener("click", function (e) {
+            e.preventDefault(); // Prevent default form submission behavior
+            submitEventCode(eventId);
+          });
 
-        document.getElementById(`pnts_cncl_${eventId}`).addEventListener("click", function () {
-          document.getElementById(`pnts_mod_${eventId}`).classList.remove("is-active");
-        });
+        document
+          .getElementById(`pnts_cncl_${eventId}`)
+          .addEventListener("click", function () {
+            document
+              .getElementById(`pnts_mod_${eventId}`)
+              .classList.remove("is-active");
+          });
       } else {
         console.error("No such event found!");
       }
@@ -807,57 +821,72 @@ function submitEventCode(eventId) {
   const eventCodeInput = document.getElementById(`genevtcode_${eventId}`).value;
   const user_email = auth.currentUser.email;
 
-  db.collection("events").doc(eventId).get().then((doc) => {
-    if (doc.exists && doc.data().code === eventCodeInput) {
-      const eventDetails = doc.data();
+  db.collection("events")
+    .doc(eventId)
+    .get()
+    .then((doc) => {
+      if (doc.exists && doc.data().code === eventCodeInput) {
+        const eventDetails = doc.data();
 
-      db.collection("ama_users").where("email", "==", user_email).get().then((userSnapshot) => {
-        if (!userSnapshot.empty) {
-          const userDocRef = userSnapshot.docs[0].ref;
+        db.collection("ama_users")
+          .where("email", "==", user_email)
+          .get()
+          .then((userSnapshot) => {
+            if (!userSnapshot.empty) {
+              const userDocRef = userSnapshot.docs[0].ref;
 
-          // Check if points for this event have already been submitted by this user
-          userDocRef.collection("member_points")
-            .where("code", "==", eventDetails.code)
-            .where("eventId", "==", eventId) // Assuming 'eventId' is stored in the document
-            .get()
-            .then((querySnapshot) => {
-              if (querySnapshot.empty) {
-                // No points have been submitted for this event by this user
-                const memberPointsData = {
-                  code: eventDetails.code,
-                  eventId: eventId, // Store eventId to uniquely identify the event in checks
-                  eventType: eventDetails.type,
-                  pointSemester: eventDetails.semester,
-                  points: parseInt(eventDetails.pts, 10),
-                };
+              // Check if points for this event have already been submitted by this user
+              userDocRef
+                .collection("member_points")
+                .where("code", "==", eventDetails.code)
+                .where("eventId", "==", eventId) // Assuming 'eventId' is stored in the document
+                .get()
+                .then((querySnapshot) => {
+                  if (querySnapshot.empty) {
+                    // No points have been submitted for this event by this user
+                    const memberPointsData = {
+                      code: eventDetails.code,
+                      eventId: eventId, // Store eventId to uniquely identify the event in checks
+                      eventType: eventDetails.type,
+                      pointSemester: eventDetails.semester,
+                      points: parseInt(eventDetails.pts, 10),
+                    };
 
-                userDocRef.collection("member_points").add(memberPointsData)
-                  .then(() => {
-                    alert("Points successfully submitted!");
-                    document.getElementById(`pnts_mod_${eventId}`).classList.remove("is-active");
+                    userDocRef
+                      .collection("member_points")
+                      .add(memberPointsData)
+                      .then(() => {
+                        alert("Points successfully submitted!");
+                        document
+                          .getElementById(`pnts_mod_${eventId}`)
+                          .classList.remove("is-active");
+                        reloadCalendarPage();
+                      })
+                      .catch((error) => {
+                        console.error("Error adding points: ", error);
+                        alert("Failed to submit points. Please try again.");
+                      });
+                  } else {
+                    // Points already submitted for this event by this user
+                    alert("You have already submitted points for this event.");
+                    document
+                      .getElementById(`pnts_mod_${eventId}`)
+                      .classList.remove("is-active");
                     reloadCalendarPage();
-                  })
-                  .catch((error) => {
-                    console.error("Error adding points: ", error);
-                    alert("Failed to submit points. Please try again.");
-                  });
-              } else {
-                // Points already submitted for this event by this user
-                alert("You have already submitted points for this event.");
-                document.getElementById(`pnts_mod_${eventId}`).classList.remove("is-active");
-                reloadCalendarPage();
-              }
-            });
-        } else {
-          alert("No user found with the provided email. Please check and try again.");
-        }
-      });
-    } else {
-      alert("Invalid event code. Please check and try again.");
-    }
-  });
+                  }
+                });
+            } else {
+              alert(
+                "No user found with the provided email. Please check and try again."
+              );
+            }
+          });
+      } else {
+        alert("Invalid event code. Please check and try again.");
+      }
+    });
 }
-        
+
 function generateCalendarHTML(date, events) {
   const totalDays = 42;
   let currentYear = date.getFullYear();
@@ -2433,25 +2462,30 @@ r_e("blog-link").addEventListener("click", () => {
           querySnapshot.forEach((doc) => {
             const post = doc.data();
             const postId = doc.id;
+            let editDeleteHtml = "";
+            if (auth.currentUser.email === "amauwmadison@gmail.com") {
+              editDeleteHtml = `
+                          <footer class="card-footer">
+                              <a href="#" class="card-footer-item" onclick="editPost('${postId}')">Edit</a>
+                              <a href="#" class="card-footer-item" onclick="deletePost('${postId}')">Delete</a>
+                          </footer>`;
+            }
             html += `
-                    <div class="container my-4">
-                      <div class="card" id="${postId}">
-                        <header class="card-header">
-                          <p class="card-header-title">${post.title}</p>
-                        </header>
-                        <div class="card-content">
-                          <div class="content">
-                            ${post.message}
-                            <br><br>
-                            <p class="card-header-subtitle"><span style="font-size: smaller; font-weight: bold;">By: ${post.author} // <time datetime="${post.date}">${post.date}</time></span></p>
+                      <div class="container my-4">
+                          <div class="card" id="${postId}">
+                              <header class="card-header">
+                                  <p class="card-header-title">${post.title}</p>
+                              </header>
+                              <div class="card-content">
+                                  <div class="content">
+                                      ${post.message}
+                                      <br><br>
+                                      <p class="card-header-subtitle"><span style="font-size: smaller; font-weight: bold;">By: ${post.author} // <time datetime="${post.date}">${post.date}</time></span></p>
+                                  </div>
+                              </div>
+                              ${editDeleteHtml}
                           </div>
-                        </div>
-                        <footer class="card-footer">
-                          <a href="#" class="card-footer-item" onclick="editPost('${postId}')">Edit</a>
-                          <a href="#" class="card-footer-item" onclick="deletePost('${postId}')">Delete</a>
-                        </footer>
-                      </div>
-                    </div>`;
+                      </div>`;
           });
           document.querySelector("#all_posts").innerHTML = html;
         })
