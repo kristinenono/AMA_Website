@@ -57,3 +57,53 @@ b. What are you planning to do today?
 Pulling info to cards to db 
 c. Any problems are you facing?
 maybe an issue with points and cal
+
+
+*4/25/204*
+Carly 
+a. What did you do yesterday?
+i worked with debugging 
+b. What are you planning to do today?
+debugging
+c. Any problems are you facing?
+showing undefined when generating calendar and two views showing different
+
+Anvita 
+a. What did you do yesterday?
+points submit button restricted dissapears from member view 2 days after the event happened, blog auth and reset filter button.
+b. What are you planning to do today?
+debug
+c. Any problems are you facing?
+debugging 
+
+
+Wyatt
+a. What did you do yesterday?
+fixed resizing for the photos
+b. What are you planning to do today?
+debugging
+c. Any problems are you facing?
+no
+
+Kristine
+a. What did you do yesterday?
+site dynamics and added functionality to the submit points button, debugging 
+b. What are you planning to do today?
+public viewing of the site and debugging
+c. Any problems are you facing?
+no
+Kieren
+a. What did you do yesterday?
+worked on auth for the blog page and then she figured out how to welcome user
+b. What are you planning to do today?
+debugging
+c. Any problems are you facing?
+no
+
+Grace
+a. What did you do yesterday?
+debugged
+b. What are you planning to do today?
+adding in content, add exit button on edit blog post, add in the security rules and test them
+c. Any problems are you facing?
+index div issue (bug)
