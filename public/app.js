@@ -42,7 +42,7 @@ function manageButtonVisibility() {
               configure_message_bar("Signed Out Successfully!");
             })
             .catch((error) => {
-              console.log(error);
+              console.error("Error Signing Out");
             });
         });
       } else {
@@ -234,7 +234,7 @@ r_e("signout_button").addEventListener("click", () => {
       configure_message_bar("Signed Out Successfully!");
     })
     .catch((error) => {
-      console.log(error);
+      console.error();
     });
 });
 
@@ -642,7 +642,6 @@ function deleteEvent(eventId) {
       .doc(eventId)
       .delete()
       .then(() => {
-        console.log("Event successfully deleted!");
         reloadCalendarPage();
       })
       .catch((error) => {
@@ -660,7 +659,6 @@ function openeditmodal(eventId) {
   openeditmodal(eventId);
 }
 function editEvent(eventId) {
-  console.log(eventId);
   // Assuming you want to get the current year and month
   let currentDate = new Date();
   let currentYear = currentDate.getFullYear();
@@ -1227,7 +1225,7 @@ r_e("calendarbtn").addEventListener("click", () => {
     document.getElementById(
       "yearblock"
     ).textContent = `${currentDate.getFullYear()}`;
-    let addEventForm = r_e("popupmodal");
+    let addEventForm = document.getElementById("popupmodal");
 
     function rightMarginHTML(is_admin) {
       if (is_admin) {
@@ -1377,7 +1375,6 @@ r_e("calendarbtn").addEventListener("click", () => {
         let evtcode = document.querySelector("#codeInput").value;
         // let month = new Date(evttime).getMonth() + 1;
         // let evtyear = new Date(evttime).getFullYear();
-        console.log(evtyear);
 
         if (type === "--select--") {
           alert("Please select an event type.");
@@ -1412,7 +1409,6 @@ r_e("calendarbtn").addEventListener("click", () => {
     } else {
       r_e("ptbtn").addEventListener("click", () => {
         let check_auth = auth.currentUser;
-        console.log("btn clicked");
         if (check_auth == null) {
           // User is not signed in
           signupModal.classList.remove("is-active");
@@ -1521,7 +1517,6 @@ document.querySelector(".pointfooter").addEventListener("click", () => {
 // points page content
 r_e("pointbtn1").addEventListener("click", () => {
   let check_auth = auth.currentUser;
-  console.log("btn clicked");
   if (check_auth == null) {
     // User is not signed in
     signupModal.classList.remove("is-active");
@@ -1942,7 +1937,6 @@ function addContent(isAdmin) {
             document.getElementById("editSemester").value =
               eventData.semester || "";
           } else {
-            console.log("No event found with that code.");
             // Optionally clear fields or alert the user
             clearEventFields(); // Clear fields if no data is found
           }
@@ -2049,7 +2043,6 @@ function addContent(isAdmin) {
           points: points,
         })
         .then(() => {
-          console.log("Points updated successfully");
           fetchAndPopulatePoints(); // Refresh the points table globally or just for the affected semester
           editmodal.classList.remove("is-active");
           clearaddpoints();
@@ -2127,7 +2120,6 @@ function addContent(isAdmin) {
         .doc(pointId)
         .delete()
         .then(() => {
-          console.log("Point deleted successfully");
           fetchMemberPoints(memberId); // Refresh the list after deletion
           fetchAndPopulatePoints();
         });
@@ -2430,7 +2422,6 @@ document.querySelector(".sponsorfooter").addEventListener("click", () => {
 //join button
 r_e("joinbuttonhome").addEventListener("click", () => {
   appendContent(contact_content);
-  console.log("learnbuttonclicked");
 });
 
 // BLOG PAGE
@@ -2608,7 +2599,6 @@ r_e("blog-link").addEventListener("click", () => {
           .doc(postId)
           .delete()
           .then(() => {
-            console.log("Post successfully deleted!");
             show_posts();
           })
           .catch((error) => {
@@ -2669,8 +2659,6 @@ r_e("blog-link").addEventListener("click", () => {
 
           `;
             document.querySelector(`#${postId}`).innerHTML = editForm;
-          } else {
-            console.log("No such document!");
           }
         })
         .catch((error) => {
@@ -2692,7 +2680,6 @@ r_e("blog-link").addEventListener("click", () => {
         .doc(postId)
         .update(editedPost)
         .then(() => {
-          console.log("Post successfully updated!");
           // Reload the posts after updating
           show_posts();
         })
@@ -2721,17 +2708,11 @@ r_e("blog-link").addEventListener("click", () => {
   //check user
   auth.onAuthStateChanged((user) => {
     if (user) {
-      // User is logged in
-      console.log("User email:", user.email);
-
       // Check if the user's email matches
       if (user.email === "amauwmadison@gmail.com") {
         r_e("addPostButton").classList.remove("is-hidden");
       } else {
       }
-    } else {
-      // User is not logged in
-      console.log("User not logged in");
     }
   });
 });
@@ -2826,7 +2807,6 @@ function deletePost(postId) {
       .doc(postId)
       .delete()
       .then(() => {
-        console.log("Post successfully deleted!");
         show_posts();
       })
       .catch((error) => {
@@ -2887,8 +2867,6 @@ function editPost(postId) {
 
           `;
         document.querySelector(`#${postId}`).innerHTML = editForm;
-      } else {
-        console.log("No such document!");
       }
     })
     .catch((error) => {
@@ -2910,7 +2888,6 @@ function saveEdit(postId) {
     .doc(postId)
     .update(editedPost)
     .then(() => {
-      console.log("Post successfully updated!");
       // Reload the posts after updating
       show_posts();
     })
