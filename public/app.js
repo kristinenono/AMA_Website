@@ -1369,6 +1369,12 @@ r_e("calendarbtn").addEventListener("click", () => {
         // let month = new Date(evttime).getMonth() + 1;
         // let evtyear = new Date(evttime).getFullYear();
         console.log(evtyear);
+        
+        if (type === "--select--") {
+          alert("Please select an event type.");
+          return; // Stop the function execution here
+        }
+
         let event = {
           name: name,
           time: time,
