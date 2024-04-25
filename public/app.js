@@ -1264,7 +1264,7 @@ r_e("calendarbtn").addEventListener("click", () => {
           <div class="field">
           <label class="label">Points Assigned</label>
           <div class="control">
-            <input class="input" id = "ptsassigned" type="number" placeholder="5" />
+            <input class="input" id = "ptsassigned" type="number" placeholder="5">
           </div>
           </div>
           <div class="field">
@@ -1363,7 +1363,7 @@ r_e("calendarbtn").addEventListener("click", () => {
         let evtyear = new Date(time).getFullYear();
         let season = month >= 1 && month <= 6 ? "SPRING" : "FALL";
         let type = evttype.value;
-        let pts = ptsassigned.value;
+        let pts = ptsassigned.value ? parseInt(ptsassigned.value, 10) : 0;
         let desc = descriptionevt.value;
         let evtcode = document.querySelector("#codeInput").value;
         // let month = new Date(evttime).getMonth() + 1;
