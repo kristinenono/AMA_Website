@@ -39,6 +39,7 @@ function manageButtonVisibility() {
             .signOut()
             .then(() => {
               window.location.href = "index.html";
+              window.page.reload();
               configure_message_bar("Signed Out Successfully!");
             })
             .catch((error) => {
