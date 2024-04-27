@@ -1292,12 +1292,14 @@ tr:hover {
 
 .contactForm-flex {
   display: flex;
-  align-items: flex-start;
+  justify-content: center; /* Centers children horizontally */
+  align-items: center; /* Centers children vertically */
+  text-align: center; /* Centers text inside the children */
   margin-right: 5%;
   margin-bottom: 3rem;
   margin-left: 5%;
-  text-align: center;
 }
+
 .contactForm-flex .field {
   text-align: left;
 }
@@ -1339,9 +1341,7 @@ textarea.input-field {
   max-height: 240px;
   resize: vertical;
 }
-.contactForm-flex img {
-  margin-left: 20px; /* Add some margin to the left of the image */
-}
+
 .contactForm-flex #name {
   width: calc(100%);
 }
@@ -1386,6 +1386,8 @@ textarea.input-field {
   background-color: var(--secondaryred);
   color: white;
 }
+
+
 /* blog page */
 .blogSection-box {
   width: 75%;
@@ -1434,7 +1436,7 @@ textarea.input-field {
 }
 
 
-/* BLOG PAGE */
+/* ABOUT PAGE */
 
 .aboutContainer {
   display: flex;
@@ -1531,16 +1533,16 @@ textarea.input-field {
   display: block;
 }
 
-#aboutHeaderSection {
-  display: flex;
+#aboutHeaderSection, #aboutHeaderSection2 {
+  flex-direction: row; /* Content side by side by default */
   padding: 30px;
+  align-items: center; /* Align items vertically */
+}
+
+#aboutHeaderSection{
   background-color: white;
 }
-#aboutHeaderSection2 {
-  display: flex;
-  padding: 30px;
-  padding-top: 40px;
-}
+
 .membership-info {
   flex: 1; /* Let the membership information take up the remaining space */
 }
@@ -1564,12 +1566,14 @@ textarea.input-field {
 }
 #speakerEventImg {
   width: 45%;
-  margin-right: 180px;
   margin-top: 20px;
+  margin: 5%;
 }
+
 #execImage {
-  margin-left: 180px;
+  margin-left: 5%;
   margin-top: 60px;
+  width: 45%;
 }
 
 .grid-list {
@@ -1594,7 +1598,6 @@ textarea.input-field {
     width: 100%;
   }
 }
-/* Adjust the padding and margin of the service-card and its content */
 
 /* Reduce the font size and spacing of the card content */
 .service-card .card-content {
