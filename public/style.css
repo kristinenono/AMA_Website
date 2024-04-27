@@ -1433,6 +1433,9 @@ textarea.input-field {
   padding-top: 5%;
 }
 
+
+/* BLOG PAGE */
+
 .aboutContainer {
   display: flex;
   flex-wrap: wrap;
@@ -1470,8 +1473,7 @@ textarea.input-field {
   color: var(--bodyTextColorWhite);
 }
 .aboutCardContent {
-  flex: 1;
-  text-align: center;
+  text-align: center; /* Center text for content */
 }
 * {
   margin: 0;
@@ -1482,10 +1484,11 @@ textarea.input-field {
 /* Center the text within the card */
 
 .aboutCardTxt-flex {
-  flex: 1;
-  margin-bottom: 3rem;
-  text-align: center;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center; /* Align items to center horizontally */
+  margin-bottom: 20px; /* Add space between elements */
 }
+
 .aboutCardImg {
   text-align: center;
 }
@@ -1523,6 +1526,11 @@ textarea.input-field {
   color: var(--secondaryred);
   font-size: 2rem;
 }
+.aboutCardHeader, .aboutCardImg {
+  margin: 0 auto; /* Center header and icons */
+  display: block;
+}
+
 #aboutHeaderSection {
   display: flex;
   padding: 30px;
@@ -1592,22 +1600,15 @@ textarea.input-field {
 .service-card .card-content {
   display: flex;
   flex-direction: column;
-  font-size: 14px;
-  line-height: 1.4;
   justify-content: center;
-  text-align: center;
+  text-align: center; /* Ensure all text is centered */
 }
+
 .service-card .card-content .aboutCardContent {
   order: -1; /* Move the image to the top */
   text-align: center;
 }
 
-/* Make adjustments for smaller screens */
-@media screen and (max-width: 768px) {
-  .service-card {
-    width: calc(50% - 20px); /* Two items per row with some spacing */
-  }
-}
 /* For the last item in each row, remove the right margin to prevent overflow */
 .grid-list li:nth-child(2n) {
   margin-right: 0;
