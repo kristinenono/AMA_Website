@@ -130,9 +130,9 @@ function r_e(id) {
     return null; // Return null to prevent further execution and clearer debugging
   }
   const element = document.querySelector(`#${id}`);
-  if (!element) {
-    console.error("No element found with ID:", id);
-  }
+  // if (!element) {
+  //   console.error("No element found with ID:", id);
+  // }
   return element;
 }
 
