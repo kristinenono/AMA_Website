@@ -1390,11 +1390,11 @@ textarea.input-field {
 /* blog page */
 #prevButton {
   margin-left: 35px;
-  margin-bottom: 35px;
+  margin-bottom: 25px;
 }
 #nextButton {
   margin-right: 35px;
-  margin-bottom: 35px;
+  margin-bottom: 25px;
 }
 .blogSection-box {
   width: 75%;
@@ -1441,10 +1441,6 @@ textarea.input-field {
 
 #foot_right {
   padding-top: 5%;
-}
-
-.postmessage {
-  white-space: pre-wrap;
 }
 
 /* ABOUT PAGE */
