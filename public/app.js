@@ -295,12 +295,16 @@ document
 let signup_cancel = document.querySelector("#signup_cancel");
 signup_cancel.addEventListener("click", () => {
   r_e("signmodal").classList.remove("is-active");
+  r_e("sign_form").reset();
+  r_e("signup_error").innerHTML = "";
   r_e("home-link").click();
   window.location.reload();
 });
 let log_cancel = document.querySelector("#log_cancel");
 log_cancel.addEventListener("click", () => {
+  r_e("log_form").reset();
   loginModal.classList.remove("is-active");
+  r_e("log_error").innerHTML = "";
 });
 
 r_e("user_found").addEventListener("click", () => {
