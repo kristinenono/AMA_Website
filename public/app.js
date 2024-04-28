@@ -909,7 +909,7 @@ function openEventModal(eventId, dayHTML, currentAuth) {
       }
     })
     .catch((error) => {
-      console.error("Error getting event details: ", error);
+      // console.error("Error getting event details: ", error);
     });
 }
 
