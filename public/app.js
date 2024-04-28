@@ -385,6 +385,9 @@ r_e("home-link").addEventListener("click", () => {
   window.location.reload();
 });
 
+
+
+// ABOUT PAGE
 let abt_content = `      <div id="contactSectionTop" class="contactSection-box contactTopFormat">
 <h2 class="primaryheader">More About Us</h2>
 <div class="social-icons-container">
@@ -603,7 +606,7 @@ let abt_content = `      <div id="contactSectionTop" class="contactSection-box c
 </div>
 </div>`;
 
-//about page
+
 r_e("abt-link").addEventListener("click", () => {
   appendContent(abt_content);
 });
@@ -612,11 +615,13 @@ document.querySelector(".aboutfooter").addEventListener("click", () => {
   r_e("abt-link").click();
 });
 
+
+// CALENDAR PAGE
 const calendarView = document.querySelector(".calview");
-const monthSelect = r_e("month-select");
+const monthSelect = document.querySelector("#month-select");
 const prevMonthBtn = document.querySelector(".action_left");
 const nextMonthBtn = document.querySelector(".action_right");
-const yearblock = r_e("yearblock");
+const yearblock = document.querySelector("#yearblock");
 const monthNames = [
   "January",
   "February",
@@ -1515,7 +1520,7 @@ document.querySelector(".pointfooter").addEventListener("click", () => {
   r_e("pointbtn1").click();
 });
 
-// points page content
+// POINTS PAGE
 r_e("pointbtn1").addEventListener("click", () => {
   let check_auth = auth.currentUser;
   if (check_auth == null) {
@@ -2311,7 +2316,7 @@ function addContent(isAdmin) {
   }
 }
 
-// contact page content
+// CONTACT PAGE
 let contact_content = `<div id="contactSectionTop" class="contactSection-box contactTopFormat">
 <h2 class="primaryheader">Let's get in touch.</h2>
 
