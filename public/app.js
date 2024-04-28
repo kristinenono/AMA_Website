@@ -2195,7 +2195,10 @@ function addContent(isAdmin) {
       showmodal.classList.remove("is-active");
     });
   } else {
-    let points_content = `<div class="columns is-centered mt-4">
+    let points_content = `
+    <div class="welcome is-size-3 has-text-centered">
+    </div>
+    <div class="columns is-centered mt-4">
     <div class="column pr-outer">
         <div class="card px-4 py-3 has-text-centered" event-type="volunteer">
             <header class="card-header">
@@ -2297,6 +2300,8 @@ function addContent(isAdmin) {
       .then((usersSnapshot) => {
         if (!usersSnapshot.empty) {
           let userDoc = usersSnapshot.docs[0];
+          let userData = userDoc.data();
+          let fullName = userData.full_name;
 
           userDoc.ref
             .collection("member_points")
@@ -2310,6 +2315,13 @@ function addContent(isAdmin) {
                   memberTotalPoints[eventType] += points;
                 }
               });
+              const firstPointDoc = pointsSnapshot.docs[0];
+              const semester = firstPointDoc
+                ? firstPointDoc.get("pointSemester").toLowerCase()
+                : "Unknown";
+
+              let welcomeDiv = document.querySelector(".welcome");
+              welcomeDiv.innerHTML = `Welcome ${fullName}! Here is your point summary for the ${semester} semester.`;
 
               // After all data is aggregated, update the UI
               updateCardsWithPoints(memberTotalPoints);
