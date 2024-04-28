@@ -385,8 +385,6 @@ r_e("home-link").addEventListener("click", () => {
   window.location.reload();
 });
 
-
-
 // ABOUT PAGE
 let abt_content = `      <div id="contactSectionTop" class="contactSection-box contactTopFormat">
 <h2 class="primaryheader">More About Us</h2>
@@ -606,7 +604,6 @@ let abt_content = `      <div id="contactSectionTop" class="contactSection-box c
 </div>
 </div>`;
 
-
 r_e("abt-link").addEventListener("click", () => {
   appendContent(abt_content);
 });
@@ -614,7 +611,6 @@ r_e("abt-link").addEventListener("click", () => {
 document.querySelector(".aboutfooter").addEventListener("click", () => {
   r_e("abt-link").click();
 });
-
 
 // CALENDAR PAGE
 const calendarView = document.querySelector(".calview");
@@ -2503,7 +2499,7 @@ document.querySelector(".blogfooter").addEventListener("click", () => {
   r_e("blog-link").click();
 });
 
-// Blog page content
+// BLOG PAGE
 r_e("blog-link").addEventListener("click", () => {
   appendContent(blog_content);
 
@@ -2535,6 +2531,23 @@ r_e("blog-link").addEventListener("click", () => {
       }
     };
 
+    let check_auth = auth.currentUser;
+    if (check_auth != null) {
+      appendContent(blog_content);
+    }
+    r_e("addPostButton").classList.add("is-hidden");
+
+    //check user
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        // Check if the user's email matches
+        if (user.email === "amauwmadison@gmail.com") {
+          r_e("addPostButton").classList.remove("is-hidden");
+        } else {
+        }
+      }
+    });
+
     // Handle form submission
     document.querySelector("#submitPost").addEventListener("click", () => {
       // construct the post object
@@ -2556,222 +2569,9 @@ r_e("blog-link").addEventListener("click", () => {
           console.error("Error adding post: ", error);
         });
     });
-
-    // Function to show all posts
-    function show_posts() {
-      db.collection("allPosts")
-        .get()
-        .then((querySnapshot) => {
-          let html = "";
-          querySnapshot.forEach((doc) => {
-            const post = doc.data();
-            const postId = doc.id;
-            let editDeleteHtml = "";
-            if (
-              auth.currentUser &&
-              auth.currentUser.email === "amauwmadison@gmail.com"
-            ) {
-              // User is authenticated and is "ama exec"
-              editDeleteHtml = `
-                <footer class="card-footer">
-                  <a href="#" class="card-footer-item" onclick="editPost('${postId}')">Edit</a>
-                  <a href="#" class="card-footer-item" onclick="deletePost('${postId}')">Delete</a>
-                </footer>`;
-            }
-            html += `
-              <div class="container my-4">
-                <div class="card" id="${postId}">
-                  <header class="card-header">
-                    <p class="card-header-title">${post.title}</p>
-                  </header>
-                  <div class="card-content">
-                    <div class="content">
-                      ${post.message}
-                      <br><br>
-                      <p class="card-header-subtitle"><span style="font-size: smaller; font-weight: bold;">By: ${post.author} // <time datetime="${post.date}">${post.date}</time></span></p>
-                    </div>
-                  </div>
-                  ${editDeleteHtml}
-                </div>
-              </div>`;
-          });
-          document.querySelector("#all_posts").innerHTML = html;
-        })
-        .catch((error) => {
-          console.error("Error getting posts: ", error);
-        });
-    }
-
-    // Function to delete a post
-    function deletePost(postId) {
-      if (confirm("Are you sure you want to delete this post?")) {
-        db.collection("allPosts")
-          .doc(postId)
-          .delete()
-          .then(() => {
-            show_posts();
-          })
-          .catch((error) => {
-            console.error("Error removing post: ", error);
-          });
-      }
-    }
-
-    // Function to edit a post
-    function editPost(postId) {
-      // Retrieve the post data from Firestore using the postId
-      db.collection("allPosts")
-        .doc(postId)
-        .get()
-        .then((doc) => {
-          if (doc.exists) {
-            const post = doc.data();
-            // Populate the form fields with the retrieved post data
-            document.querySelector("#title").value = post.title;
-            document.querySelector("#message").value = post.message;
-            document.querySelector("#author").value = post.author;
-            document.querySelector("#date").value = post.date;
-
-            // Display a form with input fields for editing
-            const editForm = `
-            <div class="box">
-              <h2 class="card-header-title is-centered is-2 mt-0" style="font-size: larger;">Edit Post</h2>
-<div class="field">
-  <label class="label">Title</label>
-  <div class="control">
-    <input class="input" type="text" id="edit_title" value="${post.title}" />
-  </div>
-</div>
-<div class="field">
-  <label class="label">Message</label>
-  <div class="control">
-    <textarea class="textarea" type="text" id="edit_message" value="${post.message}"></textarea>
-
-  </div>
-</div>
-<div class="field">
-  <label class="label">Author</label>
-  <div class="control">
-    <input class="input" type="text" id="edit_author" value="${post.author}" />
-</div>
-<div class="field">
-  <label class="label">Date</label>
-  <div class="control">
-    <input class="input" type="date" id="edit_date" value="${post.date}" />
-  </div>
-</div>
-<div class="field is-grouped">
-  <div class="control">
-    <button class="addPostBtn" onclick="saveEdit('${postId}')">Save</button>
-  </div>
-</div>
-</div>
-
-          `;
-            document.querySelector(`#${postId}`).innerHTML = editForm;
-          }
-        })
-        .catch((error) => {
-          console.error("Error getting document:", error);
-        });
-    }
-
-    // Function to save edited post
-    function saveEdit(postId) {
-      const editedPost = {
-        title: document.querySelector("#edit_title").value,
-        message: document.querySelector("#edit_message").value,
-        author: document.querySelector("#edit_author").value,
-        date: document.querySelector("#edit_date").value,
-      };
-
-      // Update the post in Firestore
-      db.collection("allPosts")
-        .doc(postId)
-        .update(editedPost)
-        .then(() => {
-          // Reload the posts after updating
-          show_posts();
-        })
-        .catch((error) => {
-          console.error("Error updating post:", error);
-        });
-    }
-
     // Call the function to display existing posts when the page loads
     show_posts();
   }, 0);
-
-  let check_auth = auth.currentUser;
-  if (check_auth == null) {
-    signup_modal.classList.add("is-active");
-  }
-  if (check_auth != null) {
-    appendContent(blog_content);
-  }
-});
-
-// NOTE FOR THIS CODE. THERE ARE 2 R_E("BLOG-LINKS")
-r_e("blog-link").addEventListener("click", () => {
-  r_e("addPostButton").classList.add("is-hidden");
-
-  //check user
-  auth.onAuthStateChanged((user) => {
-    if (user) {
-      // Check if the user's email matches
-      if (user.email === "amauwmadison@gmail.com") {
-        r_e("addPostButton").classList.remove("is-hidden");
-      } else {
-      }
-    }
-  });
-});
-
-// Get the modal
-let modal = document.getElementById("#addPostForm");
-
-// Get the button that opens the modal
-let btn = document.getElementById("addPostButton");
-// When the user clicks the button, open the modal
-btn.onclick = function () {
-  modal.classList.add("is-active");
-};
-
-// Get the <span> element that closes the modal
-let span = modal.querySelector(".modal-close");
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function () {
-  modal.classList.remove("is-active");
-};
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function (event) {
-  if (event.target == modal) {
-    modal.classList.remove("is-active");
-  }
-};
-
-// Handle form submission
-document.querySelector("#submitPost").addEventListener("click", () => {
-  // construct the post object
-  let post = {
-    title: document.querySelector("#title").value,
-    message: document.querySelector("#message").value,
-    author: document.querySelector("#author").value,
-    date: document.querySelector("#date").value,
-  };
-
-  // store the post object into the Firestore collection "allPosts"
-  db.collection("allPosts")
-    .add(post)
-    .then(() => {
-      alert("Post added");
-      modal.classList.remove("is-active"); // Hide the modal after successful submission
-    })
-    .catch((error) => {
-      console.error("Error adding post: ", error);
-    });
 });
 
 // Function to show all posts
@@ -2783,46 +2583,40 @@ function show_posts() {
       querySnapshot.forEach((doc) => {
         const post = doc.data();
         const postId = doc.id;
+        let editDeleteHtml = "";
+        if (
+          auth.currentUser &&
+          auth.currentUser.email === "amauwmadison@gmail.com"
+        ) {
+          // User is authenticated and is "ama exec"
+          editDeleteHtml = `
+            <footer class="card-footer">
+              <a href="#" class="card-footer-item" onclick="editPost('${postId}')">Edit</a>
+              <a href="#" class="card-footer-item" onclick="deletePost('${postId}')">Delete</a>
+            </footer>`;
+        }
         html += `
-                    <div class="container my-4">
-                      <div class="card" id="${postId}">
-                        <header class="card-header">
-                          <p class="card-header-title">${post.title}</p>
-                        </header>
-                        <div class="card-content">
-                          <div class="content">
-                            ${post.message}
-                            <br><br>
-                            <p class="card-header-subtitle"><span style="font-size: smaller; font-weight: bold;">By: ${post.author} // <time datetime="${post.date}">${post.date}</time></span></p>
-                          </div>
-                        </div>
-                        <footer class="card-footer">
-                          <a href="#" class="card-footer-item" onclick="editPost('${postId}')">Edit</a>
-                          <a href="#" class="card-footer-item" onclick="deletePost('${postId}')">Delete</a>
-                        </footer>
-                      </div>
-                    </div>`;
+          <div class="container my-4">
+            <div class="card" id="${postId}">
+              <header class="card-header">
+                <p class="card-header-title">${post.title}</p>
+              </header>
+              <div class="card-content">
+                <div class="content">
+                  ${post.message}
+                  <br><br>
+                  <p class="card-header-subtitle"><span style="font-size: smaller; font-weight: bold;">By: ${post.author} // <time datetime="${post.date}">${post.date}</time></span></p>
+                </div>
+              </div>
+              ${editDeleteHtml}
+            </div>
+          </div>`;
       });
       document.querySelector("#all_posts").innerHTML = html;
     })
     .catch((error) => {
       console.error("Error getting posts: ", error);
     });
-}
-
-// Function to delete a post
-function deletePost(postId) {
-  if (confirm("Are you sure you want to delete this post?")) {
-    db.collection("allPosts")
-      .doc(postId)
-      .delete()
-      .then(() => {
-        show_posts();
-      })
-      .catch((error) => {
-        console.error("Error removing post: ", error);
-      });
-  }
 }
 
 // Function to edit a post
@@ -2842,46 +2636,61 @@ function editPost(postId) {
 
         // Display a form with input fields for editing
         const editForm = `
-            <div class="box">
-              <h2 class="card-header-title is-centered is-2 mt-0" style="font-size: larger;">Edit Post</h2>
-<div class="field">
-  <label class="label">Title</label>
-  <div class="control">
-    <input class="input" type="text" id="edit_title" value="${post.title}" />
-  </div>
-</div>
-<div class="field">
-  <label class="label">Message</label>
-  <div class="control">
-    <textarea class="textarea" type="text" id="edit_message" value="${post.message}"></textarea>
-
-  </div>
-</div>
-<div class="field">
-  <label class="label">Author</label>
-  <div class="control">
-    <input class="input" type="text" id="edit_author" value="${post.author}" />
-</div>
-<div class="field">
-  <label class="label">Date</label>
-  <div class="control">
-    <input class="input" type="date" id="edit_date" value="${post.date}" />
-  </div>
-</div>
-<div class="field is-grouped">
-  <div class="control">
-    <button class="addPostBtn" onclick="saveEdit('${postId}')">Save</button>
-  </div>
-</div>
-</div>
-
-          `;
+                <div class="box">
+                  <h2 class="card-header-title is-centered is-2 mt-0" style="font-size: larger;">Edit Post</h2>
+    <div class="field">
+      <label class="label">Title</label>
+      <div class="control">
+        <input class="input" type="text" id="edit_title" value="${post.title}" />
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Message</label>
+      <div class="control">
+        <textarea class="textarea" type="text" id="edit_message" value="${post.message}"></textarea>
+    
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Author</label>
+      <div class="control">
+        <input class="input" type="text" id="edit_author" value="${post.author}" />
+    </div>
+    <div class="field">
+      <label class="label">Date</label>
+      <div class="control">
+        <input class="input" type="date" id="edit_date" value="${post.date}" />
+      </div>
+    </div>
+    <div class="field is-grouped">
+      <div class="control">
+        <button class="addPostBtn" onclick="saveEdit('${postId}')">Save</button>
+      </div>
+    </div>
+    </div>
+    
+              `;
         document.querySelector(`#${postId}`).innerHTML = editForm;
       }
     })
     .catch((error) => {
       console.error("Error getting document:", error);
     });
+}
+
+// Function to delete a post
+function deletePost(postId) {
+  if (confirm("Are you sure you want to delete this post?")) {
+    db.collection("allPosts")
+      .doc(postId)
+      .delete()
+      .then(() => {
+        show_posts();
+      })
+      .catch((error) => {
+        console.error("Error removing post: ", error);
+      });
+  }
 }
 
 // Function to save edited post
@@ -2906,13 +2715,9 @@ function saveEdit(postId) {
     });
 }
 
-//
-// Call the function to display existing posts when the page loads
-show_posts();
-
 // expand burger
-let burger_stack = documentquerySelector("#burger_stack");
-let burger_menu = document.q.uerySelector("#burger_menu");
+let burger_stack = document.querySelector("#burger_stack");
+let burger_menu = document.querySelector("#burger_menu");
 let home_burger = document.querySelector("#home-link");
 let about_burger = document.querySelector("#abt-link");
 let members_burger = document.querySelector("#members-link");
