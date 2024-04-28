@@ -107,3 +107,15 @@ b. What are you planning to do today?
 adding in content, add exit button on edit blog post, add in the security rules and test them
 c. Any problems are you facing?
 index div issue (bug)
+
+
+**Sprint Review**
+a. What did you learn from doing our first sprint?
+b. What did go well? Why?
+c. What didn’t go well? Why not?
+d. How can you make things better next time?
+e. Are you satisfied with what you already completed?
+f. Which group was invited? What are your observations/notes? Everybody was present?
+
+group 8 -- everyone was present 
+
