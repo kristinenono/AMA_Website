@@ -1663,7 +1663,8 @@ function addContent(isAdmin) {
   <div id="addshowbtn" class="container editsavecancel is-hidden">
     <button id="addedit" class="bluebtn pointbtn">Add Points</button>
     <button id="showedit" class="redbtn pointbtn">Show Points</button>
-  </div>              
+  </div>
+  <div class="table-container">
   <table class="table is-bordered">
       <thead>
         <tr>
@@ -1682,7 +1683,8 @@ function addContent(isAdmin) {
   class="p-4 m-3">
   <!-- Table rows will be dynamically added here -->
 </tbody>
-</table>`;
+</table>
+  </div>`;
     appendContent(points_content);
     listenForMemberPointsUpdates();
 
