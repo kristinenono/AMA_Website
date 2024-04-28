@@ -110,12 +110,22 @@ index div issue (bug)
 
 
 **Sprint Review**
-a. What did you learn from doing our first sprint?
-b. What did go well? Why?
-c. What didn’t go well? Why not?
-d. How can you make things better next time?
-e. Are you satisfied with what you already completed?
-f. Which group was invited? What are your observations/notes? Everybody was present?
+a. What did you learn from doing our second sprint?
+We were pretty good at delegating work last time but did better at being functional and doing it in a normal time frame. 
 
+b. What did go well? Why?
+We were able to help each other out more in this sprint. The calendar and subcollection were large improvements to our project. 
+
+c. What didn’t go well? Why not?
+Some of the problems we had were with console errors and how to deal with them in the background - has been resolved
+
+d. How can you make things better next time?
+Continue to open up the work for other people and communicate with each other for help, commenting out lines of code 
+
+e. Are you satisfied with what you already completed?
+yes! We feel like we only have little bugs to fix but are pretty much done!
+
+f. Which group was invited? What are your observations/notes? Everybody was present?
 group 8 -- everyone was present 
+they were very good at communicating and talking through what they could have improved on and where they made a lot of improvements in the form of more in person meetings. They discussed how the calendar was difficult but how they troubleshooted it. 
 
