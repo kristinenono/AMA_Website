@@ -185,7 +185,8 @@ r_e("sign_form").addEventListener("submit", (e) => {
       r_e("signup_error").innerHTML = "";
     })
     .catch((err) => {
-      r_e("signup_error").innerHTML = "The credentials inputted is already in use.";
+      r_e("signup_error").innerHTML =
+        "The credentials inputted is already in use.";
     });
 });
 
@@ -223,7 +224,8 @@ r_e("log_form").addEventListener("submit", (e) => {
       r_e("log_error").innerHTML = "";
     })
     .catch((err) => {
-      r_e("log_error").innerHTML = "The email or password you entered is incorrect.";
+      r_e("log_error").innerHTML =
+        "The email or password you entered is incorrect.";
     });
 });
 
@@ -1089,7 +1091,7 @@ function fetchEventsAndGenerateCalendarHTML(date) {
       document.querySelector(".calview").innerHTML = calendarHtml;
     })
     .catch((error) => {
-      console.error("Error getting events: ", error);
+      // console.error("Error getting events: ", error);
     });
 }
 
@@ -1711,7 +1713,7 @@ function addContent(isAdmin) {
           const memberTotalPoints = {};
           const memberPointsPromises = [];
 
-          members.forEach(member => {
+          members.forEach((member) => {
             const fullName = member.fullName;
             memberTotalPoints[fullName] = {
               volunteer: 0,
@@ -1921,9 +1923,11 @@ function addContent(isAdmin) {
             members.push({ id: doc.id, fullName: doc.data().full_name });
           });
           // Sort members alphabetically by full name
-          members.sort((a, b) => a.fullName.toLowerCase().localeCompare(b.fullName.toLowerCase()));
-    
-          members.forEach(member => {
+          members.sort((a, b) =>
+            a.fullName.toLowerCase().localeCompare(b.fullName.toLowerCase())
+          );
+
+          members.forEach((member) => {
             const option = document.createElement("option");
             option.value = member.id;
             option.textContent = member.fullName;
@@ -1980,34 +1984,36 @@ function addContent(isAdmin) {
     function populateShowMemberDropdown(callback) {
       const select = document.getElementById("showMemberSelect");
       select.innerHTML = ""; // Clear existing options
-    
+
       db.collection("ama_users")
         .get()
         .then((snapshot) => {
           const members = [];
-    
+
           snapshot.forEach((doc) => {
             // Collect all members
             members.push({
               id: doc.id,
-              fullName: doc.data().full_name
+              fullName: doc.data().full_name,
             });
           });
-    
+
           // Sort members alphabetically by full name, case-insensitive
-          members.sort((a, b) => a.fullName.toLowerCase().localeCompare(b.fullName.toLowerCase()));
-    
+          members.sort((a, b) =>
+            a.fullName.toLowerCase().localeCompare(b.fullName.toLowerCase())
+          );
+
           // Populate the dropdown with sorted members
-          members.forEach(member => {
+          members.forEach((member) => {
             const option = document.createElement("option");
             option.value = member.id;
             option.textContent = member.fullName;
             select.appendChild(option);
           });
-    
+
           // Call the callback function if provided
           if (callback) callback();
-    
+
           // Attach change event listener to select
           select.addEventListener("change", () => {
             if (select.selectedIndex >= 0) {
@@ -2697,7 +2703,7 @@ function showCurrentPagePosts() {
       updatePaginationButtons(totalPosts);
     })
     .catch((error) => {
-      console.error("Error getting posts: ", error);
+      // console.error("Error getting posts: ", error);
     });
 }
 
