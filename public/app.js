@@ -1984,29 +1984,46 @@ function addContent(isAdmin) {
     function populateShowMemberDropdown(callback) {
       const select = document.getElementById("showMemberSelect");
       select.innerHTML = ""; // Clear existing options
+    
       db.collection("ama_users")
         .get()
         .then((snapshot) => {
           const members = [];
+    
           snapshot.forEach((doc) => {
-            members.push({ id: doc.id, fullName: doc.data().full_name });
+            // Collect all members
+            members.push({
+              id: doc.id,
+              fullName: doc.data().full_name
+            });
           });
-          // Sort members alphabetically by full name
+    
+          // Sort members alphabetically by full name, case-insensitive
           members.sort((a, b) => a.fullName.toLowerCase().localeCompare(b.fullName.toLowerCase()));
     
+          // Populate the dropdown with sorted members
           members.forEach(member => {
             const option = document.createElement("option");
             option.value = member.id;
             option.textContent = member.fullName;
             select.appendChild(option);
           });
-          if (callback) callback(); // Execute callback after options are populated
+    
+          // Call the callback function if provided
+          if (callback) callback();
+    
+          // Attach change event listener to select
+          select.addEventListener("change", () => {
+            if (select.selectedIndex >= 0) {
+              setupRealTimePointsListener(select.value); // Setup real-time listener for the selected user
+            }
+          });
         })
         .catch((error) => {
           console.error("Error fetching members: ", error);
         });
     }
-    
+
 
     function setupRealTimePointsListener(memberId) {
       const tbody = document.getElementById("memberPointsList");
