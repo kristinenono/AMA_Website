@@ -2721,25 +2721,3 @@ function saveEdit(postId) {
       console.error("Error updating post:", error);
     });
 }
-
-// expand burger
-let burger_stack = document.querySelector("#burger_stack");
-let burger_menu = document.querySelector("#burger_menu");
-let home_burger = document.querySelector("#home-link");
-let about_burger = document.querySelector("#abt-link");
-let members_burger = document.querySelector("#members-link");
-let blog_burger = document.querySelector("#blog-link");
-let contact_burger = document.querySelector("#contact-link");
-function expand_burger() {
-  burger_menu.classList.toggle("is-active");
-  burger_menu.classList.toggle("has-background-light");
-  burger_stack.classList.toggle("is-active");
-  home_burger.classList.toggle("has-text-light");
-  about_burger.classList.toggle("has-text-light");
-  members_burger.classList.toggle("has-text-light");
-  blog_burger.classList.toggle("has-text-light");
-  contact_burger.classList.toggle("has-text-light");
-}
-burger_stack.addEventListener("click", expand_burger);
-
-// store info from form into db
