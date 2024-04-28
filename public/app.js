@@ -185,7 +185,7 @@ r_e("sign_form").addEventListener("submit", (e) => {
       r_e("signup_error").innerHTML = "";
     })
     .catch((err) => {
-      r_e("signup_error").innerHTML = err.message;
+      r_e("signup_error").innerHTML = "The credentials inputted is already in use.";
     });
 });
 
@@ -223,7 +223,7 @@ r_e("log_form").addEventListener("submit", (e) => {
       r_e("log_error").innerHTML = "";
     })
     .catch((err) => {
-      r_e("log_error").innerHTML = err.message;
+      r_e("log_error").innerHTML = "The email or password you entered is incorrect.";
     });
 });
 
@@ -1696,11 +1696,23 @@ function addContent(isAdmin) {
       db.collection("ama_users")
         .get()
         .then((userSnapshot) => {
+          let members = [];
+          userSnapshot.forEach((userDoc) => {
+            members.push({
+              id: userDoc.id,
+              fullName: userDoc.data().full_name,
+            });
+          });
+          // Sort alphabetically, case-insensitive
+          members.sort((a, b) =>
+            a.fullName.toLowerCase().localeCompare(b.fullName.toLowerCase())
+          );
+
           const memberTotalPoints = {};
           const memberPointsPromises = [];
 
-          userSnapshot.forEach((userDoc) => {
-            const fullName = userDoc.data().full_name;
+          members.forEach(member => {
+            const fullName = member.fullName;
             memberTotalPoints[fullName] = {
               volunteer: 0,
               professional_development: 0,
@@ -1710,7 +1722,7 @@ function addContent(isAdmin) {
             };
             const pointsPromise = db
               .collection("ama_users")
-              .doc(userDoc.id)
+              .doc(member.id)
               .collection("member_points")
               .where("pointSemester", "==", selectedSemester)
               .get()
@@ -1904,11 +1916,17 @@ function addContent(isAdmin) {
       db.collection("ama_users")
         .get()
         .then((snapshot) => {
+          const members = [];
           snapshot.forEach((doc) => {
-            const fullName = doc.data().full_name;
+            members.push({ id: doc.id, fullName: doc.data().full_name });
+          });
+          // Sort members alphabetically by full name
+          members.sort((a, b) => a.fullName.toLowerCase().localeCompare(b.fullName.toLowerCase()));
+    
+          members.forEach(member => {
             const option = document.createElement("option");
-            option.value = doc.id; // Use user's document ID as value
-            option.textContent = fullName;
+            option.value = member.id;
+            option.textContent = member.fullName;
             select.appendChild(option);
           });
         })
@@ -1962,28 +1980,44 @@ function addContent(isAdmin) {
     function populateShowMemberDropdown(callback) {
       const select = document.getElementById("showMemberSelect");
       select.innerHTML = ""; // Clear existing options
+    
       db.collection("ama_users")
         .get()
         .then((snapshot) => {
+          const members = [];
+    
           snapshot.forEach((doc) => {
-            const fullName = doc.data().full_name;
+            // Collect all members
+            members.push({
+              id: doc.id,
+              fullName: doc.data().full_name
+            });
+          });
+    
+          // Sort members alphabetically by full name, case-insensitive
+          members.sort((a, b) => a.fullName.toLowerCase().localeCompare(b.fullName.toLowerCase()));
+    
+          // Populate the dropdown with sorted members
+          members.forEach(member => {
             const option = document.createElement("option");
-            option.value = doc.id;
-            option.textContent = fullName;
+            option.value = member.id;
+            option.textContent = member.fullName;
             select.appendChild(option);
           });
-          callback(); // Execute callback after options are populated
+    
+          // Call the callback function if provided
+          if (callback) callback();
+    
+          // Attach change event listener to select
+          select.addEventListener("change", () => {
+            if (select.selectedIndex >= 0) {
+              setupRealTimePointsListener(select.value); // Setup real-time listener for the selected user
+            }
+          });
         })
         .catch((error) => {
           console.error("Error fetching members: ", error);
         });
-
-      // Update listener setup when the selected option changes
-      select.addEventListener("change", () => {
-        if (select.selectedIndex >= 0) {
-          setupRealTimePointsListener(select.value); // Setup real-time listener for the new user
-        }
-      });
     }
 
     function setupRealTimePointsListener(memberId) {
