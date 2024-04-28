@@ -2503,76 +2503,83 @@ document.querySelector(".blogfooter").addEventListener("click", () => {
 r_e("blog-link").addEventListener("click", () => {
   appendContent(blog_content);
 
-  // Wait for the content to be appended to the DOM
+  // Delay for content to be appended to the DOM
   setTimeout(() => {
-    // Get the modal
-    var modal = document.getElementById("addPostForm");
-
-    // Get the button that opens the modal
-    var btn = document.getElementById("addPostButton");
-
-    // Get the <span> element that closes the modal
-    var span = modal.querySelector(".modal-close");
-
-    // When the user clicks the button, open the modal
-    btn.onclick = function () {
-      modal.classList.add("is-active");
-    };
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function () {
-      modal.classList.remove("is-active");
-    };
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
-      if (event.target == modal) {
-        modal.classList.remove("is-active");
-      }
-    };
-
-    let check_auth = auth.currentUser;
-    if (check_auth != null) {
-      appendContent(blog_content);
-    }
-    r_e("addPostButton").classList.add("is-hidden");
-
-    //check user
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        // Check if the user's email matches
-        if (user.email === "amauwmadison@gmail.com") {
-          r_e("addPostButton").classList.remove("is-hidden");
-        } else {
-        }
-      }
-    });
-
-    // Handle form submission
-    document.querySelector("#submitPost").addEventListener("click", () => {
-      // construct the post object
-      let post = {
-        title: document.querySelector("#title").value,
-        message: document.querySelector("#message").value,
-        author: document.querySelector("#author").value,
-        date: document.querySelector("#date").value,
-      };
-
-      // store the post object into the Firestore collection "allPosts"
-      db.collection("allPosts")
-        .add(post)
-        .then(() => {
-          alert("Post added");
-          modal.classList.remove("is-active"); // Hide the modal after successful submission
-        })
-        .catch((error) => {
-          console.error("Error adding post: ", error);
-        });
-    });
-    // Call the function to display existing posts when the page loads
+    setupPostButton();
+    checkAuthorization();
     show_posts();
   }, 0);
+  // Handle form submission for adding a post
+  document.getElementById("submitPost").addEventListener("click", () => {
+    // Construct the post object
+    const post = {
+      title: document.getElementById("title").value,
+      message: document.getElementById("message").value,
+      author: document.getElementById("author").value,
+      date: document.getElementById("date").value,
+    };
+
+    // Store the post object into the Firestore collection "allPosts"
+    db.collection("allPosts")
+      .add(post)
+      .then(() => {
+        alert("Post added successfully");
+        document.getElementById("addPostForm").classList.remove("is-active");
+
+        // Reset the form fields after successful submission
+        resetAddPostForm();
+
+        // Refresh the posts displayed
+        show_posts();
+      })
+      .catch((error) => {
+        console.error("Error adding post: ", error);
+        alert("Failed to add post");
+      });
+  });
+
 });
+
+// Function to reset the Add Post form fields
+function resetAddPostForm() {
+  document.getElementById("title").value = "";
+  document.getElementById("message").value = "";
+  document.getElementById("author").value = "";
+  document.getElementById("date").value = "";
+}
+// Setup the button to open the modal
+function setupPostButton() {
+const modal = document.getElementById("addPostForm");
+const btn = document.getElementById("addPostButton");
+const span = modal.querySelector(".modal-close");
+
+btn.addEventListener("click", () => {
+  modal.classList.add("is-active");
+});
+
+span.addEventListener("click", () => {
+  modal.classList.remove("is-active");
+});
+
+window.addEventListener("click", (event) => {
+  if (event.target === modal) {
+    modal.classList.remove("is-active");
+  }
+});
+}
+
+// Check user authorization
+function checkAuthorization() {
+  auth.onAuthStateChanged((user) => {
+    if (user && user.email === "amauwmadison@gmail.com") {
+      document.getElementById("addPostButton").classList.add("is-active");
+    } else {
+      document.getElementById("addPostButton").classList.remove("is-active");
+      document.getElementById("addPostButton").classList.add("is-hidden");
+    }
+  });
+}
+
 
 // Function to show all posts
 function show_posts() {
@@ -2647,7 +2654,7 @@ function editPost(postId) {
     <div class="field">
       <label class="label">Message</label>
       <div class="control">
-        <textarea class="textarea" type="text" id="edit_message" value="${post.message}"></textarea>
+      <textarea class="textarea" id="edit_message">${post.message}</textarea>
     
       </div>
     </div>

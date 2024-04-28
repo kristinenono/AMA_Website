@@ -1403,6 +1403,7 @@ textarea.input-field {
   border-radius: 10px;
   margin: 50px auto;
   text-align: center;
+  align-items: center;
 }
 .addPostBtn {
   margin-top: 30px;
