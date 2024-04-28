@@ -612,6 +612,9 @@ document.querySelector(".aboutfooter").addEventListener("click", () => {
   r_e("abt-link").click();
 });
 
+
+
+
 // CALENDAR PAGE
 const calendarView = document.querySelector(".calview");
 const monthSelect = document.querySelector("#month-select");
