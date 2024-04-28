@@ -1,4 +1,6 @@
 **Website**: https://amabadgers.web.app/
+**Repo**: https://github.com/kristinenono/AMA_Website.git
+
 
 **USER STORIES**
 1. As a public viewer, I want to be able to view the website pages so that I can learn more about the organization
