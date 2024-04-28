@@ -2584,6 +2584,7 @@ function checkAuthorization() {
 // Function to show all posts
 function show_posts() {
   db.collection("allPosts")
+  .orderBy("date", "desc")
     .get()
     .then((querySnapshot) => {
       let html = "";
