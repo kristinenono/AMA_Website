@@ -185,8 +185,7 @@ r_e("sign_form").addEventListener("submit", (e) => {
       r_e("signup_error").innerHTML = "";
     })
     .catch((err) => {
-      r_e("signup_error").innerHTML =
-        "The credentials inputted is already in use.";
+      r_e("signup_error").innerHTML = err.message;
     });
 });
 
@@ -224,8 +223,7 @@ r_e("log_form").addEventListener("submit", (e) => {
       r_e("log_error").innerHTML = "";
     })
     .catch((err) => {
-      r_e("log_error").innerHTML =
-        "The email or password you entered is incorrect.";
+      r_e("log_error").innerHTML = err.message;
     });
 });
 
@@ -297,16 +295,12 @@ document
 let signup_cancel = document.querySelector("#signup_cancel");
 signup_cancel.addEventListener("click", () => {
   r_e("signmodal").classList.remove("is-active");
-  r_e("sign_form").reset();
-  r_e("signup_error").innerHTML = "";
   r_e("home-link").click();
   window.location.reload();
 });
 let log_cancel = document.querySelector("#log_cancel");
 log_cancel.addEventListener("click", () => {
-  r_e("log_form").reset();
   loginModal.classList.remove("is-active");
-  r_e("log_error").innerHTML = "";
 });
 
 r_e("user_found").addEventListener("click", () => {
@@ -1700,23 +1694,11 @@ function addContent(isAdmin) {
       db.collection("ama_users")
         .get()
         .then((userSnapshot) => {
-          let members = [];
-          userSnapshot.forEach((userDoc) => {
-            members.push({
-              id: userDoc.id,
-              fullName: userDoc.data().full_name,
-            });
-          });
-          // Sort alphabetically, case-insensitive
-          members.sort((a, b) =>
-            a.fullName.toLowerCase().localeCompare(b.fullName.toLowerCase())
-          );
-
           const memberTotalPoints = {};
           const memberPointsPromises = [];
 
-          members.forEach(member => {
-            const fullName = member.fullName;
+          userSnapshot.forEach((userDoc) => {
+            const fullName = userDoc.data().full_name;
             memberTotalPoints[fullName] = {
               volunteer: 0,
               professional_development: 0,
@@ -1726,7 +1708,7 @@ function addContent(isAdmin) {
             };
             const pointsPromise = db
               .collection("ama_users")
-              .doc(member.id)
+              .doc(userDoc.id)
               .collection("member_points")
               .where("pointSemester", "==", selectedSemester)
               .get()
@@ -1920,17 +1902,11 @@ function addContent(isAdmin) {
       db.collection("ama_users")
         .get()
         .then((snapshot) => {
-          const members = [];
           snapshot.forEach((doc) => {
-            members.push({ id: doc.id, fullName: doc.data().full_name });
-          });
-          // Sort members alphabetically by full name
-          members.sort((a, b) => a.fullName.toLowerCase().localeCompare(b.fullName.toLowerCase()));
-    
-          members.forEach(member => {
+            const fullName = doc.data().full_name;
             const option = document.createElement("option");
-            option.value = member.id;
-            option.textContent = member.fullName;
+            option.value = doc.id; // Use user's document ID as value
+            option.textContent = fullName;
             select.appendChild(option);
           });
         })
@@ -1984,46 +1960,29 @@ function addContent(isAdmin) {
     function populateShowMemberDropdown(callback) {
       const select = document.getElementById("showMemberSelect");
       select.innerHTML = ""; // Clear existing options
-    
       db.collection("ama_users")
         .get()
         .then((snapshot) => {
-          const members = [];
-    
           snapshot.forEach((doc) => {
-            // Collect all members
-            members.push({
-              id: doc.id,
-              fullName: doc.data().full_name
-            });
-          });
-    
-          // Sort members alphabetically by full name, case-insensitive
-          members.sort((a, b) => a.fullName.toLowerCase().localeCompare(b.fullName.toLowerCase()));
-    
-          // Populate the dropdown with sorted members
-          members.forEach(member => {
+            const fullName = doc.data().full_name;
             const option = document.createElement("option");
-            option.value = member.id;
-            option.textContent = member.fullName;
+            option.value = doc.id;
+            option.textContent = fullName;
             select.appendChild(option);
           });
-    
-          // Call the callback function if provided
-          if (callback) callback();
-    
-          // Attach change event listener to select
-          select.addEventListener("change", () => {
-            if (select.selectedIndex >= 0) {
-              setupRealTimePointsListener(select.value); // Setup real-time listener for the selected user
-            }
-          });
+          callback(); // Execute callback after options are populated
         })
         .catch((error) => {
           console.error("Error fetching members: ", error);
         });
-    }
 
+      // Update listener setup when the selected option changes
+      select.addEventListener("change", () => {
+        if (select.selectedIndex >= 0) {
+          setupRealTimePointsListener(select.value); // Setup real-time listener for the new user
+        }
+      });
+    }
 
     function setupRealTimePointsListener(memberId) {
       const tbody = document.getElementById("memberPointsList");
@@ -2529,8 +2488,13 @@ let blog_content = ` <main>
     id="all_posts"
     class="has-background-lightgray p-4 m-3 has-background-grey-lighter"
   >
-    <h1 class="title">All posts</h1>
+    <h1 class="title"></h1>
   </div>
+  <div class="pagination" style="margin-top: 20px;">
+  <button id="prevButton" class="button" onclick="prevPage()">Previous</button>
+  <button id="nextButton" class="button" onclick="nextPage()">Next</button>
+</div>
+
 </div>
 </main>`;
 
@@ -2619,45 +2583,122 @@ function checkAuthorization() {
     }
   });
 }
+// Variables to keep track of current page and total number of posts
+let currentPage = 1;
+const postsPerPage = 3;
 
-// Function to show all posts
-function show_posts() {
+// Function to display posts for the current page
+function displayCurrentPagePosts(posts) {
+  const startIndex = (currentPage - 1) * postsPerPage;
+  const endIndex = startIndex + postsPerPage;
+  const currentPosts = posts.slice(startIndex, endIndex);
+
+  let html = "";
+  currentPosts.forEach((post) => {
+    const postId = post.id;
+    let editDeleteHtml = "";
+    if (
+      auth.currentUser &&
+      auth.currentUser.email === "amauwmadison@gmail.com"
+    ) {
+      // User is authenticated and is "ama exec"
+      editDeleteHtml = `
+        <footer class="card-footer">
+          <a href="#" class="card-footer-item" onclick="editPost('${postId}')">Edit</a>
+          <a href="#" class="card-footer-item" onclick="deletePost('${postId}')">Delete</a>
+        </footer>`;
+    }
+    html += `
+      <div class="container my-4">
+        <div class="card" id="${postId}">
+          <header class="card-header">
+            <p class="card-header-title">${post.title}</p>
+          </header>
+          <div class="card-content">
+            <div class="content postmessage">
+              ${post.message}
+              <br><br>
+              <p class="card-header-subtitle"><span style="font-size: smaller; font-weight: bold;">By: ${post.author} // <time datetime="${post.date}">${post.date}</time></span></p>
+            </div>
+          </div>
+          ${editDeleteHtml}
+        </div>
+      </div>`;
+  });
+  document.querySelector("#all_posts").innerHTML = html;
+}
+
+// Function to update pagination buttons
+function updatePaginationButtons(totalPosts) {
+  const totalPages = Math.ceil(totalPosts / postsPerPage);
+  const prevButton = document.getElementById("prevButton");
+  const nextButton = document.getElementById("nextButton");
+
+  if (currentPage === 1) {
+    prevButton.disabled = true;
+  } else {
+    prevButton.disabled = false;
+  }
+
+  if (currentPage === totalPages) {
+    nextButton.disabled = true;
+  } else {
+    nextButton.disabled = false;
+  }
+}
+
+// Function to show posts based on current page
+function showCurrentPagePosts() {
   db.collection("allPosts")
     .orderBy("date", "desc")
     .get()
     .then((querySnapshot) => {
-      let html = "";
+      const posts = [];
       querySnapshot.forEach((doc) => {
-        const post = doc.data();
-        const postId = doc.id;
-        let editDeleteHtml = "";
-        if (
-          auth.currentUser &&
-          auth.currentUser.email === "amauwmadison@gmail.com"
-        ) {
-          // User is authenticated and is "ama exec"
-          editDeleteHtml = `
-            <footer class="card-footer">
-              <a href="#" class="card-footer-item" onclick="editPost('${postId}')">Edit</a>
-              <a href="#" class="card-footer-item" onclick="deletePost('${postId}')">Delete</a>
-            </footer>`;
-        }
-        html += `
-          <div class="container my-4">
-            <div class="card" id="${postId}">
-              <header class="card-header">
-                <p class="card-header-title is-size-3 is-centered">${post.title}</p>
-              </header>
-              <div class="card-content">
-                <div class="content postmessage">${post.message}
-                  <p class="card-header-subtitle"><span style="font-size: smaller; font-weight: bold;">By: ${post.author} // <time datetime="${post.date}">${post.date}</time></span></p>
-                </div>
-              </div>
-              ${editDeleteHtml}
-            </div>
-          </div>`;
+        posts.push({ id: doc.id, ...doc.data() });
       });
-      document.querySelector("#all_posts").innerHTML = html;
+      const totalPosts = posts.length;
+
+      displayCurrentPagePosts(posts);
+      updatePaginationButtons(totalPosts);
+    })
+    .catch((error) => {
+      console.error("Error getting posts: ", error);
+    });
+}
+
+// Function to show next page of posts
+function nextPage() {
+  currentPage++;
+  showCurrentPagePosts();
+}
+
+// Function to show previous page of posts
+function prevPage() {
+  currentPage--;
+  showCurrentPagePosts();
+}
+
+// Call showCurrentPagePosts function when the page loads
+showCurrentPagePosts();
+
+// Function to retrieve all posts from Firestore
+function getAllPosts() {
+  return db.collection("allPosts").orderBy("date", "desc").get();
+}
+
+// Modify show_posts() function to work with pagination
+function show_posts() {
+  getAllPosts()
+    .then((querySnapshot) => {
+      const posts = [];
+      querySnapshot.forEach((doc) => {
+        posts.push({ id: doc.id, ...doc.data() });
+      });
+      const totalPosts = posts.length;
+
+      displayCurrentPagePosts(posts);
+      updatePaginationButtons(totalPosts);
     })
     .catch((error) => {
       console.error("Error getting posts: ", error);
@@ -2681,54 +2722,46 @@ function editPost(postId) {
 
         // Display a form with input fields for editing
         const editForm = `
-          <div class="box">
-            <h2 class="card-header-title is-centered is-2 mt-0" style="font-size: larger;">Edit Post</h2>
-            <div class="field">
-              <label class="label">Title</label>
-              <div class="control">
-                <input class="input" type="text" id="edit_title" value="${post.title}" />
-              </div>
-            </div>
-            <div class="field">
-              <label class="label">Message</label>
-              <div class="control">
-                <textarea class="textarea" id="edit_message">${post.message}</textarea>
-              </div>
-            </div>
-            <div class="field">
-              <label class="label">Author</label>
-              <div class="control">
-                <input class="input" type="text" id="edit_author" value="${post.author}" />
-              </div>
-            </div>
-            <div class="field">
-              <label class="label">Date</label>
-              <div class="control">
-                <input class="input" type="date" id="edit_date" value="${post.date}" />
-              </div>
-            </div>
-            <div class="field is-grouped">
-              <div class="control">
-                <button class="addPostBtn" onclick="saveEdit('${postId}')">Save</button>
-              </div>
-              <div class="control">
-                <button class="addPostBtn" onclick="cancelEdit('${postId}')">Cancel</button>
-              </div>
-            </div>
-          </div>
-        `;
+                <div class="box">
+                  <h2 class="card-header-title is-centered is-2 mt-0" style="font-size: larger;">Edit Post</h2>
+    <div class="field">
+      <label class="label">Title</label>
+      <div class="control">
+        <input class="input" type="text" id="edit_title" value="${post.title}" />
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Message</label>
+      <div class="control">
+      <textarea class="textarea" id="edit_message">${post.message}</textarea>
+    
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Author</label>
+      <div class="control">
+        <input class="input" type="text" id="edit_author" value="${post.author}" />
+    </div>
+    <div class="field">
+      <label class="label">Date</label>
+      <div class="control">
+        <input class="input" type="date" id="edit_date" value="${post.date}" />
+      </div>
+    </div>
+    <div class="field is-grouped">
+      <div class="control">
+        <button class="addPostBtn" onclick="saveEdit('${postId}')">Save</button>
+      </div>
+    </div>
+    </div>
+    
+              `;
         document.querySelector(`#${postId}`).innerHTML = editForm;
       }
     })
     .catch((error) => {
       console.error("Error getting document:", error);
     });
-}
-
-// Function to cancel editing a post
-function cancelEdit(postId) {
-  // Reload the post content without making any changes
-  show_posts();
 }
 
 // Function to delete a post
