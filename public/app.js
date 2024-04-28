@@ -388,7 +388,7 @@ r_e("home-link").addEventListener("click", () => {
 });
 
 // ABOUT PAGE
-let abt_content = `      <div id="contactSectionTop" class="contactSection-box contactTopFormat">
+let abt_content = `      <div id="contactSectionTop" class="contactSection-box contactTopFormat animate-top">
 <h2 class="primaryheader">More About Us</h2>
 <div class="social-icons-container">
   <a href="#eventboxtype" class="social-icon" title="Email">
@@ -2367,7 +2367,7 @@ function addContent(isAdmin) {
 }
 
 // CONTACT PAGE
-let contact_content = `<div id="contactSectionTop" class="contactSection-box contactTopFormat">
+let contact_content = `<div id="contactSectionTop" class="contactSection-box contactTopFormat animate-top">
 <h2 class="primaryheader">Let's get in touch.</h2>
 
 
@@ -2483,7 +2483,7 @@ r_e("joinbuttonhome").addEventListener("click", () => {
 // BLOG PAGE
 let blog_content = ` <main>
 <div class="blogpage">
-  <div id="blogSection" class="blogSection-box">
+  <div id="blogSection" class="blogSection-box animate-top">
     <h2 class="primaryheader">Blog</h2>
     <p class="primaryBody">
     The blog page of the AMA UW-Madison's Community & Culture Committee 
