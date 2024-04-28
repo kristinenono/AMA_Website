@@ -1850,7 +1850,6 @@ function addContent(isAdmin) {
 
         // Call fetchAndPopulatePoints with blank values to reset the filters
         fetchAndPopulatePoints("", "");
-        get;
       });
 
     // Function to disable the dropdown
