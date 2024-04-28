@@ -1920,11 +1920,17 @@ function addContent(isAdmin) {
       db.collection("ama_users")
         .get()
         .then((snapshot) => {
+          const members = [];
           snapshot.forEach((doc) => {
-            const fullName = doc.data().full_name;
+            members.push({ id: doc.id, fullName: doc.data().full_name });
+          });
+          // Sort members alphabetically by full name
+          members.sort((a, b) => a.fullName.toLowerCase().localeCompare(b.fullName.toLowerCase()));
+    
+          members.forEach(member => {
             const option = document.createElement("option");
-            option.value = doc.id; // Use user's document ID as value
-            option.textContent = fullName;
+            option.value = member.id;
+            option.textContent = member.fullName;
             select.appendChild(option);
           });
         })
@@ -1981,26 +1987,26 @@ function addContent(isAdmin) {
       db.collection("ama_users")
         .get()
         .then((snapshot) => {
+          const members = [];
           snapshot.forEach((doc) => {
-            const fullName = doc.data().full_name;
+            members.push({ id: doc.id, fullName: doc.data().full_name });
+          });
+          // Sort members alphabetically by full name
+          members.sort((a, b) => a.fullName.toLowerCase().localeCompare(b.fullName.toLowerCase()));
+    
+          members.forEach(member => {
             const option = document.createElement("option");
-            option.value = doc.id;
-            option.textContent = fullName;
+            option.value = member.id;
+            option.textContent = member.fullName;
             select.appendChild(option);
           });
-          callback(); // Execute callback after options are populated
+          if (callback) callback(); // Execute callback after options are populated
         })
         .catch((error) => {
           console.error("Error fetching members: ", error);
         });
-
-      // Update listener setup when the selected option changes
-      select.addEventListener("change", () => {
-        if (select.selectedIndex >= 0) {
-          setupRealTimePointsListener(select.value); // Setup real-time listener for the new user
-        }
-      });
     }
+    
 
     function setupRealTimePointsListener(memberId) {
       const tbody = document.getElementById("memberPointsList");
