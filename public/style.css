@@ -1387,8 +1387,15 @@ textarea.input-field {
   color: white;
 }
 
-
 /* blog page */
+#prevButton {
+  margin-left: 35px;
+  margin-bottom: 35px;
+}
+#nextButton {
+  margin-right: 35px;
+  margin-bottom: 35px;
+}
 .blogSection-box {
   width: 75%;
   padding: 20px;
@@ -1436,10 +1443,9 @@ textarea.input-field {
   padding-top: 5%;
 }
 
-.postmessage{
+.postmessage {
   white-space: pre-wrap;
 }
-
 
 /* ABOUT PAGE */
 
@@ -1533,18 +1539,20 @@ textarea.input-field {
   color: var(--secondaryred);
   font-size: 2rem;
 }
-.aboutCardHeader, .aboutCardImg {
+.aboutCardHeader,
+.aboutCardImg {
   margin: 0 auto; /* Center header and icons */
   display: block;
 }
 
-#aboutHeaderSection, #aboutHeaderSection2 {
+#aboutHeaderSection,
+#aboutHeaderSection2 {
   flex-direction: row; /* Content side by side by default */
   padding: 30px;
   align-items: center; /* Align items vertically */
 }
 
-#aboutHeaderSection{
+#aboutHeaderSection {
   background-color: white;
 }
 
@@ -1700,7 +1708,7 @@ textarea.input-field {
       max-width: 70%; /* Increase the maximum width for smaller screens */
     }
   }
-  
+
   /* Media query for even smaller screen sizes */
   @media screen and (max-width: 480px) {
     .footer-logo1 {
