@@ -185,7 +185,7 @@ r_e("sign_form").addEventListener("submit", (e) => {
       r_e("signup_error").innerHTML = "";
     })
     .catch((err) => {
-      r_e("signup_error").innerHTML = "The email or password you entered is incorrect.";
+      r_e("signup_error").innerHTML = "The credentials inputted is already in use.";
     });
 });
 
