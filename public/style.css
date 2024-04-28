@@ -1436,6 +1436,10 @@ textarea.input-field {
   padding-top: 5%;
 }
 
+.postmessage{
+  white-space: pre-wrap;
+}
+
 
 /* ABOUT PAGE */
 
