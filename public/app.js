@@ -2321,7 +2321,7 @@ function addContent(isAdmin) {
                 : "Unknown";
 
               let welcomeDiv = document.querySelector(".welcome");
-              welcomeDiv.innerHTML = `Welcome ${fullName}! Here is your point summary for the ${semester} semester.`;
+              welcomeDiv.innerHTML = `Welcome ${fullName}! Here is your points summary:`;
 
               // After all data is aggregated, update the UI
               updateCardsWithPoints(memberTotalPoints);
