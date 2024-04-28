@@ -2612,7 +2612,7 @@ function displayCurrentPagePosts(posts) {
       <div class="container my-4">
         <div class="card" id="${postId}">
           <header class="card-header">
-            <p class="card-header-title">${post.title}</p>
+            <p class="card-header-title is-size-4 is-centered">${post.title}</p>
           </header>
           <div class="card-content">
             <div class="content postmessage">${post.message}
