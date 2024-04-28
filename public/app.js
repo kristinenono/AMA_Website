@@ -185,7 +185,8 @@ r_e("sign_form").addEventListener("submit", (e) => {
       r_e("signup_error").innerHTML = "";
     })
     .catch((err) => {
-      r_e("signup_error").innerHTML = "The credentials inputted is already in use.";
+      r_e("signup_error").innerHTML =
+        "The credentials inputted is already in use.";
     });
 });
 
@@ -223,7 +224,8 @@ r_e("log_form").addEventListener("submit", (e) => {
       r_e("log_error").innerHTML = "";
     })
     .catch((err) => {
-      r_e("log_error").innerHTML = "The email or password you entered is incorrect.";
+      r_e("log_error").innerHTML =
+        "The email or password you entered is incorrect.";
     });
 });
 
@@ -615,9 +617,6 @@ r_e("abt-link").addEventListener("click", () => {
 document.querySelector(".aboutfooter").addEventListener("click", () => {
   r_e("abt-link").click();
 });
-
-
-
 
 // CALENDAR PAGE
 const calendarView = document.querySelector(".calview");
@@ -1701,11 +1700,23 @@ function addContent(isAdmin) {
       db.collection("ama_users")
         .get()
         .then((userSnapshot) => {
+          let members = [];
+          userSnapshot.forEach((userDoc) => {
+            members.push({
+              id: userDoc.id,
+              fullName: userDoc.data().full_name,
+            });
+          });
+          // Sort alphabetically, case-insensitive
+          members.sort((a, b) =>
+            a.fullName.toLowerCase().localeCompare(b.fullName.toLowerCase())
+          );
+
           const memberTotalPoints = {};
           const memberPointsPromises = [];
 
-          userSnapshot.forEach((userDoc) => {
-            const fullName = userDoc.data().full_name;
+          members.forEach(member => {
+            const fullName = member.fullName;
             memberTotalPoints[fullName] = {
               volunteer: 0,
               professional_development: 0,
@@ -1715,7 +1726,7 @@ function addContent(isAdmin) {
             };
             const pointsPromise = db
               .collection("ama_users")
-              .doc(userDoc.id)
+              .doc(member.id)
               .collection("member_points")
               .where("pointSemester", "==", selectedSemester)
               .get()
@@ -2544,7 +2555,6 @@ r_e("blog-link").addEventListener("click", () => {
         alert("Failed to add post");
       });
   });
-
 });
 
 // Function to reset the Add Post form fields
@@ -2556,23 +2566,23 @@ function resetAddPostForm() {
 }
 // Setup the button to open the modal
 function setupPostButton() {
-const modal = document.getElementById("addPostForm");
-const btn = document.getElementById("addPostButton");
-const span = modal.querySelector(".modal-close");
+  const modal = document.getElementById("addPostForm");
+  const btn = document.getElementById("addPostButton");
+  const span = modal.querySelector(".modal-close");
 
-btn.addEventListener("click", () => {
-  modal.classList.add("is-active");
-});
+  btn.addEventListener("click", () => {
+    modal.classList.add("is-active");
+  });
 
-span.addEventListener("click", () => {
-  modal.classList.remove("is-active");
-});
-
-window.addEventListener("click", (event) => {
-  if (event.target === modal) {
+  span.addEventListener("click", () => {
     modal.classList.remove("is-active");
-  }
-});
+  });
+
+  window.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      modal.classList.remove("is-active");
+    }
+  });
 }
 
 // Check user authorization
@@ -2587,11 +2597,10 @@ function checkAuthorization() {
   });
 }
 
-
 // Function to show all posts
 function show_posts() {
   db.collection("allPosts")
-  .orderBy("date", "desc")
+    .orderBy("date", "desc")
     .get()
     .then((querySnapshot) => {
       let html = "";
