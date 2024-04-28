@@ -2615,9 +2615,7 @@ function displayCurrentPagePosts(posts) {
             <p class="card-header-title">${post.title}</p>
           </header>
           <div class="card-content">
-            <div class="content postmessage">
-              ${post.message}
-              <br><br>
+            <div class="content postmessage">${post.message}
               <p class="card-header-subtitle"><span style="font-size: smaller; font-weight: bold;">By: ${post.author} // <time datetime="${post.date}">${post.date}</time></span></p>
             </div>
           </div>
