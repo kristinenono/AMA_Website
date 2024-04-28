@@ -1745,7 +1745,7 @@ textarea.input-field {
   }
   .navbar-item1:hover,
   .navbar-link:hover {
-    color: var(--primarynavy); /* Maintain the color on hover */
+    color: var(--linkColor); /* Maintain the color on hover */
     background-color: transparent; /* Ensure no background change on hover */
   }
 
