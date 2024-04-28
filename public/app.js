@@ -2683,46 +2683,54 @@ function editPost(postId) {
 
         // Display a form with input fields for editing
         const editForm = `
-                <div class="box">
-                  <h2 class="card-header-title is-centered is-2 mt-0" style="font-size: larger;">Edit Post</h2>
-    <div class="field">
-      <label class="label">Title</label>
-      <div class="control">
-        <input class="input" type="text" id="edit_title" value="${post.title}" />
-      </div>
-    </div>
-    <div class="field">
-      <label class="label">Message</label>
-      <div class="control">
-      <textarea class="textarea" id="edit_message">${post.message}</textarea>
-    
-      </div>
-    </div>
-    <div class="field">
-      <label class="label">Author</label>
-      <div class="control">
-        <input class="input" type="text" id="edit_author" value="${post.author}" />
-    </div>
-    <div class="field">
-      <label class="label">Date</label>
-      <div class="control">
-        <input class="input" type="date" id="edit_date" value="${post.date}" />
-      </div>
-    </div>
-    <div class="field is-grouped">
-      <div class="control">
-        <button class="addPostBtn" onclick="saveEdit('${postId}')">Save</button>
-      </div>
-    </div>
-    </div>
-    
-              `;
+          <div class="box">
+            <h2 class="card-header-title is-centered is-2 mt-0" style="font-size: larger;">Edit Post</h2>
+            <div class="field">
+              <label class="label">Title</label>
+              <div class="control">
+                <input class="input" type="text" id="edit_title" value="${post.title}" />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Message</label>
+              <div class="control">
+                <textarea class="textarea" id="edit_message">${post.message}</textarea>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Author</label>
+              <div class="control">
+                <input class="input" type="text" id="edit_author" value="${post.author}" />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Date</label>
+              <div class="control">
+                <input class="input" type="date" id="edit_date" value="${post.date}" />
+              </div>
+            </div>
+            <div class="field is-grouped">
+              <div class="control">
+                <button class="addPostBtn" onclick="saveEdit('${postId}')">Save</button>
+              </div>
+              <div class="control">
+                <button class="addPostBtn" onclick="cancelEdit('${postId}')">Cancel</button>
+              </div>
+            </div>
+          </div>
+        `;
         document.querySelector(`#${postId}`).innerHTML = editForm;
       }
     })
     .catch((error) => {
       console.error("Error getting document:", error);
     });
+}
+
+// Function to cancel editing a post
+function cancelEdit(postId) {
+  // Reload the post content without making any changes
+  show_posts();
 }
 
 // Function to delete a post
