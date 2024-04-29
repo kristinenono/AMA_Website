@@ -3,6 +3,10 @@
 
 **Repo**: https://github.com/kristinenono/AMA_Website.git
 
+**Administration Login**:
+- User: amauwmadison@gmail.com
+- Password: IS2024!
+
 
 **USER STORIES**
 1. As a public viewer, I want to be able to view the website pages so that I can learn more about the organization
