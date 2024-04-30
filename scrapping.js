@@ -8,47 +8,74 @@ async function go() {
   });
   const page = await browser.newPage();
 
-  // Visit the site to be tested
   await page.goto("https://amabadgers.web.app/");
 
-  // Click on the burger menu button
   await page.click("body > header > nav > div.navbar-brand > a");
 
-  // Wait for a short delay for the menu to open (adjust this delay if necessary)
   await page.waitForSelector("#burgerloginbtn");
 
-  // Click on the button with the selector #burgerloginbtn
   await page.click("#burgerloginbtn");
 
-  // Wait for the email input field to be visible
   await page.waitForSelector("#email");
 
-  // Type "test@test.com" into the email input field
   await page.type("#email", "test@test.com");
 
-  // Type "testtest" into the password input field
   await page.type("#password", "testtest");
 
-  // Click on the submit button
   await page.click("#submit");
 
-  // Wait for the #title_uw element to appear
   await page.waitForSelector("#title_uw");
 
-  // Click on the burger menu button again to close the menu
   await page.click("body > header > nav > div.navbar-brand > a");
 
-  // Wait for the Members link to be visible
   await page.waitForSelector("#members-link");
 
-  // Click on the Members link
   await page.click("#members-link");
 
-  // Wait for the Points button to be visible
   await page.waitForSelector("#pointbtn1");
 
-  // Click on the Points button
   await page.click("#pointbtn1");
+
+  await page.waitForSelector(
+    "#main-content > div.columns.is-centered.mt-4.mb-4 > div > div > header > p"
+  );
+
+  await page.screenshot({ path: "test_points.png", fullPage: true });
+
+  await page.click("body > header > nav > div.navbar-brand > a");
+  await page.waitForSelector("#burgeroutbtn");
+  await page.click("#burgeroutbtn");
+
+  await page.waitForSelector("#title_uw");
+
+  await page.click("body > header > nav > div.navbar-brand > a");
+
+  await page.waitForSelector("#burgerloginbtn");
+
+  await page.click("#burgerloginbtn");
+
+  await page.waitForSelector("#email");
+
+  await page.type("#email", "amauwmadison@gmail.com");
+
+  await page.type("#password", "IS2024!");
+
+  await page.click("#submit");
+
+  await page.waitForSelector("#title_uw");
+
+  await page.click("body > header > nav > div.navbar-brand > a");
+
+  await page.waitForSelector("#members-link");
+
+  await page.click("#members-link");
+
+  await page.waitForSelector("#pointbtn1");
+
+  await page.click("#pointbtn1");
+  await page.waitForSelector("#applyFilters");
+
+  await page.screenshot({ path: "exec_points.png", fullPage: true });
 
   // Close the browser
   await browser.close();
