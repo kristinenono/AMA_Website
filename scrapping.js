@@ -9,6 +9,7 @@ async function go() {
   const page = await browser.newPage();
 
   await page.goto("https://amabadgers.web.app/");
+  //   MEMBER LOG IN
 
   await page.click("body > header > nav > div.navbar-brand > a");
 
@@ -45,6 +46,8 @@ async function go() {
   await page.click("body > header > nav > div.navbar-brand > a");
   await page.waitForSelector("#burgeroutbtn");
   await page.click("#burgeroutbtn");
+
+  //   EXEC LOG IN
 
   await page.waitForSelector("#title_uw");
 
