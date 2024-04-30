@@ -32,6 +32,24 @@ async function go() {
   // Click on the submit button
   await page.click("#submit");
 
+  // Wait for the #title_uw element to appear
+  await page.waitForSelector("#title_uw");
+
+  // Click on the burger menu button again to close the menu
+  await page.click("body > header > nav > div.navbar-brand > a");
+
+  // Wait for the Members link to be visible
+  await page.waitForSelector("#members-link");
+
+  // Click on the Members link
+  await page.click("#members-link");
+
+  // Wait for the Points button to be visible
+  await page.waitForSelector("#pointbtn1");
+
+  // Click on the Points button
+  await page.click("#pointbtn1");
+
   // Close the browser
   await browser.close();
 }
